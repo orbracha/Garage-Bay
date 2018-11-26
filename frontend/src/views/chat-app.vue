@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import msgService from '../../services/msg-service.js'
+import msgService from '../services/msg-service.js'
 // import garageHeader from '../components/garage-header.vue'
 import genericList from '../components/generic-list.vue'
 export default {
