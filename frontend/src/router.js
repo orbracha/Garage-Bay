@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import chatApp from './views/chat-app.vue';
+import chatPage from './views/chat-page.vue';
 
 Vue.use(Router);
 
@@ -17,7 +17,7 @@ export default new Router({
     {
       path: '/chat',
       name: 'chat',
-      component: chatApp,
+      component: chatPage,
     },
     {
       path: '/about',
