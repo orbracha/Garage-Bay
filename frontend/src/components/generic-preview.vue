@@ -1,8 +1,8 @@
 <template>
   <li>
-    <img :src="'img/'+ item.img">
+    <img v-if="item.img" :src="item.img">
     <div>
-      <h1>{{item.name}}</h1>
+      <h1>{{item.title}}</h1>
       <p>{{item.txt}}</p>
     </div>
   </li>

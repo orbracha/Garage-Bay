@@ -15,7 +15,8 @@
 
       <img :src="currItem.img" alt="placeholder image">
       <div class="chatLink-container">
-        <span @click="chatClicked" >&#9993;</span>
+        <!-- <span @click="chatClicked">&#9993;</span> -->
+        <router-link to="/chat">&#9993;</router-link>
         <p>Like it? Start chat</p>
       </div>
 
@@ -67,7 +68,7 @@ export default {
   methods: {
     chatClicked() {
       console.log("chat link clicked");
-      this.$router.push(`/user/${this.currSeller._id}`)
+      this.$router.push(`/chat`)
     }
   },
   computed: {

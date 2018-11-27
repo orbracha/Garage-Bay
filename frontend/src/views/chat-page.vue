@@ -3,10 +3,7 @@
     <!-- <garage-header> -->
     <h1>Chat Page &#128172;</h1>
     <generic-list :data="msgTodisplay"></generic-list>
-    <!-- <img src=" " alt=""> -->
     <!-- </garage-header> -->
-    <!-- {{getUserMsgs()}} -->
-    {{usersImgs}}
   </section>
 </template>
 
@@ -24,9 +21,9 @@ export default {
         msgTodisplay(){
             return this.msgs.map((msg,idx)=>{
                 return {
-                    name:msg.from.nickname,
+                    title:msg.from.nickname,
                     txt:msg.txt,
-                    img:'user.jpg'
+                    img:'img/user.jpg'
                 }
             }) 
         },
