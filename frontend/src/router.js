@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import chatPage from './views/chat-page.vue';
+import wishPage from './views/wish-page.vue';
 import itemDetails from './views/item-details.vue';
 import forparams from './views/paramsDeleteLater.vue';
 
@@ -20,6 +21,11 @@ export default new Router({
       path: '/chat',
       name: 'chat',
       component: chatPage,
+    },
+    {
+      path: '/wishlist',
+      name: 'wishlist',
+      component: wishPage,
     },
     {
       path: '/item/:id',
