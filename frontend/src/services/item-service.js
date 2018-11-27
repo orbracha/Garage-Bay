@@ -20,8 +20,8 @@ function query() {
 }
 
 
-function getById(itemId) {
-    item = items.find(item => item._id === itemId)
+function getById({itemId}) {
+   var item = items.find(item => item._id === itemId)
     return Promise.resolve(item);
 }
 
@@ -44,6 +44,7 @@ function _createItem(i) {
         sellerId: _makeId(5),
         location: '32.053292, 34.761452',
         category: faker.commerce.department(),
+        condition: 'Used'
     }
 }
 

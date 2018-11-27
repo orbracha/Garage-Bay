@@ -3,7 +3,9 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>|
-      <router-link to="/chat">Chat</router-link>
+      <router-link to="/chat">Chat</router-link>|
+      <router-link to="/item/:id">Item Details</router-link>|
+      <router-link to="/forparams">for params</router-link>
     </div>
     <router-view/>
   </div>
