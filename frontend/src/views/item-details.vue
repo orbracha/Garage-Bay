@@ -27,7 +27,6 @@
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
         </div>
-        {{currSeller}}
         <google-map/>
       </div>
     </div>
@@ -100,10 +99,6 @@ export default {
 }
 .chatLink-container span {
   margin-right: 5px;
-}
-.item-container {
-  width: 90%;
-  margin: 0 auto;
 }
 
 img {

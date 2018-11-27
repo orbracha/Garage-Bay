@@ -4,7 +4,7 @@ import Home from './views/Home.vue';
 import chatPage from './views/chat-page.vue';
 import wishPage from './views/wish-page.vue';
 import itemDetails from './views/item-details.vue';
-import forparams from './views/paramsDeleteLater.vue';
+
 
 Vue.use(Router);
 
@@ -31,11 +31,6 @@ export default new Router({
       path: '/item/:id',
       name: 'item-details',
       component: itemDetails,
-    },
-    {
-      path: '/forparams',
-      name: 'forParams',
-      component: forparams,
     },
     {
       path: '/about',
