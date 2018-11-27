@@ -28,13 +28,18 @@
         <p>Seller rate</p>
         <p>How many current items</p>
       </div>
+      <google-map />
     </div>
   </div>
 </template>
 
 <script>
+import GoogleMap from "@/components/GoogleMap";
 export default {
     name: 'item-details',
+    components:{
+        GoogleMap
+    },
     data(){
         return{
             currItem:{}
