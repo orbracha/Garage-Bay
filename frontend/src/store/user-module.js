@@ -17,12 +17,12 @@ export default {
         }
     },
     actions: {
-        getUserById({ commit }, { userId }) {
-            return userService.getById(userId).then(user => {
-                commit({ type: 'setUser', user })
-                return user;
-            })
-        }
+        // getUserById({ commit }, { userId }) {
+        //     return userService.getById(userId).then(user => {
+        //         commit({ type: 'setUser', user })
+        //         return user;
+        //     })
+        // }
     },
     getters: {
         getUser(state) {

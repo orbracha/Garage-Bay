@@ -53,11 +53,11 @@ export default {
     var itemId = this.$route.params.id;
     this.$store.dispatch({ type: "getItemById", itemId }).then(item => {
       this.currItem = item;
-      var userId = this.currItem.sellerId;
-      this.$store.dispatch({ type: "getUserById", userId }).then(user => {
-        this.currSeller = user;
-        this.isLoaded = true;
-      });
+      // var userId = this.currItem.sellerId;
+      // this.$store.dispatch({ type: "getUserById", userId }).then(user => {
+      //   this.currSeller = user;
+      //   this.isLoaded = true;
+      // });
     });
     //TODO WITH REAL DATA:
     //after getting the item - get seller id=> set seller name, image, rate, how many current items

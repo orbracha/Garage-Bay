@@ -1,32 +1,32 @@
 
 
 
+import axios from 'axios';
 
-var users = [_createUser('avi bobi', '1234', '123', 'https://i.stack.imgur.com/l60Hf.png' ,["9cO","thA","N2E","2KH","b1w",]),
-_createUser('yarden hachla', '4343', '456', 'https://i.stack.imgur.com/l60Hf.png',["sEk","2cN","zYJ","NRt","Rpd","OMt","RxJ", "yiy","MXW"]),
-_createUser('elad yogurt', '5675', '678', 'https://i.stack.imgur.com/l60Hf.png',["gPE","V6f","45z","cV8","gIp","GWG"])];
-
-
-function getById(userId) {
-    var user = users.find(user => user._id === userId)
-    return Promise.resolve(user);
-}
-
+// const BASE_URL = 'http://localhost:3000/api/User'
+const BASE_URL = (process.env.NODE_ENV !== 'development')
+  ? '/api/user'
+  : 'http://localhost:3000/api/user';
 export default {
-    users,
-    getById
+  query,
+  // getById,
+  remove,
+  edit
 }
 
-
-function _createUser(nickname, password, _id, img, itemList) {
-    return {
-        _id,
-        nickname,
-        password,
-        itemList,
-        wishList: [],
-        historyChat: [],
-        img
-    }
+function query() {
+  return axios.get(`${BASE_URL}`).then(res => res.data);
 }
 
+// function getById(userId) {
+//   return axios.get(`${BASE_URL}/${userId}`).then(res => res.data)
+// }
+function remove(userId) {
+  return axios.delete(`${BASE_URL}/${userId}`)
+}
+function edit(user) {
+  if (user._id) {
+    return axios.put(`${BASE_URL}`, user).then(res => res.data)
+  }
+  return axios.post(`${BASE_URL}`, user)
+}

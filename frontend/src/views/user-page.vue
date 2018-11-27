@@ -4,8 +4,8 @@
       <div id="img-container" :style="{background:'green'}"></div>
       <!-- <img src="https://api.adorable.io/avatars/285/abott@adorable.png"> -->
       <div>
-        <h1>{{user.nickname}}</h1>
-        <p>{{user.nickname}}</p>
+        <!-- <h1>{{user.nickname}}</h1>
+        <p>{{user.nickname}}</p> -->
       </div>
     </section>
     <ul class="items-thumbnail">
@@ -30,9 +30,9 @@ export default {
   },
   created() {
     var userId = this.$route.params.id;
-    this.$store
-      .dispatch({ type: "getUserById", userId })
-      .then(user => (this.user = user));
+    // this.$store
+    //   .dispatch({ type: "getUserById", userId })
+    //   .then(user => (this.user = user));
     //TODO WITH REAL DATA:
     //after getting the user - get items ids=> set sellers items
   }
