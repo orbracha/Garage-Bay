@@ -1,6 +1,6 @@
 <template>
     <section>
-        <slot name="leftArrow"><slot/>
+       <button @click="$router.go(-1)">←</button>
         <slot name="headline"></slot>
        <slot name="optionalIcon"></slot>
     </section>
@@ -12,9 +12,14 @@ export default {
 }
 </script>
 
-<style>
-*{
-    box-sizing: border-box;
+<style lang="scss" scoped>
+section {
+  display: flex;
+  background-color: #666666;
+  color: #e8e8e8;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  justify-content: space-around;
 }
-
 </style>

@@ -2,20 +2,16 @@
   <div class="item-container">
     <div v-if="!isLoaded">Loading...</div>
     <div v-else>
-      <header>
-        <span slot="leftArrow">
-          <b>←</b>
-        </span>
+      <garage-header>
         <div class="content" slot="headline">
           <h3>{{currItem.title}}</h3>
           <span>Created at: {{currItem.createAt}}</span>
         </div>
         <span slot="optionalIcon">❤</span>
-      </header>
+      </garage-header>
 
       <img :src="currItem.img" alt="placeholder image">
       <div class="chatLink-container">
-        <!-- <span @click="chatClicked">&#9993;</span> -->
         <router-link to="/chat">&#9993;</router-link>
         <p>Like it? Start chat</p>
       </div>
@@ -39,11 +35,13 @@
 </template>
 
 <script>
+import garageHeader from '../components/garage-header.vue';
 import GoogleMap from "@/components/GoogleMap";
 export default {
   name: "item-details",
   components: {
-    GoogleMap
+    GoogleMap,
+    garageHeader,
   },
   data() {
     return {
@@ -75,14 +73,12 @@ export default {
     imgSrc() {
       this.currSeller.img;
     }
-  }
+  },
 };
 </script>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+<style lang="scss" scoped>
+
 .details-container {
   margin: 10px 0;
   text-align: left;
@@ -109,13 +105,7 @@ export default {
   width: 90%;
   margin: 0 auto;
 }
-header {
-  display: flex;
-  background-color: #666666;
-  color: #e8e8e8;
-  align-items: center;
-  justify-content: center;
-}
+
 img {
   width: 100%;
   height: auto;
