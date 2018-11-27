@@ -12,12 +12,6 @@ function getById(userId) {
     return Promise.resolve(user);
 }
 
-
-
-
-
-
-
 export default {
     users,
     getById

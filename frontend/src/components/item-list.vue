@@ -28,6 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 ul{
+    padding: 0;
     max-width: 100%;
     display: grid;
     grid-gap: 15px;
