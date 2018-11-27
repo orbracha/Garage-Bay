@@ -21,7 +21,7 @@ export default {
 var items = [
     {
       "_id": "9cO",
-      "img": "http://lorempixel.com/640/480/food/1",
+      "img": "https://www.dropbox.com/sh/kxozsnpd2xmt2ni/AABunXZYKWL_vrGKixdazBC8a?raw=1",
       "title": "Chair",
       "price": "383.00",
       "desc": "Handmade Wooden Mouse",
@@ -33,7 +33,7 @@ var items = [
     },
     {
       "_id": "sEk",
-      "img": "http://lorempixel.com/640/480/fashion/2",
+      "img": "https://www.dropbox.com/s/lbr0iq95d0x3qdo/2.jpg?raw=1",
       "title": "Chair",
       "price": "856.00",
       "desc": "Licensed Soft Sausages",
@@ -45,7 +45,7 @@ var items = [
     },
     {
       "_id": "gPE",
-      "img": "http://lorempixel.com/640/480/technics/3",
+      "img": "https://www.dropbox.com/s/ij5y6lzvg7z10jt/3.jpg?raw=1",
       "title": "Pizza",
       "price": "611.00",
       "desc": "Intelligent Plastic Table",
@@ -57,7 +57,7 @@ var items = [
     },
     {
       "_id": "V6f",
-      "img": "http://lorempixel.com/640/480/food/4",
+      "img": "https://www.dropbox.com/s/7fibtvxjepxcg98/4.jpg?raw=1",
       "title": "Cheese",
       "price": "58.00",
       "desc": "Sleek Metal Sausages",
@@ -69,7 +69,7 @@ var items = [
     },
     {
       "_id": "45z",
-      "img": "http://lorempixel.com/640/480/food/5",
+      "img": "https://www.dropbox.com/s/tk5zwxe81b8lc5y/5.jpg?raw=1",
       "title": "Chips",
       "price": "151.00",
       "desc": "Small Granite Mouse",
@@ -81,7 +81,7 @@ var items = [
     },
     {
       "_id": "2cN",
-      "img": "http://lorempixel.com/640/480/food/6",
+      "img": "hhttps://www.dropbox.com/s/ulsbne26jzrv7k4/6.jpg?raw=1",
       "title": "Towels",
       "price": "913.00",
       "desc": "Tasty Metal Cheese",
@@ -93,7 +93,7 @@ var items = [
     },
     {
       "_id": "zYJ",
-      "img": "http://lorempixel.com/640/480/food/7",
+      "img": "https://www.dropbox.com/s/xi82i6pgu14fs5p/7.jpg?raw=1",
       "title": "Mouse",
       "price": "191.00",
       "desc": "Practical Plastic Sausages",
@@ -105,7 +105,7 @@ var items = [
     },
     {
       "_id": "thA",
-      "img": "http://lorempixel.com/640/480/food/8",
+      "img": "hhttps://www.dropbox.com/sh/kxozsnpd2xmt2ni/AABunXZYKWL_vrGKixdazBC8a?raw=1",
       "title": "Fish",
       "price": "598.00",
       "desc": "Licensed Granite Sausages",
