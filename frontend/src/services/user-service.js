@@ -2,7 +2,9 @@
 
 
 
-var users = [_createUser('avi bobi', '1234'), _createUser('yarden hachla', '4343'), _createUser('elad yogurt', '5675')];
+var users = [_createUser('avi bobi', '1234', '123', 'user.jpg' ,["9cO","thA","N2E","2KH","b1w",]),
+_createUser('yarden hachla', '4343', '456', 'user.jpg',["sEk","2cN","zYJ","NRt","Rpd","OMt","RxJ", "yiy","MXW"]),
+_createUser('elad yogurt', '5675', '678', 'user.jpg',["gPE","V6f","45z","cV8","gIp","GWG"])];
 
 
 function getById(userId) {
@@ -22,25 +24,15 @@ export default {
 }
 
 
-
-function _makeId(length = 3) {
-    var txt = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < length; i++) {
-        txt += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return txt;
-}
-
-
-function _createUser(nickname, password) {
+function _createUser(nickname, password, _id, img, itemList) {
     return {
-        _id:_makeId(),
+        _id,
         nickname,
         password,
-        itemList:[],
-        wishList:[],
-        historyChat:[],
+        itemList,
+        wishList: [],
+        historyChat: [],
+        img
     }
 }
 
