@@ -1,7 +1,7 @@
 <template>
   <div class="item-container">
     <div v-if="!isLoaded">Loading...</div>
-    <div else>
+    <div v-else>
       <header>
         <span slot="leftArrow">
           <b>←</b>
