@@ -2,17 +2,22 @@
 
 var msgs = [
     {
-        _id:'3df',
-        txt:'hi fdgdfddf',
-        from:{ nickname: 'avi', _id: '34d' },
+        _id: '3df',
+        txt: 'hi fdgdfddf',
+        from: { nickname: 'avi bobi', _id: '123' },
     },
     {
-        _id:'32f',
-        txt:'hi fdgdfddf',
-        from:{ nickname: 'boli', _id: '341' },
+        _id: '32f',
+        txt: 'hi fdgdfddf',
+        from: { nickname: 'boli', _id: '456' },
     }
 ]
 
+
+
+function query() {
+    return Promise.resolve(msgs);
+}
 export default {
-    msgs
+    query
 }

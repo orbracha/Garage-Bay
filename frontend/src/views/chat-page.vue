@@ -2,9 +2,11 @@
   <section>
     <!-- <garage-header> -->
     <h1>Chat Page &#128172;</h1>
-    <generic-list :data="messages"></generic-list>
+    <generic-list :data="msgTodisplay"></generic-list>
     <!-- <img src=" " alt=""> -->
     <!-- </garage-header> -->
+    <!-- {{getUserMsgs()}} -->
+    {{usersImgs}}
   </section>
 </template>
 
@@ -13,10 +15,51 @@ import msgService from '../services/msg-service.js'
 // import garageHeader from '../components/garage-header.vue'
 import genericList from '../components/generic-list.vue'
 export default {
-    computed:{
-        messages(){
-            return msgService.msgs;
+    data(){
+        return{
+            usersImgs:[]
         }
+    },
+    computed:{
+        msgTodisplay(){
+            return this.msgs.map((msg,idx)=>{
+                return {
+                    name:msg.from.nickname,
+                    txt:msg.txt,
+                    img:'user.jpg'
+                }
+            }) 
+        },
+        msgs(){
+            return this.$store.getters.getMsgs;
+        }
+    },
+    methods:{
+        getUserMsgs(){
+            this.msgs.map(msg=>{
+                var userId=msg.from._id;
+               this.$store.dispatch({type:'getUserById',userId}).then(user=>{
+                   this.usersImgs.push(user);
+                   })
+            })
+        }
+    },
+    created(){
+        this.$store.dispatch({type:'loadMsgs'}).then(()=>this.getUserMsgs())
+
+        // var self=this;
+        // this.$store.dispatch({type:'loadMsgs'}).then(msgs=>{
+        //     self.msgs=msgs;
+        //     var usersImgs=msgs.map(msg=>{
+        //         debugger
+        //         var userId=msg.from._Id;
+        //         // console.log('user id',userId)
+        //        this.$store.dispatch({type:'getUserById',userId}).then(user=>{
+        //            console.log(user)
+        //            this.usersImgs.push(user)
+        //            })
+        //     })
+        // });
     },
     components:{
         // garageHeader,
