@@ -1,14 +1,15 @@
 <template>
   <div>
     <div>
-      <h2>Search and add a pin</h2>
+      <!-- DON'T DELETE!!!!!!!! FOR DEBUG API KEY ISSUE -->
+      <!-- <h2>Search and add a pin</h2>
       <label>
         <gmap-autocomplete
           @place_changed="setPlace">
         </gmap-autocomplete>
         <button @click="addMarker">Add</button>
       </label>
-      <br/>
+      <br/> -->
 
     </div>
     <br>
