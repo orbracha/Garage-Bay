@@ -1,6 +1,7 @@
 <template>
   <ul>
     <generic-preview v-for="(item,idx) in data" :item="item" :key="idx"></generic-preview>
+    {{data}}
   </ul>
 </template>
 

@@ -1,9 +1,8 @@
 <template>
   <li>
-    <div id="img-container" :style="{background:'black'}"></div>
-    <!-- <img src="https://api.adorable.io/avatars/285/abott@adorable.png"> -->
+    <img :src="'img/'+ item.img">
     <div>
-      <h1>avi</h1>
+      <h1>{{item.name}}</h1>
       <p>{{item.txt}}</p>
     </div>
   </li>
@@ -14,27 +13,17 @@
     list-style-type: none;
     display: flex;
     margin-bottom: 5px;
-    // img {
-    //   height: 50px;
-    //   width: 50px;
-    //   grid-column: 1/2;
-    //   grid-row: 1/3;
-    // }
-    #img-container{
+    img {
       height: 50px;
       width: 50px;
       border-radius: 50%;
-      // background: url('https://api.adorable.io/avatars/285/abott@adorable.png') no-repeat;
-      background-size: center;
+      margin-right: 10px;
     }
     h1{
-      grid-column-start: 2;
       text-align: left;
       margin: 0;
     }
     p{
-      grid-column-start: 2;
-      grid-row-start: 2;
       text-align: left;
       margin: 0;
     }

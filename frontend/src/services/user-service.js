@@ -8,7 +8,7 @@ _createUser('elad yogurt', '5675', '678', 'user.jpg',["gPE","V6f","45z","cV8","g
 
 
 function getById(userId) {
-    user = users.find(user => user._id === userId)
+    var user = users.find(user => user._id === userId)
     return Promise.resolve(user);
 }
 
