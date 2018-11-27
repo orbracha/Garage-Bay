@@ -23,8 +23,8 @@ export default {
                 return items;
             })
         },
-        getItemById({ commit }, { itemId }) {
-            return itemService.getById(itemId).then(item => {
+        getItemById({ commit },  itemId ) {
+            return itemService.getById(itemId).then(item => {              
                 return item;
             })
         }

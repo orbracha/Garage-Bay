@@ -15,8 +15,8 @@ function query() {
 }
 
 
-function getById(itemId) {
-    item = items.find(item => item._id === itemId)
+function getById({itemId}) {
+   var item = items.find(item => item._id === itemId)
     return Promise.resolve(item);
 }
 
@@ -44,7 +44,8 @@ function _createItem(title, price, desc, createAt, sellerId, location, category)
         createAt,
         sellerId,
         location,
-        category
+        category,
+        condition: 'Used'
     }
 }
 
