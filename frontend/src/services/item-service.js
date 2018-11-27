@@ -1,12 +1,17 @@
+var faker = require('faker');
 
+var items = [];
+creatItems();
 
+function creatItems() {
+    for (let i = 0; i < 20; i++) {
+        items.push(_createItem(i))
+    }
+}
 
-
-var items = [_createItem('bamba', 12, 'hjghgjh', 768768768, 'tty', 76876, 'music'),
-_createItem('jhgj', 56, 'mbmn,mn,mn', 768768768, 'tty', 76876, 'kids'),
-_createItem('hhkjhk', 162, 'sadsads', 768768768, 'tty', 76876, 'home')];
-
-
+// var items = [_createItem('bamba', 12, 'hjghgjh', 768768768, 'tty', 76876, 'music'),
+// _createItem('jhgj', 56, 'mbmn,mn,mn', 768768768, 'tty', 76876, 'kids'),
+// _createItem('hhkjhk', 162, 'sadsads', 768768768, 'tty', 76876, 'home')];
 
 
 
@@ -26,25 +31,19 @@ export default {
     getById
 }
 
+// title, price, desc, createAt, sellerId, location, category
 
-
-
-
-
-
-
-
-function _createItem(title, price, desc, createAt, sellerId, location, category) {
+function _createItem(i) {
     return {
         _id: _makeId(),
-        img: '',
-        title,
-        price,
-        desc,
-        createAt,
-        sellerId,
-        location,
-        category,
+        img: faker.image.food(),
+        title: faker.commerce.product(),
+        price: faker.commerce.price(),
+        desc: faker.commerce.productName(),
+        createAt: faker.date.past(),
+        sellerId: _makeId(5),
+        location: '32.053292, 34.761452',
+        category: faker.commerce.department(),
         condition: 'Used'
     }
 }

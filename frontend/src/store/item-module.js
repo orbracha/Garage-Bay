@@ -19,7 +19,7 @@ export default {
     actions: {
         loadItems({ commit }) {
             itemService.query().then(items => {
-                commit({ type: 'setItems', items })
+                commit({ type: 'setItems', items })       
                 return items;
             })
         },
@@ -30,6 +30,8 @@ export default {
         }
     },
     getters: {
+        itemsToDisplay: state => state.items,
+
         getItems(state) {
             return state.items;
         }
