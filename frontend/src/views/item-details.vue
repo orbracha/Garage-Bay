@@ -15,8 +15,8 @@
         <router-link to="/chat">&#9993;</router-link>
         <p>Like it? Start chat</p>
       </div>
-
-      <div class="details-container">
+        <garage-footer></garage-footer>
+      <!-- <div class="details-container">
         <p>Description: {{currItem.desc}}</p>
         <p>Location: ***need to add***</p>
         <p>Condition: {{currItem.condition}}</p>
@@ -28,7 +28,7 @@
           </div>
         </div>
         <google-map/>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -53,6 +53,7 @@ export default {
     var itemId = this.$route.params.id;
     this.$store.dispatch({ type: "getItemById", itemId }).then(item => {
       this.currItem = item;
+      this.isLoaded=true;
       // var userId = this.currItem.sellerId;
       // this.$store.dispatch({ type: "getUserById", userId }).then(user => {
       //   this.currSeller = user;
