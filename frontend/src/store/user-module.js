@@ -17,6 +17,9 @@ export default {
         }
     },
     actions: {
+        // toggleWishlist({commit} , {itemId}){
+
+        // }
         // getUserById({ commit }, { userId }) {
         //     return userService.getById(userId).then(user => {
         //         commit({ type: 'setUser', user })

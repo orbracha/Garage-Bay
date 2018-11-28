@@ -18,14 +18,27 @@ export default {
   //   },
   data() {
     return {
-      user: {}
+      user: {
+        _id: "5bfd709dbaca8c22a4bb1b71",
+        nickname: "yarden hachla",
+        password: 4343.0,
+        itemList: [],
+        wishList: [],
+        historyChat: [],
+        img: "https://i.stack.imgur.com/l60Hf.png"
+      }
     };
   },
+  computed: {
+    // loggedUser() {
+    //   return this.$store.getters.getLoggedUser;
+    // },
+  },
   created() {
-    var userId = this.$route.params.id;
-    this.$store
-      .dispatch({ type: "getUserById", userId })
-      .then(user => (this.user = user));
+    // var userId = this.$route.params.id;
+    // this.$store
+    //   .dispatch({ type: "getUserById", userId })
+    //   .then(user => (this.user = user));
     //TODO WITH REAL DATA:
     //after getting the user - get items ids=> set sellers items
   }
