@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export default {
     strict: true,
     state: {
-        loggedUser:null
+        loggedUser: null
     },
     mutations: {
         setLoggedUser(state, { user }) {
@@ -17,9 +17,16 @@ export default {
         }
     },
     actions: {
+
         // toggleWishlist({commit} , {itemId}){
 
         // }
+        checkUser({ commit }, { user }) {
+            return userService.checkUser(user).then(user => {
+                commit({ type: 'setLoggedUser', user })
+            })
+
+        }
         // getUserById({ commit }, { userId }) {
         //     return userService.getById(userId).then(user => {
         //         commit({ type: 'setUser', user })
@@ -29,7 +36,8 @@ export default {
     },
     getters: {
         getLoggedUser(state) {
-            return state.loggedUser; 
+            if (!state.loggedUser) return JSON.parse(localStorage.getItem('loggedInUser'))
+            return state.loggedUser;
         }
     }
 };

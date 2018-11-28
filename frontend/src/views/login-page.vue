@@ -1,9 +1,19 @@
 <template>
   <section>
-    <ul class="items-thumbnail">
-      <li v-for="item in user.wishList" :item="user.wishList" :key="item">{{item}}</li>
-    </ul>
-    <garage-footer/>
+    <!-- <garage-footer/> -->
+    <h1>Login</h1>
+    <form @submit.prevent="checkUser">
+      <label>
+        <span>Username:</span>
+        <input autofocus type="text" v-model="user.nickname" required>
+      </label>
+      <label>
+        <span>Password:</span>
+        <input type="password" v-model="user.password" required>
+      </label>
+      <button>Login</button>
+      <span v-if="isUnknowen">Unvalid Username/Password</span>
+    </form>
   </section>
 </template>
 
@@ -12,33 +22,37 @@
 // import userList from "@/components/user-list.vue";
 
 export default {
-  name: "home",
-  //   components: {
-  //     userList
-  //   },
+  name: "login",
   data() {
     return {
-      user: {}
+      user: {
+        nickname: null,
+        password: null
+      },
+      isUnknowen: false
     };
   },
-  created() {
-    var userId = this.$route.params.id;
-    this.$store
-      .dispatch({ type: "getUserById", userId })
-      .then(user => (this.user = user));
-    //TODO WITH REAL DATA:
-    //after getting the user - get items ids=> set sellers items
+  methods: {
+    checkUser() {
+      var user = JSON.parse(JSON.stringify(this.user));
+      this.$store
+        .dispatch({ type: "checkUser", user })
+        .then(() => {
+          this.$router.push("/");
+        })
+        .catch(() => {
+          this.isUnknowen = true;
+          setTimeout(() => (this.isUnknowen = false), 2000);
+        });
+    }
   }
-  //   computed: {
-  //     users() {
-  //       console.log(this.$store.getters.usersToDisplay);
-  //       return this.$store.getters.usersToDisplay;
-  //     }
-  //   }
 };
 </script>
 
 <style lang="scss" scoped>
+section {
+  background: url("");
+}
 .user-preview {
   display: inline;
 }
