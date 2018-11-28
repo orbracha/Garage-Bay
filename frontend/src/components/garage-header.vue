@@ -18,7 +18,7 @@ section {
   background-color: #666666;
   color: #e8e8e8;
   align-items: center;
-  justify-content: center;
+  
   display: flex;
   justify-content: space-around;
 }

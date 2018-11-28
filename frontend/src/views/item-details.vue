@@ -11,7 +11,7 @@
       </garage-header>
 
       <img :src="currItem.img" alt="placeholder image">
-      <div class="chatLink-container">
+      <!-- <div class="chatLink-container">
         <router-link to="/chat">&#9993;</router-link>
         <p>Like it? Start chat</p>
       </div>
@@ -26,21 +26,24 @@
             <p>{{currSeller.nickname}} Seller rate:***need to add***</p>
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
-        </div>
+        </div> -->
         <google-map/>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
 import garageHeader from '../components/garage-header.vue';
+import garageFooter from '../components/garage-footer.vue';
 import GoogleMap from "@/components/GoogleMap";
+
 export default {
   name: "item-details",
   components: {
     GoogleMap,
     garageHeader,
+    garageFooter
   },
   data() {
     return {
@@ -53,6 +56,8 @@ export default {
     var itemId = this.$route.params.id;
     this.$store.dispatch({ type: "getItemById", itemId }).then(item => {
       this.currItem = item;
+      console.log('cur item is', this.currItem);
+      this.isLoaded=true;
       // var userId = this.currItem.sellerId;
       // this.$store.dispatch({ type: "getUserById", userId }).then(user => {
       //   this.currSeller = user;

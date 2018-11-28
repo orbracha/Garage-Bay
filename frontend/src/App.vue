@@ -6,6 +6,7 @@
       <!-- <router-link to="/chat">Chat</router-link>| -->
       <!-- <router-link to="/forparams">for params</router-link> -->
     </footer>
+    
     <router-view/>
     
   </div>
