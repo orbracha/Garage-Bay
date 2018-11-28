@@ -36,6 +36,17 @@ function addRoutes(app) {
             .then(() => res.end())
     })
 
+    app.get('/api/search',(req, res)=>{
+        return itemService.getCatagories()
+        .then(catagories=>{
+            res.json(catagories)    
+        })
+    })
+    app.get('/api/filter/',(req, res)=>{
+       itemService.filterItems(req.query)
+        
+    })
+
 }
 
 

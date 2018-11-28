@@ -7,6 +7,7 @@ import userChat from './views/user-chat.vue';
 import wishPage from './views/wish-page.vue';
 import itemDetails from './views/item-details.vue';
 import editItem from './views/edit-item.vue';
+import searchPage from './views/search-page.vue';
 
 
 Vue.use(Router);
@@ -19,6 +20,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: searchPage,
     },
     {
       path: '/chat',
