@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import chatPage from './views/chat-page.vue';
-import login from './views/login-page.vue';
+import loginPage from './views/login-page.vue';
 import userChat from './views/user-chat.vue';
 import wishPage from './views/wish-page.vue';
 import itemDetails from './views/item-details.vue';
@@ -20,6 +20,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: loginPage,
     },
     {
       path: '/search',
@@ -40,11 +45,6 @@ export default new Router({
       path: '/item/edit/:id?',
       name: 'edit',
       component: editItem,
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: login,
     },
     {
       path: '/wishlist',

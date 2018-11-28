@@ -9,11 +9,11 @@ Vue.use(Vuex);
 export default {
     strict: true,
     state: {
-        user:null
+        loggedUser:null
     },
     mutations: {
-        setUser(state, { user }) {
-            state.user = user;
+        setLoggedUser(state, { user }) {
+            state.loggedUser = user;
         }
     },
     actions: {
@@ -25,8 +25,8 @@ export default {
         // }
     },
     getters: {
-        getUser(state) {
-            return state.user; 
+        getLoggedUser(state) {
+            return state.loggedUser; 
         }
     }
 };

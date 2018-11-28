@@ -53,7 +53,7 @@ export default {
   methods: {
     saveItem() {
       var item = JSON.parse(JSON.stringify(this.currItem));
-      this.$store.dispatch({ type: "saveItem", item });
+      this.$store.dispatch({ type: "editItem", item });
     }
   },
   computed: {},
