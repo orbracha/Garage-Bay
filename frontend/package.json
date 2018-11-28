@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.5.0",
     "axios": "^0.18.0",
     "browserify-fs": "^1.0.0",
     "faker": "^4.1.0",

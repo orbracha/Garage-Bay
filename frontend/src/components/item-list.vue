@@ -21,6 +21,9 @@ export default {
     created(){
         console.log('inside  item list', this.items);   
     },
+     created(){
+        console.log('inside  item list', this.items);   
+    },
 
 }
 

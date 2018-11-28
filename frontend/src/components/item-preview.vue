@@ -1,19 +1,24 @@
 <template>
   <section>
     <li class="main-list-item" @click="itemClicked(item._id)">
-      <div class="main-list-header">{{item.title}}</div>
-      <!-- <div lass="main-list-img"></div> -->
+      <div>
+
+      </div>
       <img class="main-list-img" :src="item.img">
       <div class="main-item-details">
-        <div>{{item.desc}}</div>
-        <div>{{item.price}}</div>
-        <!-- <div>{{item.desc}}</div> -->
+        <div class="main-list-header">{{item.desc}}</div>
+        <div class="item-desc">{{item.desc}} {{item.desc}} {{item.desc}}</div>
+        <div>${{item.price}}</div>
+
       </div>
+      <hr>
     </li>
   </section>
 </template>
 
 <script>
+import genericPrivew from '@/services/item-service.js';
+
 export default {
   props: {
     item: Object
@@ -27,21 +32,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-li {
-  display: flex;
-  flex-direction: column;
-  transition: 0.3s;
-  &:hover {
-    border: 2px solid gray;
-  }
-}
-
-.main-list-img {
-  //   background-color: greenyellow;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  // transition: 0.3s;
+hr{
+  padding-bottom: 8px;
 }
 </style>
 
