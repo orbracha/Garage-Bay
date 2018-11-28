@@ -1,0 +1,39 @@
+
+.main-list-item{
+ 
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+    text-align: left;
+    &:hover {
+      transform:scale(1.1)
+      // outline: 2px solid rgb(201, 201, 201);
+    }
+  }
+  
+  .main-list-img {
+    //   background-color: greenyellow;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    // transition: 0.3s;
+  }
+
+
+  .main-list-header{
+      font-size: 1.2rem;
+      font-weight: bold;
+    //   padding: 10px;
+  }
+  .main-item-details{
+    padding: 10px;
+
+ 
+  }
+
+
+  .item-desc {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

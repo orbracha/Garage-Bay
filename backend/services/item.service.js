@@ -2,38 +2,33 @@ const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
 
-function query() {
+function query(criteria = {}) {
     return mongoService.connectToDb()
-        // .then(dbConn => {
-        // const itemCollection = dbConn.collection('item');
-        // return itemCollection.find().toArray();
-
-        // const id = new ObjectId(itemId)
-        // return mongoService.connect()
-        .then(db =>
-            db.collection('item').aggregate([
-                // {
-                //     $match: { itemId: id }
-                // },
-                {
-                    $lookup:
+        .then(db => {
+            return db.collection('item')
+                .aggregate([
                     {
-                        from: 'user',
-                        localField: 'sellerId',
-                        foreignField: '_id',
-                        as: 'user'
+                        $match: criteria
+                    },
+                    {
+                        $lookup:
+                        {
+                            from: 'user',
+                            localField: 'sellerId',
+                            foreignField: '_id',
+                            as: 'user'
+                        }
+                    },
+                    {
+                        $unwind: '$user'
                     }
-                },
-
-
-                
-                // {
-                //     $unwind: '$user'
-                // }
-            ]).toArray()
-        )
+                ]).toArray()
+                .then(items => {
+                    console.log(items)
+                    return items
+                })
+        })
 }
-
 
 function getById(itemId) {
     itemId = new ObjectId(itemId)
@@ -52,6 +47,7 @@ function remove(itemId) {
         })
 }
 function add(item) {
+    item.sellerId = new ObjectId(item.sellerId)
     return mongoService.connectToDb()
         .then(dbConn => {
             const itemCollection = dbConn.collection('item');
@@ -60,6 +56,7 @@ function add(item) {
 }
 function update(item) {
     itemId = new ObjectId(item._id)
+    item.sellerId = new ObjectId(item.sellerId)
     delete item._id;
     return mongoService.connectToDb()
         .then(dbConn => {

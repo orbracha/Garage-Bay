@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <header>
-      <div class="logo">Dibs</div>
+    <header class="home-header">
+      <div class="home-logo">Dibs</div>
+      <i class="fas fa-search"></i>
     </header>
     <item-list :items="items"/>
     <garage-footer/>
@@ -34,19 +35,6 @@ export default {
 <style lang="scss" scoped>
 *{
   box-sizing: border-box;
-}
-header {
-  z-index: 2;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100%;
-  background-color: grey;
-  .logo {
-    color: white;
-    font-family: "Lobster", cursive;
-    font-size: 3rem;
-  }
 }
 
 
