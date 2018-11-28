@@ -7,7 +7,7 @@ const userService = require('../services/user.service')
 
 function addRoutes(app) {
     app.post('/api/user', (req, res) => {
-        return userService.checkuser(req.body.user)
+        return userService.checkUser(req.body.user)
             .then(user => {
                 req.session.loggedinUser = user;
                 return res.json(user);

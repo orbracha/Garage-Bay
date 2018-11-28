@@ -3,10 +3,11 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 function checkUser(user) {
+    console.log('user', user)
     return mongoService.connectToDb()
         .then(dbConn => {
             const toyCollection = dbConn.collection('user');
-            return toyCollection.findOne({ "nickname": user }).then(user => {
+            return toyCollection.findOne({ $and: [{ "nickname": user.nickname }, { "password": +user.password }] }).then(user => {
                 if (!user) throw err;
                 return user
             });

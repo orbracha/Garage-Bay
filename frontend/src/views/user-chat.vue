@@ -7,9 +7,11 @@
       <span slot="optionalIcon">&#128172;</span>
     </garage-header>
     <div class="chat-msgs">
-         <pre>{{msgs}}</pre>
+      <ul>
+        <li v-for="(msg,idx) in msgs" :key="idx">{{msg.txt}}</li>
+      </ul>
     </div>
-   
+
     <div class="chat-text">
       <form @submit.prevent="sendMsg">
         <input type="text" v-model="newMsg.txt" required>
@@ -36,12 +38,14 @@ export default {
     sendMsg() {
       console.log("send msg", this.newMsg);
       var msg = JSON.parse(JSON.stringify(this.newMsg));
-      this.$store.dispatch({ type: "sendMsg", msg });
+      this.$store
+        .dispatch({ type: "sendMsg", msg })
+        .then(() => (this.newMsg = { from: "", txt: "" }));
     }
   },
   created() {
     this.$store.commit({ type: "connectSocket" });
-    this.newMsg.from = this.$store.getters.getUser;
+    this.newMsg.from = this.$store.getters.getLoggedUser;
     this.$store.dispatch({ type: "loadMsgs" });
   },
   components: {
@@ -51,6 +55,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ul{
+  margin: 0;
+  li{
+    list-style-type: none;
+  }
+}
 .chat-container {
   height: 100%;
 }
