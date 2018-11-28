@@ -3,6 +3,7 @@
     <footer id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/item/edit">Edit</router-link>|
+      <router-link to="/search">search</router-link>|
       <!-- <router-link to="/chat">Chat</router-link>| -->
       <!-- <router-link to="/forparams">for params</router-link> -->
     </footer>

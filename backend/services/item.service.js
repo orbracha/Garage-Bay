@@ -6,6 +6,7 @@ function query() {
     return mongoService.connectToDb()
         .then(dbConn => {
             const itemCollection = dbConn.collection('item');
+            
             return itemCollection.find().toArray();
         })
 }
@@ -41,6 +42,17 @@ function update(item) {
             return itemCollection.updateOne({ "_id": itemId }, { $set: item }).then(() => item)
         })
 }
+function getCatagories() {
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const itemCollection = dbConn.collection('item');
+            return itemCollection.distinct("category");
+        })
+}
+function filterItems(query){
+    console.log('query in back service is: ', query);
+    
+}
 
 
 
@@ -49,6 +61,8 @@ module.exports = {
     getById,
     remove,
     add,
-    update
+    update,
+    getCatagories,
+    filterItems
 }
 

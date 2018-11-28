@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import userModule from './user-module.js'
 import itemModule from './item-module.js'
 import msgModule from './msg-module.js'
+import searchModule from './search-module.js'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -10,7 +11,8 @@ export default new Vuex.Store({
   modules: {
     itemModule,
     userModule,
-    msgModule
+    msgModule,
+    searchModule
   },
   state: {
 
