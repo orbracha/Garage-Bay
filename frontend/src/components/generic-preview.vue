@@ -9,6 +9,9 @@
 </template>
 
 <style lang="scss" scoped>
+*{
+  box-sizing: border-box;
+}
   li{
     list-style-type: none;
     display: flex;

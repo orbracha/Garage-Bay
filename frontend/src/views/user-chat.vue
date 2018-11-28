@@ -1,0 +1,78 @@
+<template>
+  <section class="chat-container">
+    <garage-header>
+      <div slot="headline">
+        <h3>User Chat</h3>
+      </div>
+      <span slot="optionalIcon">&#128172;</span>
+    </garage-header>
+    <div class="chat-msgs">
+         <pre>{{msgs}}</pre>
+    </div>
+   
+    <div class="chat-text">
+      <form @submit.prevent="sendMsg">
+        <input type="text" v-model="newMsg.txt" required>
+        <button>Send</button>
+      </form>
+    </div>
+  </section>
+</template>
+
+<script>
+import garageHeader from "../components/garage-header.vue";
+export default {
+  data() {
+    return {
+      newMsg: { from: "", txt: "" }
+    };
+  },
+  computed: {
+    msgs() {
+      return this.$store.getters.getMsgs;
+    }
+  },
+  methods: {
+    sendMsg() {
+      console.log("send msg", this.newMsg);
+      var msg = JSON.parse(JSON.stringify(this.newMsg));
+      this.$store.dispatch({ type: "sendMsg", msg });
+    }
+  },
+  created() {
+    this.$store.commit({ type: "connectSocket" });
+    this.newMsg.from = this.$store.getters.getUser;
+    this.$store.dispatch({ type: "loadMsgs" });
+  },
+  components: {
+    garageHeader
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.chat-container {
+  height: 100%;
+}
+.chat-msgs {
+  height: 85%;
+  background: lightgray;
+}
+.chat-text {
+  display: flex;
+  height: 5%;
+  margin-bottom: 2px;
+  form {
+    width: 100%;
+    height: 100%;
+  }
+  input {
+    width: 80%;
+    height: 100%;
+  }
+  button {
+    height: 100%;
+    width: 20%;
+  }
+}
+</style>

@@ -3,6 +3,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store/store';
 import './registerServiceWorker';
+import './assets/scss/main.scss';
+
+
 
 
 import * as VueGoogleMaps from "vue2-google-maps"
