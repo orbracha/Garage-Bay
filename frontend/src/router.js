@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import chatPage from './views/chat-page.vue';
 import wishPage from './views/wish-page.vue';
 import itemDetails from './views/item-details.vue';
+import editItem from './views/edit-item.vue';
 
 
 Vue.use(Router);
@@ -23,12 +24,17 @@ export default new Router({
       component: chatPage,
     },
     {
+      path: '/item/edit/:id?',
+      name: 'edit',
+      component: editItem,
+    },
+    {
       path: '/wishlist',
       name: 'wishlist',
       component: wishPage,
     },
     {
-      path: '/item/:id',
+      path: '/item/details/:id',
       name: 'item-details',
       component: itemDetails,
     },

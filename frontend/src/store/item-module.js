@@ -9,23 +9,34 @@ Vue.use(Vuex);
 export default {
     strict: true,
     state: {
-        items:[]
+        items: []
     },
     mutations: {
         setItems(state, { items }) {
             state.items = items;
+        },
+        editItem(state, { item }) {
+            var items = state.items;
+            var itemIdx = items.findIndex(currItem => currItem._id === item._id);
+            if (itemIdx) return items.splice(itemIdx, 1, item);
+            items.unshift(item);
         }
     },
     actions: {
         loadItems({ commit }) {
             itemService.query().then(items => {
-                commit({ type: 'setItems', items })       
+                commit({ type: 'setItems', items })
                 return items;
             })
         },
-        getItemById({ commit },  {itemId} ) {
-            return itemService.getById(itemId).then(item => {              
+        getItemById({ commit }, { itemId }) {
+            return itemService.getById(itemId).then(item => {
                 return item;
+            })
+        },
+        editItem({ commit }, { item }) {
+            return itemService.edit(item).then(item => {
+                commit({ type: 'editItem', item });
             })
         }
     },
