@@ -9,7 +9,9 @@ Vue.use(Vuex);
 export default {
     strict: true,
     state: {
-        user:null
+        user:{
+            _id:"5bfd7083baca8c22a4bb1b70"
+        }
     },
     mutations: {
         setUser(state, { user }) {
@@ -17,12 +19,12 @@ export default {
         }
     },
     actions: {
-        // getUserById({ commit }, { userId }) {
-        //     return userService.getById(userId).then(user => {
-        //         commit({ type: 'setUser', user })
-        //         return user;
-        //     })
-        // }
+        getUserById({ commit }, { userId }) {
+            // return userService.getById(userId).then(user => {
+            //     commit({ type: 'setUser', user })
+            //     return user;
+            // })
+        }
     },
     getters: {
         getUser(state) {

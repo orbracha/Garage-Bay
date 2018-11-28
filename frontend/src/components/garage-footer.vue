@@ -3,7 +3,7 @@
         <router-link to="/">&#127968;</router-link>
         <router-link to="/chat">&#9993;</router-link>
         <router-link to="/">&plus;</router-link>
-        <router-link to="/">❤</router-link>
+        <router-link to="/wishlist/:id?">❤</router-link>
         <router-link to="/">&#9786;</router-link>
     </div>
 </template>
