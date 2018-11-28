@@ -13,6 +13,7 @@
 
 <style lang="scss">
 #app {
+  height: 100vh;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;

@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const addItemRoutes = require('./routes/item.route')
 const addUserRoutes = require('./routes/user.route')
+const addChatRoutes = require('./routes/chat.route')
 
 const session = require('express-session')
 const app = express()
@@ -18,11 +19,14 @@ app.use(session({
     cookie: { secure: false }
 }))
 
-addItemRoutes(app)
-addUserRoutes(app)
+
 app.use(express.static('public'));
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+var server = app.listen(port, () => {
     console.log(`App listening on port ${port}!`)
 });
+
+addItemRoutes(app)
+addUserRoutes(app)
+addChatRoutes(app, server)
