@@ -1,0 +1,26 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+// Google Fonts
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+// Font Variables
+$lobster: 'Lobster', cursive;
+
+
+//color Variables
+
+$dark: rgb(46, 46, 46);
+$mid: rgb(119, 119, 119);
+$light: rgb(223, 223, 223);
+
+
+body, html{
+    height: 100%;
+    width: 100%;
+}
+
+*{
+    box-sizing: border-box;
+    margin:0;
+}
+

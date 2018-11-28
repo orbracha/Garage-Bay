@@ -4,11 +4,37 @@ const ObjectId = require('mongodb').ObjectId;
 
 function query() {
     return mongoService.connectToDb()
-        .then(dbConn => {
-            const itemCollection = dbConn.collection('item');
-            return itemCollection.find().toArray();
-        })
+        // .then(dbConn => {
+        // const itemCollection = dbConn.collection('item');
+        // return itemCollection.find().toArray();
+
+        // const id = new ObjectId(itemId)
+        // return mongoService.connect()
+        .then(db =>
+            db.collection('item').aggregate([
+                // {
+                //     $match: { itemId: id }
+                // },
+                {
+                    $lookup:
+                    {
+                        from: 'user',
+                        localField: 'sellerId',
+                        foreignField: '_id',
+                        as: 'user'
+                    }
+                },
+
+
+                
+                // {
+                //     $unwind: '$user'
+                // }
+            ]).toArray()
+        )
 }
+
+
 function getById(itemId) {
     itemId = new ObjectId(itemId)
     return mongoService.connectToDb()
@@ -44,11 +70,17 @@ function update(item) {
 
 
 
+
+
+
+
+
 module.exports = {
     query,
     getById,
     remove,
     add,
-    update
+    update,
+    // getItemsUser
 }
 

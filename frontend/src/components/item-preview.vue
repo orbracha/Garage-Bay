@@ -27,12 +27,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+*{
+  box-sizing: border-box;
+}
 li {
   display: flex;
   flex-direction: column;
   transition: 0.3s;
   &:hover {
-    border: 2px solid gray;
+    transform:scale(1.1)
+    // outline: 2px solid rgb(201, 201, 201);
   }
 }
 
