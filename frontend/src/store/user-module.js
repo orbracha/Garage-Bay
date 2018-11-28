@@ -17,6 +17,10 @@ export default {
         }
     },
     actions: {
+
+        // toggleWishlist({commit} , {itemId}){
+
+        // }
         checkUser({ commit }, { user }) {
             return userService.checkUser(user).then(user => {
                 commit({ type: 'setLoggedUser', user })
