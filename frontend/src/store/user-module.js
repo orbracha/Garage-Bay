@@ -36,19 +36,20 @@ export default {
             return userService.edit(contex.state.loggedUser).then(user => {
                 console.log(user);
             })
+<<<<<<< HEAD
+=======
+
+>>>>>>> c741597fa3f8708a4ad1e2a15f6b29830fdc6241
         },
         checkUser({ commit }, { user }) {
-            return userService.checkUser(user).then(user => {
-                commit({ type: 'setLoggedUser', user })
-            })
+            return userService.checkUser(user)
+             
 
+        },
+        getUserById({ commit }, { userId }) {
+            return userService.getById(userId)
+                .then(user => user)
         }
-        // getUserById({ commit }, { userId }) {
-        //     return userService.getById(userId).then(user => {
-        //         commit({ type: 'setUser', user })
-        //         return user;
-        //     })
-        // }
     },
     getters: {
         getLoggedUser(state) {
