@@ -24,7 +24,7 @@ function query(criteria = {}) {
                     }
                 ]).toArray()
                 .then(items => {
-                    console.log(items)
+                    // console.log(items)
                     return items
                 })
         })
@@ -71,9 +71,13 @@ function getCatagories() {
             return itemCollection.distinct("category");
         })
 }
-function filterItems(query){
-    console.log('query in back service is: ', query);
-    
+function filterItems(queryObj){
+    const criteria = {
+        $and: []
+    }
+    if(queryObj.type) criteria.$and.push({ category: queryObj.type })
+    if (queryObj.text) criteria.$and.push({ title: { $regex: queryObj.text,  $options: 'i' } })
+   return query(criteria)    
 }
 
 

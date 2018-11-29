@@ -43,8 +43,11 @@ function addRoutes(app) {
         })
     })
     app.get('/api/filter/',(req, res)=>{
-       itemService.filterItems(req.query)
-        
+     return  itemService.filterItems(req.query)
+        .then(data=>{
+            // console.log('data in routes', data);
+            res.send(data)
+        })
     })
 
 }
