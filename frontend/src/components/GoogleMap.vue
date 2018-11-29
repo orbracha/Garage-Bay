@@ -1,8 +1,10 @@
 <template>
   <div>
+    <button @click="addMarker">Add</button>
+    
     <gmap-map
       :center="center"
-      :zoom="12"
+      :zoom="17"
       style="width:100%;  height: 400px;"
     >
       <gmap-marker
@@ -39,6 +41,8 @@ export default {
       this.currentPlace = place;
     },
     addMarker() {
+      console.log('adding', this.currentPlace);
+      
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),

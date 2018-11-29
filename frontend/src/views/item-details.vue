@@ -15,7 +15,8 @@
         <router-link to="/chat">&#9993;</router-link>
         <p>Like it? Start chat</p>
       </div>
-        <garage-footer></garage-footer>
+
+      <garage-footer></garage-footer>
       <!-- <div class="details-container">
         <p>Description: {{currItem.desc}}</p>
         <p>Location: ***need to add***</p>
@@ -27,20 +28,22 @@
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
         </div>
-        <google-map/>
-      </div> -->
+      </div>-->
+      <google-map/>
     </div>
   </div>
 </template>
 
 <script>
-import garageHeader from '../components/garage-header.vue';
+import garageHeader from "../components/garage-header.vue";
+import garageFooter from "../components/garage-footer.vue";
 import GoogleMap from "@/components/GoogleMap";
 export default {
   name: "item-details",
   components: {
     GoogleMap,
     garageHeader,
+    garageFooter
   },
   data() {
     return {
@@ -51,10 +54,12 @@ export default {
   },
   created() {
     var itemId = this.$route.params.id;
-    this.$store.dispatch({ type: "getItemById", itemId }).then(item => {
+    this.$store.dispatch({ type: "getItemById", itemId })
+    .then(item => {
       this.currItem = item;
-      this.isLoaded=true;
-      // var userId = this.currItem.sellerId;
+      console.log("curr item:", this.currItem.sellerId);
+      this.isLoaded = true;
+
       // this.$store.dispatch({ type: "getUserById", userId }).then(user => {
       //   this.currSeller = user;
       //   this.isLoaded = true;
@@ -66,19 +71,21 @@ export default {
   methods: {
     chatClicked() {
       console.log("chat link clicked");
-      this.$router.push(`/chat`)
+      this.$router.push(`/chat`);
     }
   },
   computed: {
     imgSrc() {
       this.currSeller.img;
     }
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
+.item-container {
+  margin-bottom: 50px;
+}
 .details-container {
   margin: 10px 0;
   text-align: left;
@@ -106,8 +113,8 @@ img {
   width: 100%;
   height: auto;
 }
-.flexSet{
-    display:flex;
-    align-items: center;
+.flexSet {
+  display: flex;
+  align-items: center;
 }
 </style>
