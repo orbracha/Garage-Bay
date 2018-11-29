@@ -42,9 +42,10 @@ export default {
                 commit({ type: 'setMsgs', msgs })
             })
         },
-        loadRooms({ commit }, {userId}) {
-            msgService.queryRooms(userId).then(rooms => {
+        loadRooms({ commit }, { userId }) {
+            return msgService.queryRooms(userId).then(rooms => {
                 commit({ type: 'setRooms', rooms })
+                return rooms;
             })
         },
         sendMsg({ commit }, { msg, user }) {

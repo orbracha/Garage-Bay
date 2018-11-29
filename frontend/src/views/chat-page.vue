@@ -6,9 +6,7 @@
       </div>
       <span slot="optionalIcon">&#128172;</span>
     </garage-header>
-    <!-- <generic-list :data="rooms"></generic-list> -->
-    {{rooms}}
-    {{userMsgs}}
+    <generic-list :data="userMsgs"></generic-list>
     <garage-footer/>
   </section>
 </template>
@@ -27,31 +25,22 @@ export default {
   },
   computed: {
     rooms() {
-      return this.$store.getters.getRooms.map(room => {
-        this.$store
-          .dispatch({ type: "getUserById", userId: room.userDest })
-          .then(user => user);
-        // var currMsg = room.historyMsgs[room.historyMsgs.length - 1];
-        // if (currMsg.from._id !== this.loggedUser._id) {
-        //   return {
-        //     title: currMsg.from.nickname,
-        //     txt: currMsg.txt,
-        //     img: currMsg.from.img
-        //   };
-        // }
-      });
+      return this.$store.getters.getRooms;
     }
   },
   methods: {
     getUserMsgs() {
-      this.rooms.map(room => {
-        return this.$store
+      console.log(this.rooms);
+      var self = this;
+      return this.rooms.map(room => {
+        this.$store
           .dispatch({ type: "getUserById", userId: room.userDest })
           .then(user => {
-            return this.userMsgs.push({
+            self.userMsgs.push({
+              txt: room.historyMsgs[room.historyMsgs.length - 1].txt,
               title: user.nickname,
               img: user.img,
-              txt: room.historyMsgs[room.historyMsgs.length - 1]
+              link: `/chat/user/${room.userDest}`
             });
           });
       });
@@ -64,20 +53,6 @@ export default {
       .then(() => {
         this.getUserMsgs();
       });
-
-    // var self=this;
-    // this.$store.dispatch({type:'loadMsgs'}).then(msgs=>{
-    //     self.msgs=msgs;
-    //     var usersImgs=msgs.map(msg=>{
-    //         debugger
-    //         var userId=msg.from._Id;
-    //         // console.log('user id',userId)
-    //        this.$store.dispatch({type:'getUserById',userId}).then(user=>{
-    //            console.log(user)
-    //            this.usersImgs.push(user)
-    //            })
-    //     })
-    // });
   },
   components: {
     garageHeader,

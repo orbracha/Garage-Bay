@@ -11,7 +11,6 @@
         <li v-for="(msg,idx) in msgs" :key="idx">{{msg.txt}}</li>
       </ul>
     </div>
-
     <div class="chat-text">
       <form @submit.prevent="sendMsg">
         <input type="text" v-model="newMsg.txt" required>
