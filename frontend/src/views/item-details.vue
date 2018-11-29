@@ -23,8 +23,8 @@
         <div class="seller-details flexSet">
           <img class="seller-img" :src="currSeller.img" alt="placeholder image">
           <div>
-            <p>{{currSeller.nickname}} </p>
-            
+            <p>{{currSeller.nickname}}</p>
+
             <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
             <!-- <span v-for="m in (5-currSeller.rate)" :key="m" class="fa fa-star"></span> -->
             <p>Currently selling {{currSeller.itemList.length}} items</p>
@@ -33,7 +33,7 @@
         <google-map/>
       </div>
     </div>
-      <garage-footer></garage-footer>
+    <garage-footer></garage-footer>
   </div>
 </template>
 
@@ -45,14 +45,14 @@ export default {
   name: "item-details",
   components: {
     GoogleMap,
-    garageHeader, 
+    garageHeader,
     garageFooter
   },
   data() {
     return {
       currItem: {},
       currSeller: {},
-      isLoaded: false,
+      isLoaded: false
     };
   },
   created() {
@@ -63,28 +63,22 @@ export default {
       this.$store.dispatch({ type: "getUserById", userId }).then(user => {
         this.currSeller = user;
         this.isLoaded = true;
-
-
-        
       });
     });
-
   },
   methods: {
     chatClicked() {
       this.$router.push(`/chat`);
-    },
-  
+    }
   },
   computed: {
     imgSrc() {
       this.currSeller.img;
     },
-    isLoggedUser(){
-      let loggedUserId=this.$store.getters.getLoggedUser._id
-      if(loggedUserId===this.currSeller._id) return false;
+    isLoggedUser() {
+      let loggedUserId = this.$store.getters.getLoggedUser._id;
+      if (loggedUserId === this.currSeller._id) return false;
       return true;
-      
     }
   }
 };
@@ -114,7 +108,7 @@ export default {
   margin-right: 5px;
 }
 .checked {
-    color: orange;
+  color: orange;
 }
 img {
   width: 100%;
