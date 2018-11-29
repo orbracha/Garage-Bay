@@ -2,9 +2,7 @@
   <div class="home">
     <header class="home-header">
       <img class="home-logo" src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png" alt="">
-      <!-- <div class="home-logo">Dibs</div> -->
-
-      <i class="fas fa-search"></i>
+      <router-link to="/search"><i class="fas fa-search"/></router-link>
     </header>
     <item-list :items="items"/>
     <garage-footer/>
@@ -35,6 +33,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.fa-search{
+  cursor: pointer;
+}
 
 </style>
