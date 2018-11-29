@@ -33,14 +33,11 @@ export default {
         }
     },
     actions: {
-        loadMsgs({ commit }) {
-            return msgService.query().then(msgs => {
-                commit({ type: 'setMsgs', msgs })
-                return msgs;
-            })
+        loadMsgs({ commit }, { user }) {
+            commit({ type: 'setMsgs', msgs: user.historyChat })
         },
-        sendMsg({ commit }, { msg }) {
-            msgService.add(msg).then(() => {
+        sendMsg({ commit }, { msg, user }) {
+            msgService.add(msg, user).then(() => {
                 commit({ type: 'sendMsg', msg })
             })
         }

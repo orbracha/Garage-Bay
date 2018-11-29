@@ -17,14 +17,15 @@ function addRoute(app, server) {
         })
     });
 
-    app.get('/api/msg', (req, res) => {
+    app.get('/api/msg/:userId', (req, res) => {
         return msgService.query()
             .then(msgs => res.json(msgs))
     })
 
-    app.post('/api/msg', (req, res) => {
-        const msg = req.body;
-        msgService.add(msg)
+    app.put('/api/msg', (req, res) => {
+        const user = req.body;
+        console.log(user)
+        msgService.updateUserChat(user)
             .then(msg => res.json(msg))
     })
 }

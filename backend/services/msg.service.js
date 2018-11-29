@@ -25,11 +25,31 @@ function remove(msgId) {
             return msgCollection.remove({ _id: msgId })
         })
 }
-function add(msg) {
+function updateUserChat(user) {
+    user._id = new ObjectId(user._id)
     return mongoService.connectToDb()
         .then(dbConn => {
-            const msgCollection = dbConn.collection('msg');
-            return msgCollection.insert(msg);
+            const collection = dbConn.collection('user');
+            return collection.updateOne({ _id: user._id },
+                { $set: {historyChat: user.historyChat} })
+        })
+}
+
+function unshiftNewMsg(userId, newMsg) {
+    userId = new ObjectId(userId)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const collection = dbConn.collection('user');
+            return collection.findOneAndUpdate({ _id: userId },
+                {
+                    $push: {
+                        historyChat:
+                        {
+                            $each: newMsg,
+                            $position: 0
+                        }
+                    }
+                })
         })
 }
 function update(msg) {
@@ -48,7 +68,7 @@ module.exports = {
     query,
     getById,
     remove,
-    add,
+    updateUserChat,
     update
 }
 
