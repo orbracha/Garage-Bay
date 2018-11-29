@@ -12,10 +12,10 @@
 
       <img :src="currItem.img" alt="placeholder image">
       <div class="chatLink-container">
-        <router-link to="/chat">&#9993;</router-link>
+        <router-link :to="'/chat/user/'+ currItem.sellerId">&#9993;</router-link>
         <p>Like it? Start chat</p>
       </div>
-        <garage-footer></garage-footer>
+      <garage-footer></garage-footer>
       <!-- <div class="details-container">
         <p>Description: {{currItem.desc}}</p>
         <p>Location: ***need to add***</p>
@@ -28,19 +28,19 @@
           </div>
         </div>
         <google-map/>
-      </div> -->
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import garageHeader from '../components/garage-header.vue';
+import garageHeader from "../components/garage-header.vue";
 import GoogleMap from "@/components/GoogleMap";
 export default {
   name: "item-details",
   components: {
     GoogleMap,
-    garageHeader,
+    garageHeader
   },
   data() {
     return {
@@ -55,7 +55,7 @@ export default {
     
     this.$store.dispatch({ type: "getItemById", itemId }).then(item => {
       this.currItem = item;
-      this.isLoaded=true;
+      this.isLoaded = true;
       // var userId = this.currItem.sellerId;
       // this.$store.dispatch({ type: "getUserById", userId }).then(user => {
       //   this.currSeller = user;
@@ -68,19 +68,18 @@ export default {
   methods: {
     chatClicked() {
       console.log("chat link clicked");
-      this.$router.push(`/chat`)
+      this.$router.push(`/chat`);
     }
   },
   computed: {
     imgSrc() {
       this.currSeller.img;
     }
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
 .details-container {
   margin: 10px 0;
   text-align: left;
@@ -108,8 +107,8 @@ img {
   width: 100%;
   height: auto;
 }
-.flexSet{
-    display:flex;
-    align-items: center;
+.flexSet {
+  display: flex;
+  align-items: center;
 }
 </style>
