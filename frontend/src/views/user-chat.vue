@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       newMsg: { from: "", txt: "" },
-      msgs: null,
+      msgs: [],
       loggedUser: null
     };
   },
@@ -47,10 +47,12 @@ export default {
   },
   created() {
     this.loggedUser = this.$store.getters.getLoggedUser;
-    var sellerId = this.$route.params.sellerId;
-    console.log(sellerId, this.loggedUser._id);
-    this.$store.commit({ type: "connectSocket" });
-    this.msgs = this.loggedUser.historyChat;
+    var userDest = this.$route.params.sellerId;
+    this.$store.commit({
+      type: "connectSocket",
+      userId: this.loggedUser._id,
+      userDest
+    });
   },
   components: {
     garageHeader

@@ -1,19 +1,32 @@
 
 msgService = require('../services/msg.service')
-
+roomService = require('../services/room.service')
+var currRoom;
 function addRoute(app, server) {
     var io = require('socket.io').listen(server);
     io.on('connection', function (socket) {
         console.log('a user connected');
-        // socket.emit('chat newMsg', { type: true })
-        // socket.emit('chat history', historyMsgs)
+        socket.on('roomRequested', (userId, userDest) => {
+            return roomService.findRoom(userId, userDest).then(room => {
+                if (room) {
+                    currRoom = room;
+                    socket.join(room._id);
+                    console.log('exist', currRoom)
+                    io.to(currRoom._id).emit('usersConnected', currRoom);
+                }
+                else roomService.addRoom(userId, userDest).then(res => {
+                    currRoom = res.ops[0];
+                    socket.join(currRoom._id);
+                    console.log('add', currRoom)
+                    io.to(currRoom._id).emit('usersConnected', currRoom);
+                })
 
-        socket.on('disconnect', function () {
-            // socket.emit('chat newMsg', { typeMsg: true })
-            console.log('user disconnected');
+            });
+
         });
-        socket.on('chat-newMsg', (msg) => {
-            socket.emit('newMsg', msg)
+
+        io.to(currRoom).on('chat-newMsg', (msg) => {
+            io.to(currRoom).emit('newMsg', msg)
         })
     });
 

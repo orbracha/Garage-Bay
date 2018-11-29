@@ -22,9 +22,9 @@ export default {
         addMsg(state, { msg }) {
             state.msgs.push(msg)
         },
-        connectSocket(state) {
+        connectSocket(state, { userId, userDest }) {
             this.commit({ type: 'getMsg' });
-            socketService.connectSocket();
+            socketService.connectSocket(userId, userDest);
         },
         getMsg(state) {
             eventBus.$on(GET_MSG, (msg) => {

@@ -7,11 +7,13 @@ const BASE_URL = (process.env.NODE_ENV !== 'development')
     : 'http://localhost:3000';
 
 var socket;
-
-var msgs = [];
-function connectSocket() {
+var roomId;
+function connectSocket(userId, userDest) {
     socket = ioClient(BASE_URL);
-
+    socket.emit('roomRequested', userId, userDest)
+    socket.on('usersConnected', room => {
+        console.log('room is ready', room);
+    });
     socket.on('newMsg', function (msg) {
         eventBus.$emit(GET_MSG, msg)
     });
