@@ -2,6 +2,7 @@
 
 
 import axios from 'axios';
+import storageService, { LOGGEDIN_USER_KEY } from './storage-service'
 
 // const BASE_URL = 'http://localhost:3000/api/User'
 const BASE_URL = (process.env.NODE_ENV !== 'development')
@@ -11,14 +12,20 @@ export default {
   // getById,
   remove,
   edit,
-  checkUser
+  checkUser,
+  loadFromLocalStorage
 }
 
 function checkUser(user) {
   return axios.post(`${BASE_URL}`, { user }).then(res => {
-    localStorage.setItem('loggedInUser', JSON.stringify(res.data))
+    storageService.save(LOGGEDIN_USER_KEY, res.data)
     return res.data
   });
+}
+
+function loadFromLocalStorage() {
+  const userFromLS = storageService.load(LOGGEDIN_USER_KEY);
+  return userFromLS ? userFromLS : null;
 }
 
 // function getById(userId) {

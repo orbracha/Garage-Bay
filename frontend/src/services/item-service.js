@@ -1,6 +1,6 @@
 'use strict'
 import axios from 'axios';
-
+import storageService from './storage-service'
 // const BASE_URL = 'http://localhost:3000/api/Item'
 const BASE_URL = (process.env.NODE_ENV !== 'development')
   ? '/api/item'

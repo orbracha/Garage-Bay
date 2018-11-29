@@ -7,7 +7,7 @@ function checkUser(user) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const toyCollection = dbConn.collection('user');
-            return toyCollection.findOne({ $and: [{ "nickname": user.nickname }, { "password": +user.password }] }).then(user => {
+            return toyCollection.findOne({ $and: [{ "nickname": user.nickname }, { "password": user.password }] }).then(user => {
                 if (!user) throw err;
                 return user
             });

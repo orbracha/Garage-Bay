@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <header class="home-header">
-      <div class="home-logo">Dibs</div>
+      <img class="home-logo" src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png" alt="">
+      <!-- <div class="home-logo">Dibs</div> -->
+
       <i class="fas fa-search"></i>
     </header>
     <item-list :items="items"/>
@@ -33,9 +35,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-*{
-  box-sizing: border-box;
-}
 
 
 </style>
