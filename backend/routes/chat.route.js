@@ -32,6 +32,10 @@ function addRoute(app, server) {
 
     app.get('/api/msg', (req, res) => {
         var { userId, userDest } = req.query
+        if (!userDest) {
+            return roomService.query(userId)
+                .then(rooms => res.json(rooms))
+        }
         return roomService.findRoom(userId, userDest)
             .then(room => {
                 if (room) return res.json(room.historyMsgs)
@@ -41,7 +45,6 @@ function addRoute(app, server) {
 
     app.put('/api/msg', (req, res) => {
         const user = req.body;
-        console.log(user)
         msgService.updateUserChat(user)
             .then(msg => res.json(msg))
     })

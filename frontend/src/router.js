@@ -9,6 +9,7 @@ import itemDetails from './views/item-details.vue';
 import editItem from './views/edit-item.vue';
 import searchPage from './views/search-page.vue';
 import userPage from './views/user-page.vue';
+import selectImage from './views/select-image.vue';
 
 
 Vue.use(Router);
@@ -26,6 +27,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: loginPage,
+    },
+    {
+      path: '/select-image',
+      name: 'select-image',
+      component: selectImage,
     },
     {
       path: '/search',
