@@ -36,10 +36,6 @@ export default {
             return userService.edit(contex.state.loggedUser).then(user => {
                 console.log(user);
             })
-<<<<<<< HEAD
-=======
-
->>>>>>> c741597fa3f8708a4ad1e2a15f6b29830fdc6241
         },
         checkUser({ commit }, { user }) {
             return userService.checkUser(user)
