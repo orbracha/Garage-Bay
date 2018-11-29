@@ -15,7 +15,7 @@ export default {
         setLoggedUser(state, { user }) {
             state.loggedUser = user;
         },
-        toggleWishlist(state, itemId){
+        toggleWishlist(state, itemId) {
             console.log('item Id', itemId);
             const wishlistItemIdx = state.loggedUser.wishList.indexOf(item => {
                 return item === itemId
@@ -25,20 +25,18 @@ export default {
             } else {
                 state.loggedUser.wishList.splice(wishlistItemIdx, 1)
 
-                
+
             }
         },
 
     },
     actions: {
         toggleWishlist(contex, { itemId }) {
-            contex.commit('toggleWishlist',itemId)          
-                    return userService.edit(contex.state.loggedUser).then(user => {
-                        console.log(user);                      
-                    })
-
+            contex.commit('toggleWishlist', itemId)
+            return userService.edit(contex.state.loggedUser).then(user => {
+                console.log(user);
+            })
         },
-
         checkUser({ commit }, { user }) {
             return userService.checkUser(user).then(user => {
                 commit({ type: 'setLoggedUser', user })
