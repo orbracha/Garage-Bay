@@ -26,20 +26,22 @@ function remove(roomId) {
         })
 }
 
-function update(room) {
+function addMsgToRoom(msg, room) {
     roomId = new ObjectId(room._id)
-    delete room._id;
     return mongoService.connectToDb()
         .then(dbConn => {
-            const roomCollection = dbConn.collection('room');
-            return roomCollection.updateOne({ "_id": roomId }, { $set: room }).then(() => room)
+            const collection = dbConn.collection('room');
+            return collection.update(
+                { "_id": roomId },
+                { $push: { "historyMsgs": msg } }
+            )
         })
 }
 function addRoom(userId, userDest) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const roomCollection = dbConn.collection('room');
-            return roomCollection.insertOne({ "userId": userId ,"userDest": userDest }).then((room) => room)
+            return roomCollection.insertOne({ "userId": userId, "userDest": userDest, "historyMsgs": [] }).then((room) => room)
         })
 }
 function findRoom(userId, userDest) {
@@ -48,7 +50,7 @@ function findRoom(userId, userDest) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const roomCollection = dbConn.collection('room');
-            return roomCollection.findOne({ "userId": userId }, { "userDest": userDest }).then((room) => room)
+            return roomCollection.findOne({ $or: [{ "userId": userId, "userDest": userDest }, { "userId": userDest, "userDest": userId }] }).then((room) => room)
         })
 }
 
@@ -59,7 +61,7 @@ module.exports = {
     getById,
     remove,
     addRoom,
-    update,
+    addMsgToRoom,
     findRoom
 }
 

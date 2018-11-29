@@ -27,11 +27,14 @@ export default {
   data() {
     return {
       newMsg: { from: "", txt: "" },
-      msgs: [],
       loggedUser: null
     };
   },
-  computed: {},
+  computed: {
+    msgs() {
+      return this.$store.getters.getMsgs;
+    }
+  },
   methods: {
     sendMsg() {
       console.log("send msg", this.newMsg);
@@ -50,6 +53,11 @@ export default {
     var userDest = this.$route.params.sellerId;
     this.$store.commit({
       type: "connectSocket",
+      userId: this.loggedUser._id,
+      userDest
+    });
+    this.$store.dispatch({
+      type: "loadMsgs",
       userId: this.loggedUser._id,
       userDest
     });

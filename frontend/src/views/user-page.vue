@@ -42,7 +42,6 @@ export default {
   computed: {
     user(){
       if(isMyProfile) return this.loggedUser
-      else return this.$store.getters.
     }
   },
 
