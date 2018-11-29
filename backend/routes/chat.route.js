@@ -1,25 +1,42 @@
 
 msgService = require('../services/msg.service')
-
+roomService = require('../services/room.service')
 function addRoute(app, server) {
+    var currRoom;
     var io = require('socket.io').listen(server);
     io.on('connection', function (socket) {
         console.log('a user connected');
-        // socket.emit('chat newMsg', { type: true })
-        // socket.emit('chat history', historyMsgs)
+        socket.on('roomRequested', (userId, userDest) => {
+            return roomService.findRoom(userId, userDest).then(room => {
+                if (room) {
+                    currRoom = room;
+                    socket.join(room._id);
+                    io.to(currRoom._id).emit('usersConnected', currRoom);
+                }
+                else roomService.addRoom(userId, userDest).then(res => {
+                    currRoom = res.ops[0];
+                    socket.join(currRoom._id);
+                    io.to(currRoom._id).emit('usersConnected', currRoom);
+                })
 
-        socket.on('disconnect', function () {
-            // socket.emit('chat newMsg', { typeMsg: true })
-            console.log('user disconnected');
+            });
+
         });
-        socket.on('chat-newMsg', (msg) => {
-            socket.emit('newMsg', msg)
+
+        socket.on('chat-newMsg', (msg, room) => {
+            roomService.addMsgToRoom(msg, room).then(() => {
+                io.to(room._id).emit('newMsg', msg)
+            })
         })
     });
 
-    app.get('/api/msg/:userId', (req, res) => {
-        return msgService.query()
-            .then(msgs => res.json(msgs))
+    app.get('/api/msg', (req, res) => {
+        var { userId, userDest } = req.query
+        return roomService.findRoom(userId, userDest)
+            .then(room => {
+                if (room) return res.json(room.historyMsgs)
+                return room;
+            })
     })
 
     app.put('/api/msg', (req, res) => {

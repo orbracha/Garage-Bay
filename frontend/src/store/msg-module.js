@@ -22,23 +22,26 @@ export default {
         addMsg(state, { msg }) {
             state.msgs.push(msg)
         },
-        connectSocket(state) {
-            this.commit({ type: 'getMsg' });
-            socketService.connectSocket();
+        connectSocket(state, { userId, userDest }) {
+            this.commit({ type: 'gotMsg' });
+            socketService.connectSocket(userId, userDest)
         },
-        getMsg(state) {
+        gotMsg(state) {
             eventBus.$on(GET_MSG, (msg) => {
                 this.commit({ type: 'addMsg', msg })
             })
         }
     },
     actions: {
-        loadMsgs({ commit }, { user }) {
-            commit({ type: 'setMsgs', msgs: user.historyChat })
+        loadMsgs({ commit }, { userId, userDest }) {
+            msgService.query(userId, userDest).then(msgs => {
+                commit({ type: 'setMsgs', msgs })
+            })
         },
         sendMsg({ commit }, { msg, user }) {
             msgService.add(msg, user).then(() => {
                 commit({ type: 'sendMsg', msg })
+                commit({ type: 'addMsg', msg })
             })
         }
     },
