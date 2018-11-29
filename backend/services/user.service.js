@@ -23,8 +23,9 @@ function query() {
             return userCollection.find().toArray();
         })
 }
+
 function getById(userId) {
-    userId = new ObjectId(userId)
+    var userId = new ObjectId(userId)
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
@@ -63,13 +64,12 @@ module.exports = {
     getById,
     remove,
     add,
-    update
-}
-
-
-
-
-module.exports = {
+    update,
     checkUser
 }
+
+
+
+
+
 

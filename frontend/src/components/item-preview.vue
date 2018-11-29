@@ -45,7 +45,7 @@ export default {
       // this.$router.push(`/seller/${sellerId}`);
     },
     itemClicked(itemId) {
-      this.$router.push(`/item/${itemId}`);
+      this.$router.push(`/item/details/${itemId}`);
     },
     toggleWishlist() {
       this.wishlist = !this.wishlist;
