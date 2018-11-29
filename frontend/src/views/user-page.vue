@@ -1,17 +1,23 @@
 <template>
   <section>
-    <div class="user-profile-preview">
-
-      <img class="user-profile-thumbnail" :src="user.img">
-      <div>
-        <h1>dkdfjkdkjfodijf</h1>
-        <h1>{{user.nickname}}</h1>
-        <p>{{user.rate}}</p>
+    <section v-if="!isLoadin">Loading...</section>
+    <section v-else>
+      <div class="user-profile-preview">
+        <img class="user-profile-thumbnail" :src="user.img">
+        <div>
+          <h1>{{user.nickname}}</h1>
+          <p>{{user.rate}}</p>
+        </div>
       </div>
-    </div>
-
-    <garage-footer/>
-
+      <ul class="listed-items-thumbnail">
+        <li v-for="(item,idx) in user.listedItems" :key="idx">
+          <div class="user-profile-thumbnail" >
+          <img class="img-thumb" :src="item.img">
+          </div>
+        </li>
+      </ul>
+      <garage-footer/>
+    </section>
   </section>
 </template>
 
@@ -27,37 +33,58 @@ export default {
   },
   data() {
     return {
-      isMyProfile: false,
+      user: null,
+      isLoadin: false,
       loggedUser: this.$store.getters.getLoggedUser,
       sellerId: null
     };
   },
-<<<<<<< HEAD
-=======
-  computed: {
-    user(){
-      if(isMyProfile) return this.loggedUser
+  methods: {
+    setUser() {
+      const userId = this.$route.params.userId;
+      console.log(userId);
+      if (userId === this.loggedUser._id) {
+        console.log("displaying logged user profile");
+        this.user = this.loggedUser;
+      } else {
+        var self = this;
+        this.$store
+          .dispatch({ type: "getUserById", userId })
+          .then(user => {
+            self.user = user[0];
+            console.log(self.user);
+            this.isLoadin = true;
+          })
+          .catch(err => console.log("EROOOOOR"));
+      }
+    }
+  },
+  watch: {
+    "$route.params.userId": {
+      handler() {
+        this.setUser();
+      },
+      immediate: true
     }
   },
 
->>>>>>> f629131327ffc20c3330cc81b1d5d8d4e2519aff
   created() {
-    const userId = this.$route.params.userId;
-    console.log(userId);
-    if (userId === this.loggedUser._id) {
-      console.log("displaying logged user profile");
-      return (this.isMyProfile = true);
-    } else {
-      
-      this.sellerId = userId;
-      console.log("displaying seller profile", this.sellerId);
-    }
-  },
-  computed: {
-    user() {
-      if(this.sellerId) return userService.getById(this.sellerId)
-      else return this.loggedUser
-    }
+    this.setUser();
+    // setUser();
+    // const userId = this.$route.params.userId;
+    // console.log(userId);
+    // if (userId === this.loggedUser._id) {
+    //   console.log("displaying logged user profile");
+    //    this.user = (this.isMyProfile = true);
+    // } else {
+    //   this.user = this.$store
+    //     .dispatch({ type: "getUserById", userId })
+    //     .then(user => {
+    //       console.log(user);
+    //     });
+    // this.sellerId = userId;
+    // console.log("displaying seller profile", this.sellerId);
+    // }
   }
 };
 </script>

@@ -2,16 +2,44 @@ const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
 
+// function checkUser(user) {
+//     console.log('user', user)
+//     return mongoService.connectToDb()
+//         .then(dbConn => {
+//             const toyCollection = dbConn.collection('user');
+//             return toyCollection.findOne({ $and: [{ "nickname": user.nickname }, { "password": user.password }] }).then(user => {
+//                 if (!user) throw err;
+//                 return user
+//             });
+//         })
+// }
+
+
+
 function checkUser(user) {
-    console.log('user', user)
     return mongoService.connectToDb()
-        .then(dbConn => {
-            const toyCollection = dbConn.collection('user');
-            return toyCollection.findOne({ $and: [{ "nickname": user.nickname }, { "password": user.password }] }).then(user => {
-                if (!user) throw err;
-                return user
-            });
+        .then(db => {
+            return db.collection('user')
+                .aggregate([
+                    {
+                        $match: { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
+                    },
+                    {
+                        $lookup:
+                        {
+                            from: 'item',
+                            localField: 'itemList',
+                            foreignField: '_id',
+                            as: 'listedItems'
+                        },
+                    }
+                    // {
+                    //     $unwind:'$item'
+                    // }
+                
+                ]).toArray()
         })
+
 }
 
 
@@ -25,13 +53,35 @@ function query() {
 }
 
 function getById(userId) {
-    var userId = new ObjectId(userId)
+    const id = new ObjectId(userId)
     return mongoService.connectToDb()
-        .then(dbConn => {
-            const userCollection = dbConn.collection('user');
-            return userCollection.findOne({ _id: userId })
+        .then(db => {
+            return db.collection('user')
+                .aggregate([
+                    {
+                        $match: { _id: id }
+                    },
+                    {
+                        $lookup:
+                        {
+                            from: 'item',
+                            localField: 'itemList',
+                            foreignField: '_id',
+                            as: 'listedItems'
+                        },
+                        // $lookup:
+                        // {
+                        //     from: 'item',
+                        //     localField: 'wishList',
+                        //     foreignField: '_id',
+                        //     as: 'wishItems'
+                        // }
+                    }
+                ]).toArray()
         })
 }
+
+
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()

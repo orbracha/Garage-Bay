@@ -39,8 +39,6 @@ export default {
         },
         checkUser({ commit }, { user }) {
             return userService.checkUser(user)
-             
-
         },
         getUserById({ commit }, { userId }) {
             return userService.getById(userId)

@@ -1,8 +1,14 @@
 <template>
   <div class="home">
     <header class="home-header">
-      <img class="home-logo" src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png" alt="">
-      <router-link to="/search"><i class="fas fa-search"/></router-link>
+      <router-link to="/">
+        <img
+          class="home-logo"
+          src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png">
+      </router-link>
+      <router-link to="/search">
+        <i class="fas fa-search"/>
+      </router-link>
     </header>
     <item-list class="item-list" :items="items"/>
     <garage-footer/>
@@ -33,8 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fa-search{
+.fa-search {
   cursor: pointer;
 }
-
 </style>

@@ -1,4 +1,13 @@
 
+.home-list{
+  padding: 0;
+  max-width: 100%;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill , minmax(300px, 1fr));
+  // grid-template-row: repeat(auto-fill , minmax(300px, 1fr));
+}
+
 .main-list-item{
     display: flex;
     flex-direction: column;
@@ -58,7 +67,6 @@
 }
 
 .main-list-item{
-  list-style-type: none;
   display: flex;
   margin-bottom: 5px;
   .seller-thumbnail{

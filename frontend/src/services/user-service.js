@@ -19,8 +19,8 @@ export default {
 
 function checkUser(user) {
   return axios.post(`${BASE_URL}`, { user }).then(res => {
-    storageService.save(LOGGEDIN_USER_KEY, res.data)
-    return res.data
+    storageService.save(LOGGEDIN_USER_KEY, res.data[0])
+    return res.data[0]
   });
 }
 
