@@ -1,25 +1,36 @@
 <template>
-    <div class="footer">
-        <router-link to="/">&#127968;</router-link>
-        <router-link to="/chat">&#9993;</router-link>
-        <router-link to="/">&plus;</router-link>
-        <router-link to="/">❤</router-link>
-        <router-link to="/">&#9786;</router-link>
-    </div>
+  <div class="footer">
+    <router-link to="/">
+      <i class="fas fa-home"></i>
+    </router-link>
+    <router-link to="/chat">
+      <i class="far fa-comment-alt"></i>
+    </router-link>
+    <router-link to="/item/edit">
+      <i class="fas fa-plus"></i>
+    </router-link>
+    <router-link to="/wishlist">
+      <i class="far fa-heart"></i>
+    </router-link>
+    <router-link v-if="user" :to="'/user/'+user._id">
+      <i class="fas fa-user"></i>
+    </router-link>
+    <router-link v-else to="/login">
+      <i class="fas fa-user"></i>
+    </router-link>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'garage-footer'
-}
+  name: "garage-footer",
+  computed: {
+    user() {
+      return this.$store.getters.getLoggedUser;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-.footer{
-    display:flex;
-    background-color: #666666;
-    color: #e8e8e8;
-    justify-content: space-around;
-    align-items: center;
-}
 </style>

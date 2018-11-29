@@ -14,6 +14,7 @@ export default {
 
 <style lang="scss" scoped>
 section {
+  height: 10%;
   display: flex;
   background-color: #666666;
   color: #e8e8e8;

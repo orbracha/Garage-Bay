@@ -2,8 +2,14 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import chatPage from './views/chat-page.vue';
+import loginPage from './views/login-page.vue';
+import userChat from './views/user-chat.vue';
 import wishPage from './views/wish-page.vue';
 import itemDetails from './views/item-details.vue';
+import editItem from './views/edit-item.vue';
+import searchPage from './views/search-page.vue';
+import userPage from './views/user-page.vue';
+import selectImage from './views/select-image.vue';
 
 
 Vue.use(Router);
@@ -18,9 +24,39 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/login',
+      name: 'login',
+      component: loginPage,
+    },
+    {
+      path: '/select-image',
+      name: 'select-image',
+      component: selectImage,
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: searchPage,
+    },
+    {
       path: '/chat',
       name: 'chat',
       component: chatPage,
+    },
+    {
+      path: '/chat/user/:sellerId',
+      name: 'user-chat',
+      component: userChat,
+    },
+    {
+      path: '/user/:userId',
+      name: 'user-page',
+      component: userPage,
+    },
+    {
+      path: '/item/edit/:id?',
+      name: 'edit',
+      component: editItem,
     },
     {
       path: '/wishlist',
@@ -28,7 +64,7 @@ export default new Router({
       component: wishPage,
     },
     {
-      path: '/item/:id',
+      path: '/item/details/:id',
       name: 'item-details',
       component: itemDetails,
     },

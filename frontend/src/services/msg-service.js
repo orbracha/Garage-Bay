@@ -1,23 +1,22 @@
+import axios from "axios";
+
 'use strict'
 
-var msgs = [
-    {
-        _id: '3df',
-        txt: 'hi fdgdfddf',
-        from: { nickname: 'avi bobi', _id: '123' },
-    },
-    {
-        _id: '32f',
-        txt: 'hi fdgdfddf',
-        from: { nickname: 'boli', _id: '456' },
-    }
-]
 
+const BASE_URL = (process.env.NODE_ENV !== 'development')
+    ? '/api/msg'
+    : 'http://localhost:3000/api/msg';
 
-
-function query() {
-    return Promise.resolve(msgs);
+function query(userId, userDest) {
+    return axios.get(`${BASE_URL}?userId=${userId}&userDest=${userDest}`).then(res => res.data)
 }
+function add(msg, user) {
+    console.log('add by service')
+    return Promise.resolve();
+}
+
+
 export default {
-    query
+    query,
+    add
 }

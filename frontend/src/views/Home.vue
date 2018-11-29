@@ -1,30 +1,40 @@
 <template>
   <div class="home">
-    <item-list :items="items"/>
+    <header class="home-header">
+      <img class="home-logo" src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png" alt="">
+      <router-link to="/search"><i class="fas fa-search"/></router-link>
+    </header>
+    <item-list class="item-list" :items="items"/>
+    <garage-footer/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import itemList from "@/components/item-list.vue";
+import garageFooter from "@/components/garage-footer.vue";
 
 export default {
   name: "home",
   components: {
     itemList,
+    garageFooter
   },
   created() {
     this.$store.dispatch({ type: "loadItems" });
   },
   computed: {
     items() {
-      console.log(this.$store.getters.itemsToDisplay);
+      // console.log(this.$store.getters.itemsToDisplay);
       return this.$store.getters.itemsToDisplay;
-    },
+    }
   }
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.fa-search{
+  cursor: pointer;
+}
 
 </style>

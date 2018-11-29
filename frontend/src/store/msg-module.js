@@ -1,8 +1,9 @@
 'use strict'
-
+import eventBus, { GET_MSG } from '../services/eventBus-service.js'
 import Vue from 'vue';
 import Vuex from 'vuex';
 import msgService from '../services/msg-service.js'
+import socketService from '../services/socket-service.js'
 
 Vue.use(Vuex);
 
@@ -14,24 +15,37 @@ export default {
     mutations: {
         setMsgs(state, { msgs }) {
             state.msgs = msgs;
+        },
+        sendMsg(state, { msg }) {
+            socketService.sendMsg(msg)
+        },
+        addMsg(state, { msg }) {
+            state.msgs.push(msg)
+        },
+        connectSocket(state, { userId, userDest }) {
+            this.commit({ type: 'gotMsg' });
+            socketService.connectSocket(userId, userDest)
+        },
+        gotMsg(state) {
+            eventBus.$on(GET_MSG, (msg) => {
+                this.commit({ type: 'addMsg', msg })
+            })
         }
     },
     actions: {
-        loadMsgs({ commit }) {
-            return msgService.query().then(msgs => {
+        loadMsgs({ commit }, { userId, userDest }) {
+            msgService.query(userId, userDest).then(msgs => {
                 commit({ type: 'setMsgs', msgs })
-                return msgs;
             })
         },
-        getMsgsById({ commit }, msgId) {
-            return msgService.getById(msgId).then(msgs => {
-                return msgs;
+        sendMsg({ commit }, { msg, user }) {
+            msgService.add(msg, user).then(() => {
+                commit({ type: 'sendMsg', msg })
+                commit({ type: 'addMsg', msg })
             })
         }
     },
     getters: {
-        msgsToDisplay: state => state.msgs,
-
         getMsgs(state) {
             return state.msgs;
         }

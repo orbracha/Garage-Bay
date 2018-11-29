@@ -3,10 +3,11 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 function checkUser(user) {
+    console.log('user', user)
     return mongoService.connectToDb()
         .then(dbConn => {
             const toyCollection = dbConn.collection('user');
-            return toyCollection.findOne({ "nickname": user }).then(user => {
+            return toyCollection.findOne({ $and: [{ "nickname": user.nickname }, { "password": user.password }] }).then(user => {
                 if (!user) throw err;
                 return user
             });
@@ -22,8 +23,9 @@ function query() {
             return userCollection.find().toArray();
         })
 }
+
 function getById(userId) {
-    userId = new ObjectId(userId)
+    var userId = new ObjectId(userId)
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
@@ -62,13 +64,12 @@ module.exports = {
     getById,
     remove,
     add,
-    update
-}
-
-
-
-
-module.exports = {
+    update,
     checkUser
 }
+
+
+
+
+
 
