@@ -4,7 +4,7 @@
       <img class="home-logo" src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png" alt="">
       <router-link to="/search"><i class="fas fa-search"/></router-link>
     </header>
-    <item-list :items="items"/>
+    <item-list class="item-list" :items="items"/>
     <garage-footer/>
   </div>
 </template>

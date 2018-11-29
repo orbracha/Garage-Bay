@@ -13,6 +13,7 @@
         <i class="far fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
         <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
         <img class="main-list-img" :src="item.img">
+        <!-- <img class="price-tag" :src="{{imgLink}}"> -->
       </div>
 
       <div class="main-item-details">
@@ -35,6 +36,7 @@ export default {
 
   data() {
     return {
+      // imgLink:"https://res.cloudinary.com/duxpc5ggn/image/upload/v1543480967/la-06.png",
       wishlist: false,
       loggedUser: null
     };
@@ -48,28 +50,16 @@ export default {
       this.$router.push(`/item/details/${itemId}`);
     },
     toggleWishlist() {
+      if (!this.loggedUser) return this.$router.push(`/login`);
       this.wishlist = !this.wishlist;
       const itemId = this.item._id;
-      this.$store.dispatch({ type: "toggleWishlist", itemId })
+      this.$store.dispatch({ type: "toggleWishlist", itemId });
       console.log(" toggling  wishlist");
-
-      //   const wishlistItemIdx = this.userWishlist.indexOf(item => {
-      //     return item === itemId;
-      //   });
-      //   if (wishlistItemIdx === -1) {
-      //     this.loggedUser.wishList.push(itemId);
-      //   } else {
-      //     this.loggedUser.wishList.splice(wishlistItemIdx, 1);
-      //     console.log("user after toggle", this.loggedUser);
-      //   }
-      //   console.log("added to wishlist");
-      //   console.log("wishlist", this.wishlist);
-      // }
     }
   },
   computed: {
     userWishlist() {
-      return this.loggedUser.wishList;
+      if (this.loggedUser) return this.loggedUser.wishList;
     },
     seller() {
       return this.item.user;
@@ -77,13 +67,13 @@ export default {
   },
   created() {
     this.loggedUser = this.$store.getters.getLoggedUser;
-
-    const isItemInWishlist = this.userWishlist.some(item => {
-      return item === this.item._id;
-    });
-    console.log("isItemInWishlist", isItemInWishlist);
-
-    if (isItemInWishlist) this.wishlist = true;
+    if (this.loggedUser) {
+      const isItemInWishlist = this.userWishlist.some(item => {
+        return item === this.item._id;
+      });
+      console.log("isItemInWishlist", isItemInWishlist);
+      if (isItemInWishlist) this.wishlist = true;
+    }
   }
 };
 </script>
