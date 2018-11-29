@@ -12,7 +12,10 @@
     <router-link to="/wishlist">
       <i class="far fa-heart"></i>
     </router-link>
-    <router-link :to="'/user'+user._id">
+    <router-link v-if="user" :to="'/user'+user._id">
+      <i class="fas fa-user"></i>
+    </router-link>
+    <router-link v-else to="/login">
       <i class="fas fa-user"></i>
     </router-link>
   </div>

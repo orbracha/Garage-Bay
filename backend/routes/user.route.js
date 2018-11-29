@@ -22,12 +22,17 @@ function addRoutes(app) {
         res.end();
     });
 
-
     app.get('/api/user/:userId', (req, res) => {
         const userId = req.params.userId;
-        userService.getById(userId)
-            .then(user => res.json(user))
-    })
+            userService.getById(userId)
+                .then(user =>{
+                    console.log('user to send', user);
+
+                    res.json(user)
+                } )
+        })
+     
+
     app.post('/api/user', (req, res) => {
         const toy = req.body;
         userService.add(toy)
