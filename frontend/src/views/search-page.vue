@@ -1,7 +1,14 @@
 <template>
   <div>
+    <garage-header>
+      <div slot="headline">
+        <h3>Search</h3>
+      </div>
+      <span slot="optionalIcon">
+        <i class="fas fa-search"/>
+      </span>
+    </garage-header>
     <section v-if="isLoadingCat">Loading</section>
-
     <section v-else>
       <div class="filter-container">
         <input type="text" v-model="filter.byTxt">
@@ -16,15 +23,19 @@
       <div class="items-container">
         <div v-if="isLoadingItems">Loading Items</div>
         <div v-else v-for="item in itemsToDisplay" :key="item._id">
-            <img :src=item.img alt="" >
-            <br>
-            {{item.title}}</div>
+          <img :src="item.img" alt>
+          <br>
+          {{item.title}}
+        </div>
       </div>
     </section>
+    <garage-footer/>
   </div>
 </template>
 
 <script>
+import garageHeader from "../components/garage-header.vue";
+import garageFooter from "@/components/garage-footer.vue";
 export default {
   name: "search-page",
   data() {
@@ -70,6 +81,10 @@ export default {
       immediate: true,
       deep: true
     }
+  },
+  components: {
+    garageHeader,
+    garageFooter
   }
 };
 </script>
@@ -94,7 +109,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  div{
+  div {
     background-color: #f5f5f0;
     border: 1px solid black;
     color: black;
