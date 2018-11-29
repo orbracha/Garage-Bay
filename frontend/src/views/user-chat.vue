@@ -26,27 +26,31 @@ import garageHeader from "../components/garage-header.vue";
 export default {
   data() {
     return {
-      newMsg: { from: "", txt: "" }
+      newMsg: { from: "", txt: "" },
+      msgs: null,
+      loggedUser: null
     };
   },
-  computed: {
-    msgs() {
-      return this.$store.getters.getMsgs;
-    }
-  },
+  computed: {},
   methods: {
     sendMsg() {
       console.log("send msg", this.newMsg);
+      this.newMsg.from = {
+        _id: this.loggedUser._id,
+        nickname: this.loggedUser.nickname
+      };
       var msg = JSON.parse(JSON.stringify(this.newMsg));
       this.$store
-        .dispatch({ type: "sendMsg", msg })
+        .dispatch({ type: "sendMsg", msg, user: this.loggedUser })
         .then(() => (this.newMsg = { from: "", txt: "" }));
     }
   },
   created() {
+    this.loggedUser = this.$store.getters.getLoggedUser;
+    var sellerId = this.$route.params.sellerId;
+    console.log(sellerId, this.loggedUser._id);
     this.$store.commit({ type: "connectSocket" });
-    this.newMsg.from = this.$store.getters.getLoggedUser;
-    this.$store.dispatch({ type: "loadMsgs" });
+    this.msgs = this.loggedUser.historyChat;
   },
   components: {
     garageHeader
@@ -55,9 +59,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-ul{
+ul {
   margin: 0;
-  li{
+  li {
     list-style-type: none;
   }
 }

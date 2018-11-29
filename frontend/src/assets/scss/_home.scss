@@ -1,4 +1,5 @@
 .home-header {
+
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -8,16 +9,26 @@
   right: 0;
   top: 0;
   width: 100%;
+  height: 70px;
   background-color: $dark;
+  background-image: url("https://res.cloudinary.com/duxpc5ggn/image/upload/v1543440395/homeHeader.jpg");
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center center;
+  // object-fit: cover;
+  box-shadow: inset 0px -4px 4px -1px rgba(0,0,0,0.65);
     .home-logo {
-      color:$light;
-      font-family: $lobster;
-      font-size: 3rem;
+      width: 120px;
+      padding-top: 12px;
+      // color:$light;
+      // font-family: $lobster;
+      // font-size: 3rem;
     }
     i{
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: $light;
-      margin:0;
+      // color: greenyellow;
+      padding-bottom: 25px;
     }
   }
   

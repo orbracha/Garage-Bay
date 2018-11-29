@@ -37,7 +37,7 @@ export default new Router({
       component: chatPage,
     },
     {
-      path: '/chat/user',
+      path: '/chat/user/:sellerId',
       name: 'user-chat',
       component: userChat,
     },
