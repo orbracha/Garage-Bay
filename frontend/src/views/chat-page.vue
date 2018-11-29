@@ -6,7 +6,7 @@
       </div>
       <span slot="optionalIcon">&#128172;</span>
     </garage-header>
-    <generic-list :data="msgTodisplay"></generic-list>
+    <generic-list :data="userMsgs"></generic-list>
     <garage-footer/>
   </section>
 </template>
@@ -19,49 +19,40 @@ import garageFooter from "@/components/garage-footer.vue";
 export default {
   data() {
     return {
-      usersImgs: []
+      loggedUser: null,
+      userMsgs: []
     };
   },
   computed: {
-    msgTodisplay() {
-      return this.msgs.map((msg, idx) => {
-        return {
-          title: msg.from.nickname,
-          txt: msg.txt,
-          img: "img/user.jpg"
-        };
-      });
-    },
-    msgs() {
-      return this.$store.getters.getMsgs;
+    rooms() {
+      return this.$store.getters.getRooms;
     }
   },
   methods: {
     getUserMsgs() {
-      this.msgs.map(msg => {
-        var userId = msg.from._id;
-        this.$store.dispatch({ type: "getUserById", userId }).then(user => {
-          this.usersImgs.push(user);
-        });
+      console.log(this.rooms);
+      var self = this;
+      return this.rooms.map(room => {
+        this.$store
+          .dispatch({ type: "getUserById", userId: room.userDest })
+          .then(user => {
+            self.userMsgs.push({
+              txt: room.historyMsgs[room.historyMsgs.length - 1].txt,
+              title: user.nickname,
+              img: user.img,
+              link: `/chat/user/${room.userDest}`
+            });
+          });
       });
     }
   },
   created() {
-    this.$store.dispatch({ type: "loadMsgs" }).then(() => this.getUserMsgs());
-
-    // var self=this;
-    // this.$store.dispatch({type:'loadMsgs'}).then(msgs=>{
-    //     self.msgs=msgs;
-    //     var usersImgs=msgs.map(msg=>{
-    //         debugger
-    //         var userId=msg.from._Id;
-    //         // console.log('user id',userId)
-    //        this.$store.dispatch({type:'getUserById',userId}).then(user=>{
-    //            console.log(user)
-    //            this.usersImgs.push(user)
-    //            })
-    //     })
-    // });
+    this.loggedUser = this.$store.getters.getLoggedUser;
+    this.$store
+      .dispatch({ type: "loadRooms", userId: this.loggedUser._id })
+      .then(() => {
+        this.getUserMsgs();
+      });
   },
   components: {
     garageHeader,

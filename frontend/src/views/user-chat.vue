@@ -11,7 +11,6 @@
         <li v-for="(msg,idx) in msgs" :key="idx">{{msg.txt}}</li>
       </ul>
     </div>
-
     <div class="chat-text">
       <form @submit.prevent="sendMsg">
         <input type="text" v-model="newMsg.txt" required>
@@ -40,7 +39,8 @@ export default {
       console.log("send msg", this.newMsg);
       this.newMsg.from = {
         _id: this.loggedUser._id,
-        nickname: this.loggedUser.nickname
+        nickname: this.loggedUser.nickname,
+        img: this.loggedUser.img
       };
       var msg = JSON.parse(JSON.stringify(this.newMsg));
       this.$store

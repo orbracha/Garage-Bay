@@ -2,11 +2,11 @@ const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
 
-function query() {
+function query(userId) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const roomCollection = dbConn.collection('room');
-            return roomCollection.find().toArray();
+            return roomCollection.find({ "userId": userId }).toArray();
         })
 }
 function getById(roomId) {
