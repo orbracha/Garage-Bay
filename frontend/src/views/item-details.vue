@@ -51,6 +51,8 @@ export default {
   },
   created() {
     var itemId = this.$route.params.id;
+    console.log('item id in .vue', itemId);
+    
     this.$store.dispatch({ type: "getItemById", itemId }).then(item => {
       this.currItem = item;
       this.isLoaded = true;
