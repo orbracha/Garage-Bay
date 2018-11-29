@@ -11,25 +11,29 @@
       </garage-header>
 
       <img :src="currItem.img" alt="placeholder image">
-      <div class="chatLink-container">
+      <div class="chatLink-container" v-if="isLoggedUser">
         <router-link :to="'/chat/user/'+ currItem.sellerId">&#9993;</router-link>
         <p>Like it? Start chat</p>
       </div>
-      <garage-footer></garage-footer>
-      <!-- <div class="details-container">
+      <div class="details-container">
+        {{currSeller}}
         <p>Description: {{currItem.desc}}</p>
-        <p>Location: ***need to add***</p>
+        <p>Location: ***need to add distance***</p>
         <p>Condition: {{currItem.condition}}</p>
         <div class="seller-details flexSet">
           <img class="seller-img" :src="currSeller.img" alt="placeholder image">
           <div>
-            <p>{{currSeller.nickname}} Seller rate:***need to add***</p>
+            <p>{{currSeller.nickname}} </p>
+            
+            <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
+            <!-- <span v-for="m in (5-currSeller.rate)" :key="m" class="fa fa-star"></span> -->
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
         </div>
         <google-map/>
-      </div>-->
+      </div>
     </div>
+      <garage-footer></garage-footer>
   </div>
 </template>
 
@@ -41,40 +45,46 @@ export default {
   name: "item-details",
   components: {
     GoogleMap,
-    garageHeader
+    garageHeader, 
+    garageFooter
   },
   data() {
     return {
       currItem: {},
       currSeller: {},
-      isLoaded: false
+      isLoaded: false,
     };
   },
   created() {
     var itemId = this.$route.params.id;
-    console.log('item id in .vue', itemId);
-    
     this.$store.dispatch({ type: "getItemById", itemId }).then(item => {
       this.currItem = item;
-      this.isLoaded = true;
-      // var userId = this.currItem.sellerId;
-      // this.$store.dispatch({ type: "getUserById", userId }).then(user => {
-      //   this.currSeller = user;
-      //   this.isLoaded = true;
-      // });
+      var userId = this.currItem.sellerId;
+      this.$store.dispatch({ type: "getUserById", userId }).then(user => {
+        this.currSeller = user;
+        this.isLoaded = true;
+
+
+        
+      });
     });
-    //TODO WITH REAL DATA:
-    //after getting the item - get seller id=> set seller name, image, rate, how many current items
+
   },
   methods: {
     chatClicked() {
-      console.log("chat link clicked");
       this.$router.push(`/chat`);
-    }
+    },
+  
   },
   computed: {
     imgSrc() {
       this.currSeller.img;
+    },
+    isLoggedUser(){
+      let loggedUserId=this.$store.getters.getLoggedUser._id
+      if(loggedUserId===this.currSeller._id) return false;
+      return true;
+      
     }
   }
 };
@@ -103,7 +113,9 @@ export default {
 .chatLink-container span {
   margin-right: 5px;
 }
-
+.checked {
+    color: orange;
+}
 img {
   width: 100%;
   height: auto;
