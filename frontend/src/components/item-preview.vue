@@ -1,6 +1,6 @@
 <template>
   <li v-if="item">
-    <div class="seller-preview" @click="sellerClicked(seller._id)">
+    <div class="seller-preview" @click="userClicked(seller._id)">
       <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
       <div>
         <h1>{{seller.nickname}}</h1>
@@ -42,9 +42,9 @@ export default {
     };
   },
   methods: {
-    sellerClicked(sellerId) {
+    userClicked(sellerId) {
       console.log("seller clicked");
-      // this.$router.push(`/seller/${sellerId}`);
+      this.$router.push(`/user/${sellerId}`);
     },
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
@@ -79,29 +79,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-hr {
-  padding-bottom: 8px;
-}
-.seller-preview {
-  padding: 12px;
-  padding-bottom: 5px;
-  list-style-type: none;
-  display: flex;
-  // margin-bottom: 5px;
-  img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  h1 {
-    text-align: left;
-    margin: 0;
-  }
-  p {
-    text-align: left;
-    margin: 0;
-  }
-}
+// hr {
+//   padding-bottom: 8px;
+// }
+// .seller-preview {
+//   padding: 12px;
+//   padding-bottom: 5px;
+//   list-style-type: none;
+//   display: flex;
+//   // margin-bottom: 5px;
+//   img {
+//     height: 50px;
+//     width: 50px;
+//     border-radius: 50%;
+//     margin-right: 10px;
+//   }
+//   h1 {
+//     text-align: left;
+//     margin: 0;
+//   }
+//   p {
+//     text-align: left;
+//     margin: 0;
+//   }
+// }
 </style>
 

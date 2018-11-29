@@ -1,29 +1,21 @@
 <template>
   <section>
-    <section class="user-preview">
-      <div class="user-preview">
-        <img class="user-thumbnail" :src="loggedUser.img">
-        <div>
-          <h1>{{loggedUser.nickname}}</h1>
-          <p>{{loggedUser.rate}}</p>
-        </div>
-      </div>
-      <garage-footer/>
+    <div class="user-profile-preview">
 
-      <!-- <div id="img-container" :style="{background:'green'}"></div> -->
-      <!-- <img src="https://api.adorable.io/avatars/285/abott@adorable.png"> -->
-      <!-- <div> -->
-      <!-- <h1>{{user.nickname}}</h1>
-      <p>{{user.nickname}}</p>-->
-    </section>
-    <ul class="items-thumbnail">
-      <!-- <li v-for="item in user.itemList" :item="user.itemList" :key="item">{{item}}</li> -->
-    </ul>
+      <img class="user-profile-thumbnail" :src="user.img">
+      <div>
+        <h1>dkdfjkdkjfodijf</h1>
+        <h1>{{user.nickname}}</h1>
+        <p>{{user.rate}}</p>
+      </div>
+    </div>
+
+    <garage-footer/>
+
   </section>
 </template>
 
 <script>
-// @ is an alias to /src
 import garageFooter from "@/components/garage-footer.vue";
 import userService from "@/services/user-service.js";
 
@@ -36,23 +28,26 @@ export default {
   data() {
     return {
       isMyProfile: false,
-      loggedUser: this.$store.getters.getLoggedUser
+      loggedUser: this.$store.getters.getLoggedUser,
+      sellerId: null
     };
   },
-  computed: {
-    user(){
-      if(isMyProfile) return this.loggedUser
-      else return this.$store.getters.
-    }
-  },
-
   created() {
     const userId = this.$route.params.userId;
     console.log(userId);
     if (userId === this.loggedUser._id) {
       console.log("displaying logged user profile");
-      this.isMyProfile = true;
-      return;
+      return (this.isMyProfile = true);
+    } else {
+      
+      this.sellerId = userId;
+      console.log("displaying seller profile", this.sellerId);
+    }
+  },
+  computed: {
+    user() {
+      if(this.sellerId) return userService.getById(this.sellerId)
+      else return this.loggedUser
     }
   }
 };
