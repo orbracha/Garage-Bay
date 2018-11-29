@@ -9,18 +9,36 @@ Vue.use(Vuex);
 export default {
     strict: true,
     state: {
-        loggedUser: null
+        loggedUser: userService.loadFromLocalStorage()
     },
     mutations: {
         setLoggedUser(state, { user }) {
             state.loggedUser = user;
-        }
+        },
+        toggleWishlist(state, itemId){
+            console.log('item Id', itemId);
+            const wishlistItemIdx = state.loggedUser.wishList.indexOf(item => {
+                return item === itemId
+            })
+            if (wishlistItemIdx === -1) {
+                state.loggedUser.wishList.push(itemId)
+            } else {
+                state.loggedUser.wishList.splice(wishlistItemIdx, 1)
+
+                
+            }
+        },
+
     },
     actions: {
+        toggleWishlist(contex, { itemId }) {
+            contex.commit('toggleWishlist',itemId)          
+                    return userService.edit(contex.state.loggedUser).then(user => {
+                        console.log(user);                      
+                    })
 
-        // toggleWishlist({commit} , {itemId}){
+        },
 
-        // }
         checkUser({ commit }, { user }) {
             return userService.checkUser(user).then(user => {
                 commit({ type: 'setLoggedUser', user })
@@ -36,8 +54,7 @@ export default {
     },
     getters: {
         getLoggedUser(state) {
-            if (!state.loggedUser) return JSON.parse(localStorage.getItem('loggedInUser'))
             return state.loggedUser;
         }
-    }
+    },
 };

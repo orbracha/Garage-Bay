@@ -31,6 +31,10 @@ export default {
         filterItems({commit}, filter){
             console.log('filter in search module:', filter);
             searchService.query(filter)
+        },
+
+        toggleWishlist({commit}, {itemId}){
+
         }
         // loadItems({ commit }) {
         //     itemService.query().then(items => {
