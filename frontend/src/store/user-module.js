@@ -12,7 +12,9 @@ export default {
         loggedUser: userService.loadFromLocalStorage()
     },
     mutations: {
-        setLoggedUser(state, { user }) {
+        setLoggedUser(state, user) {
+            console.log('user in mut', user);
+            
             state.loggedUser = user;
         },
         toggleWishlist(state, itemId) {
@@ -39,6 +41,9 @@ export default {
         },
         checkUser({ commit }, { user }) {
             return userService.checkUser(user)
+                .then(user => {
+                    commit('setLoggedUser', user)
+                })
         },
         getUserById({ commit }, { userId }) {
             return userService.getById(userId)
