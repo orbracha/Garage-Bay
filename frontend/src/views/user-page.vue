@@ -32,6 +32,15 @@ export default {
       sellerId: null
     };
   },
+<<<<<<< HEAD
+=======
+  computed: {
+    user(){
+      if(isMyProfile) return this.loggedUser
+    }
+  },
+
+>>>>>>> f629131327ffc20c3330cc81b1d5d8d4e2519aff
   created() {
     const userId = this.$route.params.userId;
     console.log(userId);

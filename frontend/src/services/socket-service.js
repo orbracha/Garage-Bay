@@ -7,24 +7,23 @@ const BASE_URL = (process.env.NODE_ENV !== 'development')
     : 'http://localhost:3000';
 
 var socket;
-
-var msgs = [];
-function connectSocket() {
+var gRoom;
+function connectSocket(userId, userDest) {
     socket = ioClient(BASE_URL);
-
+    socket.emit('roomRequested', userId, userDest)
     socket.on('newMsg', function (msg) {
-        eventBus.$emit(GET_MSG, msg)
+        if (msg.from._id !== userId) eventBus.$emit(GET_MSG, msg)
     });
-
-    // socket.on('typing', () => {
-    //     socket.broadcast.emit('typing', { typeUser: true })
-    //     typing();
-    // })
+    socket.on('usersConnected', room => {
+        gRoom = room;
+        console.log('room is ready', room);
+    });
+    return Promise.resolve(gRoom)
 }
 
 function sendMsg(msg) {
-    socket.emit('chat-newMsg', msg)
-    return Promise.resolve();
+    socket.emit('chat-newMsg', msg, gRoom)
+    return gRoom
 }
 export default {
 
