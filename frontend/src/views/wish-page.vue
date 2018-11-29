@@ -9,13 +9,14 @@
 
 <script>
 // @ is an alias to /src
-// import userList from "@/components/user-list.vue";
+import garageFooter from "@/components/garage-footer.vue";
 
 export default {
+  
   name: "home",
-  //   components: {
-  //     userList
-  //   },
+    components: {
+    garageFooter
+  },
   data() {
     return {
       user: {
