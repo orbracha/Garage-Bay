@@ -6,7 +6,9 @@
       </div>
       <span slot="optionalIcon">&#128172;</span>
     </garage-header>
-    <generic-list :data="msgTodisplay"></generic-list>
+    <!-- <generic-list :data="rooms"></generic-list> -->
+    {{rooms}}
+    {{userMsgs}}
     <garage-footer/>
   </section>
 </template>
@@ -19,35 +21,49 @@ import garageFooter from "@/components/garage-footer.vue";
 export default {
   data() {
     return {
-      usersImgs: []
+      loggedUser: null,
+      userMsgs: []
     };
   },
   computed: {
-    msgTodisplay() {
-      return this.msgs.map((msg, idx) => {
-        return {
-          title: msg.from.nickname,
-          txt: msg.txt,
-          img: "img/user.jpg"
-        };
+    rooms() {
+      return this.$store.getters.getRooms.map(room => {
+        this.$store
+          .dispatch({ type: "getUserById", userId: room.userDest })
+          .then(user => user);
+        // var currMsg = room.historyMsgs[room.historyMsgs.length - 1];
+        // if (currMsg.from._id !== this.loggedUser._id) {
+        //   return {
+        //     title: currMsg.from.nickname,
+        //     txt: currMsg.txt,
+        //     img: currMsg.from.img
+        //   };
+        // }
       });
-    },
-    msgs() {
-      return this.$store.getters.getMsgs;
     }
   },
   methods: {
     getUserMsgs() {
-      this.msgs.map(msg => {
-        var userId = msg.from._id;
-        this.$store.dispatch({ type: "getUserById", userId }).then(user => {
-          this.usersImgs.push(user);
-        });
+      this.rooms.map(room => {
+        return this.$store
+          .dispatch({ type: "getUserById", userId: room.userDest })
+          .then(user => {
+            return this.userMsgs.push({
+              title: user.nickname,
+              img: user.img,
+              txt: room.historyMsgs[room.historyMsgs.length - 1]
+            });
+          });
       });
     }
   },
   created() {
-    this.$store.dispatch({ type: "loadMsgs" }).then(() => this.getUserMsgs());
+    this.loggedUser = this.$store.getters.getLoggedUser;
+    this.$store
+      .dispatch({ type: "loadRooms", userId: this.loggedUser._id })
+      .then(() => {
+        this.getUserMsgs();
+      });
 
     // var self=this;
     // this.$store.dispatch({type:'loadMsgs'}).then(msgs=>{

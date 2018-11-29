@@ -10,11 +10,15 @@ Vue.use(Vuex);
 export default {
     strict: true,
     state: {
-        msgs: []
+        msgs: [],
+        rooms: []
     },
     mutations: {
         setMsgs(state, { msgs }) {
             state.msgs = msgs;
+        },
+        setRooms(state, { rooms }) {
+            state.rooms = rooms;
         },
         sendMsg(state, { msg }) {
             socketService.sendMsg(msg)
@@ -34,8 +38,13 @@ export default {
     },
     actions: {
         loadMsgs({ commit }, { userId, userDest }) {
-            msgService.query(userId, userDest).then(msgs => {
+            msgService.queryMsgs(userId, userDest).then(msgs => {
                 commit({ type: 'setMsgs', msgs })
+            })
+        },
+        loadRooms({ commit }, {userId}) {
+            msgService.queryRooms(userId).then(rooms => {
+                commit({ type: 'setRooms', rooms })
             })
         },
         sendMsg({ commit }, { msg, user }) {
@@ -43,11 +52,15 @@ export default {
                 commit({ type: 'sendMsg', msg })
                 commit({ type: 'addMsg', msg })
             })
-        }
+        },
+
     },
     getters: {
         getMsgs(state) {
             return state.msgs;
+        },
+        getRooms(state) {
+            return state.rooms;
         }
     }
 };

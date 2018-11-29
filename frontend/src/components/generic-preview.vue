@@ -9,13 +9,20 @@
 </template>
 
 <style lang="scss" scoped>
-
+li {
+  display: flex;
+  img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+}
 </style>
 
 
 <script>
 export default {
-props:['item']
-}
+  props: ["item"]
+};
 </script>
 

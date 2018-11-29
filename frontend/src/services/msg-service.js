@@ -7,8 +7,11 @@ const BASE_URL = (process.env.NODE_ENV !== 'development')
     ? '/api/msg'
     : 'http://localhost:3000/api/msg';
 
-function query(userId, userDest) {
+function queryMsgs(userId, userDest) {
     return axios.get(`${BASE_URL}?userId=${userId}&userDest=${userDest}`).then(res => res.data)
+}
+function queryRooms(userId) {
+    return axios.get(`${BASE_URL}?userId=${userId}`).then(res => res.data)
 }
 function add(msg, user) {
     console.log('add by service')
@@ -17,6 +20,7 @@ function add(msg, user) {
 
 
 export default {
-    query,
+    queryMsgs,
+    queryRooms,
     add
 }
