@@ -8,6 +8,7 @@ import wishPage from './views/wish-page.vue';
 import itemDetails from './views/item-details.vue';
 import editItem from './views/edit-item.vue';
 import searchPage from './views/search-page.vue';
+import userPage from './views/user-page.vue';
 
 
 Vue.use(Router);
@@ -40,6 +41,11 @@ export default new Router({
       path: '/chat/user/:sellerId',
       name: 'user-chat',
       component: userChat,
+    },
+    {
+      path: '/user/:userId',
+      name: 'user-page',
+      component: userPage,
     },
     {
       path: '/item/edit/:id?',
