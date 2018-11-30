@@ -1,10 +1,12 @@
 <template>
-  <div class="home">
+  <div v-if="isLoading">Loding...</div>
+  <div class="home" v-else>
     <header class="home-header">
       <router-link to="/">
         <img
           class="home-logo"
-          src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png">
+          src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png"
+        >
       </router-link>
       <router-link to="/search">
         <i class="fas fa-search"/>
@@ -26,8 +28,20 @@ export default {
     itemList,
     garageFooter
   },
+  data() {
+    return {
+      isLoading: true
+    };
+  },
   created() {
-    this.$store.dispatch({ type: "loadItems" });
+    this.$store.dispatch({ type: "loadItems" })
+    .then(res => {
+      console.log(res);
+      
+      console.log('got items in home');
+      
+      this.isLoading = false;
+    });
   },
   computed: {
     items() {

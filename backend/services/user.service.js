@@ -32,10 +32,10 @@ function checkUser(user) {
                             foreignField: '_id',
                             as: 'listedItems'
                         },
+                    },
+                    {
+                        $unwind:'$item'
                     }
-                    // {
-                    //     $unwind:'$item'
-                    // }
                 
                 ]).toArray()
         })

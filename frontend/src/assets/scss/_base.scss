@@ -33,3 +33,20 @@ ul {
 .around{
     justify-content: space-around
 }
+
+.checked {
+    color: rgb(255, 187, 0);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: orange;
+  } 
+
+  .empty-star{
+    color: rgba(255, 255, 255, 0);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: orange;
+  }
+
+  .fa-star{
+      padding-right: 2px;
+      font-size: .8rem
+  }

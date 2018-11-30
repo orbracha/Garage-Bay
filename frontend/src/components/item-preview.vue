@@ -4,14 +4,17 @@
       <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
       <div>
         <h1>{{seller.nickname}}</h1>
-        <p>{{seller.rate}}</p>
+          <span v-for="n in seller.rate" :key="n" class="fa fa-star checked"></span>
+          <span v-for="(x,idx) in 5-seller.rate" :key="idx" class="fa fa-star empty-star"></span>
+
+        <!-- <p>{{seller.rate}}</p> -->
       </div>
     </div>
 
     <section class="main-list-item" @click="itemClicked(item._id)">
       <div class="img-wrapper">
-        <i class="far fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
-        <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
+        <i class="fas fa-heart empty-heart pulse" v-if="!wishlist" @click.stop="toggleWishlist"></i>
+        <i class="fas fa-heart full-heart pulse" v-else @click.stop="toggleWishlist"></i>
         <img class="main-list-img" :src="item.img">
         <!-- <img class="price-tag" :src="{{imgLink}}"> -->
       </div>
