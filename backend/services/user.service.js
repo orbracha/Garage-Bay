@@ -34,9 +34,14 @@ function checkUser(user) {
                         },
                     },
                     {
-                        $unwind:'$item'
+                        $lookup:
+                        {
+                            from: 'item',
+                            localField: 'wishList',
+                            foreignField: '_id',
+                            as: 'wishlistItems'
+                        },
                     }
-                
                 ]).toArray()
         })
 
@@ -68,14 +73,7 @@ function getById(userId) {
                             localField: 'itemList',
                             foreignField: '_id',
                             as: 'listedItems'
-                        },
-                        // $lookup:
-                        // {
-                        //     from: 'item',
-                        //     localField: 'wishList',
-                        //     foreignField: '_id',
-                        //     as: 'wishItems'
-                        // }
+                        }
                     }
                 ]).toArray()
         })

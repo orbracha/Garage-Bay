@@ -17,6 +17,8 @@ ul {
     list-style-type: none;
   }
 
+
+
 .flex{
     display: flex
 }
@@ -49,4 +51,32 @@ ul {
   .fa-star{
       padding-right: 2px;
       font-size: .8rem
+  }
+
+  @media (min-width:700px){
+    .container{
+        margin: 0 auto;
+        max-width: 1400px;
+        display: flex
+    }
+
+        aside{
+            flex-grow:1;
+            background-color: grey;
+        }
+
+        .item-list{
+        padding: 20px;
+
+            flex-grow:1
+        }
+        header{
+            display: none
+        }
+
+        .garage-footer{
+            visibility: hidden;
+            display: none;
+        }
+
   }

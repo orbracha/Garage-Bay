@@ -1,6 +1,8 @@
 <template>
   <div v-if="isLoading">Loding...</div>
-  <div class="home" v-else>
+  
+  <div class="home container" v-else>
+    <!-- <section class="main-display"> -->
     <header class="home-header">
       <router-link to="/">
         <img
@@ -13,7 +15,9 @@
       </router-link>
     </header>
     <item-list class="item-list" :items="items"/>
+    <aside class="side-bar">Side bar</aside>
     <garage-footer/>
+    <!-- </section> -->
   </div>
 </template>
 

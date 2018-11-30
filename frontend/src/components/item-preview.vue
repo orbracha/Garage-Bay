@@ -5,7 +5,7 @@
       <div>
         <h1>{{seller.nickname}}</h1>
           <span v-for="n in seller.rate" :key="n" class="fa fa-star checked"></span>
-          <span v-for="(x,idx) in 5-seller.rate" :key="idx" class="fa fa-star empty-star"></span>
+          <!-- <span v-for="x in 5-seller.rate" :key="x" class="fa fa-star empty-star"></span> -->
 
         <!-- <p>{{seller.rate}}</p> -->
       </div>
