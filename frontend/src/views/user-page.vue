@@ -49,7 +49,7 @@ export default {
     const userId = this.$route.params.userId;
     console.log(userId);
     if (userId === this.loggedUser._id) {
-      console.log("displaying logged user profile");
+      // console.log("displaying logged user profile");
       this.isMyProfile = true;
       return;
     }

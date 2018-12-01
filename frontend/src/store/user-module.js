@@ -12,11 +12,11 @@ export default {
         loggedUser: userService.loadFromLocalStorage()
     },
     mutations: {
-        setLoggedUser(state, { user }) {
+        setLoggedUser(state,  user ) {     
             state.loggedUser = user;
         },
         toggleWishlist(state, itemId) {
-            console.log('item Id', itemId);
+            
             const wishlistItemIdx = state.loggedUser.wishList.indexOf(item => {
                 return item === itemId
             })
@@ -34,14 +34,17 @@ export default {
         toggleWishlist(contex, { itemId }) {
             contex.commit('toggleWishlist', itemId)
             return userService.edit(contex.state.loggedUser).then(user => {
-                console.log(user);
+                
             })
         },
         checkUser({ commit }, { user }) {
-            console.log('IN CHECK USER ***************************************************');
+            
             
             return userService.checkUser(user)
-             
+             .then(user=>{
+                
+                 commit('setLoggedUser', user)
+             })
 
         },
         getUserById({ commit }, { userId }) {

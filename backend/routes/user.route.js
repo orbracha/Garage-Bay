@@ -38,17 +38,7 @@ function addRoutes(app) {
         userService.add(toy)
             .then(Toy => res.json(Toy))
     })
-    // app.put('/api/Toy', (req, res) => {
-    //     const toy = req.body;
-    //     userService.update(toy)
-    //         .then(Toy => res.json(Toy))
-    // })
 
-    // app.delete('/api/Toy/:ToyId', (req, res) => {
-    //     const ToyId = req.params.ToyId;
-    //     userService.remove(ToyId)
-    //         .then(() => res.end())
-    // })
 
 }
 
