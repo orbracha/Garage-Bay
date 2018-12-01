@@ -38,6 +38,8 @@ export default {
             })
         },
         checkUser({ commit }, { user }) {
+            console.log('IN CHECK USER ***************************************************');
+            
             return userService.checkUser(user)
              
 
@@ -49,6 +51,8 @@ export default {
     },
     getters: {
         getLoggedUser(state) {
+            console.log('current user:', state.loggedUser);
+            
             return state.loggedUser;
         }
     },
