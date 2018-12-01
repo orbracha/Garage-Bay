@@ -3,14 +3,44 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 function checkUser(user) {
-    console.log('user', user)
+    // return mongoService.connectToDb()
+    //     .then(dbConn => {
+    //         const toyCollection = dbConn.collection('user');
+    //         return toyCollection.findOne(
+    //             { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
+
+    //             )
+    //             .then(user => {
+    //             if (!user) throw err;
+    //             return user
+    //         });
+    //     })
     return mongoService.connectToDb()
-        .then(dbConn => {
-            const toyCollection = dbConn.collection('user');
-            return toyCollection.findOne({ $and: [{ "nickname": user.nickname }, { "password": user.password }] }).then(user => {
-                if (!user) throw err;
-                return user
-            });
+        .then(db => {
+            return db.collection('user').aggregate([
+                {
+                    $match: { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
+                },
+                {
+                    $lookup:
+                    {
+                        from: 'item',
+                        localField: 'itemList',
+                        foreignField: '_id',
+                        as: 'itemList'
+                    },
+                },
+                {
+                    $lookup:
+                    {
+                        from: 'item',
+                        localField: 'wishList',
+                        foreignField: '_id',
+                        as: 'wishList'
+                    },
+                }
+            ]).toArray()
+            .then(user=>user[0])
         })
 }
 

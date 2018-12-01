@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     sellerClicked(sellerId) {
-      console.log("seller clicked");
+      // console.log("seller clicked");
       // this.$router.push(`/seller/${sellerId}`);
     },
     itemClicked(itemId) {
@@ -54,7 +54,7 @@ export default {
       this.wishlist = !this.wishlist;
       const itemId = this.item._id;
       this.$store.dispatch({ type: "toggleWishlist", itemId });
-      console.log(" toggling  wishlist");
+      // console.log(" toggling  wishlist");
     }
   },
   computed: {
@@ -71,7 +71,7 @@ export default {
       const isItemInWishlist = this.userWishlist.some(item => {
         return item === this.item._id;
       });
-      console.log("isItemInWishlist", isItemInWishlist);
+      // console.log("isItemInWishlist", isItemInWishlist);
       if (isItemInWishlist) this.wishlist = true;
     }
   }
