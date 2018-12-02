@@ -33,8 +33,8 @@
             <!-- <span v-for="m in (5-currSeller.rate)" :key="m" class="fa fa-star"></span> -->
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
-        </div>
-        <!-- <google-map/> -->
+        </div> 
+        <google-map/>
       </div>
     </div>
     <garage-footer></garage-footer>

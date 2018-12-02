@@ -10,6 +10,7 @@ import editItem from './views/edit-item.vue';
 import searchPage from './views/search-page.vue';
 import userPage from './views/user-page.vue';
 import selectImage from './views/select-image.vue';
+import dibsPage from './views/dibs-page.vue';
 
 
 Vue.use(Router);
@@ -29,10 +30,16 @@ export default new Router({
       component: loginPage,
     },
     {
-      path: '/select-image',
+      path: '/dibs/:dibRoute?',
+      name: 'dibsPage',
+      component: dibsPage,
+    },
+    {
+      path: '/select-image/:def?',
       name: 'select-image',
       component: selectImage,
     },
+ 
     {
       path: '/search',
       name: 'search',

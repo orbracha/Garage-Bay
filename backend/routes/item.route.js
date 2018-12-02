@@ -25,7 +25,7 @@ function addRoutes(app) {
             .then(item => res.json(item))
     })
     app.put('/api/item',requireAuth, (req, res) => {
-        const item = req.body;
+        const item = req.body;       
         itemService.update(item)
             .then(item => res.json(item))
     })

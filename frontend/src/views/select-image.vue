@@ -62,7 +62,12 @@ export default {
 
       this.$store.dispatch({ type: "saveImage", imageToSave })
       .then(res => {
+        if(this.$route.params.def==='item')
         this.$router.push('/item/edit')
+        else{
+          
+          console.log('PARAMS', this.$route.params.def);
+        }
       })
       .catch(err=>{
         console.log('ERROR:', err);

@@ -70,14 +70,23 @@ export default {
         var item = JSON.parse(JSON.stringify(this.currItem))
         item.createdAt=Date.now()
         item.sellerId=this.$store.getters.getLoggedUser
-        // item.location= get location from google geo
+        item.location= this.geolocate()
         
-        this.$store.dispatch({ type: "addItem", item });
-        
-        
+        this.$store.dispatch({ type: "addItem", item });        
       }
       
+    },
+        geolocate: function() {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log('position from edit', position);
+        
+        // this.center = {
+        //   lat: position.coords.latitude,
+        //   lng: position.coords.longitude
+        // };
+      });
     }
+    
   },
   computed: {},
   created() {

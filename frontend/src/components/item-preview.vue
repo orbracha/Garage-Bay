@@ -11,7 +11,12 @@
     <section class="main-list-item" @click="itemClicked(item._id)">
       <div class="img-wrapper">
         <i class="far fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
-        <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
+        <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>     
+        <i
+          class="far fa-money-bill-alt"
+          v-if="loggedUser._id!==item.sellerId"
+          @click.stop="sendDibs"
+        />
         <img class="main-list-img" :src="item.img">
         <!-- <img class="price-tag" :src="{{imgLink}}"> -->
       </div>
@@ -55,6 +60,21 @@ export default {
       const itemId = this.item._id;
       this.$store.dispatch({ type: "toggleWishlist", itemId });
       // console.log(" toggling  wishlist");
+    },
+    sendDibs() {
+      var item = this.item;
+      delete item.user;
+      this.$store.dispatch({
+        type: "sendDibs",
+        userId: this.loggedUser._id,
+        item
+      });
+      var user = JSON.parse(JSON.stringify(this.loggedUser));
+      user.dibsAns.unshift({
+        isAns: false,
+        item
+      });
+      this.$store.dispatch({ type: "updateUser", user });
     }
   },
   computed: {
@@ -81,6 +101,11 @@ export default {
 <style lang="scss" scoped>
 hr {
   padding-bottom: 8px;
+}
+.fa-money-bill-alt {
+  font-size: 50px;
+  position: absolute;
+  right: 0;
 }
 .seller-preview {
   padding: 12px;

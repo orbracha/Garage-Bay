@@ -6,7 +6,7 @@
     <router-link to="/chat">
       <i class="far fa-comment-alt"></i>
     </router-link>
-    <router-link to="/select-image">
+    <router-link to="/select-image/item">
       <i class="fas fa-plus"></i>
     </router-link>
     <router-link to="/wishlist">
