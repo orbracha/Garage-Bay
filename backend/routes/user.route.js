@@ -24,25 +24,26 @@ function addRoutes(app) {
 
     app.get('/api/user/:userId', (req, res) => {
         const userId = req.params.userId;
-            userService.getById(userId)
-                .then(user =>{
-                    console.log('user to send', user);
+        userService.getById(userId)
+            .then(user => {
+                console.log('user to send', user);
 
-                    res.json(user)
-                } )
-        })
-     
-
-    app.post('/api/user', (req, res) => {
-        const user = req.body;
-        userService.add(user)
-            .then(User => res.json(Toy))
+                res.json(user)
+            })
     })
+
+
+    // app.post('/api/user', (req, res) => {
+    //     const user = req.body;
+    //     userService.add(user)
+    //         .then(user => res.json(user))
+    // })
 
     app.put('/api/user', (req, res) => {
         const user = req.body;
-        userService.add(user)
-            .then(User => res.json(Toy))
+        console.log('----------------------out of server-----------------',user)
+        userService.update(user)
+            .then(user => res.json(user))
     })
 
 

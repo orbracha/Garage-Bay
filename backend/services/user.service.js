@@ -4,48 +4,45 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 function checkUser(user) {
-    console.log('user', user)
     return mongoService.connectToDb()
         .then(dbConn => {
-            const collection = dbConn.collection('user');
-            return collection.findOne({ $and: [{ "nickname": user.nickname }, { "password": user.password }] }).then(user => {
-                if (!user) throw err;
-                return user
-            });
+            const db = dbConn.collection('or-user');
+            return db.findOne(
+                { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
+
+            )
+                .then(user => {
+                    if (!user) throw err;
+                    return user
+                });
         })
-}
-
-
-
-function userlist(user) {
-    return mongoService.connectToDb()
-        .then(db => {
-            return db.collection('user')
-                .aggregate([
-                    {
-                        $match: { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
-                    },
-                    {
-                        $lookup:
-                        {
-                            from: 'item',
-                            localField: 'itemList',
-                            foreignField: '_id',
-                            as: 'listedItems'
-                        },
-                    },
-                    {
-                        $lookup:
-                        {
-                            from: 'item',
-                            localField: 'wishList',
-                            foreignField: '_id',
-                            as: 'wishlistItems'
-                        },
-                    }
-                ]).toArray()
-        })
-
+    // return mongoService.connectToDb()
+    //     .then(db => {
+    //         return db.collection('user').aggregate([
+    //             {
+    //                 $match: { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
+    //             },
+    //             {
+    //                 $lookup:
+    //                 {
+    //                     from: 'item',
+    //                     localField: 'itemList',
+    //                     foreignField: '_id',
+    //                     as: 'itemList'
+    //                 },
+    //             },
+    //             {
+    //                 $lookup:
+    //                 {
+    //                     from: 'item',
+    //                     localField: 'wishList',
+    //                     foreignField: '_id',
+    //                     as: 'wishList'
+    //                 },
+    //             }
+    //         ]).toArray()
+    //             .then(user => user[0])
+    //     })
 }
 
 
@@ -53,7 +50,7 @@ function userlist(user) {
 function query() {
     return mongoService.connectToDb()
         .then(dbConn => {
-            const userCollection = dbConn.collection('user');
+            const userCollection = dbConn.collection('or-user');
             return userCollection.find().toArray();
         })
 }
@@ -80,7 +77,6 @@ function getById(userId) {
         })
 }
 
-
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -97,13 +93,15 @@ function add(user) {
         })
 }
 function update(user) {
-   const userId = new ObjectId(user._id)
+    console.log('----------------------in of server-----------------', user)
+    const userId = new ObjectId(user._id)
     delete user._id;
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
             return userCollection.updateOne({ "_id": userId }, { $set: user }).then(() => {
-                user._id=userId
+                user._id = userId;
+                console.log(userId)
                 return user
             })
         })

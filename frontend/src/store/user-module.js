@@ -3,6 +3,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import userService from '../services/user-service.js'
+import storageService, { LOGGEDIN_USER_KEY } from '../services/storage-service.js'
+
 
 Vue.use(Vuex);
 
@@ -31,6 +33,9 @@ export default {
                 
             })
         },
+        updateUser(state, { user }) {
+            state.loggedUser = user;
+        }
 
     },
     actions: {
@@ -44,13 +49,21 @@ export default {
                 .then(user => {
                     commit('setLoggedUser', user)
                 })
+
         },
         getUserById({ commit }, { userId }) {
             console.log('inside user module', userId);
 
             return userService.getById(userId)
                 .then(user => user)
-        }
+        },
+        updateUser({ commit }, { user }) {
+            return userService.edit(user).then(user => {
+                // storageService.save(LOGGEDIN_USER_KEY, user)
+                commit({ type: 'updateUser', user })
+                // return Promise.resolve()
+            })
+        },
     },
     getters: {
         getLoggedUser(state) {

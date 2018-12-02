@@ -43,7 +43,10 @@ export default {
         }
     },
     getters: {
-        itemsToDisplay: state => state.items,
+        itemsToDisplay: state => {
+            console.log(state.items)
+            return state.items
+        },
 
         getItems(state) {
             return state.items;

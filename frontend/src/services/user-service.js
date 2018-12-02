@@ -40,6 +40,8 @@ function remove(userId) {
 }
 function edit(user) {
   if (user._id) {
+    console.log('user to update', user)
+    storageService.save(LOGGEDIN_USER_KEY, user)
     return axios.put(`${BASE_URL}`, user).then(res => res.data)
   }
   return axios.post(`${BASE_URL}`, user)

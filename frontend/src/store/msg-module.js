@@ -54,6 +54,15 @@ export default {
                 commit({ type: 'addMsg', msg })
             })
         },
+        sendDibs({ commit }, { userId, item }) {
+            socketService.sendDibs(userId, item);
+        },
+        sendAns({commit},{ans}){
+            socketService.sendAns(ans);
+        },
+        cancelDibReq({},{dib}){
+            socketService.cancelDibReq(dib)
+        }
 
     },
     getters: {
