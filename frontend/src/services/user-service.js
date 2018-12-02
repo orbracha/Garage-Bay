@@ -20,6 +20,8 @@ export default {
 function checkUser(user) {
   return axios.post(`${BASE_URL}`, { user }).then(res => {
     storageService.save(LOGGEDIN_USER_KEY, res.data)
+    console.log('user back in front service', res.data);
+    
     return res.data
   });
 }

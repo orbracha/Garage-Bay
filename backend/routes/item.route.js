@@ -45,9 +45,14 @@ function addRoutes(app) {
     app.get('/api/filter/',(req, res)=>{
      return  itemService.filterItems(req.query)
         .then(data=>{
-            // console.log('data in routes', data);
             res.send(data)
         })
+    })
+    app.post('/api/item/add-image', (req, res) => {
+        const img = req.body;
+      itemService.saveImgToCloudinary(img)
+       .then(url=>res.json(url))
+  
     })
 
 }

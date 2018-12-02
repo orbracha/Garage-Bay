@@ -11,7 +11,11 @@
       </garage-header>
 
       <img :src="currItem.img" alt="placeholder image">
-      <div class="chatLink-container" v-if="isLoggedUser">
+      <div  v-if="isLoggedUser">
+        <!-- <button>Edit Item</button> -->
+        <router-link :to="`/item/edit/${currItem._id}`">Edit Item</router-link>
+      </div>
+      <div v-else class="chatLink-container">
         <router-link :to="'/chat/user/'+ currItem.sellerId">&#9993;</router-link>
         <p>Like it? Start chat</p>
       </div>
@@ -29,8 +33,8 @@
             <!-- <span v-for="m in (5-currSeller.rate)" :key="m" class="fa fa-star"></span> -->
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
-        </div> 
-        <google-map/>
+        </div>
+        <!-- <google-map/> -->
       </div>
     </div>
     <garage-footer></garage-footer>
@@ -78,8 +82,8 @@ export default {
     },
     isLoggedUser() {
       let loggedUserId = this.$store.getters.getLoggedUser._id;
-      if (loggedUserId === this.currSeller._id) return false;
-      return true;
+      if (loggedUserId === this.currSeller._id) return true;
+      return false;
     }
   }
 };

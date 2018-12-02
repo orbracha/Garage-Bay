@@ -8,16 +8,22 @@
     </garage-header>
 
     <form @submit="saveItem">
+      <img :src="currItem.img" >
       <label>
         <span>Title:</span>
         <input type="text" v-model="currItem.title" required>
       </label>
       <label>
         <span>Category:</span>
-        <select v-model="currItem.category">
-          <option value="music">Music</option>
-          <option value="home">Home</option>
-          <option value="kids">Kids</option>
+        <select v-if="catagories.length>0" v-model="currItem.category">
+          <option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</option>
+        </select>
+      </label>
+      <label>
+        <span>Condition:</span>
+        <select  v-model="currItem.condition">
+          <option value="likeNew">Like new</option>
+          <option value="used">Used</option>
         </select>
       </label>
       <label>
@@ -28,6 +34,7 @@
         <span>Price:</span>
         <input type="number" v-model="currItem.price" required>
       </label>
+      
       <button>Save</button>
     </form>
     <garage-footer></garage-footer>
@@ -38,22 +45,38 @@
 import garageHeader from "../components/garage-header.vue";
 import garageFooter from "../components/garage-footer.vue";
 export default {
-  props: ["img"],
+  // props: ["img"],
   data() {
     return {
       currItem: {
         title: "",
         category: "",
         Description: "",
-        price: null,
-        img: this.img
-      }
+        price: 0,
+        img: ""
+      },
+      isLoadingCat: false,
+      catagories:[]
     };
   },
   methods: {
     saveItem() {
       var item = JSON.parse(JSON.stringify(this.currItem));
-      this.$store.dispatch({ type: "editItem", item });
+      if(this.currItem._id){
+        this.$store.dispatch({ type: "editItem", item });
+      }
+      else{
+        
+        var item = JSON.parse(JSON.stringify(this.currItem))
+        item.createdAt=Date.now()
+        item.sellerId=this.$store.getters.getLoggedUser
+        // item.location= get location from google geo
+        
+        this.$store.dispatch({ type: "addItem", item });
+        
+        
+      }
+      
     }
   },
   computed: {},
@@ -64,6 +87,21 @@ export default {
         .dispatch({ type: "getItemById", itemId })
         .then(item => (this.currItem = item));
     }
+    else{
+      let item={
+        title: "",
+        category: "",
+        Description: "",
+        price: 0,
+        img: this.$store.getters.getImageUrl
+      }
+      this.currItem=item;
+    }
+       this.isLoadingCat = true;
+    this.$store.dispatch({ type: "getAllCatagories" }).then(catagories => {
+      this.catagories = catagories;
+      this.isLoadingCat = false;
+    });
   },
   components: {
     garageHeader,
@@ -79,6 +117,13 @@ label {
   span {
     display: block;
     margin: 5px auto;
+  }
+}
+form{
+  margin-bottom: 70px;
+  img{
+    width: 200px;
+    margin-top:20px;
   }
 }
 </style>

@@ -40,7 +40,11 @@ function checkUser(user) {
                     },
                 }
             ]).toArray()
-            .then(user=>user[0])
+            .then(user=>{
+                console.log('user in back service:', user[0]);
+                
+return user[0]
+            })
         })
 }
 

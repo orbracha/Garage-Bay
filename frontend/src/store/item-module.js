@@ -9,7 +9,8 @@ Vue.use(Vuex);
 export default {
     strict: true,
     state: {
-        items: []
+        items: [],
+        newUrl:''
     },
     mutations: {
         setItems(state, { items }) {
@@ -20,6 +21,9 @@ export default {
             var itemIdx = items.findIndex(currItem => currItem._id === item._id);
             if (itemIdx) return items.splice(itemIdx, 1, item);
             items.unshift(item);
+        },
+        setNewUrl(state, {url}){
+            state.newUrl=url
         }
     },
     actions: {
@@ -38,6 +42,17 @@ export default {
             return itemService.edit(item).then(item => {
                 commit({ type: 'editItem', item });
             })
+        },
+        saveImage({ commit }, imageToSave) {
+           return itemService.saveImage(imageToSave)
+            .then(url=>{
+                commit({type: 'setNewUrl',url })
+            })
+          
+        },
+        addItem({comiit}, {item}){
+            console.log('item in store', item);
+            
         }
     },
     getters: {
@@ -45,6 +60,9 @@ export default {
 
         getItems(state) {
             return state.items;
+        },
+        getImageUrl(state){
+            return state.newUrl
         }
     }
 };
