@@ -30,7 +30,7 @@
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
         </div> 
-        <google-map/>
+        <!-- <google-map/> -->
       </div>
     </div>
     <garage-footer></garage-footer>

@@ -22,7 +22,15 @@ function addRoute(app, server) {
             });
 
         });
-
+        socket.on('dibs', (userId, item) => {
+            io.emit('got-dibs', userId, item);
+        })
+        socket.on('cancelDibReq', dib => {
+            io.emit('got-cancle-dib', dib);
+        })
+        socket.on('sendAns', (ans) => {
+            io.emit('got-ans', ans);
+        })
         socket.on('chat-newMsg', (msg, room) => {
             roomService.addMsgToRoom(msg, room).then(() => {
                 io.to(room._id).emit('newMsg', msg)
