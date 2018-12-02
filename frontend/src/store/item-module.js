@@ -51,9 +51,10 @@ export default {
           
         },
         addItem({comiit}, {item}){
-            console.log('item in store', item);
-            
-        }
+            // console.log('item in store', item);
+            itemService.addItem(item)
+        },
+      
     },
     getters: {
         itemsToDisplay: state => {

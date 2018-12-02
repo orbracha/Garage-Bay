@@ -1,5 +1,6 @@
 
 const itemService = require('../services/item.service')
+const userService = require('../services/user.service')
 
 function requireAuth(req, res, next) {
     const user = req.session.loggedinUser
@@ -19,10 +20,16 @@ function addRoutes(app) {
         itemService.getById(itemId)
             .then(item => res.json(item))
     })
-    app.post('/api/item',requireAuth, (req, res) => {
+    app.post('/api/item/add-item', (req, res) => {
         const item = req.body;
+        // console.log('item in back', item);
         itemService.add(item)
-            .then(item => res.json(item))
+        .then(item=>{
+            console.log('got back', item);
+            
+            res.json(item)
+        })
+
     })
     app.put('/api/item',requireAuth, (req, res) => {
         const item = req.body;       

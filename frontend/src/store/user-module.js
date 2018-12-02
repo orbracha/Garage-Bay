@@ -60,6 +60,7 @@ export default {
                 // return Promise.resolve()
             })
         },
+      
     },
     getters: {
         getLoggedUser(state) {

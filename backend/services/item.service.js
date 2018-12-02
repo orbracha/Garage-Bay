@@ -55,7 +55,7 @@ function add(item) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const itemCollection = dbConn.collection('item');
-            return itemCollection.insert(item);
+            return itemCollection.insert(item)   
         })
 }
 function update(item) {
