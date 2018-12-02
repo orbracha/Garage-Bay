@@ -19,16 +19,19 @@ export default {
         },
         toggleWishlist(state, itemId) {
 
-            const wishlistItemIdx = state.loggedUser.wishList.indexOf(item => {
-                return item === itemId
-            })
+            const wishlistItemIdx = state.loggedUser.wishList.indexOf(itemId)
+            console.log('wish list item index', wishlistItemIdx);
+
+
             if (wishlistItemIdx === -1) {
                 state.loggedUser.wishList.push(itemId)
             } else {
                 state.loggedUser.wishList.splice(wishlistItemIdx, 1)
-
-
             }
+            return userService.edit(state.loggedUser).then(user => {
+                console.log(user);
+                
+            })
         },
         updateUser(state, { user }) {
             state.loggedUser = user;
@@ -39,7 +42,6 @@ export default {
         toggleWishlist(contex, { itemId }) {
             contex.commit('toggleWishlist', itemId)
             return userService.edit(contex.state.loggedUser).then(user => {
-
             })
         },
         checkUser({ commit }, { user }) {
@@ -50,6 +52,8 @@ export default {
 
         },
         getUserById({ commit }, { userId }) {
+            console.log('inside user module', userId);
+
             return userService.getById(userId)
                 .then(user => user)
         },

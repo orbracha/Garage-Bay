@@ -29,6 +29,8 @@ export default {
     actions: {
         loadItems({ commit }) {
             itemService.query().then(items => {
+                console.log('inside loaditems in store', items);
+                
                 commit({ type: 'setItems', items })
                 return items;
             })
