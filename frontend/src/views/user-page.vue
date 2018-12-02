@@ -5,14 +5,18 @@
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
         <i v-if="userProfile" class="fas fa-pen edit-user"></i>
-        <div>
+        <i v-if="userProfile" class="fas fa-pen edit-user"></i>
           <h1>{{user.nickname}}'s Garage</h1>
           <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
           <!-- <span v-for="x in 5-user.rate" :key="x" class="fa fa-star empty-star"></span> -->
           <!-- <p>{{user.rate}}</p> -->
-        </div>
-      </div>
-      <ul class="listed-items-thumbnail">
+          <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
+          <!-- <span v-for="x in 5-user.rate" :key="x" class="fa fa-star empty-star"></span> -->
+          <!-- <p>{{user.rate}}</p> -->
+        <li v-for="(item,idx) in user.listedItems" :key="idx" @click="itemClicked(item._id)">
+          <div class="user-profile-thumbnail">
+            <img class="img-thumb" :src="item.img">
+            <!-- <div class="hover-mask"> LALALA</div> -->
         <li v-for="(item,idx) in user.listedItems" :key="idx" @click="itemClicked(item._id)">
           <div class="user-profile-thumbnail">
             <img class="img-thumb" :src="item.img">
@@ -46,19 +50,22 @@ export default {
   },
   methods: {
     itemClicked(itemId) {
+        this.userProfile = true;
+
+        this.isLoadin = false;
       this.$router.push(`/item/details/${itemId}`);
     },
     setUser() {
       const userId = this.$route.params.userId;
-      console.log(userId);
       if (userId === this.loggedUser._id) {
         console.log("displaying logged user profile");
-        this.user = this.loggedUser;
+            this.isLoadin = false;
         this.userProfile = true;
 
         this.isLoadin = false;
       } else {
         var self = this;
+
         this.$store
           .dispatch({ type: "getUserById", userId })
           .then(user => {
@@ -68,7 +75,9 @@ export default {
           })
           .catch(err => console.log("EROOOOOR"));
       }
+    console.log(this.loggedUser);
     }
+    
   },
 
   watch: {
@@ -82,12 +91,12 @@ export default {
 
   created() {
     console.log(this.loggedUser);
-    
     this.setUser();
   }
 };
+
 </script>
 
 <style lang="scss" scoped>
 
-</style>
+
