@@ -65,7 +65,7 @@ export default new Router({
       component: editItem,
     },
     {
-      path: '/wishlist',
+      path: '/user/wishlist/:userId',
       name: 'wishlist',
       component: wishPage,
     },

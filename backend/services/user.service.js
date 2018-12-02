@@ -6,7 +6,7 @@ const ObjectId = require('mongodb').ObjectId;
 function checkUser(user) {
     return mongoService.connectToDb()
         .then(dbConn => {
-            const db = dbConn.collection('or-user');
+            const db = dbConn.collection('user');
             return db.findOne(
                 { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
 
@@ -50,7 +50,7 @@ function checkUser(user) {
 function query() {
     return mongoService.connectToDb()
         .then(dbConn => {
-            const userCollection = dbConn.collection('or-user');
+            const userCollection = dbConn.collection('user');
             return userCollection.find().toArray();
         })
 }
@@ -77,6 +77,33 @@ function getById(userId) {
         })
 }
 
+
+
+
+
+function getUserWhishlist(userId) {
+    const id = new ObjectId(userId)
+    return mongoService.connectToDb()
+        .then(db => {
+            return db.collection('user')
+                .aggregate([
+                    {
+                        $match: { _id: id }
+                    },
+                    {
+                        $lookup:
+                        {
+                            from: 'item',
+                            localField: 'wishList',
+                            foreignField: '_id',
+                            as: 'wishlistItems'
+                        }
+                    }
+                ]).toArray()
+        })
+}
+
+
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -96,6 +123,14 @@ function update(user) {
     console.log('----------------------in of server-----------------', user)
     const userId = new ObjectId(user._id)
     delete user._id;
+
+    user.wishList = user.wishList.map(id => {
+        return new ObjectId(id)
+    })
+
+    user.itemList = user.itemList.map(id => {
+        return new ObjectId(id)
+    })
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
@@ -115,7 +150,8 @@ module.exports = {
     remove,
     add,
     update,
-    checkUser
+    checkUser,
+    getUserWhishlist
 }
 
 

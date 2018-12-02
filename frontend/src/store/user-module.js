@@ -18,13 +18,14 @@ export default {
             state.loggedUser = user;
         },
         toggleWishlist(state, itemId) {
+            const id = new ObjectId(itemId)
 
-            const wishlistItemIdx = state.loggedUser.wishList.indexOf(itemId)
+            const wishlistItemIdx = state.loggedUser.wishList.indexOf(id)
             console.log('wish list item index', wishlistItemIdx);
 
 
             if (wishlistItemIdx === -1) {
-                state.loggedUser.wishList.push(itemId)
+                state.loggedUser.wishList.push(id)
             } else {
                 state.loggedUser.wishList.splice(wishlistItemIdx, 1)
             }
@@ -53,10 +54,18 @@ export default {
         },
         getUserById({ commit }, { userId }) {
             console.log('inside user module', userId);
-
             return userService.getById(userId)
-                .then(user => user)
+                .then(user => {
+                    console.log('user in stor', user);
+                    
+                    return user})
         },
+        getUserWhishlist({commit}, {userId}){
+            console.log('inside user module, getting wishlis', userId);
+            return userService.getUserWhishlist(userId)
+            .then(user => user)
+        },
+        
         updateUser({ commit }, { user }) {
             return userService.edit(user).then(user => {
                 // storageService.save(LOGGEDIN_USER_KEY, user)

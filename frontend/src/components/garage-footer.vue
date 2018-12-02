@@ -9,7 +9,7 @@
     <router-link to="/select-image">
       <i class="fas fa-plus"></i>
     </router-link>
-    <router-link v-if="user" :user="user" to="/wishlist">
+    <router-link v-if="user" :userId="user._id" :to="'/user/wishlist/'+user._id">
       <i class="far fa-heart"></i>
     </router-link>
       <router-link v-else to="/login">

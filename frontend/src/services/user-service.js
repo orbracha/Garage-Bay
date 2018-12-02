@@ -14,7 +14,8 @@ export default {
   remove,
   edit,
   checkUser,
-  loadFromLocalStorage
+  loadFromLocalStorage,
+  getUserWhishlist
 }
 
 function checkUser(user) {
@@ -33,8 +34,13 @@ function loadFromLocalStorage() {
 }
 
 function getById(userId) {
-  return axios.get(`${BASE_URL}/${userId}`).then(res =>res.data[0])
+  return axios.get(`${BASE_URL}/${userId}`).then(res => res.data[0])
 }
+
+function getUserWhishlist(userId){
+  return axios.get(`${BASE_URL}/wishlist/${userId}`).then(res =>res.data[0])
+}
+
 function remove(userId) {
   return axios.delete(`${BASE_URL}/${userId}`)
 }

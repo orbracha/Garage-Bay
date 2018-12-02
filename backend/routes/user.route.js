@@ -32,6 +32,18 @@ function addRoutes(app) {
             })
     })
 
+    app.get('/api/user/wishlist/:userId', (req, res) => {
+        const userId = req.params.userId;
+        console.log('user ID in serviveeeeee',userId);
+        
+        userService.getUserWhishlist(userId)
+            .then(user => {
+                console.log('wishlist to send', user);
+
+                res.json(user)
+            })
+    })
+
 
     // app.post('/api/user', (req, res) => {
     //     const user = req.body;
