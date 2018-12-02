@@ -6,7 +6,7 @@ const ObjectId = require('mongodb').ObjectId;
 function checkUser(user) {
     return mongoService.connectToDb()
         .then(dbConn => {
-            const db = dbConn.collection('or-user');
+            const db = dbConn.collection('user');
             return db.findOne(
                 { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
 
@@ -50,7 +50,7 @@ function checkUser(user) {
 function query() {
     return mongoService.connectToDb()
         .then(dbConn => {
-            const userCollection = dbConn.collection('or-user');
+            const userCollection = dbConn.collection('user');
             return userCollection.find().toArray();
         })
 }
@@ -76,6 +76,12 @@ function getById(userId) {
                 ]).toArray()
         })
 }
+function getByName(userName) {
+    return mongoService.connectToDb()
+        .then(db => {
+            return db.collection('user').findOne({ nickname: userName }).then(res => res)
+        })
+}
 
 function remove(userId) {
     userId = new ObjectId(userId)
@@ -89,7 +95,7 @@ function add(user) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
-            return userCollection.insert(user);
+            return userCollection.insertOne(user);
         })
 }
 function update(user) {
@@ -115,7 +121,8 @@ module.exports = {
     remove,
     add,
     update,
-    checkUser
+    checkUser,
+    getByName
 }
 
 
