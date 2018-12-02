@@ -16,33 +16,6 @@ function checkUser(user) {
                     return user
                 });
         })
-    // return mongoService.connectToDb()
-    //     .then(db => {
-    //         return db.collection('user').aggregate([
-    //             {
-    //                 $match: { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: 'item',
-    //                     localField: 'itemList',
-    //                     foreignField: '_id',
-    //                     as: 'itemList'
-    //                 },
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: 'item',
-    //                     localField: 'wishList',
-    //                     foreignField: '_id',
-    //                     as: 'wishList'
-    //                 },
-    //             }
-    //         ]).toArray()
-    //             .then(user => user[0])
-    //     })
 }
 
 
@@ -74,6 +47,12 @@ function getById(userId) {
                         }
                     }
                 ]).toArray()
+        })
+}
+function getByName(userName) {
+    return mongoService.connectToDb()
+        .then(db => {
+            return db.collection('user').findOne({ nickname: userName }).then(res => res)
         })
 }
 
@@ -116,7 +95,7 @@ function add(user) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
-            return userCollection.insert(user);
+            return userCollection.insertOne(user);
         })
 }
 function update(user) {
@@ -151,7 +130,8 @@ module.exports = {
     add,
     update,
     checkUser,
-    getUserWhishlist
+    getUserWhishlist,
+    getByName,
 }
 
 

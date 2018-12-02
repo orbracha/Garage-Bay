@@ -1,6 +1,11 @@
 const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
-
+var cloudinary = require('cloudinary')
+cloudinary.config({ 
+    cloud_name: 'dwms8epem', 
+    api_key: '631124472585116', 
+    api_secret: 'eswbF3nMwMwU2Q-MBFUxBVRzgbY' 
+  });
 
 function query(criteria = {}) {
     return mongoService.connectToDb()
@@ -24,7 +29,10 @@ function query(criteria = {}) {
                     }
                 ]).toArray()
                 .then(items => {
+
+
                     console.log(items)
+
                     return items
                 })
         })
@@ -79,7 +87,10 @@ function filterItems(queryObj){
     if (queryObj.text) criteria.$and.push({ title: { $regex: queryObj.text,  $options: 'i' } })
    return query(criteria)    
 }
-
+function saveImgToCloudinary({imageToSave}) {
+    return cloudinary.v2.uploader.upload(imageToSave)
+    .then(data=>data.secure_url)
+}
 
 
 
@@ -94,6 +105,7 @@ module.exports = {
     add,
     update,
     getCatagories,
-    filterItems
+    filterItems,
+    saveImgToCloudinary
 }
 

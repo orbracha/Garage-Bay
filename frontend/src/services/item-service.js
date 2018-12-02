@@ -9,7 +9,8 @@ export default {
   query,
   getById,
   remove,
-  edit
+  edit,
+  saveImage
 }
 
 function query() {
@@ -27,4 +28,8 @@ function edit(item) {
     return axios.put(`${BASE_URL}`, item).then(res => res.data)
   }
   return axios.post(`${BASE_URL}`, item)
+}
+function saveImage(img){
+return axios.post(`${BASE_URL}/add-image`, img)
+.then(res=>res.data)
 }
