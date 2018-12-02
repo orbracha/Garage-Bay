@@ -6,7 +6,7 @@
     <router-link to="/chat">
       <i class="far fa-comment-alt"></i>
     </router-link>
-    <router-link to="/item/edit">
+    <router-link to="/select-image">
       <i class="fas fa-plus"></i>
     </router-link>
     <router-link v-if="user" :user="user" to="/wishlist">

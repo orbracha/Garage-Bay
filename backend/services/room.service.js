@@ -6,7 +6,7 @@ function query(userId) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const roomCollection = dbConn.collection('room');
-            return roomCollection.find({ "userId": userId }).toArray();
+            return roomCollection.find({ $or: [{ "userId": userId }, { "userDest": userId }] }).toArray();
         })
 }
 function getById(roomId) {

@@ -33,14 +33,16 @@ export default {
       console.log(this.rooms);
       var self = this;
       return this.rooms.map(room => {
+        if (room.userId === this.loggedUser._id) var userDest = room.userDest;
+        else var userDest = room.userId;
         this.$store
-          .dispatch({ type: "getUserById", userId: room.userDest })
+          .dispatch({ type: "getUserById", userId: userDest })
           .then(user => {
             self.userMsgs.push({
               txt: room.historyMsgs[room.historyMsgs.length - 1].txt,
               title: user.nickname,
               img: user.img,
-              link: `/chat/user/${room.userDest}`
+              link: `/chat/user/${userDest}`
             });
           });
       });

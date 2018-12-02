@@ -32,6 +32,7 @@ function addRoute(app, server) {
 
     app.get('/api/msg', (req, res) => {
         var { userId, userDest } = req.query
+        console.log('userId, userDest', userId, userDest)
         if (!userDest) {
             return roomService.query(userId)
                 .then(rooms => res.json(rooms))

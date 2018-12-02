@@ -29,7 +29,7 @@
             <!-- <span v-for="m in (5-currSeller.rate)" :key="m" class="fa fa-star"></span> -->
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
-        </div>
+        </div> 
         <google-map/>
       </div>
     </div>
@@ -41,6 +41,7 @@
 import garageHeader from "../components/garage-header.vue";
 import garageFooter from "../components/garage-footer.vue";
 import GoogleMap from "@/components/GoogleMap";
+
 export default {
   name: "item-details",
   components: {
