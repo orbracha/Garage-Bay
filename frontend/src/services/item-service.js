@@ -34,9 +34,8 @@ function saveImage(img){
 return axios.post(`${BASE_URL}/add-image`, img)
 .then(res=>res.data)
 }
-function addItem(user){
-  console.log('user from front server', user);
+function addItem(item){
   
-  return axios.post(`${BASE_URL}/add-item`, user)
+  return axios.post(`${BASE_URL}/add-item`, item)
   .then(res=>res.data)
 }

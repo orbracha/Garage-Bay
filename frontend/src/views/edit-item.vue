@@ -7,7 +7,7 @@
       <span slot="optionalIcon">&#x1f4f7;</span>
     </garage-header>
 
-    <form @submit="saveItem">
+    <form @submit.prevent="saveItem">
       <img :src="currItem.img">
       <label>
         <span>Title:</span>
@@ -71,9 +71,11 @@ export default {
         item.createAt = Date.now();
         item.sellerId = this.$store.getters.getLoggedUser._id;
         item.location = await this.getLocation();
-        console.log("item from edit", item);
 
-        this.$store.dispatch({ type: "addItem", item });
+        this.$store.dispatch({ type: "addItem", item })
+        .then(itemId=>{
+         this.$router.push(`/item/details/${itemId}`)
+        })
       }
     },
     getLocation() {

@@ -4,7 +4,7 @@ const userService = require('../services/user.service')
 
 function requireAuth(req, res, next) {
     const user = req.session.loggedinUser
-    console.log('user',user)
+    console.log('user', user)
     // if (!user) return res.status(401).send('Something broke!')
     // else next()
     next()
@@ -15,51 +15,45 @@ function addRoutes(app) {
             .then(items => res.json(items))
     })
 
-    app.get('/api/item/:itemId',requireAuth, (req, res) => {
+    app.get('/api/item/:itemId', requireAuth, (req, res) => {
         const itemId = req.params.itemId;
         itemService.getById(itemId)
             .then(item => res.json(item))
     })
     app.post('/api/item/add-item', (req, res) => {
         const item = req.body;
-        // console.log('item in back', item);
-        itemService.add(item)
-        .then(item=>{
-            console.log('got back', item);
-            
-            res.json(item)
-        })
-
+        return itemService.add(item)
+            .then(item => res.json(item))
     })
-    app.put('/api/item',requireAuth, (req, res) => {
-        const item = req.body;       
+    app.put('/api/item', requireAuth, (req, res) => {
+        const item = req.body;
         itemService.update(item)
             .then(item => res.json(item))
     })
 
-    app.delete('/api/item/:itemId',requireAuth, (req, res) => {
+    app.delete('/api/item/:itemId', requireAuth, (req, res) => {
         const itemId = req.params.itemId;
         itemService.remove(itemId)
             .then(() => res.end())
     })
 
-    app.get('/api/search',(req, res)=>{
+    app.get('/api/search', (req, res) => {
         return itemService.getCatagories()
-        .then(catagories=>{
-            res.json(catagories)    
-        })
+            .then(catagories => {
+                res.json(catagories)
+            })
     })
-    app.get('/api/filter/',(req, res)=>{
-     return  itemService.filterItems(req.query)
-        .then(data=>{
-            res.send(data)
-        })
+    app.get('/api/filter/', (req, res) => {
+        return itemService.filterItems(req.query)
+            .then(data => {
+                res.send(data)
+            })
     })
     app.post('/api/item/add-image', (req, res) => {
         const img = req.body;
-      itemService.saveImgToCloudinary(img)
-       .then(url=>res.json(url))
-  
+        itemService.saveImgToCloudinary(img)
+            .then(url => res.json(url))
+
     })
 
 }

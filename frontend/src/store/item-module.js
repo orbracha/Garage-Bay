@@ -52,9 +52,9 @@ export default {
             })
           
         },
-        addItem({comiit}, {item}){
-            // console.log('item in store', item);
-            itemService.addItem(item)
+        addItem({commit}, {item}){
+            return itemService.addItem(item)
+            .then(newItem=>newItem._id)
         },
       
     },
