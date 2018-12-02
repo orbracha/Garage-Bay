@@ -1,10 +1,13 @@
 <template>
   <li v-if="item">
-    <div class="seller-preview" @click="sellerClicked(seller._id)">
+    <div class="seller-preview" @click="userClicked(seller._id)">
       <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
       <div>
         <h1>{{seller.nickname}}</h1>
-        <p>{{seller.rate}}</p>
+          <span v-for="n in seller.rate" :key="n" class="fa fa-star checked"></span>
+          <!-- <span v-for="x in 5-seller.rate" :key="x" class="fa fa-star empty-star"></span> -->
+
+        <!-- <p>{{seller.rate}}</p> -->
       </div>
     </div>
 
@@ -26,7 +29,7 @@
         <div class="item-desc">{{item.desc}} {{item.desc}} {{item.desc}}</div>
         <div>${{item.price}}</div>
       </div>
-      <hr>
+
     </section>
   </li>
 </template>
@@ -47,18 +50,19 @@ export default {
     };
   },
   methods: {
-    sellerClicked(sellerId) {
-      // console.log("seller clicked");
-      // this.$router.push(`/seller/${sellerId}`);
+    userClicked(sellerId) {
+      console.log("seller clicked");
+      this.$router.push(`/user/${sellerId}`);
     },
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
     },
     toggleWishlist() {
       if (!this.loggedUser) return this.$router.push(`/login`);
-      this.wishlist = !this.wishlist;
       const itemId = this.item._id;
-      this.$store.dispatch({ type: "toggleWishlist", itemId });
+      this.wishlist = !this.wishlist
+      this.$store.dispatch({ type: "toggleWishlist", itemId })
+   
       // console.log(" toggling  wishlist");
     },
     sendDibs() {
@@ -99,9 +103,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-hr {
-  padding-bottom: 8px;
-}
+
 .fa-money-bill-alt {
   font-size: 50px;
   position: absolute;

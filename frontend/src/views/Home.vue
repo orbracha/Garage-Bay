@@ -1,5 +1,8 @@
 <template>
-  <div class="home">
+  <div v-if="isLoading">Loding...</div>
+  
+  <div class="home container" v-else>
+    <!-- <section class="main-display"> -->
     <header class="home-header">
       <img
         class="home-logo"
@@ -38,8 +41,20 @@ export default {
     itemList,
     garageFooter
   },
+  data() {
+    return {
+      isLoading: true
+    };
+  },
   created() {
-    this.$store.dispatch({ type: "loadItems" });
+    this.$store.dispatch({ type: "loadItems" })
+    .then(res => {
+      console.log(res);
+      
+      console.log('got items in home');
+      
+      this.isLoading = false;
+    });
   },
   computed: {
     items() {

@@ -1,29 +1,30 @@
 <template>
   <section>
-    <section class="user-preview">
-      <div class="user-preview">
-        <img class="user-thumbnail" :src="loggedUser.img">
-        <div>
-          <h1>{{loggedUser.nickname}}</h1>
-          <p>{{loggedUser.rate}}</p>
+    <section v-if="isLoadin">Loading...</section>
+    <section v-else class="user-page">
+      <div class="user-profile-preview">
+        <img class="user-profile-thumbnail" :src="user.img">
+        <i v-if="isLoggedUser" class="fas fa-pen edit-user"></i>
+        <h1>{{user.nickname}}'s Garage</h1>
+        <div class="rating">
+        <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
+        <span v-for="x in 5-user.rate" :key="x" class="fa fa-star empty-star"></span>
         </div>
+        <!-- <p>{{user.rate}}</p> -->
+        <ul>
+          <li v-for="(item,idx) in user.listedItems" :key="idx" @click="itemClicked(item._id)">
+            <div class="user-profile-thumbnail">
+              <img class="img-thumb" :src="item.img">
+            </div>
+          </li>
+        </ul>
       </div>
       <garage-footer/>
-
-      <!-- <div id="img-container" :style="{background:'green'}"></div> -->
-      <!-- <img src="https://api.adorable.io/avatars/285/abott@adorable.png"> -->
-      <!-- <div> -->
-      <!-- <h1>{{user.nickname}}</h1>
-      <p>{{user.nickname}}</p>-->
     </section>
-    <ul class="items-thumbnail">
-      <!-- <li v-for="item in user.itemList" :item="user.itemList" :key="item">{{item}}</li> -->
-    </ul>
   </section>
 </template>
 
 <script>
-// @ is an alias to /src
 import garageFooter from "@/components/garage-footer.vue";
 import userService from "@/services/user-service.js";
 
@@ -35,37 +36,54 @@ export default {
   },
   data() {
     return {
-      isMyProfile: false,
-      loggedUser: this.$store.getters.getLoggedUser
+      user: null,
+      isLoadin: true,
+      isLoggedUser: false
     };
   },
-  computed: {
-    user(){
-      if(isMyProfile) return this.loggedUser
+  methods: {
+    itemClicked(itemId) {
+      this.$router.push(`/item/details/${itemId}`);
+    },
+    setUser() {
+      
+      const loggedUserId = this.$store.getters.getLoggedUser._id;
+      console.log(loggedUserId);
+      const userId = this.$route.params.userId;
+      console.log(loggedUserId);
+      if (userId === this.loggedUserId) {
+        console.log("displaying logged user profile");
+        isLoggedUser: true;
+      } else {
+        console.log("displaying user profile");
+      }
+      var self = this;
+      this.$store
+        .dispatch({ type: "getUserById", userId })
+        .then(user => {
+          self.user = user;
+          this.isLoadin = false;
+        })
+        .catch(err => console.log("EROOOOOR"));
+
+      console.log(this.user);
+    }
+  },
+
+  watch: {
+    "$route.params.userId": {
+      handler() {
+        this.setUser();
+      },
+      immediate: true
     }
   },
 
   created() {
-    const userId = this.$route.params.userId;
-    console.log(userId);
-    if (userId === this.loggedUser._id) {
-      // console.log("displaying logged user profile");
-      this.isMyProfile = true;
-      return;
-    }
+    console.log(this.loggedUserId);
+    this.setUser();
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.user-preview {
-  display: inline;
-}
-.items-thumbnail {
-  padding: 0;
-  max-width: 100%;
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-}
-</style>

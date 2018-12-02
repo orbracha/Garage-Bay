@@ -19,7 +19,10 @@ export default {
 
 function checkUser(user) {
   return axios.post(`${BASE_URL}`, { user }).then(res => {
+    // console.log('user in  user servive',user);
+    
     storageService.save(LOGGEDIN_USER_KEY, res.data)
+    console.log('user returned from server:', res.data)
     return res.data
   });
 }
@@ -30,7 +33,7 @@ function loadFromLocalStorage() {
 }
 
 function getById(userId) {
-  return axios.get(`${BASE_URL}/${userId}`).then(res => res.data)
+  return axios.get(`${BASE_URL}/${userId}`).then(res =>res.data[0])
 }
 function remove(userId) {
   return axios.delete(`${BASE_URL}/${userId}`)

@@ -1,0 +1,65 @@
+
+.user-page {
+    margin: 0;
+    background-image: url("../img/garage-BG.jpg");
+    height: 100vh;
+    background-color: #858585;
+  }
+  
+  .user-profile-preview {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.445);
+    margin: 0 15px 0 15px;
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+  
+    .user-profile-thumbnail {
+      position: relative;
+      margin-right: 12px;
+      height: 100px;
+      width: 100px;
+      border-radius: 500px;
+     
+
+    }
+  
+    .edit-user {
+      position: absolute;
+  
+      color: white;
+      font-size: 0.8rem;
+      height: 30px;
+      width: 30px;
+      background-color: rgb(41, 130, 214);
+      border-radius: 20px;
+    }
+    h1 {
+      text-align: left;
+      margin: 0;
+    }
+    p {
+      text-align: left;
+      margin: 0;
+    }
+  }
+  
+  .listed-items-thumbnail {
+    padding: 0;
+    margin: 15px;
+    max-width: 100%;
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+  
+    img {
+      border-radius: 12px;
+      height: 100%;
+      width: 100%;
+      transition: 0.3s;
+      object-fit: cover;
+      box-shadow: 8px 8px 28px -6px rgba(0, 0, 0, 0.75);
+    }
+
+  }

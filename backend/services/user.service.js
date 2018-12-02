@@ -1,5 +1,4 @@
-'use strict';
-
+'use strict'
 const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
@@ -57,11 +56,24 @@ function query() {
 }
 
 function getById(userId) {
-    userId = new ObjectId(userId)
+    const id = new ObjectId(userId)
     return mongoService.connectToDb()
-        .then(dbConn => {
-            const userCollection = dbConn.collection('user');
-            return userCollection.findOne({ _id: userId })
+        .then(db => {
+            return db.collection('user')
+                .aggregate([
+                    {
+                        $match: { _id: id }
+                    },
+                    {
+                        $lookup:
+                        {
+                            from: 'item',
+                            localField: 'itemList',
+                            foreignField: '_id',
+                            as: 'listedItems'
+                        }
+                    }
+                ]).toArray()
         })
 }
 
