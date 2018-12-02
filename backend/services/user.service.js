@@ -1,22 +1,23 @@
+'use strict'
 const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
 
-// function checkUser(user) {
-//     console.log('user', user)
-//     return mongoService.connectToDb()
-//         .then(dbConn => {
-//             const toyCollection = dbConn.collection('user');
-//             return toyCollection.findOne({ $and: [{ "nickname": user.nickname }, { "password": user.password }] }).then(user => {
-//                 if (!user) throw err;
-//                 return user
-//             });
-//         })
-// }
-
-
-
 function checkUser(user) {
+    console.log('user', user)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const collection = dbConn.collection('user');
+            return collection.findOne({ $and: [{ "nickname": user.nickname }, { "password": user.password }] }).then(user => {
+                if (!user) throw err;
+                return user
+            });
+        })
+}
+
+
+
+function userlist(user) {
     return mongoService.connectToDb()
         .then(db => {
             return db.collection('user')
@@ -96,12 +97,15 @@ function add(user) {
         })
 }
 function update(user) {
-    userId = new ObjectId(user._id)
+   const userId = new ObjectId(user._id)
     delete user._id;
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
-            return userCollection.updateOne({ "_id": userId }, { $set: user }).then(() => user)
+            return userCollection.updateOne({ "_id": userId }, { $set: user }).then(() => {
+                user._id=userId
+                return user
+            })
         })
 }
 

@@ -34,9 +34,15 @@ function addRoutes(app) {
      
 
     app.post('/api/user', (req, res) => {
-        const toy = req.body;
-        userService.add(toy)
-            .then(Toy => res.json(Toy))
+        const user = req.body;
+        userService.add(user)
+            .then(User => res.json(Toy))
+    })
+
+    app.put('/api/user', (req, res) => {
+        const user = req.body;
+        userService.add(user)
+            .then(User => res.json(Toy))
     })
 
 

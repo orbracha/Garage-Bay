@@ -15,9 +15,7 @@
       </router-link>
     </header>
     <item-list class="item-list" :items="items"/>
-    <aside class="side-bar">Side bar</aside>
     <garage-footer/>
-    <!-- </section> -->
   </div>
 </template>
 

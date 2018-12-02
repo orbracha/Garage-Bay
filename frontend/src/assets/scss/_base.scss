@@ -38,14 +38,16 @@ ul {
 
 .checked {
     color: rgb(255, 187, 0);
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: orange;
+    // -webkit-text-stroke-width: 1px;
+    // -webkit-text-stroke-color: orange;
   } 
 
   .empty-star{
-    color: rgba(255, 255, 255, 0);
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: orange;
+    color: gray;
+
+    // color: rgba(255, 255, 255, 0);
+    // -webkit-text-stroke-width: 1px;
+    // -webkit-text-stroke-color: orange;
   }
 
   .fa-star{

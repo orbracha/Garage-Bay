@@ -4,26 +4,21 @@
     <section v-else class="user-page">
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
-        <i v-if="userProfile" class="fas fa-pen edit-user"></i>
-        <i v-if="userProfile" class="fas fa-pen edit-user"></i>
-          <h1>{{user.nickname}}'s Garage</h1>
-          <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
-          <!-- <span v-for="x in 5-user.rate" :key="x" class="fa fa-star empty-star"></span> -->
-          <!-- <p>{{user.rate}}</p> -->
-          <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
-          <!-- <span v-for="x in 5-user.rate" :key="x" class="fa fa-star empty-star"></span> -->
-          <!-- <p>{{user.rate}}</p> -->
-        <li v-for="(item,idx) in user.listedItems" :key="idx" @click="itemClicked(item._id)">
-          <div class="user-profile-thumbnail">
-            <img class="img-thumb" :src="item.img">
-            <!-- <div class="hover-mask"> LALALA</div> -->
-        <li v-for="(item,idx) in user.listedItems" :key="idx" @click="itemClicked(item._id)">
-          <div class="user-profile-thumbnail">
-            <img class="img-thumb" :src="item.img">
-            <!-- <div class="hover-mask"> LALALA</div> -->
-          </div>
-        </li>
-      </ul>
+        <i v-if="isLoggedUser" class="fas fa-pen edit-user"></i>
+        <h1>{{user.nickname}}'s Garage</h1>
+        <div class="rating">
+        <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
+        <span v-for="x in 5-user.rate" :key="x" class="fa fa-star empty-star"></span>
+        </div>
+        <!-- <p>{{user.rate}}</p> -->
+        <ul>
+          <li v-for="(item,idx) in user.listedItems" :key="idx" @click="itemClicked(item._id)">
+            <div class="user-profile-thumbnail">
+              <img class="img-thumb" :src="item.img">
+            </div>
+          </li>
+        </ul>
+      </div>
       <garage-footer/>
     </section>
   </section>
@@ -43,41 +38,36 @@ export default {
     return {
       user: null,
       isLoadin: true,
-      userProfile: false,
-      loggedUser: this.$store.getters.getLoggedUser,
-      sellerId: null
+      isLoggedUser: false
     };
   },
   methods: {
     itemClicked(itemId) {
-        this.userProfile = true;
-
-        this.isLoadin = false;
       this.$router.push(`/item/details/${itemId}`);
     },
     setUser() {
+      
+      const loggedUserId = this.$store.getters.getLoggedUser._id;
+      console.log(loggedUserId);
       const userId = this.$route.params.userId;
-      if (userId === this.loggedUser._id) {
+      console.log(loggedUserId);
+      if (userId === this.loggedUserId) {
         console.log("displaying logged user profile");
-            this.isLoadin = false;
-        this.userProfile = true;
-
-        this.isLoadin = false;
+        isLoggedUser: true;
       } else {
-        var self = this;
-
-        this.$store
-          .dispatch({ type: "getUserById", userId })
-          .then(user => {
-            self.user = user[0];
-            console.log(self.user);
-            this.isLoadin = false;
-          })
-          .catch(err => console.log("EROOOOOR"));
+        console.log("displaying user profile");
       }
-    console.log(this.loggedUser);
+      var self = this;
+      this.$store
+        .dispatch({ type: "getUserById", userId })
+        .then(user => {
+          self.user = user;
+          this.isLoadin = false;
+        })
+        .catch(err => console.log("EROOOOOR"));
+
+      console.log(this.user);
     }
-    
   },
 
   watch: {
@@ -90,13 +80,10 @@ export default {
   },
 
   created() {
-    console.log(this.loggedUser);
+    console.log(this.loggedUserId);
     this.setUser();
   }
 };
-
 </script>
 
 <style lang="scss" scoped>
-
-

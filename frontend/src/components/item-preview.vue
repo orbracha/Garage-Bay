@@ -24,7 +24,7 @@
         <div class="item-desc">{{item.desc}} {{item.desc}} {{item.desc}}</div>
         <div>${{item.price}}</div>
       </div>
-      <hr>
+
     </section>
   </li>
 </template>
@@ -54,9 +54,10 @@ export default {
     },
     toggleWishlist() {
       if (!this.loggedUser) return this.$router.push(`/login`);
-      this.wishlist = !this.wishlist;
       const itemId = this.item._id;
-      this.$store.dispatch({ type: "toggleWishlist", itemId });
+      this.wishlist = !this.wishlist
+      this.$store.dispatch({ type: "toggleWishlist", itemId })
+   
       // console.log(" toggling  wishlist");
     }
   },
@@ -82,29 +83,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// hr {
-//   padding-bottom: 8px;
-// }
-// .seller-preview {
-//   padding: 12px;
-//   padding-bottom: 5px;
-//   list-style-type: none;
-//   display: flex;
-//   // margin-bottom: 5px;
-//   img {
-//     height: 50px;
-//     width: 50px;
-//     border-radius: 50%;
-//     margin-right: 10px;
-//   }
-//   h1 {
-//     text-align: left;
-//     margin: 0;
-//   }
-//   p {
-//     text-align: left;
-//     margin: 0;
-//   }
-// }
 </style>
 
