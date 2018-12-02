@@ -65,7 +65,7 @@ export default {
         if(this.$route.params.def==='item')
         this.$router.push('/item/edit')
         else{
-          
+          this.$router.push('/signup')
           console.log('PARAMS', this.$route.params.def);
         }
       })

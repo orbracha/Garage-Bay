@@ -32,17 +32,25 @@ function addRoutes(app) {
                 res.json(user)
             })
     })
+    app.post('/api/user/sign/user', (req, res) => {
+        const userName = req.body.userName;
+        userService.getByName(userName)
+            .then(user => {
+                res.json(user)
+            })
+    })
 
 
-    // app.post('/api/user', (req, res) => {
-    //     const user = req.body;
-    //     userService.add(user)
-    //         .then(user => res.json(user))
-    // })
+    app.post('/api/user/sign', (req, res) => {
+        const user = req.body;
+        console.log(user)
+        userService.add(user)
+            .then(user => res.json(user))
+    })
 
     app.put('/api/user', (req, res) => {
         const user = req.body;
-        console.log('----------------------out of server-----------------',user)
+        console.log('----------------------out of server-----------------', user)
         userService.update(user)
             .then(user => res.json(user))
     })

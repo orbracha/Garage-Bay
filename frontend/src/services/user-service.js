@@ -3,14 +3,13 @@
 
 import axios from 'axios';
 import storageService, { LOGGEDIN_USER_KEY } from './storage-service'
-import { log } from 'util';
 
-// const BASE_URL = 'http://localhost:3000/api/User'
 const BASE_URL = (process.env.NODE_ENV !== 'development')
   ? '/api/user'
   : 'http://localhost:3000/api/user';
 export default {
   getById,
+  getByName,
   remove,
   edit,
   checkUser,
@@ -20,11 +19,11 @@ export default {
 function checkUser(user) {
   return axios.post(`${BASE_URL}`, { user }).then(res => {
     // console.log('user in  user servive',user);
-    
+
     storageService.save(LOGGEDIN_USER_KEY, res.data)
 
-//     console.log('user back in front service', res.data);
-    
+    //     console.log('user back in front service', res.data);
+
 
     console.log('user returned from server:', res.data)
 
@@ -38,16 +37,20 @@ function loadFromLocalStorage() {
 }
 
 function getById(userId) {
-  return axios.get(`${BASE_URL}/${userId}`).then(res =>res.data[0])
+  return axios.get(`${BASE_URL}/${userId}`).then(res => res.data[0])
+}
+
+function getByName(userName) {
+  return axios.post(`${BASE_URL}/sign/user`, {userName}).then(res => res.data)
 }
 function remove(userId) {
   return axios.delete(`${BASE_URL}/${userId}`)
 }
 function edit(user) {
   if (user._id) {
-    console.log('user to update', user)
     storageService.save(LOGGEDIN_USER_KEY, user)
     return axios.put(`${BASE_URL}`, user).then(res => res.data)
   }
-  return axios.post(`${BASE_URL}`, user)
+  console.log('user to update', user)
+  return axios.post(`${BASE_URL}/sign`, user)
 }

@@ -11,6 +11,7 @@ import searchPage from './views/search-page.vue';
 import userPage from './views/user-page.vue';
 import selectImage from './views/select-image.vue';
 import dibsPage from './views/dibs-page.vue';
+import signupPage from './views/signup-page.vue';
 
 
 Vue.use(Router);
@@ -28,6 +29,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: loginPage,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: signupPage,
     },
     {
       path: '/dibs/:dibRoute?',

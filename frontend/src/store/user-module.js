@@ -55,11 +55,18 @@ export default {
             return userService.getById(userId)
                 .then(user => user)
         },
+        addUser({ commit }, { user }) {
+            return userService.edit(user)
+                .then(user => user)
+        },
+        getUserByName({ commit }, { userName }) {
+            console.log('inside user module', userName);
+            return userService.getByName(userName)
+                .then(user => user)
+        },
         updateUser({ commit }, { user }) {
             return userService.edit(user).then(user => {
-               
                 commit({ type: 'updateUser', user })
-                
             })
         },
       
