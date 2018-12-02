@@ -25,7 +25,7 @@ function addRoutes(app) {
             .then(item => res.json(item))
     })
     app.put('/api/item',requireAuth, (req, res) => {
-        const item = req.body;
+        const item = req.body;       
         itemService.update(item)
             .then(item => res.json(item))
     })
@@ -45,9 +45,14 @@ function addRoutes(app) {
     app.get('/api/filter/',(req, res)=>{
      return  itemService.filterItems(req.query)
         .then(data=>{
-            // console.log('data in routes', data);
             res.send(data)
         })
+    })
+    app.post('/api/item/add-image', (req, res) => {
+        const img = req.body;
+      itemService.saveImgToCloudinary(img)
+       .then(url=>res.json(url))
+  
     })
 
 }

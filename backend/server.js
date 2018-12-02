@@ -6,11 +6,21 @@ const addChatRoutes = require('./routes/chat.route')
 
 const session = require('express-session')
 const app = express()
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 const cors = require('cors')
 app.use(cors({
     origin: ['http://localhost:8080'],
     credentials: true // enable set cookie
+}));
+
+app.use(bodyParser.urlencoded({
+    limit: '5mb',
+    parameterLimit: 100000,
+    extended: false 
+}));
+
+app.use(bodyParser.json({
+    limit: '5mb'
 }));
 app.use(session({
     secret: 'sxjbijxixszaixsax76x87a6sxbash',

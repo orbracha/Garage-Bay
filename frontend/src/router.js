@@ -35,10 +35,11 @@ export default new Router({
       component: dibsPage,
     },
     {
-      path: '/select-image',
+      path: '/select-image/:def?',
       name: 'select-image',
       component: selectImage,
     },
+ 
     {
       path: '/search',
       name: 'search',

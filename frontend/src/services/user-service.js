@@ -22,7 +22,12 @@ function checkUser(user) {
     // console.log('user in  user servive',user);
     
     storageService.save(LOGGEDIN_USER_KEY, res.data)
+
+//     console.log('user back in front service', res.data);
+    
+
     console.log('user returned from server:', res.data)
+
     return res.data
   });
 }

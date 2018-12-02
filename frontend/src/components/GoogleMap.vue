@@ -39,15 +39,17 @@ export default {
     // receives a place object via the autocomplete component
     setPlace(place) {
       this.currentPlace = place;
+      
+      
     },
     addMarker() {
       console.log('adding', this.currentPlace);
-      
+    
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng()
-        };
+        };        
         this.markers.push({ position: marker });
         this.places.push(this.currentPlace);
         this.center = marker;
