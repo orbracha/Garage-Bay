@@ -28,9 +28,7 @@ export default {
     },
     actions: {
         loadItems({ commit }) {
-            itemService.query().then(items => {
-                console.log('inside loaditems in store', items);
-                
+            itemService.query().then(items => {           
                 commit({ type: 'setItems', items })
                 return items;
             })
@@ -52,14 +50,14 @@ export default {
             })
           
         },
-        addItem({comiit}, {item}){
-            console.log('item in store', item);
-            
-        }
+        addItem({commit}, {item}){
+            return itemService.addItem(item)
+            .then(newItem=>newItem._id)
+        },
+      
     },
     getters: {
         itemsToDisplay: state => {
-            console.log(state.items)
             return state.items
         },
 

@@ -21,7 +21,6 @@ export default {
             const id = new ObjectId(itemId)
 
             const wishlistItemIdx = state.loggedUser.wishList.indexOf(id)
-            console.log('wish list item index', wishlistItemIdx);
 
 
             if (wishlistItemIdx === -1) {
@@ -30,7 +29,6 @@ export default {
                 state.loggedUser.wishList.splice(wishlistItemIdx, 1)
             }
             return userService.edit(state.loggedUser).then(user => {
-                console.log(user);
                 
             })
         },
@@ -54,6 +52,7 @@ export default {
         },
         getUserById({ commit }, { userId }) {
             console.log('inside user module', userId);
+
             return userService.getById(userId)
                 .then(user => {
                     console.log('user in stor', user);
@@ -79,10 +78,10 @@ export default {
                 commit({ type: 'updateUser', user })
             })
         },
+      
     },
     getters: {
         getLoggedUser(state) {
-            console.log('current user:', state.loggedUser);
             return state.loggedUser;
         }
     },
