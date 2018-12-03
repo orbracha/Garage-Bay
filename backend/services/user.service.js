@@ -19,7 +19,6 @@ function checkUser(user) {
 }
 
 
-
 function query() {
     return mongoService.connectToDb()
         .then(dbConn => {
@@ -56,11 +55,7 @@ function getByName(userName) {
         })
 }
 
-
-
-
-
-function getUserWhishlist(userId) {
+function getUserWishlist(userId) {
     const id = new ObjectId(userId)
     return mongoService.connectToDb()
         .then(db => {
@@ -91,6 +86,7 @@ function remove(userId) {
             return userCollection.remove({ _id: userId })
         })
 }
+
 function add(user) {
     return mongoService.connectToDb()
         .then(dbConn => {
@@ -130,7 +126,7 @@ module.exports = {
     add,
     update,
     checkUser,
-    getUserWhishlist,
+    getUserWishlist,
     getByName,
 }
 

@@ -1,18 +1,24 @@
 <template>
-  <div>
+  <div class="page-layout">
     <garage-header>
-      <div slot="headline">
+      <div slot="headline flex row">
         <h3>Search</h3>
-      </div>
-      <span slot="optionalIcon">
+        <div class="filter-container">
+          <input type="text" v-model="filter.byTxt">
+        </div>
         <i class="fas fa-search"/>
-      </span>
+      </div>
+
+      <!-- <span slot="optionalIcon">
+        <i class="fas fa-search"/>
+      </span>-->
     </garage-header>
     <section v-if="isLoadingCat">Loading</section>
+
     <section v-else>
-      <div class="filter-container">
+      <!-- <div class="filter-container">
         <input type="text" v-model="filter.byTxt">
-      </div>
+      </div>-->
       <div class="catagories-container">
         <div
           v-for="catagory in catagories"
@@ -20,13 +26,16 @@
           @click="catagoryClicked(catagory)"
         >{{catagory}}</div>
       </div>
+
+      <div v-if="isLoadingItems">Loading Items</div>
+      <items-tumbnail v-else :list="itemsToDisplay"/>
+
       <div class="items-container">
-        <div v-if="isLoadingItems">Loading Items</div>
-        <div v-else v-for="item in itemsToDisplay" :key="item._id">
+        <!-- <div v-else v-for="item in itemsToDisplay" :key="item._id">
           <img :src="item.img" alt>
           <br>
           {{item.title}}
-        </div>
+        </div>-->
       </div>
     </section>
     <garage-footer/>
@@ -95,8 +104,9 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
   div {
-    border: 1px solid black;
+    // border: 1px solid black;
     background-color: #333;
+    box-shadow: 8px 8px 28px -6px rgba(0, 0, 0, 0.75);
     color: white;
     padding: 10px;
     margin: 5px;

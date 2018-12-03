@@ -3,7 +3,7 @@
     <div class="seller-preview" @click="userClicked(seller._id)">
       <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
       <div>
-        <h1>{{seller.nickname}}</h1>
+        <h3>{{seller.nickname}}</h3>
         <span v-for="n in seller.rate" :key="n" class="fa fa-star checked"></span>
         <span v-for="x in 5-seller.rate" :key="x.idx" class="fa fa-star empty-star"></span>
 
@@ -17,11 +17,14 @@
         <i class="fas fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
         <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
         <template v-if="loggedUser">
-          <i
-            class="far fa-money-bill-alt"
+          <!-- <i class="far fa-hand-peace"></i> -->
+          <img  class="dibs-logo" src="../assets/img/money.svg" v-if="loggedUser._id!==item.sellerId"
+            @click.stop="sendDibs">
+          <!-- <i
+            class="far fa-hand-peace"
             v-if="loggedUser._id!==item.sellerId"
             @click.stop="sendDibs"
-          />
+          /> -->
         </template>
         <img class="main-list-img" :src="item.img">
         <!-- <img class="price-tag" :src="{{imgLink}}"> -->
@@ -110,10 +113,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fa-money-bill-alt {
-  font-size: 50px;
+.dibs-logo{
+  height:45px;
+  padding: 7px;
   position: absolute;
-  right: 0;
+  top: 12px;
+  left: 12px;
 }
 .seller-preview {
   padding: 12px;
@@ -122,12 +127,15 @@ export default {
   display: flex;
 
   img {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     margin-right: 10px;
   }
-  h1 {
+  h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     text-align: left;
     margin: 0;
   }

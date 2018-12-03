@@ -44,7 +44,7 @@ function addRoutes(app) {
         const userId = req.params.userId;
         console.log('user ID in serviveeeeee',userId);
         
-        userService.getUserWhishlist(userId)
+        userService.getUserWishlist(userId)
             .then(user => {
                 console.log('wishlist to send', user);
 
