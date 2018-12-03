@@ -20,8 +20,7 @@ body{
     background-image: url("../img/garage-BG.jpg");
     background-repeat: repeat-x;
     background-attachment: fixed;
-
-    height: 100%;
+    height: 100vw;
     width: 100%;
     margin:0;
     // background-size: cover;
@@ -74,57 +73,3 @@ ul {
       font-size: .8rem
   }
 
-  @media (min-width:700px){
-    // .container{
- 
-    // }
-    .home-content{
-        position: absolute;
-        margin: 0 auto;
-        max-width: 1000px;
-        display: flex;
-        flex-direction: row-reverse;
-
-        .home-list{
-            margin: 10px 10px;
-            border-radius: 8px;
-        }
-        .footer{
-            position: fixed;
-            // margin: 0 auto;
-            margin-top: 70px;
-            left: 0;
-            top: 0;
-            width: 250px;
-            height: 100vh;
-            flex-direction: column;
-            justify-content: start;
-                //   flex-grow:1;
-            // background-color: $light;
-            i{
-                padding: 8px;
-            }
-        }
-
-    }
-
-        // aside{
-        //     flex-grow:1;
-        //     background-color: grey;
-        // }
-
-        // .item-list{
-        // padding: 20px;
-
-        //     flex-grow:1
-        // }
-        // header{
-        //     display: none
-        // }
-
-        // .garage-footer{
-        //     visibility: hidden;
-        //     display: none;
-        // }
-
-  }

@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section class="user-page">
     <section v-if="isLoadin">Loading...</section>
-    <section v-else class="page-layout">
+    <section v-else class="user-page-content">
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
         <div class="profile-info flec column">
@@ -16,8 +16,8 @@
 
       <event-feed v-if="user.events.length <= 2" :events="user.events"></event-feed>
       <items-tumbnail :list="user.listedItems"/>
-      <garage-footer/>
     </section>
+    <garage-footer/>
   </section>
 </template>
 

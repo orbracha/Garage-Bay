@@ -1,17 +1,9 @@
 
-.page-layo {
 
-    margin: 0;
-    background-image: url("../img/garage-BG.jpg");
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    background-attachment: fixed;
-    background-position: top; 
-    background-color: #858585;
-    padding-bottom: 60px;
-    height: 100vw;
-  }
-  
+
+.user-page-content{
+  margin-right: 240px;
+
   .user-profile-preview {
     position: relative;
     background-color: $semi;
@@ -29,9 +21,7 @@
      
 
     }
-//     .profile-info{
-// di
-//     }
+
   
     .edit-user {
       position: absolute;
@@ -68,13 +58,19 @@
     }
   
     img {
+      
       border-radius: 12px;
       height: 100%;
       width: 100%;
       transition: 0.3s;
       object-fit: cover;
       box-shadow: 8px 8px 28px -6px rgba(0, 0, 0, 0.75);
+       &:hover{
+        cursor: pointer;
+       }
     }
 
   }
+
+}
 
