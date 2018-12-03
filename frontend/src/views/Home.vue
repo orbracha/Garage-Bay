@@ -1,14 +1,10 @@
 <template>
   <div v-if="isLoading">Loding...</div>
-  
+
   <div class="home container" v-else>
     <!-- <section class="main-display"> -->
     <header class="home-header">
-      <img
-        class="home-logo"
-        src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png"
-        alt
-      >
+      <img class="home-logo" src="../assets/img/logo1.svg">
       <router-link to="/dibs">
         <div v-if="user" class="dibs-container">
           <i class="far fa-money-bill-alt"/>
@@ -47,12 +43,11 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch({ type: "loadItems" })
-    .then(res => {
+    this.$store.dispatch({ type: "loadItems" }).then(res => {
       console.log(res);
-      
-      console.log('got items in home');
-      
+
+      console.log("got items in home");
+
       this.isLoading = false;
     });
   },

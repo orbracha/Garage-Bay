@@ -16,33 +16,6 @@ function checkUser(user) {
                     return user
                 });
         })
-    // return mongoService.connectToDb()
-    //     .then(db => {
-    //         return db.collection('user').aggregate([
-    //             {
-    //                 $match: { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: 'item',
-    //                     localField: 'itemList',
-    //                     foreignField: '_id',
-    //                     as: 'itemList'
-    //                 },
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: 'item',
-    //                     localField: 'wishList',
-    //                     foreignField: '_id',
-    //                     as: 'wishList'
-    //                 },
-    //             }
-    //         ]).toArray()
-    //             .then(user => user[0])
-    //     })
 }
 
 
@@ -83,6 +56,33 @@ function getByName(userName) {
         })
 }
 
+
+
+
+
+function getUserWhishlist(userId) {
+    const id = new ObjectId(userId)
+    return mongoService.connectToDb()
+        .then(db => {
+            return db.collection('user')
+                .aggregate([
+                    {
+                        $match: { _id: id }
+                    },
+                    {
+                        $lookup:
+                        {
+                            from: 'item',
+                            localField: 'wishList',
+                            foreignField: '_id',
+                            as: 'wishlistItems'
+                        }
+                    }
+                ]).toArray()
+        })
+}
+
+
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -102,6 +102,14 @@ function update(user) {
     console.log('----------------------in of server-----------------', user)
     const userId = new ObjectId(user._id)
     delete user._id;
+
+    user.wishList = user.wishList.map(id => {
+        return new ObjectId(id)
+    })
+
+    user.itemList = user.itemList.map(id => {
+        return new ObjectId(id)
+    })
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
@@ -122,7 +130,8 @@ module.exports = {
     add,
     update,
     checkUser,
-    getByName
+    getUserWhishlist,
+    getByName,
 }
 
 
