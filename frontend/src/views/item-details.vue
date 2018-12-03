@@ -7,7 +7,7 @@
           <h3>{{currItem.title}}</h3>
           <span>Created at: {{currItem.createAt}}</span>
         </div>
-        <span slot="optionalIcon">❤</span>
+        <span slot="optionalIcon">  <i class="fas fa-heart empty-heart"></i></span>
       </garage-header>
 
       <img :src="currItem.img" alt="placeholder image">
@@ -20,14 +20,17 @@
       </div>
       <div class="details-container">
         <p>Description: {{currItem.desc}}</p>
-        <p>Location: {{distance}} Km</p>
+        <p>Location: {{distance}} Km away</p>
         <p>Condition: {{currItem.condition}}</p>
-        <div class="seller-details flexSet">
+        <div class="seller-details  flex row">
           <img class="seller-img" :src="currSeller.img" alt="placeholder image">
-          <div>
+          <div class="seller-details-text  flex column between">
             <p>{{currSeller.nickname}}</p>
-            <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
-            <span v-for="m in (5-currSeller.rate)" :key="m.num" class="fa fa-star"></span>
+            <p>
+              <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
+              <span v-for="m in (5-currSeller.rate)" :key="m.num" class="fa fa-star"></span>
+            </p>
+
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
         </div>
@@ -79,7 +82,6 @@ export default {
       var userCoords = await this.$store.dispatch({ type: "getLocation" });
       console.log("USER COORDS", userCoords, "item coords:", itemCoords);
       this.distance = this.calcDistance(userCoords, itemCoords);
-      
     },
     calcDistance(userCoords, itemCoords) {
       var R = 6371;
@@ -115,17 +117,25 @@ export default {
 
 <style lang="scss" scoped>
 .details-container {
-  margin: 10px 0;
+  margin: 10px 15px;
   text-align: left;
 }
 .seller-img {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  margin: 20px;
+  // margin: 20px;
 
   object-fit: cover;
   object-position: center right;
+}
+.seller-details {
+  margin-top: 15px;
+  height: 70px;
+
+  .seller-details-text{
+    margin-left: 12px;
+  }
 }
 .chatLink-container {
   display: flex;
@@ -136,9 +146,12 @@ export default {
 .chatLink-container span {
   margin-right: 5px;
 }
-.checked {
-  color: orange;
+p{
+  margin: 0;
 }
+// .checked {
+//   color: orange;
+// }
 img {
   width: 100%;
   height: auto;
