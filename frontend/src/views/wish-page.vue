@@ -1,17 +1,17 @@
 <template>
   <section>
     <section class="page-layout">
-       <garage-header>
+      <section>
+        <garage-header></garage-header>
 
-       </garage-header>
-       
-      <div class="wish-spacer">My Wishlist</div>
+        <div class="wish-spacer">My Wishlist</div>
 
-      <section v-if="isLoadin">Loading...</section>
-      <items-tumbnail v-else :list="wishlist"/>
+        <section v-if="isLoadin">Loading...</section>
+        <items-tumbnail v-else :list="wishlist"/>
+      </section>
+
+      <garage-footer/>
     </section>
-
-    <garage-footer/>
   </section>
 </template>
 
@@ -79,10 +79,13 @@ export default {
 //   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 // }
 
-.wish-spacer{
+.wish-spacer {
+  background-color: rgba(255, 255, 255, 0.521);
   font-size: 1.3rem;
-  color: rgb(231, 231, 231);
+  color: rgb(63, 63, 63);
   text-align: center;
-  padding-top: 45px;
+  margin-top: 40px;
+  border-radius: 10px;
+  padding: 15px;
 }
 </style>

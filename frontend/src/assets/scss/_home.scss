@@ -63,4 +63,19 @@
 
     }
 
+    @media (min-width:700px){
+ 
+      .home-content{
+          // position: absolute;
+          margin: 0 auto;
+          margin-left: 240px;
+          max-width: 1000px;
+          padding: 10px;
+          // display: flex;
+          // flex-direction: row-reverse;        
+  
+      }
+  
+    }
+
   

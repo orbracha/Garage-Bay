@@ -15,7 +15,7 @@
         <span v-if="isUnknowen">Unvalid Username/Password</span>
       </form>
       <p>New Here?</p>
-      <button class="sign-btn">Sign up!</button>
+      <router-link to="/signup"> <button class="sign-btn">Sign up!</button></router-link>
       <p>or</p>
       <button class="sign-btn">Continue as a guest</button>
       <garage-footer/>
