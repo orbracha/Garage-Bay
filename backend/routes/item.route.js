@@ -4,7 +4,7 @@ const userService = require('../services/user.service')
 
 function requireAuth(req, res, next) {
     const user = req.session.loggedinUser
-    console.log('user', user)
+
     // if (!user) return res.status(401).send('Something broke!')
     // else next()
     next()
@@ -12,7 +12,7 @@ function requireAuth(req, res, next) {
 function addRoutes(app) {
     app.get('/api/item', (req, res) => {
         return itemService.query()
-            .then(items => res.json(items))
+            .then(items =>res.json(items))
     })
 
     app.get('/api/item/:itemId', requireAuth, (req, res) => {

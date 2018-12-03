@@ -48,10 +48,6 @@ export default {
   },
   created() {
     this.$store.dispatch({ type: "loadItems" }).then(res => {
-      console.log(res);
-
-      console.log("got items in home");
-
       this.isLoading = false;
     });
   },

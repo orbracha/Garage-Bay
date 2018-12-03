@@ -14,20 +14,17 @@ export default {
   edit,
   checkUser,
   loadFromLocalStorage,
-  getUserWhishlist
+  getUserWhishlist,
+  updateUser
 }
-
+function updateUser(user){
+  storageService.save(LOGGEDIN_USER_KEY,user)
+}
 function checkUser(user) {
   return axios.post(`${BASE_URL}`, { user }).then(res => {
     // console.log('user in  user servive',user);
 
     storageService.save(LOGGEDIN_USER_KEY, res.data)
-
-    //     console.log('user back in front service', res.data);
-
-
-    console.log('user returned from server:', res.data)
-
     return res.data
   });
 }

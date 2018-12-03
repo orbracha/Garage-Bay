@@ -11,7 +11,8 @@ export default {
   remove,
   edit,
   saveImage,
-  addItem
+  addItem,
+  remove
 }
 
 function query() {

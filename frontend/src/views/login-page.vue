@@ -18,7 +18,7 @@
       <router-link to="/signup"> <button class="sign-btn">Sign up!</button></router-link>
       <p>or</p>
       <button class="sign-btn">Continue as a guest</button>
-      <garage-footer/>
+      <!-- <garage-footer/> -->
     </div>
   </section>
 </template>

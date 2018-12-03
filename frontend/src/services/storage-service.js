@@ -8,7 +8,11 @@ function loadFromStorage(key) {
 }
 
 function saveToStorage(key, val) {
-    localStorage[key] = JSON.stringify(val);
+    const user={
+        nickname:val.nickname,
+        password: val.password
+    }
+    localStorage[key] = JSON.stringify(user);
 }
 
 function clearStorage(key) {
