@@ -52,8 +52,6 @@ export default {
 
         },
         getUserById({ commit }, { userId }) {
-            console.log('inside user module', userId);
-
             return userService.getById(userId)
                 .then(user => user)
         },
@@ -71,10 +69,10 @@ export default {
                 commit({ type: 'updateUser', user })
             })
         },
+      
     },
     getters: {
         getLoggedUser(state) {
-            console.log('current user:', state.loggedUser);
             return state.loggedUser;
         }
     },

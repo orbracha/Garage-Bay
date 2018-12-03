@@ -10,7 +10,8 @@ export default {
   getById,
   remove,
   edit,
-  saveImage
+  saveImage,
+  addItem
 }
 
 function query() {
@@ -32,4 +33,9 @@ function edit(item) {
 function saveImage(img){
 return axios.post(`${BASE_URL}/add-image`, img)
 .then(res=>res.data)
+}
+function addItem(item){
+  
+  return axios.post(`${BASE_URL}/add-item`, item)
+  .then(res=>res.data)
 }

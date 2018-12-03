@@ -20,7 +20,7 @@
         <p>Like it? Start chat</p>
       </div>
       <div class="details-container">
-        {{currSeller}}
+       
         <p>Description: {{currItem.desc}}</p>
         <p>Location: ***need to add distance***</p>
         <p>Condition: {{currItem.condition}}</p>
@@ -28,13 +28,12 @@
           <img class="seller-img" :src="currSeller.img" alt="placeholder image">
           <div>
             <p>{{currSeller.nickname}}</p>
-
             <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
-            <!-- <span v-for="m in (5-currSeller.rate)" :key="m" class="fa fa-star"></span> -->
+            <span v-for="m in (5-currSeller.rate)" :key="m" class="fa fa-star"></span>
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
         </div> 
-        <google-map/>
+        <!-- <google-map/> -->
       </div>
     </div>
     <garage-footer></garage-footer>

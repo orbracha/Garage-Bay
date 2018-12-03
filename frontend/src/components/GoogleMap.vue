@@ -56,7 +56,7 @@ export default {
         this.currentPlace = null;
       }
     },
-    geolocate: function() {
+    geolocate() {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
           lat: position.coords.latitude,
