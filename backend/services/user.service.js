@@ -97,17 +97,15 @@ function updateUserDibsAns(userId, ans) {
     console.log('update ans', ans.dib.item)
     return mongoService.connectToDb().then(db => {
         return db.collection('user').updateOne(
-            { _id: id, "dibsAns.item": ans.dib.item },
-            { $inc: { "dibsAns.$.isAns": true } },
-            false, true
+            {
+                _id: id,
+                dibsAns: {
+                    $elemMatch: { 'item._id': ans.dib.item._id }
+                }
+            },
+            { $set: { 'dibsAns.$.isAns': true, 'dibsAns.$.type': ans.type } }
         )
     })
-
-    db.bar.update({ "items.item_name": { $ne: "my_item_three" } },
-        { $inc: { total: 1, "items.$.price": 1 } },
-        false,
-        true);
-    return Promise.resolve();
 }
 function removeUserDib(dib) {
     const sellerId = new ObjectId(dib.item.sellerId)
