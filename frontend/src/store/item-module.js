@@ -28,7 +28,7 @@ export default {
     },
     actions: {
         loadItems({ commit }) {
-            itemService.query().then(items => {           
+            itemService.query().then(items => {   
                 commit({ type: 'setItems', items })
                 return items;
             })
@@ -50,9 +50,18 @@ export default {
             })
           
         },
-        addItem({commit}, {item}){
+        addItem(context, {item}){
             return itemService.addItem(item)
-            .then(newItem=>newItem._id)
+            .then(newItem=>{
+                context.dispatch({type: 'getUserById', userId: newItem.sellerId})
+                .then(user=>{
+                
+                    console.log('user in add item:######3', user);
+                    
+                   context.commit({type: 'updateUserLocally', user})
+                })
+                return newItem._id
+            })
         },
       
     },
