@@ -7,7 +7,8 @@
       <img class="home-logo" src="../assets/img/logo1.svg">
       <router-link to="/dibs">
         <div v-if="user" class="dibs-container">
-          <i class="far fa-money-bill-alt"/>
+          <img class="dibs-logo" src="../assets/img/moneyWhite.svg">
+          <!-- <i class="far fa-hand-peace"/> -->
           <span v-if="user.dibs.length" class="notification">{{user.dibs.length}}</span>
         </div>
       </router-link>
@@ -21,8 +22,10 @@
         <i class="fas fa-search"/>
       </router-link>
     </header>
-    <item-list class="item-list" :items="items"/>
-    <garage-footer/>
+    <section class="home-content container">
+      <item-list class="item-list" :items="items"/>
+      <garage-footer/>
+    </section>
   </div>
 </template>
 
@@ -67,23 +70,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fa-search {
-  cursor: pointer;
-}
-.dibs-container {
-  position: relative;
-  text-decoration: none;
-  .notification {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    padding: 5px 10px;
-    border-radius: 50%;
-    background-color: red;
-    color: white;
-  }
-  .fa-money-bill-alt {
-    font-size: 50px;
-  }
-}
 </style>

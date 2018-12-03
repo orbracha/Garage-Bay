@@ -45,6 +45,14 @@
     // object-fit: cover;
     // transition: 0.3s;
   }
+  .price-tag{
+    position: relative;
+    top: 25px;
+    left: 25px;
+    width: 25px;
+    height: 25px;
+
+  }
 }
 
 .empty-heart{
@@ -55,9 +63,9 @@
 
   padding: 7px;
   position: absolute;
-  top: 15px;
-  left: 15px;
-  font-size: 2rem;
+  top: 12px;
+  right: 12px;
+  font-size: 1.6rem;
   // transition: .3s ease;
   animation: none;
 
@@ -83,9 +91,9 @@
   color: rgb(247, 53, 53);
   padding: 7px;
   position: absolute;
-  top: 15px;
-  left: 15px;
-  font-size: 2rem;
+  top: 12px;
+  right: 12px;
+  font-size: 1.6rem;
   // transition: .2s ease;
   animation: none;
 

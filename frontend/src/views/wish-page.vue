@@ -1,9 +1,13 @@
 <template>
   <section>
     <section class="page-layout">
-      <div class="wish-spacer"></div>
-      <section v-if="isLoadin">Loading...</section>
+       <garage-header>
 
+       </garage-header>
+       
+      <div class="wish-spacer">My Wishlist</div>
+
+      <section v-if="isLoadin">Loading...</section>
       <items-tumbnail v-else :list="wishlist"/>
     </section>
 
@@ -64,18 +68,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-preview {
-  display: inline;
-}
-.items-thumbnail {
-  padding: 0;
-  max-width: 100%;
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-}
+// .user-preview {
+//   display: inline;
+// }
+// .items-thumbnail {
+//   padding: 0;
+//   max-width: 100%;
+//   display: grid;
+//   grid-gap: 15px;
+//   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+// }
 
 .wish-spacer{
-  height: 50px;
+  font-size: 1.3rem;
+  color: rgb(231, 231, 231);
+  text-align: center;
+  padding-top: 45px;
 }
 </style>

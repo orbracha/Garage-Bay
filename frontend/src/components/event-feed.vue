@@ -1,7 +1,7 @@
 <template>
-  <transition name="fade">
-    <h1>{{news}}</h1>
-  </transition>
+
+    <h1>Upcoming events: {{news}}</h1>
+
 </template>
 
 <script>
@@ -21,7 +21,7 @@ export default {
       this.news = this.events[i];
       i++;
       if (i >= this.events.length) i = 0;
-    }, 2000);
+    }, 3000);
   },
 
   destroyed() {
@@ -30,5 +30,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+h1{
+    marging: 0 15px;
+    color:rgb(245, 245, 245);
+    text-align: left;
+}
 </style>
+
+
