@@ -45,6 +45,8 @@
 <script>
 import garageHeader from "../components/garage-header.vue";
 import garageFooter from "@/components/garage-footer.vue";
+import itemsTumbnail from "@/components/item-thumbnail.vue";
+
 export default {
   name: "search-page",
   data() {
@@ -93,7 +95,8 @@ export default {
   },
   components: {
     garageHeader,
-    garageFooter
+    garageFooter,
+    itemsTumbnail
   }
 };
 </script>

@@ -22,10 +22,10 @@
         <i class="fas fa-search"/>
       </router-link>
     </header>
-    <section class="home-content container">
+    <section class="home-content">
       <item-list class="item-list" :items="items"/>
-      <garage-footer/>
     </section>
+      <garage-footer/>
   </div>
 </template>
 

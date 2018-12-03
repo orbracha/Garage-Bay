@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <event-feed :events="user.events"></event-feed>
+      <event-feed v-if="user.events.length <= 2" :events="user.events"></event-feed>
       <items-tumbnail :list="user.listedItems"/>
       <garage-footer/>
     </section>
