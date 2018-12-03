@@ -12,7 +12,6 @@
 
       <img :src="currItem.img" alt="placeholder image">
       <div v-if="isLoggedUser">
-        <!-- <button>Edit Item</button> -->
         <router-link :to="`/item/edit/${currItem._id}`">Edit Item</router-link>
       </div>
       <div v-else class="chatLink-container">
@@ -55,7 +54,8 @@ export default {
     return {
       currItem: {},
       currSeller: {},
-      isLoaded: false
+      isLoaded: false,
+      distance: 0
     };
   },
   created() {
@@ -66,12 +66,20 @@ export default {
       this.$store.dispatch({ type: "getUserById", userId }).then(user => {
         this.currSeller = user;
         this.isLoaded = true;
+        this.getDistance();
       });
     });
   },
   methods: {
     chatClicked() {
       this.$router.push(`/chat`);
+    },
+    getDistance: async function() {
+      var itemCoords = this.currItem.location;
+      var userCoords = await this.$store.dispatch({ type: "getLocation" });
+      console.log("USER COORDS", userCoords, "item coords:", itemCoords);
+      this.distance = this.calcDistance(userCoords, itemCoords);
+      
     },
     calcDistance(userCoords, itemCoords) {
       var R = 6371;
@@ -100,13 +108,6 @@ export default {
       let loggedUserId = this.$store.getters.getLoggedUser._id;
       if (loggedUserId === this.currSeller._id) return true;
       return false;
-    },
-    distance() {
-      var userCoords = this.$store.getters.getLoggedUser.location;
-      var itemCoords = this.currItem.location;
-      console.log("USER COORDS", userCoords, "item coords:", itemCoords);
-     var t= this.calcDistance(userCoords, itemCoords);
-      return t;
     }
   }
 };

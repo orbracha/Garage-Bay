@@ -70,28 +70,16 @@ export default {
 
         item.createAt = Date.now();
         item.sellerId = this.$store.getters.getLoggedUser._id;
-        item.location = await this.getLocation();
-
+        item.location = await this.$store.dispatch({type:'getLocation'});
+        
+        
         this.$store.dispatch({ type: "addItem", item })
         .then(itemId=>{
          this.$router.push(`/item/details/${itemId}`)
         })
       }
     },
-    getLocation() {
-      return new Promise((resolve, reject) => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(position => {
-            let loc = `${position.coords.latitude}, ${
-              position.coords.longitude
-            }`;
-            resolve(loc);
-          }, reject);
-        } else {
-          reject("no geolocation in navigator");
-        }
-      });
-    }
+
   },
   computed: {},
   created() {
