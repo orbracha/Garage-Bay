@@ -25,7 +25,7 @@
     <section class="home-content">
       <item-list class="item-list" :items="items"/>
     </section>
-      <garage-footer/>
+    <garage-footer/>
   </div>
 </template>
 

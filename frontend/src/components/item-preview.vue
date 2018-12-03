@@ -1,33 +1,10 @@
 <template>
   <li v-if="item" class="item-preview-container">
-    <div class="seller-preview" @click="userClicked(seller._id)">
-      <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
-      <div>
-        <h3>{{seller.nickname}}</h3>
-        <span v-for="n in seller.rate" :key="n" class="fa fa-star checked"></span>
-        <span v-for="x in 5-seller.rate" :key="x.idx" class="fa fa-star empty-star"></span>
-
-        <!-- <span v-for="x in 5-seller.rate" :key="x" class="fa fa-star empty-star"></span> -->
-        <!-- <p>{{seller.rate}}</p> -->
-      </div>
-    </div>
-
     <section class="main-list-item" @click="itemClicked(item._id)">
       <div class="img-wrapper">
         <i class="fas fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
         <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
-        <template v-if="loggedUser">
-          <!-- <i class="far fa-hand-peace"></i> -->
-          <img  class="dibs-logo" src="../assets/img/money.svg" v-if="loggedUser._id!==item.sellerId"
-            @click.stop="sendDibs">
-          <!-- <i
-            class="far fa-hand-peace"
-            v-if="loggedUser._id!==item.sellerId"
-            @click.stop="sendDibs"
-          /> -->
-        </template>
         <img class="main-list-img" :src="item.img">
-        <!-- <img class="price-tag" :src="{{imgLink}}"> -->
       </div>
 
       <div class="main-item-details">
@@ -36,6 +13,14 @@
         <div>${{item.price}}</div>
       </div>
     </section>
+    <div class="seller-preview" @click="userClicked(seller._id)">
+      <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
+      <div>
+        <h3>{{seller.nickname}}</h3>
+        <!-- <span v-for="n in seller.rate" :key="n" class="fa fa-star checked"></span>
+        <span v-for="x in 5-seller.rate" :key="x.idx" class="fa fa-star empty-star"></span>-->
+      </div>
+    </div>
   </li>
 </template>
 
@@ -113,8 +98,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dibs-logo{
-  height:45px;
+.dibs-logo {
+  height: 45px;
   padding: 7px;
   position: absolute;
   top: 12px;
