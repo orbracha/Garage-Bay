@@ -21,6 +21,12 @@
   background-position: center center;
   // object-fit: cover;
   box-shadow: inset 0px -4px 4px -1px rgba(0,0,0,0.65);
+  .logo-text{
+    color:white;
+    // margin:10px 0; 
+    font-size: 50px;
+    font-family: $lobster;
+  }
     .home-logo {
       width: 120px;
       padding-top: 12px;

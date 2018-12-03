@@ -4,7 +4,8 @@
   <div class="home container" v-else>
     <!-- <section class="main-display"> -->
     <header class="home-header">
-      <img class="home-logo" src="../assets/img/logo1.svg">
+      <div class="logo-text">dibs</div>
+      <!-- <img class="home-logo" src="../assets/img/logo1.svg"> -->
       <router-link to="/dibs">
         <div v-if="user" class="dibs-container">
           <img class="dibs-logo" src="../assets/img/moneyWhite.svg">
@@ -25,7 +26,7 @@
     <section class="home-content">
       <item-list class="item-list" :items="items"/>
     </section>
-      <garage-footer/>
+    <garage-footer/>
   </div>
 </template>
 
