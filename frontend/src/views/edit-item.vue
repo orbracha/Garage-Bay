@@ -7,8 +7,8 @@
       <span slot="optionalIcon">&#x1f4f7;</span>
     </garage-header>
 
-    <form @submit="saveItem">
-      <img :src="currItem.img" >
+    <form @submit.prevent="saveItem">
+      <img :src="currItem.img">
       <label>
         <span>Title:</span>
         <input type="text" v-model="currItem.title" required>
@@ -21,7 +21,7 @@
       </label>
       <label>
         <span>Condition:</span>
-        <select  v-model="currItem.condition">
+        <select v-model="currItem.condition">
           <option value="likeNew">Like new</option>
           <option value="used">Used</option>
         </select>
@@ -51,42 +51,47 @@ export default {
       currItem: {
         title: "",
         category: "",
-        Description: "",
+        desc: "",
         price: 0,
-        img: ""
+        img: "",
+        condition: ""
       },
       isLoadingCat: false,
-      catagories:[]
+      catagories: []
     };
   },
   methods: {
-    saveItem() {
+    saveItem: async function() {
       var item = JSON.parse(JSON.stringify(this.currItem));
-      if(this.currItem._id){
+      if (this.currItem._id) {
         this.$store.dispatch({ type: "editItem", item });
+      } else {
+        var item = JSON.parse(JSON.stringify(this.currItem));
+
+        item.createAt = Date.now();
+        item.sellerId = this.$store.getters.getLoggedUser._id;
+        item.location = await this.getLocation();
+
+        this.$store.dispatch({ type: "addItem", item })
+        .then(itemId=>{
+         this.$router.push(`/item/details/${itemId}`)
+        })
       }
-      else{
-        
-        var item = JSON.parse(JSON.stringify(this.currItem))
-        item.createdAt=Date.now()
-        item.sellerId=this.$store.getters.getLoggedUser
-        item.location= this.geolocate()
-        
-        this.$store.dispatch({ type: "addItem", item });        
-      }
-      
     },
-        geolocate: function() {
-      navigator.geolocation.getCurrentPosition(position => {
-        console.log('position from edit', position);
-        
-        // this.center = {
-        //   lat: position.coords.latitude,
-        //   lng: position.coords.longitude
-        // };
+    getLocation() {
+      return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(position => {
+            let loc = `${position.coords.latitude}, ${
+              position.coords.longitude
+            }`;
+            resolve(loc);
+          }, reject);
+        } else {
+          reject("no geolocation in navigator");
+        }
       });
     }
-    
   },
   computed: {},
   created() {
@@ -95,18 +100,17 @@ export default {
       this.$store
         .dispatch({ type: "getItemById", itemId })
         .then(item => (this.currItem = item));
-    }
-    else{
-      let item={
+    } else {
+      let item = {
         title: "",
         category: "",
         Description: "",
         price: 0,
         img: this.$store.getters.getImageUrl
-      }
-      this.currItem=item;
+      };
+      this.currItem = item;
     }
-       this.isLoadingCat = true;
+    this.isLoadingCat = true;
     this.$store.dispatch({ type: "getAllCatagories" }).then(catagories => {
       this.catagories = catagories;
       this.isLoadingCat = false;
@@ -128,11 +132,11 @@ label {
     margin: 5px auto;
   }
 }
-form{
+form {
   margin-bottom: 70px;
-  img{
+  img {
     width: 200px;
-    margin-top:20px;
+    margin-top: 20px;
   }
 }
 </style>

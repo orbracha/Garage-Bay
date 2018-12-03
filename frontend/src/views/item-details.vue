@@ -11,7 +11,7 @@
       </garage-header>
 
       <img :src="currItem.img" alt="placeholder image">
-      <div  v-if="isLoggedUser">
+      <div v-if="isLoggedUser">
         <!-- <button>Edit Item</button> -->
         <router-link :to="`/item/edit/${currItem._id}`">Edit Item</router-link>
       </div>
@@ -20,21 +20,19 @@
         <p>Like it? Start chat</p>
       </div>
       <div class="details-container">
-        {{currSeller}}
         <p>Description: {{currItem.desc}}</p>
-        <p>Location: ***need to add distance***</p>
+        <p>Location: {{distance}} Km</p>
         <p>Condition: {{currItem.condition}}</p>
         <div class="seller-details flexSet">
           <img class="seller-img" :src="currSeller.img" alt="placeholder image">
           <div>
             <p>{{currSeller.nickname}}</p>
-
             <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
-            <!-- <span v-for="m in (5-currSeller.rate)" :key="m" class="fa fa-star"></span> -->
+            <span v-for="m in (5-currSeller.rate)" :key="m.num" class="fa fa-star"></span>
             <p>Currently selling {{currSeller.itemList.length}} items</p>
           </div>
-        </div> 
-        <google-map/>
+        </div>
+        <!-- <google-map/> -->
       </div>
     </div>
     <garage-footer></garage-footer>
@@ -74,6 +72,24 @@ export default {
   methods: {
     chatClicked() {
       this.$router.push(`/chat`);
+    },
+    calcDistance(userCoords, itemCoords) {
+      var R = 6371;
+      // var dLat = deg2rad(lat2-lat1);
+      var dLat = this.deg2rad(itemCoords.lat - userCoords.lat); // deg2rad below
+      var dLon = this.deg2rad(itemCoords.lng - userCoords.lng);
+      var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(this.deg2rad(userCoords.lat)) *
+          Math.cos(this.deg2rad(userCoords.lng)) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      var d = R * c; // Distance in km
+      return d.toFixed(2);
+    },
+    deg2rad(deg) {
+      return deg * (Math.PI / 180);
     }
   },
   computed: {
@@ -84,6 +100,13 @@ export default {
       let loggedUserId = this.$store.getters.getLoggedUser._id;
       if (loggedUserId === this.currSeller._id) return true;
       return false;
+    },
+    distance() {
+      var userCoords = this.$store.getters.getLoggedUser.location;
+      var itemCoords = this.currItem.location;
+      console.log("USER COORDS", userCoords, "item coords:", itemCoords);
+     var t= this.calcDistance(userCoords, itemCoords);
+      return t;
     }
   }
 };
