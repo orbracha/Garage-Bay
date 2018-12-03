@@ -43,11 +43,18 @@ function getById(itemId) {
         })
 }
 function remove(itemId) {
+    console.log('item to remove:', itemId);
+    
     itemId = new ObjectId(itemId)
     return mongoService.connectToDb()
         .then(dbConn => {
             const itemCollection = dbConn.collection('item');
             return itemCollection.remove({ _id: itemId })
+            .then(()=>{
+                const userCollection = dbConn.collection('user');
+                return userCollection.update({},{$pull:{itemList: itemId, wishList:itemId}},{ multi: true } )
+                
+            })
         })
 }
 function add(item) {

@@ -27,6 +27,17 @@ export default {
         }
     },
     actions: {
+        removeItem(context, {item}){
+
+          itemService.remove(item._id)
+           .then(()=>{
+            context.dispatch({type: 'getUserById', userId:item.sellerId})
+            .then(user=>{
+                context.commit({type: 'updateUserLocally', user})
+            })
+           })
+        },
+
         loadItems({ commit }) {
             itemService.query().then(items => {   
                 commit({ type: 'setItems', items })
