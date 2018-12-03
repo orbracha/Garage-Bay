@@ -7,35 +7,39 @@
           <h3>{{currItem.title}}</h3>
           <span>Created at: {{currItem.createAt}}</span>
         </div>
-        <span slot="optionalIcon">  <i class="fas fa-heart empty-heart"></i></span>
+        <span slot="optionalIcon">
+          <i class="fas fa-heart empty-heart"></i>
+        </span>
       </garage-header>
 
-      <img :src="currItem.img" alt="placeholder image">
-      <div v-if="isLoggedUser">
-        <router-link :to="`/item/edit/${currItem._id}`">Edit Item</router-link>
-      </div>
-      <div v-else class="chatLink-container">
-        <router-link :to="'/chat/user/'+ currItem.sellerId">&#9993;</router-link>
-        <p>Like it? Start chat</p>
-      </div>
-      <div class="details-container">
-        <p>Description: {{currItem.desc}}</p>
-        <p>Location: {{distance}} Km away</p>
-        <p>Condition: {{currItem.condition}}</p>
-        <div class="seller-details  flex row">
-          <img class="seller-img" :src="currSeller.img" alt="placeholder image">
-          <div class="seller-details-text  flex column between">
-            <p>{{currSeller.nickname}}</p>
-            <p>
-              <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
-              <span v-for="m in (5-currSeller.rate)" :key="m.num" class="fa fa-star"></span>
-            </p>
-
-            <p>Currently selling {{currSeller.itemList.length}} items</p>
-          </div>
+      <section class="item-content">
+        <img :src="currItem.img" alt="placeholder image">
+        <div v-if="isLoggedUser">
+          <router-link :to="`/item/edit/${currItem._id}`">Edit Item</router-link>
         </div>
-        <!-- <google-map/> -->
-      </div>
+        <div v-else class="chatLink-container">
+          <router-link :to="'/chat/user/'+ currItem.sellerId">&#9993;</router-link>
+          <p>Like it? Start chat</p>
+        </div>
+        <div class="details-container">
+          <p>Description: {{currItem.desc}}</p>
+          <p>Location: {{distance}} Km away</p>
+          <p>Condition: {{currItem.condition}}</p>
+          <div class="seller-details flex row">
+            <img class="seller-img" :src="currSeller.img" alt="placeholder image">
+            <div class="seller-details-text flex column between">
+              <p>{{currSeller.nickname}}</p>
+              <p>
+                <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
+                <span v-for="m in (5-currSeller.rate)" :key="m.num" class="fa fa-star"></span>
+              </p>
+
+              <p>Currently selling {{currSeller.itemList.length}} items</p>
+            </div>
+          </div>
+          <!-- <google-map/> -->
+        </div>
+      </section>
     </div>
     <garage-footer></garage-footer>
   </div>
@@ -120,6 +124,10 @@ export default {
   margin: 10px 15px;
   text-align: left;
 }
+.item-content{
+  margin: 70px 0;
+
+}
 .seller-img {
   width: 70px;
   height: 70px;
@@ -133,7 +141,7 @@ export default {
   margin-top: 15px;
   height: 70px;
 
-  .seller-details-text{
+  .seller-details-text {
     margin-left: 12px;
   }
 }
@@ -146,7 +154,7 @@ export default {
 .chatLink-container span {
   margin-right: 5px;
 }
-p{
+p {
   margin: 0;
 }
 // .checked {
