@@ -83,23 +83,35 @@ function getByName(userName) {
         })
 }
 
-function updateUserDibs(userId, param, dib) {
+function updateUserDibs(userId, dib) {
     const id = new ObjectId(userId)
     console.log('update user', userId)
     console.log('update user with dib', dib)
     return mongoService.connectToDb().then(db => {
-        return db.collection('user').updateOne({ _id: id }, { $push: { [param]: dib } })
+        return db.collection('user').updateOne({ _id: id }, { $push: { dibs: dib } })
+    })
+}
+function updateUserDibsAns(userId, dib) {
+    const id = new ObjectId(userId)
+    console.log('update user', userId)
+    console.log('update user with dib', dib)
+    return mongoService.connectToDb().then(db => {
+        return db.collection('user').updateOne({ _id: id, dibsAns: dib.item }, { $set: { "dib.$" : 82 } })
     })
 }
 function removeUserDib(dib) {
-    console.log('dib.item ', dib.item)
-    console.log('dib.from ', dib.from)
-    const sellerId = new Object(dib.item.sellerId)
-    console.log('id', sellerId)
+    const sellerId = new ObjectId(dib.item.sellerId)
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
-            return userCollection.updateOne({ _id: sellerId }, { $pull: { dibs: { from: dib.from } } }, { multi: true })
+            return userCollection.updateOne({ _id: sellerId }, {
+                $pull: {
+                    dibs: {
+                        $and: [{ from: dib.from }, { item: dib.item }]
+                    }
+                }
+            }, { multi: true })
+                .then(result => console.log({ nModified: result.result.nModified }))
         })
 }
 
@@ -119,7 +131,6 @@ function add(user) {
         })
 }
 function update(user) {
-    // console.log('----------------------in of server-----------------', user)
     const userId = new ObjectId(user._id)
     delete user._id;
     return mongoService.connectToDb()
@@ -144,7 +155,8 @@ module.exports = {
     checkUser,
     getByName,
     updateUserDibs,
-    removeUserDib
+    removeUserDib,
+    updateUserDibsAns
 }
 
 

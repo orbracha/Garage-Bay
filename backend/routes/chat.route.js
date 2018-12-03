@@ -24,7 +24,7 @@ function addRoute(app, server) {
 
         });
         socket.on('dibs', (userId, item) => {
-            userService.updateUserDibs(item.sellerId, 'dibs', { item: item, from: userId }).then(() => {
+            userService.updateUserDibs(item.sellerId, { item: item, from: userId }).then(() => {
                 io.emit('got-dibs', userId, item);
             })
         })
@@ -40,7 +40,7 @@ function addRoute(app, server) {
                 type: ans.type,
                 isAns: true
             }
-            userService.updateUserDibs(ans.dib.from, 'dibsAns', dib).then(() => {
+            userService.updateUserDibsAns(ans.dib.from, dib).then(() => {
                 io.emit('got-ans', ans);
             })
         })
