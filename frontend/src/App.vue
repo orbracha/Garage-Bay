@@ -19,33 +19,23 @@ export default {
         userId: this.$store.getters.getLoggedUser._id
       });
       eventBus.$on(GET_DIBS, (item, fromUser) => {
-        this.$store.dispatch({type:'loadDibs'})
+        this.$store.dispatch({ type: "loadDibs" });
       });
       eventBus.$on(GET_ANS, ans => {
-        var user = JSON.parse(
-          JSON.stringify(this.$store.getters.getLoggedUser)
-        );
-        var dib = user.dibsAns.find(dib => dib.item._id === ans.dib.item._id);
-        var dibIdx = user.dibsAns.findIndex(
-          dib => dib.item._id === ans.dib.item._id
-        );
-        dib.isAns = true;
-        dib.type = ans.type;
-        user.dibsAns.splice(dibIdx, 1, dib);
-        console.log("get ans", user);
-        this.$store.dispatch({ type: "updateUser", user });
+        this.$store.dispatch({ type: "loadDibs" });
       });
       eventBus.$on(GET_CANCLE, dib => {
-        var user = JSON.parse(
-          JSON.stringify(this.$store.getters.getLoggedUser)
-        );
-        var dibIdx = user.dibs.findIndex(
-          currDib =>
-            currDib.item._id === dib.item._id && currDib.from === dib.from
-        );
-        user.dibs.splice(dibIdx, 1);
-        console.log("get cancle", user);
-        this.$store.dispatch({ type: "updateUser", user });
+        this.$store.dispatch({ type: "loadDibs" });
+        // var user = JSON.parse(
+        //   JSON.stringify(this.$store.getters.getLoggedUser)
+        // );
+        // var dibIdx = user.dibs.findIndex(
+        //   currDib =>
+        //     currDib.item._id === dib.item._id && currDib.from === dib.from
+        // );
+        // user.dibs.splice(dibIdx, 1);
+        // console.log("get cancle", user);
+        // this.$store.dispatch({ type: "updateUser", user });
       });
     }
   }

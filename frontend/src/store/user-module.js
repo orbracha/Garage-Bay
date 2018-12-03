@@ -46,6 +46,7 @@ export default {
         },
         loadDibs(contex) {
             userService.getById(contex.state.loggedUser._id).then(user => {
+                storageService.save(LOGGEDIN_USER_KEY, user)
                 contex.commit({ type: 'setLoggedUser', user })
             })
         },

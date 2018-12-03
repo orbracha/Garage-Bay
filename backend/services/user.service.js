@@ -83,24 +83,25 @@ function getByName(userName) {
         })
 }
 
-function updateUserDibs(userId, dib) {
-    userId = Object(userId);
+function updateUserDibs(userId, param, dib) {
+    const id = new ObjectId(userId)
     console.log('update user', userId)
     console.log('update user with dib', dib)
     return mongoService.connectToDb().then(db => {
-        return db.collection('user').updateOne({ _id: userId }, { $push: { dibs: dib } })
+        return db.collection('user').updateOne({ _id: id }, { $push: { [param]: dib } })
     })
 }
-
-// function getUserDibs(userId) {
-//     userId = new Object(userId);
-//     console.log('user id in server', userId)
-//     return mongoService.connectToDb()
-//         .then(dbConn => {
-//             const userCollection = dbConn.collection('user');
-//             return userCollection.findOne({ _id: userId })
-//         })
-// }
+function removeUserDib(dib) {
+    console.log('dib.item ', dib.item)
+    console.log('dib.from ', dib.from)
+    const sellerId = new Object(dib.item.sellerId)
+    console.log('id', sellerId)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const userCollection = dbConn.collection('user');
+            return userCollection.updateOne({ _id: sellerId }, { $pull: { dibs: { from: dib.from } } }, { multi: true })
+        })
+}
 
 function remove(userId) {
     userId = new ObjectId(userId)
@@ -143,7 +144,7 @@ module.exports = {
     checkUser,
     getByName,
     updateUserDibs,
-    // getUserDibs
+    removeUserDib
 }
 
 

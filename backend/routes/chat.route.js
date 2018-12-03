@@ -24,15 +24,20 @@ function addRoute(app, server) {
 
         });
         socket.on('dibs', (userId, item) => {
-            userService.updateUserDibs(item.sellerId, { item: item, from: userId }).then(() => {
+            userService.updateUserDibs(item.sellerId, 'dibs', { item: item, from: userId }).then(() => {
                 io.emit('got-dibs', userId, item);
             })
         })
         socket.on('cancelDibReq', dib => {
-            io.emit('got-cancle-dib', dib);
+            console.log('outer dib', dib)
+            userService.removeUserDib(dib).then(() => {
+                io.emit('got-cancle-dib', dib);
+            })
         })
         socket.on('sendAns', (ans) => {
-            io.emit('got-ans', ans);
+            userService.updateUserDibs(ans.dib.from, 'dibsAns', ans).then(() => {
+                io.emit('got-ans', ans);
+            })
         })
         socket.on('chat-newMsg', (msg, room) => {
             roomService.addMsgToRoom(msg, room).then(() => {
