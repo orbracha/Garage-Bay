@@ -15,6 +15,7 @@
       <section class="item-content">
         <img :src="currItem.img" alt="placeholder image">
         <div v-if="isLoggedUser">
+          <button @click="removeItem">Remove</button>
           <router-link :to="`/item/edit/${currItem._id}`">Edit Item</router-link>
         </div>
         <div v-else class="chatLink-container">
@@ -78,6 +79,13 @@ export default {
     });
   },
   methods: {
+    removeItem(){
+      var item=this.currItem
+      this.$store.dispatch({type: 'removeItem', item})
+      .then(()=>{
+        this.$router.push('/')
+      })
+    },
     chatClicked() {
       this.$router.push(`/chat`);
     },

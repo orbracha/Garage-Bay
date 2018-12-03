@@ -11,7 +11,6 @@ function requireAuth(req, res, next) {
 }
 function addRoutes(app) {
     app.get('/api/item', (req, res) => {
-        
         return itemService.query()
             .then(items =>res.json(items))
     })
