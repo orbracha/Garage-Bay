@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import storageService, { LOGGEDIN_USER_KEY } from './services/storage-service.js'
 import eventBus, {
   GET_MSG,
   GET_DIBS,
@@ -13,6 +14,10 @@ import eventBus, {
 export default {
   methods: {},
   created() {
+    const credentials=storageService.load(LOGGEDIN_USER_KEY)
+    if(credentials){
+      this.$store.dispatch({type: 'checkUser', user: credentials})
+    }
     if (this.$store.getters.getLoggedUser) {
       this.$store.commit({
         type: "connectSocket",

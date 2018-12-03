@@ -11,7 +11,7 @@ Vue.use(Vuex);
 export default {
     strict: true,
     state: {
-        loggedUser: userService.loadFromLocalStorage()
+        loggedUser: null
     },
     mutations: {
         setLoggedUser(state, user) {
@@ -32,8 +32,9 @@ export default {
                 
             })
         },
-        updateUser(state, { user }) {
+        updateUserLocally(state, { user }) {
             state.loggedUser = user;
+            userService.updateUser(user);
         }
 
     },
@@ -48,19 +49,13 @@ export default {
                 .then(user => {
                     commit('setLoggedUser', user)
                 })
-
         },
         getUserById({ commit }, { userId }) {
-            console.log('inside user module', userId);
-
             return userService.getById(userId)
-                .then(user => {
-                    console.log('user in stor', user);
-                    
+                .then(user => { 
                     return user})
         },
         getUserWhishlist({commit}, {userId}){
-            console.log('inside user module, getting wishlis', userId);
             return userService.getUserWhishlist(userId)
             .then(user => user)
         },
@@ -69,13 +64,12 @@ export default {
                 .then(user => user)
         },
         getUserByName({ commit }, { userName }) {
-            console.log('inside user module', userName);
             return userService.getByName(userName)
                 .then(user => user)
         },
         updateUser({ commit }, { user }) {
             return userService.edit(user).then(user => {
-                commit({ type: 'updateUser', user })
+                commit({ type: 'updateUserLocally', user })
             })
         },
       
