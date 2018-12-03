@@ -32,7 +32,8 @@ export default {
 
 <style lang="scss" scoped>
 h1{
-    marging: 0 15px;
+    margin: 0 15px;
+    margin-top: 15px;
     color:rgb(245, 245, 245);
     text-align: left;
 }

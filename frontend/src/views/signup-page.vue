@@ -9,7 +9,7 @@
       <h1>Sign-up</h1>
     </header>
     <form class="form-container" @submit.prevent="saveUser">
-      <router-link to="/select-image">
+      <router-link to="/select-image" class="camera-icon">
         <span>{{img? 'Replace':'Add'}} Picture</span>
         <i class="fas fa-camera"/>
       </router-link>
@@ -115,6 +115,10 @@ label {
     display: block;
     margin: 5px auto;
   }
+}
+.camera-icon{
+  color: white;
+  text-decoration: none;
 }
 form {
   margin-top: 80px;

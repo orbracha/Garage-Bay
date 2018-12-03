@@ -5,7 +5,7 @@
       <garage-header>
         <div class="content" slot="headline">
           <h3>{{currItem.title}}</h3>
-          <span>Created at: {{currItem.createAt}}</span>
+          <span>Created at: {{currItem.createAt}})    </span>
         </div>
         <span slot="optionalIcon">
           <i class="fas fa-heart empty-heart"></i>
@@ -107,6 +107,9 @@ export default {
     }
   },
   computed: {
+    relativeTime(time) {
+      moment(time).fromNow();
+    },
     imgSrc() {
       this.currSeller.img;
     },
@@ -124,9 +127,8 @@ export default {
   margin: 10px 15px;
   text-align: left;
 }
-.item-content{
+.item-content {
   margin: 70px 0;
-
 }
 .seller-img {
   width: 70px;
