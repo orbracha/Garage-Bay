@@ -35,12 +35,12 @@ function addRoute(app, server) {
             })
         })
         socket.on('sendAns', (ans) => {
-            var dib = {
-                item: ans.dib.item,
-                type: ans.type,
-                isAns: true
-            }
-            userService.updateUserDibsAns(ans.dib.from, dib).then(() => {
+            // var dib = {
+            //     item: ans.dib.item,
+            //     type: ans.type,
+            //     isAns: true
+            // }
+            userService.updateUserDibsAns(ans.dib.from, ans).then(() => {
                 io.emit('got-ans', ans);
             })
         })

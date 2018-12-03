@@ -26,16 +26,6 @@ export default {
       });
       eventBus.$on(GET_CANCLE, dib => {
         this.$store.dispatch({ type: "loadDibs" });
-        // var user = JSON.parse(
-        //   JSON.stringify(this.$store.getters.getLoggedUser)
-        // );
-        // var dibIdx = user.dibs.findIndex(
-        //   currDib =>
-        //     currDib.item._id === dib.item._id && currDib.from === dib.from
-        // );
-        // user.dibs.splice(dibIdx, 1);
-        // console.log("get cancle", user);
-        // this.$store.dispatch({ type: "updateUser", user });
       });
     }
   }
