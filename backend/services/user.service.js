@@ -83,6 +83,25 @@ function getByName(userName) {
         })
 }
 
+function updateUserDibs(userId, dib) {
+    userId = Object(userId);
+    console.log('update user', userId)
+    console.log('update user with dib', dib)
+    return mongoService.connectToDb().then(db => {
+        return db.collection('user').updateOne({ _id: userId }, { $push: { dibs: dib } })
+    })
+}
+
+// function getUserDibs(userId) {
+//     userId = new Object(userId);
+//     console.log('user id in server', userId)
+//     return mongoService.connectToDb()
+//         .then(dbConn => {
+//             const userCollection = dbConn.collection('user');
+//             return userCollection.findOne({ _id: userId })
+//         })
+// }
+
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -99,7 +118,7 @@ function add(user) {
         })
 }
 function update(user) {
-    console.log('----------------------in of server-----------------', user)
+    // console.log('----------------------in of server-----------------', user)
     const userId = new ObjectId(user._id)
     delete user._id;
     return mongoService.connectToDb()
@@ -122,7 +141,9 @@ module.exports = {
     add,
     update,
     checkUser,
-    getByName
+    getByName,
+    updateUserDibs,
+    // getUserDibs
 }
 
 

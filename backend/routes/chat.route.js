@@ -1,6 +1,7 @@
 
 msgService = require('../services/msg.service')
 roomService = require('../services/room.service')
+userService = require('../services/user.service')
 function addRoute(app, server) {
     var currRoom;
     var io = require('socket.io').listen(server);
@@ -23,7 +24,9 @@ function addRoute(app, server) {
 
         });
         socket.on('dibs', (userId, item) => {
-            io.emit('got-dibs', userId, item);
+            userService.updateUserDibs(item.sellerId, { item: item, from: userId }).then(() => {
+                io.emit('got-dibs', userId, item);
+            })
         })
         socket.on('cancelDibReq', dib => {
             io.emit('got-cancle-dib', dib);

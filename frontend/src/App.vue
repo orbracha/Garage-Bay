@@ -19,14 +19,7 @@ export default {
         userId: this.$store.getters.getLoggedUser._id
       });
       eventBus.$on(GET_DIBS, (item, fromUser) => {
-        var user = JSON.parse(
-          JSON.stringify(this.$store.getters.getLoggedUser)
-        );
-        // delete item.user;
-        user.dibs.unshift({ item: item, from: fromUser });
-        
-        console.log("get dibs", user);
-        this.$store.dispatch({ type: "updateUser", user });
+        this.$store.dispatch({type:'loadDibs'})
       });
       eventBus.$on(GET_ANS, ans => {
         var user = JSON.parse(

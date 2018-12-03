@@ -13,7 +13,8 @@ export default {
   remove,
   edit,
   checkUser,
-  loadFromLocalStorage
+  loadFromLocalStorage,
+  loadDibs
 }
 
 function checkUser(user) {
@@ -35,7 +36,9 @@ function loadFromLocalStorage() {
   const userFromLS = storageService.load(LOGGEDIN_USER_KEY);
   return userFromLS ? userFromLS : null;
 }
-
+function loadDibs(userId){
+  return axios.get(`${BASE_URL}/dibs/${userId}`).then(res => res.data)
+}
 function getById(userId) {
   return axios.get(`${BASE_URL}/${userId}`).then(res => res.data[0])
 }
