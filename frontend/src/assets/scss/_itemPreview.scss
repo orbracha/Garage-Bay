@@ -3,6 +3,9 @@
 
 .item-preview-container{
   background-color: rgba(255, 255, 255, 0.527);
+  &:hover{
+    cursor: pointer;
+  }
 }
 .home-list{
   padding: 0;
@@ -20,8 +23,11 @@
     text-align: left;
   }  
   .main-list-header{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
       font-size: 1.2rem;
-      font-weight: bold;
+      font-weight: 400;
   }
   .main-item-details{
     padding: 12px;

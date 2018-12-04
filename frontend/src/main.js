@@ -4,6 +4,7 @@ import router from './router';
 import store from './store/store';
 import './registerServiceWorker';
 import './assets/scss/main.scss';
+import VueCarousel from 'vue-carousel';
 
 
 
@@ -24,5 +25,7 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  VueCarousel,
+  
   render: h => h(App),
 }).$mount('#app');

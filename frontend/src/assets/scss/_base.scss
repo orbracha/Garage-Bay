@@ -53,7 +53,16 @@ ul {
 .around{
     justify-content: space-around
 }
+.wrap{
+    flex-wrap: wrap
+}
+.right{
+    text-align: right;
 
+}
+.floated{
+    float: unset;
+}
 .checked {
     color: rgb(255, 187, 0);
     // -webkit-text-stroke-width: 1px;

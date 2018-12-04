@@ -1,5 +1,6 @@
 <template>
   <div class="footer">
+    <div class="screen"></div>
     <section class="footer-icons-wrapper">
       <router-link class="footer-item-1 flex row" to="/">
         <i class="fas fa-home"></i>
@@ -35,6 +36,7 @@
         <p>My profile</p>
       </router-link>
     </section>
+    
   </div>
 </template>
 
