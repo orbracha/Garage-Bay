@@ -66,16 +66,22 @@
   }
   .item-desc{
     padding: 0;
-    padding-left:10px; 
+    padding-bottom: 8px;
     text-align: left;
     overflow: unset;
   }
   p{
-    padding: 10px;
+    padding-bottom: 8px;
     margin: 0;
   }
-
+  .map{
+    margin-top: 5px;
+    width:100% ;
+    height: 300px;
+  }
   .action-btn-container{
+    display: flex;
+    align-items: center;
     text-align: left;
       .fa-heart{
         position: initial;
@@ -83,7 +89,7 @@
       button{
         background:#0f8c4d;
         padding: 8px 12px;
-        font-size: 20px;
+        font-size: 15px;
         margin-right: 10px;
         border-radius: 5px;
       }

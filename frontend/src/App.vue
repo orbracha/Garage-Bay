@@ -73,7 +73,6 @@ export default {
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   height: 100vh;
-
   margin: 0;
 }
 #nav {

@@ -7,6 +7,7 @@ import moment from 'moment-timezone'
 import './registerServiceWorker';
 import './assets/scss/main.scss';
 import * as VueGoogleMaps from "vue2-google-maps"
+import VueCarousel from 'vue-carousel';
 
 Vue.use(VueMoment, {
   moment,
@@ -30,5 +31,7 @@ Vue.filter('relativeTime', timestamp => {
 new Vue({
   router,
   store,
+  VueCarousel,
+  
   render: h => h(App),
 }).$mount('#app');

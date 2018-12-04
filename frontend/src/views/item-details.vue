@@ -2,22 +2,9 @@
   <div class="item-container">
     <div v-if="!isLoaded">Loading...</div>
     <template v-else>
-      <!-- <garage-header>
-        <div class="content" slot="headline">
-          <h3>{{currItem.title}}</h3>
-          <span>Created at: {{currItem.createAt}})</span>
-        </div>
-        <span slot="optionalIcon">
-          <router-link v-if="isLoggedUser" :to="`/item/edit/${currItem._id}`">
-            <i class="far fa-edit"/>
-          </router-link>
-          <i v-else-if="loggedUser" class="fas fa-heart empty-heart"></i>
-        </span>
-      </garage-header>-->
       <header class="details-header flex">
         <div class="header-content">
           <h3>{{currItem.title}}</h3>
-          <h3>{{currItem.price}}$</h3>
           <span id="item-created">Listed : {{currItem.createAt | relativeTime}}</span>
           <div v-if="isLoggedUser" class="edit-btn-container">
             <router-link :to="`/item/edit/${currItem._id}`">
@@ -37,12 +24,13 @@
             {{distance}} Km away
           </p>
           <p>Condition: {{currItem.condition}}</p>
+          <p>{{currItem.price}}$</p>
           <div class="action-btn-container">
             <button @click="sendDibs">Buy</button>
             <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
           </div>
+          <google-map :itemCoords="currItem.location"/>
         </div>
-        <!-- <google-map/> -->
       </section>
     </template>
     <garage-footer></garage-footer>

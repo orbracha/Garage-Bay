@@ -25,7 +25,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(position => {
-            let loc = {lng:position.coords.latitude, lat:position.coords.longitude}
+            let loc = {lng:position.coords.longitude, lat:position.coords.latitude}
             resolve(loc);
           }, reject);
         } else {

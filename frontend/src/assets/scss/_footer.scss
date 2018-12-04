@@ -5,8 +5,10 @@
     width: 100%;
     height: 45px;
     background-color: $light;
-    color: $dark;
-    padding: 0 15px;
+
+    
+          color: $dark;
+    // padding: 0 15px;
 
 
     .footer-icons-wrapper{
@@ -18,6 +20,7 @@
         }
         i{
             font-size: 1.3rem;
+            padding: 10px;
         }
         .fa-plus{
             padding: 8px;
@@ -44,7 +47,7 @@
 }
 
 @media (min-width:700px){
-     
+ 
     
     .footer{
       padding-top: 70px;
@@ -52,15 +55,47 @@
       top: 0;
       width: 20%;
       height: 100vh;  
-      margin-right: 10px;  
+      margin-right: 10px; 
+      background-color: #92929200;
+
+      transition: 0.3s;
+      .screen{
+        background-color: rgba(0, 0, 0, 0.664);
+        position: fixed;
+        width: 0;
+        height: 100vh;
+        left: 230px;
+        top: 70px;
+        transition: 0.3;
+      }
+      &:hover{
+        width: 230px;
+        background-color: $light;
+        .screen{
+            background-color: rgba(0, 0, 0, 0.664);
+            position: fixed;
+            width: calc(100vw-230px);;
+            height: 100vh;
+            left: 230;
+            top: 70px;
+          }
+        .footer-icons-wrapper{
+            left: 0;
+        }
+      } 
    
       .footer-icons-wrapper{
           padding: 10px;
+          padding-left: 20px;
+          position: relative;
           flex-direction: column;
           justify-content: start;
           align-items: flex-start;
+          left: -120px;
+          transition: 0.3s;
+        
           .fa-plus{
-            font-size: 1rem;
+            font-size: 1.3rem;
         }
         p{
             display: block;
