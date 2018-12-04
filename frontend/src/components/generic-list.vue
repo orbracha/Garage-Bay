@@ -5,17 +5,16 @@
 </template>
 
 <script>
-import genericPreview from './generic-preview.vue'
+import genericPreview from "./generic-preview.vue";
 export default {
-    props:{
-        data:Array
-    },
-components:{
+  props: {
+    data: Array
+  },
+  components: {
     genericPreview
-}
-}
+  }
+};
 </script>
 
 <style>
-
 </style>
