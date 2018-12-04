@@ -1,0 +1,42 @@
+.item-content{
+  display: flex;
+  border: 3px white solid;
+  // justify-content: center;
+  padding: 5px;
+}
+.details-container{
+  background: white;
+  margin-left: 10px;
+  width: 400px;
+  text-align: left;
+  padding: 10px;
+  h3{
+    text-align: center;
+    padding: 0;
+  }
+  .item-desc{
+    padding: 0;
+    text-align: center;
+  }
+}
+.img-container{
+  width: 800px;
+}
+.item-img{
+  height: 500px;
+  width: 500px;
+}
+
+.seller-img{
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+}
+
+
+@media(max-width:400px){
+  .item-img {
+      width: 100%;
+      height: auto;
+    }
+}

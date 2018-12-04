@@ -5,7 +5,7 @@
       <garage-header>
         <div class="content" slot="headline">
           <h3>{{currItem.title}}</h3>
-          <span>Created at: {{currItem.createAt}})    </span>
+          <span>Created at: {{currItem.createAt}})</span>
         </div>
         <span slot="optionalIcon">
           <i class="fas fa-heart empty-heart"></i>
@@ -13,20 +13,23 @@
       </garage-header>
 
       <section class="item-content">
-        <img :src="currItem.img" alt="placeholder image">
-        <div v-if="isLoggedUser">
-          <button @click="removeItem">Remove</button>
-          <router-link :to="`/item/edit/${currItem._id}`">Edit Item</router-link>
+        <div class="img-container">
+          <div v-if="isLoggedUser">
+            <button @click="removeItem">Remove</button>
+            <router-link :to="`/item/edit/${currItem._id}`"><i class="far fa-edit"/></router-link>
+          </div>
+          <img class="item-img" :src="currItem.img" alt="placeholder image">
         </div>
-        <div v-else class="chatLink-container">
+        <div v-if="isLoggedUser" class="chatLink-container">
           <router-link :to="'/chat/user/'+ currItem.sellerId">&#9993;</router-link>
           <p>Like it? Start chat</p>
         </div>
         <div class="details-container">
-          <p>Description: {{currItem.desc}}</p>
-          <p>Location: {{distance}} Km away</p>
+          <h3>{{currItem.title}}</h3>
+          <p class="item-desc">{{currItem.desc}}</p>
+          <p><i class="fas fa-map-marker-alt"/> {{distance}} Km away</p>
           <p>Condition: {{currItem.condition}}</p>
-          <div class="seller-details flex row">
+          <div class="seller-details">
             <img class="seller-img" :src="currSeller.img" alt="placeholder image">
             <div class="seller-details-text flex column between">
               <p>{{currSeller.nickname}}</p>
@@ -79,12 +82,11 @@ export default {
     });
   },
   methods: {
-    removeItem(){
-      var item=this.currItem
-      this.$store.dispatch({type: 'removeItem', item})
-      .then(()=>{
-        this.$router.push('/')
-      })
+    removeItem() {
+      var item = this.currItem;
+      this.$store.dispatch({ type: "removeItem", item }).then(() => {
+        this.$router.push("/");
+      });
     },
     chatClicked() {
       this.$router.push(`/chat`);
@@ -131,51 +133,51 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.details-container {
-  margin: 10px 15px;
-  text-align: left;
-}
-.item-content {
-  margin: 70px 0;
-}
-.seller-img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  // margin: 20px;
+// .details-container {
+//   margin: 10px 15px;
+//   text-align: left;
+// }
+// .item-content {
+//   margin: 70px 0;
+// }
+// .seller-img {
+//   width: 70px;
+//   height: 70px;
+//   border-radius: 50%;
+//   // margin: 20px;
 
-  object-fit: cover;
-  object-position: center right;
-}
-.seller-details {
-  margin-top: 15px;
-  height: 70px;
+//   object-fit: cover;
+//   object-position: center right;
+// }
+// .seller-details {
+//   margin-top: 15px;
+//   height: 70px;
 
-  .seller-details-text {
-    margin-left: 12px;
-  }
-}
-.chatLink-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.chatLink-container span {
-  margin-right: 5px;
-}
-p {
-  margin: 0;
-}
+//   .seller-details-text {
+//     margin-left: 12px;
+//   }
+// }
+// .chatLink-container {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   cursor: pointer;
+// }
+// .chatLink-container span {
+//   margin-right: 5px;
+// }
+// p {
+//   margin: 0;
+// }
 // .checked {
 //   color: orange;
 // }
-img {
-  width: 100%;
-  height: auto;
-}
-.flexSet {
-  display: flex;
-  align-items: center;
-}
+// img {
+//   width: 100%;
+//   height: auto;
+// }
+// .flexSet {
+//   display: flex;
+//   align-items: center;
+// }
 </style>
