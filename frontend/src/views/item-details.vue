@@ -1,8 +1,8 @@
 <template>
   <div class="item-container">
     <div v-if="!isLoaded">Loading...</div>
-    <div v-else>
-      <garage-header>
+    <template v-else>
+      <!-- <garage-header>
         <div class="content" slot="headline">
           <h3>{{currItem.title}}</h3>
           <span>Created at: {{currItem.createAt}})</span>
@@ -13,60 +13,38 @@
           </router-link>
           <i v-else-if="loggedUser" class="fas fa-heart empty-heart"></i>
         </span>
-      </garage-header>
-
-      <section class="item-content">
-        <div class="img-container">
-          <img class="item-img" :src="currItem.img" alt="placeholder image">
-        </div>
-        <div class="details-container">
-          <h3>
-            {{currItem.title}}
-            <span slot="optionalIcon">
-              <router-link v-if="isLoggedUser" :to="`/item/edit/${currItem._id}`">
-                <i class="far fa-edit"/>
-              </router-link>
-              <i v-else-if="loggedUser" class="fas fa-heart empty-heart"></i>
-            </span>
-            <span id="item-create">Listed : {{currItem.createAt | relativeTime}}</span>
-          </h3>
+      </garage-header>-->
+      <header class="details-header flex">
+        <div class="header-content">
+          <h3>{{currItem.title}}</h3>
           <h3>{{currItem.price}}$</h3>
+          <span id="item-created">Listed : {{currItem.createAt | relativeTime}}</span>
+          <div v-if="isLoggedUser" class="edit-btn-container">
+            <router-link :to="`/item/edit/${currItem._id}`">
+              <i class="far fa-edit"/>
+            </router-link>
+            <i @click="removeItem" class="far fa-trash-alt"></i>
+          </div>
+        </div>
+        <img class="details-seller-img" :src="currSeller.img" alt="placeholder image">
+      </header>
+      <section class="item-content">
+        <div class="img-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
+        <div class="details-container">
           <p class="item-desc">{{currItem.desc}}</p>
           <p>
             <i class="fas fa-map-marker-alt"/>
             {{distance}} Km away
           </p>
           <p>Condition: {{currItem.condition}}</p>
-          <div v-if="loggedUser" class="chatLink-container">
-            <p class="catch-dibs">
-              Like it? Dibs it!
-              <button @click="sendDibs">
-                <img class="home-logo" src="../assets/img/logo1.svg">
-              </button>
-            </p>
+          <div class="action-btn-container">
+            <button @click="sendDibs">Buy</button>
+            <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
           </div>
-          <footer class="seller-details">
-            <div class="flex">
-              <img class="seller-img" :src="currSeller.img" alt="placeholder image">
-              <div class="seller-details-text flex column between">
-                <router-link :to="'/user/' + currSeller._id">
-                  <p>{{currSeller.nickname}}</p>
-                </router-link>
-                <p>
-                  <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
-                  <span v-for="m in (5-currSeller.rate)" :key="m.num" class="fa fa-star"></span>
-                </p>
-                <p>Currently selling {{currSeller.itemList.length}} items</p>
-              </div>
-            </div>
-            <div class="remove-btn-container" v-if="isLoggedUser">
-              <button @click="removeItem">Remove Item</button>
-            </div>
-          </footer>
-          <!-- <google-map/> -->
         </div>
+        <!-- <google-map/> -->
       </section>
-    </div>
+    </template>
     <garage-footer></garage-footer>
   </div>
 </template>
@@ -173,52 +151,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-// .details-container {
-//   margin: 10px 15px;
-//   text-align: left;
-// }
-// .item-content {
-//   margin: 70px 0;
-// }
-// .seller-img {
-//   width: 70px;
-//   height: 70px;
-//   border-radius: 50%;
-//   // margin: 20px;
-
-//   object-fit: cover;
-//   object-position: center right;
-// }
-// .seller-details {
-//   margin-top: 15px;
-//   height: 70px;
-
-//   .seller-details-text {
-//     margin-left: 12px;
-//   }
-// }
-// .chatLink-container {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   cursor: pointer;
-// }
-// .chatLink-container span {
-//   margin-right: 5px;
-// }
-// p {
-//   margin: 0;
-// }
-// .checked {
-//   color: orange;
-// }
-// img {
-//   width: 100%;
-//   height: auto;
-// }
-// .flexSet {
-//   display: flex;
-//   align-items: center;
-// }
-</style>
