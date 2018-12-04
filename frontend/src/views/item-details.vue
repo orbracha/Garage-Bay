@@ -18,16 +18,20 @@
       <section class="item-content">
         <div class="img-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
         <div class="details-container">
-          <p class="item-desc">{{currItem.desc}}</p>
-          <p>
-            <i class="fas fa-map-marker-alt"/>
-            {{distance}} Km away
-          </p>
-          <p>Condition: {{currItem.condition}}</p>
-          <p>{{currItem.price}}$</p>
-          <div class="action-btn-container">
-            <button @click="sendDibs">Buy</button>
-            <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
+          <div>
+            <div>
+              <p class="item-desc">{{currItem.desc}}</p>
+              <p>
+                <i class="fas fa-map-marker-alt"/>
+                {{distance}} Km away
+              </p>
+              <p>Condition: {{currItem.condition}}</p>
+              <p>{{currItem.price}}$</p>
+            </div>
+            <div class="action-btn-container">
+              <button @click="sendDibs">Buy</button>
+              <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
+            </div>
           </div>
           <google-map :itemCoords="currItem.location"/>
         </div>
@@ -71,20 +75,21 @@ export default {
   },
   methods: {
     sendDibs() {
-      var item = this.currItem;
-      delete item.user;
-      this.$store.dispatch({
-        type: "sendDibs",
-        userId: this.loggedUser._id,
-        item
-      });
-      var user = JSON.parse(JSON.stringify(this.loggedUser));
-      user.dibsAns.unshift({
-        isAns: false,
-        item
-      });
-
-      this.$store.dispatch({ type: "updateUser", user });
+      if (this.loggedUser) {
+        var item = this.currItem;
+        delete item.user;
+        this.$store.dispatch({
+          type: "sendDibs",
+          userId: this.loggedUser._id,
+          item
+        });
+        var user = JSON.parse(JSON.stringify(this.loggedUser));
+        user.dibsAns.unshift({
+          isAns: false,
+          item
+        });
+        this.$store.dispatch({ type: "updateUser", user });
+      } else this.$router.push("/login");
     },
     removeItem() {
       var item = this.currItem;
@@ -128,8 +133,11 @@ export default {
       this.currSeller.img;
     },
     isLoggedUser() {
-      let loggedUserId = this.$store.getters.getLoggedUser._id;
-      if (loggedUserId === this.currSeller._id) return true;
+      if (this.loggedUser) {
+        let loggedUserId = this.$store.getters.getLoggedUser._id;
+        if (loggedUserId === this.currSeller._id) return true;
+        return false;
+      }
       return false;
     },
     loggedUser() {

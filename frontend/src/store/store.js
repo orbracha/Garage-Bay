@@ -15,9 +15,16 @@ export default new Vuex.Store({
     searchModule
   },
   state: {
+    isMenu: false,
+
 
   },
   mutations: {
+    toggleMenu(state) {
+      state.isMenu = !state.isMenu;
+      console.log('state isMenu', state.isMenu);
+      
+    }
 
   },
   actions: {
@@ -25,7 +32,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(position => {
-            let loc = {lng:position.coords.longitude, lat:position.coords.latitude}
+            let loc = { lng: position.coords.longitude, lat: position.coords.latitude }
             resolve(loc);
           }, reject);
         } else {
@@ -34,4 +41,12 @@ export default new Vuex.Store({
       })
     },
   },
+  getters:{
+    isMenu(state){
+      return state.isMenu
+    },
+    user(state){
+      return state.loggedUser
+    },
+  }
 });

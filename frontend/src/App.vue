@@ -1,6 +1,9 @@
 <template>
   <div id="app">
+    <garage-header></garage-header>
     <router-view/>
+    <menu-screen/>
+    <garage-footer/>
   </div>
 </template>
 <script>
@@ -13,26 +16,37 @@ import eventBus, {
   GET_ANS,
   GET_CANCLE
 } from "./services/eventBus-service.js";
+import garageFooter from "@/components/garage-footer.vue";
+import garageHeader from "@/components/garage-header.vue";
+import menuScreen from "@/components/screen.vue";
+
 export default {
+  components: {
+    garageFooter,
+    garageHeader,
+    menuScreen
+  },
   methods: {},
   created() {
-
-
     const credentials = storageService.load(LOGGEDIN_USER_KEY);
     if (credentials) {
-       this.$store.commit({
-        type: "connectSocket",
-        userId: this.$store.getters.getLoggedUser._id
-      });
-      eventBus.$on(GET_DIBS, (item, fromUser) => {
-        this.$store.dispatch({ type: "loadDibs" });
-      });
-      eventBus.$on(GET_ANS, ans => {
-        this.$store.dispatch({ type: "loadDibs" });
-      });
-      eventBus.$on(GET_CANCLE, dib => {
-        this.$store.dispatch({ type: "loadDibs" });
-      })
+      this.$store
+        .dispatch({ type: "checkUser", user: credentials })
+        .then(() => {
+          this.$store.commit({
+            type: "connectSocket",
+            userId: this.$store.getters.getLoggedUser._id
+          });
+          eventBus.$on(GET_DIBS, (item, fromUser) => {
+            this.$store.dispatch({ type: "loadDibs" });
+          });
+          eventBus.$on(GET_ANS, ans => {
+            this.$store.dispatch({ type: "loadDibs" });
+          });
+          eventBus.$on(GET_CANCLE, dib => {
+            this.$store.dispatch({ type: "loadDibs" });
+          });
+        });
     }
   }
 };
@@ -41,7 +55,7 @@ export default {
 <style lang="scss">
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
 }
 #nav {
