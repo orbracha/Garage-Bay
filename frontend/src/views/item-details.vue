@@ -1,47 +1,38 @@
 <template>
   <div class="item-container">
     <div v-if="!isLoaded">Loading...</div>
-    <div v-else>
-      <garage-header>
-        <div class="content" slot="headline">
+    <template v-else>
+      <header class="details-header flex">
+        <div class="header-content">
           <h3>{{currItem.title}}</h3>
-          <span>Created at: {{currItem.createAt}})    </span>
+          <span id="item-created">Listed : {{currItem.createAt | relativeTime}}</span>
+          <div v-if="isLoggedUser" class="edit-btn-container">
+            <router-link :to="`/item/edit/${currItem._id}`">
+              <i class="far fa-edit"/>
+            </router-link>
+            <i @click="removeItem" class="far fa-trash-alt"></i>
+          </div>
         </div>
-        <span slot="optionalIcon">
-          <i class="fas fa-heart empty-heart"></i>
-        </span>
-      </garage-header>
-
+        <img class="details-seller-img" :src="currSeller.img" alt="placeholder image">
+      </header>
       <section class="item-content">
-        <img :src="currItem.img" alt="placeholder image">
-        <div v-if="isLoggedUser">
-          <button @click="removeItem">Remove</button>
-          <router-link :to="`/item/edit/${currItem._id}`">Edit Item</router-link>
-        </div>
-        <div v-else class="chatLink-container">
-          <router-link :to="'/chat/user/'+ currItem.sellerId">&#9993;</router-link>
-          <p>Like it? Start chat</p>
-        </div>
+        <div class="img-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
         <div class="details-container">
-          <p>Description: {{currItem.desc}}</p>
-          <p>Location: {{distance}} Km away</p>
+          <p class="item-desc">{{currItem.desc}}</p>
+          <p>
+            <i class="fas fa-map-marker-alt"/>
+            {{distance}} Km away
+          </p>
           <p>Condition: {{currItem.condition}}</p>
-          <div class="seller-details flex row">
-            <img class="seller-img" :src="currSeller.img" alt="placeholder image">
-            <div class="seller-details-text flex column between">
-              <p>{{currSeller.nickname}}</p>
-              <p>
-                <span v-for="n in currSeller.rate" :key="n" class="fa fa-star checked"></span>
-                <span v-for="m in (5-currSeller.rate)" :key="m.num" class="fa fa-star"></span>
-              </p>
-
-              <p>Currently selling {{currSeller.itemList.length}} items</p>
-            </div>
+          <p>{{currItem.price}}$</p>
+          <div class="action-btn-container">
+            <button @click="sendDibs">Buy</button>
+            <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
           </div>
           <google-map :itemCoords="currItem.location"/>
         </div>
       </section>
-    </div>
+    </template>
     <garage-footer></garage-footer>
   </div>
 </template>
@@ -79,12 +70,27 @@ export default {
     });
   },
   methods: {
-    removeItem(){
-      var item=this.currItem
-      this.$store.dispatch({type: 'removeItem', item})
-      .then(()=>{
-        this.$router.push('/')
-      })
+    sendDibs() {
+      var item = this.currItem;
+      delete item.user;
+      this.$store.dispatch({
+        type: "sendDibs",
+        userId: this.loggedUser._id,
+        item
+      });
+      var user = JSON.parse(JSON.stringify(this.loggedUser));
+      user.dibsAns.unshift({
+        isAns: false,
+        item
+      });
+
+      this.$store.dispatch({ type: "updateUser", user });
+    },
+    removeItem() {
+      var item = this.currItem;
+      this.$store.dispatch({ type: "removeItem", item }).then(() => {
+        this.$router.push("/");
+      });
     },
     chatClicked() {
       this.$router.push(`/chat`);
@@ -125,57 +131,11 @@ export default {
       let loggedUserId = this.$store.getters.getLoggedUser._id;
       if (loggedUserId === this.currSeller._id) return true;
       return false;
+    },
+    loggedUser() {
+      return this.$store.getters.getLoggedUser;
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
-.details-container {
-  margin: 10px 15px;
-  text-align: left;
-}
-.item-content {
-  margin: 70px 0;
-}
-.seller-img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  // margin: 20px;
-
-  object-fit: cover;
-  object-position: center right;
-}
-.seller-details {
-  margin-top: 15px;
-  height: 70px;
-
-  .seller-details-text {
-    margin-left: 12px;
-  }
-}
-.chatLink-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.chatLink-container span {
-  margin-right: 5px;
-}
-p {
-  margin: 0;
-}
-// .checked {
-//   color: orange;
-// }
-img {
-  width: 100%;
-  height: auto;
-}
-.flexSet {
-  display: flex;
-  align-items: center;
-}
-</style>

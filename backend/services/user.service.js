@@ -55,6 +55,48 @@ function getByName(userName) {
         })
 }
 
+
+function updateUserDibs(userId, dib) {
+    const id = new ObjectId(userId)
+    console.log('update user', userId)
+    console.log('update user with dib', dib)
+    return mongoService.connectToDb().then(db => {
+        return db.collection('user').updateOne({ _id: id }, { $push: { dibs: dib } })
+    })
+}
+function updateUserDibsAns(userId, ans) {
+    const id = new ObjectId(userId)
+    console.log('update user', id)
+    console.log('update ans', ans.dib.item)
+    return mongoService.connectToDb().then(db => {
+        return db.collection('user').updateOne(
+            {
+                _id: id,
+                dibsAns: {
+                    $elemMatch: { 'item._id': ans.dib.item._id }
+                }
+            },
+            { $set: { 'dibsAns.$.isAns': true, 'dibsAns.$.type': ans.type } }
+        )
+    })
+}
+function removeUserDib(dib) {
+    const sellerId = new ObjectId(dib.item.sellerId)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const userCollection = dbConn.collection('user');
+            return userCollection.updateOne({ _id: sellerId }, {
+                $pull: {
+                    dibs: {
+                        $and: [{ from: dib.from }, { item: dib.item }]
+                    }
+                }
+            }, { multi: true })
+                .then(result => console.log({ nModified: result.result.nModified }))
+        })
+}
+
+
 function getUserWishlist(userId) {
     const id = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -78,6 +120,7 @@ function getUserWishlist(userId) {
 }
 
 
+
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -95,7 +138,6 @@ function add(user) {
         })
 }
 function update(user) {
-  
     const userId = new ObjectId(user._id)
     delete user._id;
 
@@ -126,8 +168,13 @@ module.exports = {
     add,
     update,
     checkUser,
+    getByName,
+    updateUserDibs,
+    removeUserDib,
+    updateUserDibsAns,
     getUserWishlist,
     getByName,
+
 }
 
 

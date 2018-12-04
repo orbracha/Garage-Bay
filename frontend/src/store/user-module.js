@@ -14,7 +14,7 @@ export default {
         loggedUser: null
     },
     mutations: {
-        setLoggedUser(state, user) {
+        setLoggedUser(state, { user }) {
             state.loggedUser = user;
         },
         toggleWishlist(state, itemId) {
@@ -29,7 +29,7 @@ export default {
                 state.loggedUser.wishList.splice(wishlistItemIdx, 1)
             }
             return userService.edit(state.loggedUser).then(user => {
-                
+                console.log(user);
             })
         },
         updateUserLocally(state, { user }) {
@@ -44,10 +44,16 @@ export default {
             return userService.edit(contex.state.loggedUser).then(user => {
             })
         },
+        loadDibs(contex) {
+            userService.getById(contex.state.loggedUser._id).then(user => {
+                storageService.save(LOGGEDIN_USER_KEY, user)
+                contex.commit({ type: 'setLoggedUser', user })
+            })
+        },
         checkUser({ commit }, { user }) {
             return userService.checkUser(user)
                 .then(user => {
-                    commit('setLoggedUser', user)
+                    commit({ type: 'setLoggedUser', user })
                 })
         },
         getUserById({ commit }, { userId }) {

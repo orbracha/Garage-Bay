@@ -61,22 +61,7 @@ export default {
       this.$router.push(`/item/details/${itemId}`);
     },
 
-    sendDibs() {
-      var item = this.item;
-      delete item.user;
-      this.$store.dispatch({
-        type: "sendDibs",
-        userId: this.loggedUser._id,
-        item
-      });
-      var user = JSON.parse(JSON.stringify(this.loggedUser));
-      user.dibsAns.unshift({
-        isAns: false,
-        item
-      });
 
-      this.$store.dispatch({ type: "updateUser", user });
-    }
   },
   computed: {
     userWishlist() {

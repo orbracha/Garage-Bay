@@ -1,6 +1,7 @@
 
 msgService = require('../services/msg.service')
 roomService = require('../services/room.service')
+userService = require('../services/user.service')
 function addRoute(app, server) {
     var currRoom;
     var io = require('socket.io').listen(server);
@@ -23,13 +24,25 @@ function addRoute(app, server) {
 
         });
         socket.on('dibs', (userId, item) => {
-            io.emit('got-dibs', userId, item);
+            userService.updateUserDibs(item.sellerId, { item: item, from: userId }).then(() => {
+                io.emit('got-dibs', userId, item);
+            })
         })
         socket.on('cancelDibReq', dib => {
-            io.emit('got-cancle-dib', dib);
+            console.log('outer dib', dib)
+            userService.removeUserDib(dib).then(() => {
+                io.emit('got-cancle-dib', dib);
+            })
         })
         socket.on('sendAns', (ans) => {
-            io.emit('got-ans', ans);
+            // var dib = {
+            //     item: ans.dib.item,
+            //     type: ans.type,
+            //     isAns: true
+            // }
+            userService.updateUserDibsAns(ans.dib.from, ans).then(() => {
+                io.emit('got-ans', ans);
+            })
         })
         socket.on('chat-newMsg', (msg, room) => {
             roomService.addMsgToRoom(msg, room).then(() => {
