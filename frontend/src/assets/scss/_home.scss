@@ -32,9 +32,9 @@
     background-repeat:   no-repeat;
     background-position: center center;
     box-shadow: 0px 0px 20px -4px rgba(0,0,0,0.75);
-    .fa-user{
-      display: none;
-    }
+    // .fa-user{
+    //   display: none;
+    // }
     input{
         border: 1px solid rgb(206, 206, 206);
       }
@@ -49,10 +49,8 @@
       }
       .header-profile-icon{
         display: none;
+        margin-left: 12px;
       }
-      // .fa-user{
-      //   display: none;
-      // }
    
       i{
         color:$mid;
@@ -70,29 +68,27 @@
         text-decoration: none;
         .notification {
           position: absolute;
-          top: -12px;
+          top: -23px;
           right: -14px;
           padding: 2px 7px;
           border-radius: 50%;
           background-color: red;
           color: white;
          }
-         .dibs-logo {
-          height: 55px;
-          // padding-bottom: 25px;
-          transform: rotate(25deg);
-          &:hover {
-            cursor: pointer;
-          }
-        }
-  
+        
       }
+          .header-icons-container{
+            a{
+              margin-left: 10px;
+  
+            }
+          }
   
       @media (min-width:600px){
         .burger{
           display: inline-block;
         }
-        .header-profile-icon{
+        .home-header .header-profile-icon{
           display: inline-block;
         }
 
@@ -106,10 +102,6 @@
             // flex-direction: row-reverse;        
     
         }
-
-        .fa-user{
-          display: inline-block;
-        }
     
       }
 
@@ -117,7 +109,7 @@
         .burger{
           display: none;
         }
-        .header-profile-icon{
+        .home-header .header-profile-icon{
           display: inline-block;
         }
 
