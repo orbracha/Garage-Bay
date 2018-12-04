@@ -14,8 +14,14 @@
 
     <div>
       <button id="snap" v-on:click="capture">Snap Photo</button>
+      <label>
+        add from gallery
+        <input type="file" @change="imageSelected($event)" accept="image/png, image/jpeg">
+      </label>
+
     </div>
-    <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+    <canvas ref="canvas" id="canvas" width="640" height="480" v-if="isCamera"></canvas>
+    <img v-else src="uploadedImg">
   </div>
 </template>
 
@@ -28,11 +34,12 @@ export default {
       canvas: {},
       captures: [],
       stream: null,
-      showStream: true
+      showStream: true,
+      isCamera: true,
+      uploadedImg: null
     };
   },
   mounted() {
-
     this.video = this.$refs.video;
     this.stream && this.stream.stop && this.stream.stop();
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -44,35 +51,45 @@ export default {
     }
   },
   methods: {
-   
+    imageSelected(ev) {
+      
+      console.log(ev.srcElement.files[0]);
+      this.uploadedImg=ev.srcElement.files[0]
+      this.stopStream();
+      this.isCamera = false;
+    },
+    stopStream() {
+      const tracks = this.stream.getTracks();
+      tracks.forEach(track => track.stop());
+      this.showStream = false;
+      this.saveImage();
+    },
     capture() {
       this.canvas = this.$refs.canvas;
       var context = this.canvas
         .getContext("2d")
         .drawImage(this.video, 0, 0, 640, 480);
       this.captures.push(canvas.toDataURL("image/png"));
-
-      const tracks = this.stream.getTracks();
-      tracks.forEach(track => track.stop());
-      this.showStream = false;
-      this.saveImage();
+      this.stopStream();
     },
     saveImage() {
-      var imageToSave = this.captures[0];
+      if (this.isCamera) {
+        var imageToSave = this.captures[0];
 
-      this.$store.dispatch({ type: "saveImage", imageToSave })
-      .then(res => {
-        if(this.$route.params.def==='item')
-        this.$router.push('/item/edit')
-        else{
-          this.$router.push('/signup')
-          console.log('PARAMS', this.$route.params.def);
-        }
-      })
-      .catch(err=>{
-        console.log('ERROR:', err);
-        
-      })
+        this.$store
+          .dispatch({ type: "saveImage", imageToSave })
+          .then(res => {
+            if (this.$route.params.def === "item")
+              this.$router.push("/item/edit");
+            else {
+              this.$router.push("/signup");
+              console.log("PARAMS", this.$route.params.def);
+            }
+          })
+          .catch(err => {
+            console.log("ERROR:", err);
+          });
+      }
     }
   },
   beforeDestroy() {
