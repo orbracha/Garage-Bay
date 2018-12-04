@@ -22,8 +22,11 @@ function query() {
 function getById(itemId) {
   return axios.get(`${BASE_URL}/${itemId}`).then(res => res.data)
 }
-function remove(itemId) {
-  return axios.delete(`${BASE_URL}/${itemId}`)
+function remove(itemId, sellerId) {
+  return axios.delete(`${BASE_URL}/${itemId}/${sellerId}`)
+  .then(user=>user.data[0]);
+  
+  return updatedUser
 }
 function edit(item) {
   if (item._id) {
