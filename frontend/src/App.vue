@@ -55,7 +55,7 @@ export default {
 <style lang="scss">
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
 }
 #nav {
