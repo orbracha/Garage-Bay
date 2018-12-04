@@ -43,8 +43,6 @@ function getById(itemId) {
         })
 }
 function remove(itemId) {
-    console.log('item to remove:', itemId);
-    
     itemId = new ObjectId(itemId)
     return mongoService.connectToDb()
         .then(dbConn => {
