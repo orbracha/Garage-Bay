@@ -44,11 +44,11 @@
 .img-wrapper{
   position: relative;
   width: 100%;
-  // border-bottom: 1px solid $light;
-  // border-top: 1px solid $light;
   padding: 0 6px;
   .main-list-img {
-  border: 1px solid $light;
+    // border: 1px solid $light;
+    border-bottom: 1px solid $light;
+    border-top: 1px solid $light;
 
     width: 100%;
     height: 100%;

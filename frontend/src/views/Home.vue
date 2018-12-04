@@ -1,49 +1,23 @@
 <template>
-  <div v-if="isLoading">Loding...</div>
-
-  <div class="home" v-else>
-    <header class="home-header">
-      <div class="burger">
-      <i class="fas fa-times" v-if="isMenu" @click="toggleMenu"></i>
-      <i class="fas fa-bars" v-else @click="toggleMenu"></i>
+  <section>
+    <div v-if="isLoading">Loding...</div>
+    <div class="home" v-else>
+      <div class="carousel-container">
+        <div class="carousel-header">Highest rated sellers</div>
+        <garage-carousel v-if="user" :user="user"/>
       </div>
 
-      <router-link to="/">
-        <div class="logo-text">dibs</div>
-      </router-link>
+      <section class="home-content">
+        <item-list class="item-list" :items="items"/>
+      </section>
 
-      <input type="text" placeholder=" Search item">
-
-      <router-link to="/search">
-        <i class="fas fa-search"/>
-      </router-link>
-
-      <router-link class="footer-item-2 flex row" v-if="user" :to="'/user/'+user._id">
-        <i class="fas fa-user"></i>
-      </router-link>
-
-      <router-link class="footer-item-2 header-profile-icon" v-else to="/login">
-        <i class="fas fa-user"></i>
-      </router-link>
-    </header>
-
-    <div class="carousel-container">
-      <div class="carousel-header">Highest rated sellers</div>
-      <garage-carousel v-if="user" :user="user"/>
     </div>
-
-    <section class="home-content">
-      <item-list class="item-list" :items="items"/>
-    </section>
-    <menu-screen class="screen" :class="{ open: isMenu }" @click.native="toggleMenu"/>
-    <garage-footer class="footer" :class="{ open: isMenu }"/>
-  </div>
+  </section>
 </template>
 
 <script>
 // @ is an alias to /src
 import itemList from "@/components/item-list.vue";
-import garageFooter from "@/components/garage-footer.vue";
 import garageCarousel from "@/components/garage-carousel.vue";
 import menuScreen from "@/components/screen.vue";
 
@@ -51,14 +25,12 @@ export default {
   name: "home",
   components: {
     itemList,
-    garageFooter,
     garageCarousel,
     menuScreen
   },
   data() {
     return {
-      isLoading: true,
-      isMenu: false
+      isLoading: true
     };
   },
   created() {
@@ -66,13 +38,12 @@ export default {
       this.isLoading = false;
     });
   },
-  methods: {
-    toggleMenu() {
-      this.isMenu = !this.isMenu;
-      console.log(this.isMenu);
-      
-    }
-  },
+  // methods: {
+  //   toggleMenu() {
+  //     this.isMenu = !this.isMenu;
+  //     console.log(this.isMenu);
+  //   }
+  // },
   computed: {
     items() {
       // console.log(this.$store.getters.itemsToDisplay);
