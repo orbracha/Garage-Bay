@@ -30,6 +30,9 @@ body{
     box-sizing: border-box;
    
 }
+a{
+    text-decoration: none;
+}
 
 ul {
     list-style-type: none;
@@ -68,14 +71,6 @@ ul {
     // -webkit-text-stroke-width: 1px;
     // -webkit-text-stroke-color: orange;
   } 
-
-  .empty-star{
-    color: gray;
-
-    // color: rgba(255, 255, 255, 0);
-    // -webkit-text-stroke-width: 1px;
-    // -webkit-text-stroke-color: orange;
-  }
 
   .fa-star{
       padding-right: 2px;
