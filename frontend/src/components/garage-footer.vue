@@ -1,6 +1,5 @@
 <template>
-  <div >
-
+  <div class="footer" :class="{ open: isMenu }">
     <section class="footer-icons-wrapper">
       <router-link class="footer-item-1 flex row" to="/">
         <i class="fas fa-home"></i>
@@ -42,14 +41,22 @@
 <script>
 export default {
   name: "garage-footer",
-  computed: {
-    user() {
-      return this.$store.getters.getLoggedUser;
+  methods:{
+    toggleMenu(){
+      this.$store.commit({type: 'toggleMenu'})
     }
+  },
+  computed:{
+    isMenu(){
+      return this.$store.state.isMenu
+    },
+    user(){
+      return this.$store.getters.getLoggedUser
+    }
+
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
 </style>
