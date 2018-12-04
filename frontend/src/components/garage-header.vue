@@ -9,38 +9,44 @@
       <div class="logo-text">dibs</div>
     </router-link>
 
-    <input type="text" placeholder=" Search item">
-
+    <!-- <input type="text" placeholder=" Search item"> -->
     <router-link to="/search">
       <i class="fas fa-search"/>
     </router-link>
-
+    <template v-if="user">
+      <router-link class="dibs-container" to="/dibs">
+        <span class="notification">{{user.dibs.length}}</span>
+        <i class="fas fa-donate"></i>
+      </router-link>
+      <router-link class="dibs-container" to="/dibs/">
+        <span class="notification">{{user.dibsAns.length}}</span>
+        <i class="fas fa-shopping-cart"></i>
+      </router-link>
+    </template>
     <router-link v-if="user" :to="'/user/'+user._id">
       <i class="fas fa-user"></i>
     </router-link>
 
-    <router-link  v-else to="/login">
+    <router-link v-else to="/login">
       <i class="fas fa-user"></i>
     </router-link>
-
   </header>
 </template>
 
 <script>
 export default {
-  methods:{
-    toggleMenu(){
-      this.$store.commit({type: 'toggleMenu'})
+  methods: {
+    toggleMenu() {
+      this.$store.commit({ type: "toggleMenu" });
     }
   },
-  computed:{
-    isMenu(){
-      return this.$store.state.isMenu
+  computed: {
+    isMenu() {
+      return this.$store.state.isMenu;
     },
-    user(){
-      return this.$store.getters.getLoggedUser
+    user() {
+      return this.$store.getters.getLoggedUser;
     }
-
   }
 };
 </script>
