@@ -26,14 +26,13 @@
         border-radius: 50px;
       }
       a {
-        // font-size: 3rem;
         color: $dark;
-        // color: #c23939;
+
         text-decoration: none; /* no underline */
         transition: 0.3s;
         &:hover {
           cursor: pointer;
-        //   background-color: aquamarine;
+
           color: $darkD;
         }
       }
@@ -51,17 +50,6 @@
       margin-right: 10px;
       background-color: rgba(134, 134, 134, 0);
       transition: 0.3s;
-    //   &:hover {
-    //     width: 200px;
-    //     background-color:white;
-    //     .screen{
-    //         opacity: 1;
-    //         visibility: visible;
-    //     }
-    //     .footer-icons-wrapper {
-    //       left: 0;
-    //     }
-    //   }
       &.open {
         width: 200px;
         background-color:white;

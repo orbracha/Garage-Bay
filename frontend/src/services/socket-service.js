@@ -11,7 +11,6 @@ var gRoom;
 function connectSocket(userId, userDest) {
 
     socket = ioClient(BASE_URL);
-    // socket.heartbeatTimeout = 20000;
     if (userDest && userId) socket.emit('roomRequested', userId, userDest)
     socket.on('newMsg', function (msg) {
         if (msg.from._id !== userId) eventBus.$emit(GET_MSG, msg)
