@@ -1,6 +1,7 @@
 <template>
   <li v-if="item" class="item-preview-container">
     <section class="main-list-item" @click="itemClicked(item._id)">
+      
       <div class="img-wrapper">
         <i class="fas fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
         <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
@@ -12,7 +13,9 @@
         <div class="item-desc">{{item.desc}} {{item.desc}} {{item.desc}}</div>
         <div>${{item.price}}</div>
       </div>
+
     </section>
+
     <div class="seller-preview" @click="userClicked(seller._id)">
       <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
       <div>
