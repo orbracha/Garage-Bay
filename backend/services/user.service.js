@@ -95,7 +95,7 @@ function add(user) {
         })
 }
 function update(user) {
-    console.log('----------------------in of server-----------------', user)
+  
     const userId = new ObjectId(user._id)
     delete user._id;
 
@@ -111,7 +111,7 @@ function update(user) {
             const userCollection = dbConn.collection('user');
             return userCollection.updateOne({ "_id": userId }, { $set: user }).then(() => {
                 user._id = userId;
-                console.log(userId)
+                
                 return user
             })
         })

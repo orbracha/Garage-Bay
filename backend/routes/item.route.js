@@ -31,10 +31,17 @@ function addRoutes(app) {
             .then(item => res.json(item))
     })
 
-    app.delete('/api/item/:itemId', requireAuth, (req, res) => {
+    app.delete('/api/item/:itemId/:sellerId', requireAuth, (req, res) => {
         const itemId = req.params.itemId;
+        const sellerId=req.params.sellerId
+        console.log('params', itemId, sellerId);
+        
         itemService.remove(itemId)
-            .then(() => res.end())
+        .then(()=>{
+            userService.getById(sellerId)
+            .then(user=>res.json(user))
+        })
+       
     })
 
     app.get('/api/search', (req, res) => {
