@@ -1,6 +1,6 @@
 <template>
   <carousel :per-page="1" :centerMode="true" :autoplay="true" :mouse-drag="false" 
-  :loop="true" :navigationNextLabel="▶">
+  :loop="true">
     <slide>
        <garage-card :user="user"/>
     </slide>
