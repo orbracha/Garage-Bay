@@ -4,8 +4,8 @@ import router from './router';
 import store from './store/store';
 import './registerServiceWorker';
 import './assets/scss/main.scss';
-import SuiVue from 'semantic-ui-vue';
-import 'semantic-ui-css/semantic.min.css'
+import VueCarousel from 'vue-carousel';
+
 
 
 
@@ -25,6 +25,7 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  SuiVue,
+  VueCarousel,
+  
   render: h => h(App),
 }).$mount('#app');

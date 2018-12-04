@@ -17,13 +17,13 @@
           <span v-if="countOfDibsAns" class="notification">{{countOfDibsAns}}</span>
         </div>
       </router-link> -->
-      <input type="text" >
+      <input type="text" placeholder=" Search item" >
       <router-link to="/search">
         <i class="fas fa-search"/>
       </router-link>
     </header>
 
-    <garage-card v-if="user" :user="user"/>
+    <garage-carousel v-if="user" :user="user"/>
     
     <section class="home-content">
       <item-list class="item-list" :items="items"/>
@@ -36,14 +36,14 @@
 // @ is an alias to /src
 import itemList from "@/components/item-list.vue";
 import garageFooter from "@/components/garage-footer.vue";
-import garageCard from "@/components/garage-card.vue";
+import garageCarousel from "@/components/garage-carousel.vue";
 
 export default {
   name: "home",
   components: {
     itemList,
     garageFooter,
-    garageCard
+    garageCarousel
   },
   data() {
     return {
