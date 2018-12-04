@@ -43,12 +43,7 @@ export default {
       captures: [],
       stream: null,
       showStream: true,
-<<<<<<< HEAD
-      isCamera: true,
-      uploadedImg: null
-=======
       imageData: ""
->>>>>>> e5779a1a4e2dbe9bbdaaa7e0599c10a6c4591c9c
     };
   },
   mounted() {
@@ -63,24 +58,10 @@ export default {
     }
   },
   methods: {
-<<<<<<< HEAD
-    imageSelected(ev) {
-      
-      console.log(ev.srcElement.files[0]);
-      this.uploadedImg=ev.srcElement.files[0]
-      this.stopStream();
-      this.isCamera = false;
-    },
-=======
->>>>>>> e5779a1a4e2dbe9bbdaaa7e0599c10a6c4591c9c
     stopStream() {
       const tracks = this.stream.getTracks();
       tracks.forEach(track => track.stop());
       this.showStream = false;
-<<<<<<< HEAD
-      this.saveImage();
-=======
->>>>>>> e5779a1a4e2dbe9bbdaaa7e0599c10a6c4591c9c
     },
     capture() {
       this.canvas = this.$refs.canvas;
@@ -89,26 +70,6 @@ export default {
         .drawImage(this.video, 0, 0, 640, 480);
       this.captures.push(canvas.toDataURL("image/png"));
       this.stopStream();
-<<<<<<< HEAD
-    },
-    saveImage() {
-      if (this.isCamera) {
-        var imageToSave = this.captures[0];
-
-        this.$store
-          .dispatch({ type: "saveImage", imageToSave })
-          .then(res => {
-            if (this.$route.params.def === "item")
-              this.$router.push("/item/edit");
-            else {
-              this.$router.push("/signup");
-              console.log("PARAMS", this.$route.params.def);
-            }
-          })
-          .catch(err => {
-            console.log("ERROR:", err);
-          });
-=======
       this.saveImage();
     },
     saveImage() {
@@ -151,7 +112,6 @@ export default {
         };
         // Start the reader job - read file as a data url (base64 format)
         reader.readAsDataURL(input.files[0]);
->>>>>>> e5779a1a4e2dbe9bbdaaa7e0599c10a6c4591c9c
       }
     }
   },
