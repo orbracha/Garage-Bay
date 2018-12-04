@@ -22,13 +22,22 @@ function addRoutes(app) {
         req.session.destroy();
         res.end();
     });
+    // app.get('/api/user/dibs/:userId', (req, res) => {
+    //     const userId = req.params.userId;
+    //     console.log('userid', userId)
+    //     return userService.getById(userId)
+    //         .then(user => {
+    //             console.log('user with dibs to send', user);
+
+    //             return res.json(user)
+    //         })
+    // });
 
     app.get('/api/user/:userId', (req, res) => {
         const userId = req.params.userId;
         userService.getById(userId)
-            .then(user => {
-                res.json(user)
-            })
+            .then(user => res.json(user))
+
     })
     app.post('/api/user/sign/user', (req, res) => {
         const userName = req.body.userName;
@@ -59,7 +68,6 @@ function addRoutes(app) {
 
     app.put('/api/user', (req, res) => {
         const user = req.body;
-       
         userService.update(user)
             .then(user => res.json(user))
     })

@@ -45,7 +45,6 @@ export default {
         idx,
         type
       };
-      console.log("seller answer about his dibs", ans);
       this.removeDib(idx).then(() => {
         this.$store.dispatch({ type: "sendAns", ans });
       });
@@ -53,12 +52,12 @@ export default {
     cancelDibReq({ dib, idx }) {
       if (confirm("Are you sure?")) {
         dib.from = this.$store.getters.getLoggedUser._id;
-        this.$store.dispatch({ type: "cancelDibReq", dib });
         var user = JSON.parse(
           JSON.stringify(this.$store.getters.getLoggedUser)
         );
         user.dibsAns.splice(idx, 1);
         this.$store.dispatch({ type: "updateUser", user });
+        this.$store.dispatch({ type: "cancelDibReq", dib });
       }
     },
     doneBuy(idx) {
