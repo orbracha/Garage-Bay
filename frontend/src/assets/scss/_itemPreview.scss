@@ -2,7 +2,7 @@
 // @import url("hover-min.css");
 
 .item-preview-container{
-  background-color: rgba(255, 255, 255, 0.527);
+  background-color: white;
   &:hover{
     cursor: pointer;
   }
@@ -11,7 +11,7 @@
   padding: 0;
   max-width: 100%;
   display: grid;
-  grid-gap: 15px;
+  grid-gap: 20px;
   grid-template-columns: repeat(auto-fill , minmax(200px, 1fr));
   // grid-template-rows: repeat(auto-fill , minmax(300px, 1fr));
 }
@@ -44,8 +44,12 @@
 .img-wrapper{
   position: relative;
   width: 100%;
-  // height: 200px;
+  // border-bottom: 1px solid $light;
+  // border-top: 1px solid $light;
+  padding: 0 6px;
   .main-list-img {
+  border: 1px solid $light;
+
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -156,7 +160,7 @@ hr {
 }
 
 
-@media (min-width:700px){
+@media (min-width:420px){
 
   .img-wrapper{
     width: 100%;

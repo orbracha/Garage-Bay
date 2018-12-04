@@ -45,10 +45,10 @@
   
   .listed-items-thumbnail {
     padding: 0;
-    margin: 15px;
+    margin: 20px;
     max-width: 100%;
     display: grid;
-    grid-gap: 15px;
+    grid-gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     // grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
 
