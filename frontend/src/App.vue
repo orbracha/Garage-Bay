@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <garage-header></garage-header>
-    <router-view/>
+    <router-view class="router-view"/>
     <menu-screen/>
     <garage-footer/>
   </div>

@@ -2,29 +2,22 @@
   <section>
     <section class="page-layout">
       <section>
-        <garage-header></garage-header>
-
         <div class="wish-spacer">My Wishlist</div>
-
         <section v-if="isLoadin">Loading...</section>
-        <items-tumbnail v-else :list="wishlist"/>
+        <items-thumbnail v-else :list="wishlist"/>
       </section>
-
-      <garage-footer/>
     </section>
   </section>
 </template>
 
 <script>
 // @ is an alias to /src
-import garageFooter from "@/components/garage-footer.vue";
-import itemsTumbnail from "@/components/item-thumbnail.vue";
+import itemsThumbnail from "@/components/item-thumbnail.vue";
 
 export default {
   name: "home",
   components: {
-    garageFooter,
-    itemsTumbnail
+    itemsThumbnail
   },
   data() {
     return {
@@ -47,7 +40,7 @@ export default {
 
           self.isLoadin = false;
         })
-        .catch(err => console.log("EROOOOOR"));
+        .catch(err => console.log("ERROOOR"));
     }
   },
   watch: {
@@ -58,34 +51,20 @@ export default {
       immediate: true
     }
   }
-
-  // computed: {
-  //   userId(){
-  //     return this.$store.getters.loggedUser._id
-  //   }
-  // }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-// .user-preview {
-//   display: inline;
-// }
-// .items-thumbnail {
-//   padding: 0;
-//   max-width: 100%;
-//   display: grid;
-//   grid-gap: 15px;
-//   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-// }
+
 
 .wish-spacer {
-  background-color: rgba(255, 255, 255, 0.521);
+  // background-color: rgba(194, 125, 125, 0.521);
+  text-align: left;
+  padding: 20px;
   font-size: 1.3rem;
-  color: rgb(63, 63, 63);
-  text-align: center;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
   margin-top: 40px;
   border-radius: 10px;
-  padding: 15px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <carousel
+  <!-- <carousel
     class="carousel"
     :perPage="1"
   
@@ -7,7 +7,8 @@
     :navigationEnabled="true"
     :paginationEnabled="false"
     :loop="true"
-  >
+  > -->
+   <carousel class="carousel" :autoplay="true"  :per-page="1" :navigate-to="someLocalProperty" :mouse-drag="false">
     <slide>
       <garage-card :user="user"/>
     </slide>

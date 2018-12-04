@@ -1,11 +1,4 @@
-
-
-
-.item-list{
-    margin-top: 70px;
-  
-  }
-  
+ 
   .burger{
     display: none;
 
@@ -38,7 +31,6 @@
       }
     .logo-text{
       color:$mid;
-      // margin:10px 0; 
       font-size: 50px;
       font-family: $lobster;
       &:hover{
@@ -95,13 +87,9 @@
         }
 
         .home-content{
-            // position: absolute;
             margin: 0 auto;
-            // margin-left: 240px;
             max-width: 1000px;
             padding: 20px;
-            // display: flex;
-            // flex-direction: row-reverse;        
     
         }
     
@@ -114,13 +102,4 @@
         .header-profile-icon{
           display: inline-block;
         }
-
-          .home-content{
-              margin-left: 200px;
-          }
-          .carousel-container{
-   
-            margin-left: 200px;
-          }
-
       }
