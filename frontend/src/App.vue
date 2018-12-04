@@ -21,7 +21,7 @@ export default {
     const credentials = storageService.load(LOGGEDIN_USER_KEY);
     if (credentials) {
        this.$store.commit({
-        type: "connectSocket",
+        type: "connectSocket", 
         userId: this.$store.getters.getLoggedUser._id
       });
       eventBus.$on(GET_DIBS, (item, fromUser) => {
