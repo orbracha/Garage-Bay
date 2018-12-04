@@ -1,37 +1,38 @@
 <template>
-  <section>
+  <section class="user-page">
     <section v-if="isLoadin">Loading...</section>
-    <section v-else class="user-page">
+    <section v-else class="user-page-content">
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
-        <i v-if="isLoggedUser" class="fas fa-pen edit-user"></i>
-        <h1>{{user.nickname}}'s Garage</h1>
-        <div class="rating">
-        <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
-        <span v-for="x in 5-user.rate" :key="x" class="fa fa-star empty-star"></span>
+        <div class="profile-info flec column">
+          <i v-if="isLoggedUser" class="fas fa-pen edit-user"></i>
+          <h1>{{user.nickname}}'s Garage</h1>
+          <div class="rating">
+            <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
+            <span v-for="x in 5-user.rate" :key="x.idx" class="fa fa-star empty-star"></span>
+          </div>
         </div>
-        <!-- <p>{{user.rate}}</p> -->
-        <ul>
-          <li v-for="(item,idx) in user.listedItems" :key="idx" @click="itemClicked(item._id)">
-            <div class="user-profile-thumbnail">
-              <img class="img-thumb" :src="item.img">
-            </div>
-          </li>
-        </ul>
       </div>
-      <garage-footer/>
+
+      <event-feed v-if="user.events.length <= 2" :events="user.events"></event-feed>
+      <items-tumbnail :list="user.listedItems"/>
     </section>
+    <garage-footer/>
   </section>
 </template>
 
 <script>
 import garageFooter from "@/components/garage-footer.vue";
 import userService from "@/services/user-service.js";
+import itemsTumbnail from "@/components/item-thumbnail.vue";
+import eventFeed from "@/components/event-feed.vue";
 
 export default {
   name: "home",
   components: {
     garageFooter,
+    itemsTumbnail,
+    eventFeed,
     userService
   },
   data() {
@@ -46,11 +47,8 @@ export default {
       this.$router.push(`/item/details/${itemId}`);
     },
     setUser() {
-      
       const loggedUserId = this.$store.getters.getLoggedUser._id;
-      console.log(loggedUserId);
       const userId = this.$route.params.userId;
-      console.log(loggedUserId);
       if (userId === this.loggedUserId) {
         console.log("displaying logged user profile");
         isLoggedUser: true;
@@ -62,7 +60,9 @@ export default {
         .dispatch({ type: "getUserById", userId })
         .then(user => {
           self.user = user;
-          this.isLoadin = false;
+          console.log(user);
+
+          self.isLoadin = false;
         })
         .catch(err => console.log("EROOOOOR"));
 

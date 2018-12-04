@@ -4,6 +4,9 @@
   </div>
 </template>
 <script>
+import storageService, {
+  LOGGEDIN_USER_KEY
+} from "./services/storage-service.js";
 import eventBus, {
   GET_MSG,
   GET_DIBS,
@@ -13,8 +16,11 @@ import eventBus, {
 export default {
   methods: {},
   created() {
-    if (this.$store.getters.getLoggedUser) {
-      this.$store.commit({
+
+
+    const credentials = storageService.load(LOGGEDIN_USER_KEY);
+    if (credentials) {
+       this.$store.commit({
         type: "connectSocket",
         userId: this.$store.getters.getLoggedUser._id
       });
@@ -26,7 +32,7 @@ export default {
       });
       eventBus.$on(GET_CANCLE, dib => {
         this.$store.dispatch({ type: "loadDibs" });
-      });
+      })
     }
   }
 };
@@ -36,9 +42,6 @@ export default {
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   height: 100vh;
-
-  text-align: center;
-  color: #2c3e50;
   margin: 0;
 }
 #nav {

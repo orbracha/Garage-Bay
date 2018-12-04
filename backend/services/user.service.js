@@ -16,35 +16,7 @@ function checkUser(user) {
                     return user
                 });
         })
-    // return mongoService.connectToDb()
-    //     .then(db => {
-    //         return db.collection('user').aggregate([
-    //             {
-    //                 $match: { $and: [{ "nickname": user.nickname }, { "password": user.password }] }
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: 'item',
-    //                     localField: 'itemList',
-    //                     foreignField: '_id',
-    //                     as: 'itemList'
-    //                 },
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: 'item',
-    //                     localField: 'wishList',
-    //                     foreignField: '_id',
-    //                     as: 'wishList'
-    //                 },
-    //             }
-    //         ]).toArray()
-    //             .then(user => user[0])
-    //     })
 }
-
 
 
 function query() {
@@ -82,6 +54,7 @@ function getByName(userName) {
             return db.collection('user').findOne({ nickname: userName }).then(res => res)
         })
 }
+
 
 function updateUserDibs(userId, dib) {
     const id = new ObjectId(userId)
@@ -123,6 +96,31 @@ function removeUserDib(dib) {
         })
 }
 
+
+function getUserWishlist(userId) {
+    const id = new ObjectId(userId)
+    return mongoService.connectToDb()
+        .then(db => {
+            return db.collection('user')
+                .aggregate([
+                    {
+                        $match: { _id: id }
+                    },
+                    {
+                        $lookup:
+                        {
+                            from: 'item',
+                            localField: 'wishList',
+                            foreignField: '_id',
+                            as: 'wishlistItems'
+                        }
+                    }
+                ]).toArray()
+        })
+}
+
+
+
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -131,6 +129,7 @@ function remove(userId) {
             return userCollection.remove({ _id: userId })
         })
 }
+
 function add(user) {
     return mongoService.connectToDb()
         .then(dbConn => {
@@ -141,12 +140,20 @@ function add(user) {
 function update(user) {
     const userId = new ObjectId(user._id)
     delete user._id;
+
+    user.wishList = user.wishList.map(id => {
+        return new ObjectId(id)
+    })
+
+    user.itemList = user.itemList.map(id => {
+        return new ObjectId(id)
+    })
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
             return userCollection.updateOne({ "_id": userId }, { $set: user }).then(() => {
                 user._id = userId;
-                console.log(userId)
+                
                 return user
             })
         })
@@ -164,7 +171,10 @@ module.exports = {
     getByName,
     updateUserDibs,
     removeUserDib,
-    updateUserDibsAns
+    updateUserDibsAns,
+    getUserWishlist,
+    getByName,
+
 }
 
 

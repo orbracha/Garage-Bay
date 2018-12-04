@@ -1,0 +1,51 @@
+.login-page{
+    .home-logo{
+        margin-bottom: 45px;
+    }
+    padding-top: 45px;
+    color: $dark;
+    text-align: center;
+    align-items: center;
+    form{
+        text-align: left;
+        background-color: $semi;
+        width: 200px;
+        margin: 0 auto;
+        padding: 15px;
+        .input-line{
+            
+            margin-bottom: 15px;
+        }
+        input{
+            background-color: white;
+            border: none;
+            
+        }
+    
+      .login-btn{
+          height: 25px;
+          width: 60px;
+          background-color: $greenA;
+          border-radius: 5px;
+          border: none;
+
+      }
+        
+    }
+    p{
+        color:white;
+    }
+    .sign-btn{
+    color: $dark;
+
+        height: 30px;
+        width: 160px;
+        border-radius: 5px;
+        border: none;
+    }
+
+}
+
+button:hover{
+    cursor: pointer;
+}

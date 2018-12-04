@@ -11,30 +11,30 @@ Vue.use(Vuex);
 export default {
     strict: true,
     state: {
-        loggedUser: userService.loadFromLocalStorage()
+        loggedUser: null
     },
     mutations: {
         setLoggedUser(state, { user }) {
             state.loggedUser = user;
         },
         toggleWishlist(state, itemId) {
+            const id = new ObjectId(itemId)
 
-            const wishlistItemIdx = state.loggedUser.wishList.indexOf(itemId)
-            console.log('wish list item index', wishlistItemIdx);
+            const wishlistItemIdx = state.loggedUser.wishList.indexOf(id)
 
 
             if (wishlistItemIdx === -1) {
-                state.loggedUser.wishList.push(itemId)
+                state.loggedUser.wishList.push(id)
             } else {
                 state.loggedUser.wishList.splice(wishlistItemIdx, 1)
             }
             return userService.edit(state.loggedUser).then(user => {
                 console.log(user);
-
             })
         },
-        updateUser(state, { user }) {
+        updateUserLocally(state, { user }) {
             state.loggedUser = user;
+            userService.updateUser(user);
         }
 
     },
@@ -55,32 +55,33 @@ export default {
                 .then(user => {
                     commit({ type: 'setLoggedUser', user })
                 })
-
         },
         getUserById({ commit }, { userId }) {
-            console.log('inside user module', userId);
-
             return userService.getById(userId)
-                .then(user => user)
+                .then(user => { 
+                    return user})
+        },
+        getUserWhishlist({commit}, {userId}){
+            return userService.getUserWhishlist(userId)
+            .then(user => user)
         },
         addUser({ commit }, { user }) {
             return userService.edit(user)
                 .then(user => user)
         },
         getUserByName({ commit }, { userName }) {
-            console.log('inside user module', userName);
             return userService.getByName(userName)
                 .then(user => user)
         },
         updateUser({ commit }, { user }) {
             return userService.edit(user).then(user => {
-                commit({ type: 'updateUser', user })
+                commit({ type: 'updateUserLocally', user })
             })
         },
+      
     },
     getters: {
         getLoggedUser(state) {
-            console.log('current user:', state.loggedUser);
             return state.loggedUser;
         }
     },

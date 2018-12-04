@@ -14,6 +14,7 @@ function addRoutes(app) {
             })
             .catch(err => res.status(401).send(err))
     })
+    
 
 
     app.get('/api/user/logout', (req, res) => {
@@ -36,6 +37,7 @@ function addRoutes(app) {
         const userId = req.params.userId;
         userService.getById(userId)
             .then(user => res.json(user))
+
     })
     app.post('/api/user/sign/user', (req, res) => {
         const userName = req.body.userName;
@@ -45,17 +47,27 @@ function addRoutes(app) {
             })
     })
 
+    app.get('/api/user/wishlist/:userId', (req, res) => {
+        const userId = req.params.userId;
+        
+        userService.getUserWishlist(userId)
+            .then(user => {
+           
+
+                res.json(user)
+            })
+    })
+
 
     app.post('/api/user/sign', (req, res) => {
         const user = req.body;
-        console.log(user)
+
         userService.add(user)
             .then(user => res.json(user))
     })
 
     app.put('/api/user', (req, res) => {
         const user = req.body;
-        // console.log('----------------------out of server-----------------', user)
         userService.update(user)
             .then(user => res.json(user))
     })

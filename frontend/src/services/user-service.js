@@ -14,20 +14,18 @@ export default {
   edit,
   checkUser,
   loadFromLocalStorage,
-  loadDibs
+  loadDibs,
+  getUserWhishlist,
+  updateUser
 }
-
+function updateUser(user){
+  storageService.save(LOGGEDIN_USER_KEY,user)
+}
 function checkUser(user) {
   return axios.post(`${BASE_URL}`, { user }).then(res => {
     // console.log('user in  user servive',user);
 
     storageService.save(LOGGEDIN_USER_KEY, res.data)
-
-    //     console.log('user back in front service', res.data);
-
-
-    console.log('user returned from server:', res.data)
-
     return res.data
   });
 }
@@ -46,6 +44,11 @@ function getById(userId) {
 function getByName(userName) {
   return axios.post(`${BASE_URL}/sign/user`, {userName}).then(res => res.data)
 }
+
+function getUserWhishlist(userId){
+  return axios.get(`${BASE_URL}/wishlist/${userId}`).then(res =>res.data[0])
+}
+
 function remove(userId) {
   return axios.delete(`${BASE_URL}/${userId}`)
 }

@@ -27,10 +27,18 @@ export default {
         }
     },
     actions: {
+        removeItem(context, {item}){
+
+          itemService.remove(item._id, item.sellerId)
+           
+            .then(user=>{
+                context.commit({type: 'updateUserLocally', user})
+            })
+           
+        },
+
         loadItems({ commit }) {
-            itemService.query().then(items => {
-                console.log('inside loaditems in store', items);
-                
+            itemService.query().then(items => {   
                 commit({ type: 'setItems', items })
                 return items;
             })
@@ -52,14 +60,23 @@ export default {
             })
           
         },
-        addItem({comiit}, {item}){
-            console.log('item in store', item);
-            
-        }
+        addItem(context, {item}){
+            return itemService.addItem(item)
+            .then(newItem=>{
+                context.dispatch({type: 'getUserById', userId: newItem.sellerId})
+                .then(user=>{
+                
+                    console.log('user in add item:######3', user);
+                    
+                   context.commit({type: 'updateUserLocally', user})
+                })
+                return newItem._id
+            })
+        },
+      
     },
     getters: {
         itemsToDisplay: state => {
-            console.log(state.items)
             return state.items
         },
 

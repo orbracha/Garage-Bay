@@ -1,49 +1,91 @@
 <template>
   <section>
-    <ul class="listed-items-thumbnail">
-      <li v-for="(item,idx) in user.wishlistItems" :key="idx" @click="itemClicked(item._id)">
-        <div class="user-profile-thumbnail">
-          <img class="img-thumb" :src="item.img">
-        </div>
-      </li>
-    </ul>
-    <garage-footer/>
-    <garage-footer/>
+    <section class="page-layout">
+      <section>
+        <garage-header></garage-header>
+
+        <div class="wish-spacer">My Wishlist</div>
+
+        <section v-if="isLoadin">Loading...</section>
+        <items-tumbnail v-else :list="wishlist"/>
+      </section>
+
+      <garage-footer/>
+    </section>
   </section>
 </template>
 
 <script>
 // @ is an alias to /src
 import garageFooter from "@/components/garage-footer.vue";
+import itemsTumbnail from "@/components/item-thumbnail.vue";
 
 export default {
   name: "home",
-  props: ["user"],
-
   components: {
-    garageFooter
+    garageFooter,
+    itemsTumbnail
   },
   data() {
-    return {};
+    return {
+      isLoadin: true,
+      wishlist: []
+    };
   },
   methods: {
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
+    },
+    getUserWhishlist() {
+      const userId = this.$store.getters.getLoggedUser._id;
+      var self = this;
+      this.$store
+        .dispatch({ type: "getUserWhishlist", userId })
+        .then(user => {
+          self.wishlist = user.wishlistItems;
+          console.log(user);
+
+          self.isLoadin = false;
+        })
+        .catch(err => console.log("EROOOOOR"));
     }
   },
-  computed: {}
+  watch: {
+    "$route.params.userId": {
+      handler() {
+        this.getUserWhishlist();
+      },
+      immediate: true
+    }
+  }
+
+  // computed: {
+  //   userId(){
+  //     return this.$store.getters.loggedUser._id
+  //   }
+  // }
 };
 </script>
 
 <style lang="scss" scoped>
-.user-preview {
-  display: inline;
-}
-.items-thumbnail {
-  padding: 0;
-  max-width: 100%;
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+// .user-preview {
+//   display: inline;
+// }
+// .items-thumbnail {
+//   padding: 0;
+//   max-width: 100%;
+//   display: grid;
+//   grid-gap: 15px;
+//   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+// }
+
+.wish-spacer {
+  background-color: rgba(255, 255, 255, 0.521);
+  font-size: 1.3rem;
+  color: rgb(63, 63, 63);
+  text-align: center;
+  margin-top: 40px;
+  border-radius: 10px;
+  padding: 15px;
 }
 </style>

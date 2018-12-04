@@ -1,62 +1,71 @@
 <template>
   <div>
-    <button @click="addMarker">Add</button>
-    
-    <gmap-map
-      :center="center"
-      :zoom="17"
-      style="width:100%;  height: 400px;"
-    >
+    <gmap-map :center="center" :zoom="17" class="map"  ref="mapRef">
       <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        @click="center=m.position"
-      ></gmap-marker>
+        :position="marker.position"
+        :clickable="true"
+        :title="marker.title"
+        @click="toggleInfoWin"
+      >
+        <info-window :opened="marker.isInfoOpen" v-if="isLoaded">{{address}}</info-window>
+      </gmap-marker>
     </gmap-map>
   </div>
 </template>
 
 <script>
+import InfoWindow from "vue2-google-maps/dist/components/infoWindow";
+
 export default {
   name: "GoogleMap",
+  components: {
+    InfoWindow
+  },
+  props: ["itemCoords"],
   data() {
     return {
-      // default to Montreal to keep it simple
-      // change this to whatever makes sense
-      center: { lat: 45.508, lng: -73.587 },
-      markers: [],
-      places: [],
-      currentPlace: null
+      center: { lat: 32.088032, lng: 34.803139 },
+      marker: {
+        position: { lat: this.itemCoords.lat, lng: this.itemCoords.lng },
+        title: "test title",
+        isInfoOpen: false
+      },
+      address: "No valid address",
+      isLoaded: false
     };
   },
 
   mounted() {
     this.geolocate();
+    this.checkIfLoaded();
   },
-
+  created() {},
   methods: {
-    // receives a place object via the autocomplete component
-    setPlace(place) {
-      this.currentPlace = place;
-      
-      
+    checkIfLoaded() {
+      this.$refs.mapRef.$mapPromise
+        .then(() => {
+          this.isLoaded = true;
+          return this.reverseGeolocate()
+        })
+        .then(address => this.address = address);
     },
-    addMarker() {
-      console.log('adding', this.currentPlace);
-    
-      if (this.currentPlace) {
-        const marker = {
-          lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
-        };        
-        this.markers.push({ position: marker });
-        this.places.push(this.currentPlace);
-        this.center = marker;
-        this.currentPlace = null;
-      }
+    reverseGeolocate() {
+      var geocoder = new google.maps.Geocoder();
+      var latlng = {};
+      latlng.lat = this.marker.position.lat;
+      latlng.lng = this.marker.position.lng;
+      return new Promise((resolve, reject) => {
+        geocoder.geocode({ location: latlng }, (results, status) => {
+           if (status == "OK") {
+             resolve(results[0].formatted_address);
+           }
+         });
+      })
     },
-    geolocate: function() {
+    toggleInfoWin() {
+      this.marker.isInfoOpen = !this.marker.isInfoOpen;
+    },
+    geolocate() {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
           lat: position.coords.latitude,

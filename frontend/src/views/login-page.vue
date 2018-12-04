@@ -1,28 +1,39 @@
 <template>
   <section>
-    <!-- <garage-footer/> -->
-    <h1>Login</h1>
-    <form @submit.prevent="checkUser">
-      <label>
-        <span>Username:</span>
-        <input autofocus type="text" v-model="user.nickname" required>
-      </label>
-      <label>
-        <span>Password:</span>
-        <input type="password" v-model="user.password" required>
-      </label>
-      <button>Login</button>
-      <span v-if="isUnknowen">Unvalid Username/Password</span>
-    </form>
+    <div class="login-page page-layout flex column">
+      <img class="home-logo" src="../assets/img/logo1.svg">
+      <form class="flex column" @submit.prevent="checkUser">
+        <label class="input-line">
+          <div>Username:</div>
+          <input autofocus type="text" v-model="user.nickname" required>
+        </label>
+        <label class="input-line">
+          <div>Password:</div>
+          <input type="password" v-model="user.password" required>
+        </label>
+        <button class="login-btn">Login</button>
+        <span v-if="isUnknowen">Unvalid Username/Password</span>
+      </form>
+      <p>New Here?</p>
+      <router-link to="/signup"> <button class="sign-btn">Sign up!</button></router-link>
+      <p>or</p>
+      <button class="sign-btn">Continue as a guest</button>
+      <!-- <garage-footer/> -->
+    </div>
   </section>
 </template>
 
 <script>
 // @ is an alias to /src
 // import userList from "@/components/user-list.vue";
+import garageFooter from "@/components/garage-footer.vue";
 
 export default {
   name: "login",
+  components: {
+    garageFooter
+  },
+
   data() {
     return {
       user: {
@@ -50,17 +61,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {
-  background: url("");
-}
-.user-preview {
-  display: inline;
-}
-.items-thumbnail {
-  padding: 0;
-  max-width: 100%;
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-}
 </style>
