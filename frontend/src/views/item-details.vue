@@ -71,6 +71,7 @@ export default {
   },
   methods: {
     sendDibs() {
+      if (this.loggedUser){
       var item = this.currItem;
       delete item.user;
       this.$store.dispatch({
@@ -83,8 +84,9 @@ export default {
         isAns: false,
         item
       });
-
       this.$store.dispatch({ type: "updateUser", user });
+      }
+      else this.$router.push('/login');
     },
     removeItem() {
       var item = this.currItem;
@@ -128,8 +130,11 @@ export default {
       this.currSeller.img;
     },
     isLoggedUser() {
-      let loggedUserId = this.$store.getters.getLoggedUser._id;
-      if (loggedUserId === this.currSeller._id) return true;
+      if (this.loggedUser) {
+        let loggedUserId = this.$store.getters.getLoggedUser._id;
+        if (loggedUserId === this.currSeller._id) return true;
+        return false;
+      }
       return false;
     },
     loggedUser() {
