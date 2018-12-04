@@ -1,35 +1,49 @@
 <template>
-  <section>
-    <i @click="$router.go(-1)" class="fas fa-arrow-left"></i>
-    <!-- <button @click="$router.go(-1)">←</button> -->
-    <slot name="headline"></slot>
-    <slot name="optional-box"></slot>
-    <slot name="optionalIcon"></slot>
-  </section>
+  <header class="home-header">
+    <div class="burger">
+      <i class="fas fa-times" v-if="isMenu" @click="toggleMenu"></i>
+      <i class="fas fa-bars" v-else @click="toggleMenu"></i>
+    </div>
+
+    <router-link to="/">
+      <div class="logo-text">dibs</div>
+    </router-link>
+
+    <input type="text" placeholder=" Search item">
+
+    <router-link to="/search">
+      <i class="fas fa-search"/>
+    </router-link>
+
+    <router-link v-if="user" :to="'/user/'+user._id">
+      <i class="fas fa-user"></i>
+    </router-link>
+
+    <router-link  v-else to="/login">
+      <i class="fas fa-user"></i>
+    </router-link>
+
+  </header>
 </template>
 
 <script>
-export default {};
+export default {
+  methods:{
+    toggleMenu(){
+      this.$store.commit({type: 'toggleMenu'})
+    }
+  },
+  computed:{
+    isMenu(){
+      return this.$store.state.isMenu
+    },
+    user(){
+      return this.$store.getters.getLoggedUser
+    }
+
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-// section {
-//   padding: 0 25px;
-//   // background-image: url("../assets/img/homeHeader.jpg");
-//   background-size: cover;
-//   background-repeat: no-repeat;
-//   background-position: center center;
-//   background-color: gray;
-//   height: 70px;
-//   display: flex;
-//   color: #e8e8e8;
-//   align-items: center;
-//   justify-content: space-between;
-//   i {
-//     font-size: 1.3rem;
-//     &:hover {
-//       cursor: pointer;
-//     }
-//   }
-// }
 </style>

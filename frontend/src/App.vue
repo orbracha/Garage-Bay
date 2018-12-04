@@ -1,6 +1,9 @@
 <template>
   <div id="app">
+    <garage-header></garage-header>
     <router-view/>
+    <menu-screen/>
+    <garage-footer/>
   </div>
 </template>
 <script>
@@ -13,7 +16,16 @@ import eventBus, {
   GET_ANS,
   GET_CANCLE
 } from "./services/eventBus-service.js";
+import garageFooter from "@/components/garage-footer.vue";
+import garageHeader from "@/components/garage-header.vue";
+import menuScreen from "@/components/screen.vue";
+
 export default {
+  components: {
+    garageFooter,
+    garageHeader,
+    menuScreen
+  },
   methods: {},
   created() {
     const credentials = storageService.load(LOGGEDIN_USER_KEY);
@@ -73,9 +85,6 @@ export default {
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   height: 100vh;
-
-  // text-align: center;
-  color: #353535;
   margin: 0;
 }
 #nav {
