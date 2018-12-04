@@ -38,7 +38,7 @@
               <p>Currently selling {{currSeller.itemList.length}} items</p>
             </div>
           </div>
-          <!-- <google-map/> -->
+          <google-map :itemCoords="currItem.location"/>
         </div>
       </section>
     </div>
