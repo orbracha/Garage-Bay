@@ -5,7 +5,7 @@
         <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
         <div>
           <h3>{{seller.nickname}}</h3>
-          <div>{{distance}} Km away </div>
+          <div v-if="loggedUser">{{distance}} Km away </div>
      
         </div>
       </div>
