@@ -5,7 +5,7 @@
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
         <div class="profile-info flex column">
-          <i v-if="isLoggedUser" class="far fa-edit edit-user"></i>
+          <i v-if="isLoggedUser" class="far fa-edit edit-user" @click="editUserClicked"></i>
           <h1>{{user.nickname}}{{(isLoggedUser)? '':'\'s Garage'}}</h1>
           <div class="rating">
             <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>

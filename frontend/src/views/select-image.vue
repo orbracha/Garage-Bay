@@ -74,13 +74,14 @@ export default {
     saveImage() {
       if (this.captures[0])  var imageToSave = this.captures[0];
        else  var imageToSave = this.imageData;
-      
-
       this.$store
         .dispatch({ type: "saveImage", imageToSave })
         .then(res => {
           if (this.$route.params.def === "item")
-            this.$router.push("/item/edit");
+            this.$router.push("/select-image/edit");
+          else if(this.$route.params.def === "edit-user"){
+                this.$router.push('/user/edit/userId')
+          }
           else {
             this.$router.push("/signup");
             console.log("PARAMS", this.$route.params.def);
