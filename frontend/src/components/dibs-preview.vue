@@ -29,33 +29,33 @@
     </template>
     <template v-else>
       <div class="dibAns-container">
-          <sui-card>
-            <sui-card-content>
-              <sui-image :src="dib.item.img" class="right floated"/>
-              <sui-card-header>
-                <template v-if="!dib.isAns">The seller isnt answer yet!</template>
-                <template v-else>
-                  The seller {{(dib.type)? 'Agree':'Deny'}} ,
-                  Talk to him/her:
-                  <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
-                </template>
-              </sui-card-header>
-            </sui-card-content>
-            <sui-card-content extra>
-              <sui-container text-align="center">
-                <sui-button-group>
-                  <sui-button
-                    v-if="!dib.isAns"
-                    basic
-                    positive
-                    @click="$emit('cancelDibReq',{dib,idx})"
-                  >Never mind..</sui-button>
-                  <sui-button v-else basic positive @click="$emit('doneBuy',idx)">Done!</sui-button>
-                </sui-button-group>
-              </sui-container>
-            </sui-card-content>
-          </sui-card>
-        </div>
+        <sui-card>
+          <sui-card-content>
+            <sui-image :src="dib.item.img" class="right floated"/>
+            <sui-card-header>
+              <template v-if="!dib.isAns">The seller isnt answer yet!</template>
+              <template v-else>
+                The seller {{(dib.type)? 'Agree':'Deny'}} ,
+                Talk to him/her:
+                <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
+              </template>
+            </sui-card-header>
+          </sui-card-content>
+          <sui-card-content extra>
+            <sui-container text-align="center">
+              <sui-button-group>
+                <sui-button
+                  v-if="!dib.isAns"
+                  basic
+                  positive
+                  @click="$emit('cancelDibReq',{dib,idx})"
+                >Never mind..</sui-button>
+                <sui-button v-else basic positive @click="$emit('doneBuy',idx)">Done!</sui-button>
+              </sui-button-group>
+            </sui-container>
+          </sui-card-content>
+        </sui-card>
+      </div>
     </template>
   </li>
 </template>
@@ -80,7 +80,9 @@ export default {
     }
   },
   created() {
-    this.getFromUser();
+    if (!this.isAnsList) {
+      this.getFromUser();
+    }
   }
 };
 </script>
