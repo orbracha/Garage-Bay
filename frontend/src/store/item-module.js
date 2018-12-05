@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import itemService from '../services/item-service.js'
+import { debug } from 'util';
 
 Vue.use(Vuex);
 
@@ -16,11 +17,15 @@ export default {
         setItems(state, { items }) {
             state.items = items;
         },
-        editItem(state, { item }) {
+        editItem(state, { updatedItem }) {     
             var items = state.items;
-            var itemIdx = items.findIndex(currItem => currItem._id === item._id);
-            if (itemIdx) return items.splice(itemIdx, 1, item);
-            items.unshift(item);
+            var itemIdx = items.findIndex(currItem =>{
+                return currItem._id === updatedItem._id
+            } );
+            if (itemIdx!==-1){
+                return items.splice(itemIdx, 1, updatedItem);
+            } 
+            items.unshift(updatedItem);
         },
         setNewUrl(state, {url}){
             state.newUrl=url
@@ -40,6 +45,8 @@ export default {
         loadItems({ commit }) {
             itemService.query().then(items => {   
                 commit({ type: 'setItems', items })
+                console.log('items:', items);
+                
                 return items;
             })
         },
@@ -48,9 +55,11 @@ export default {
                 return item;
             })
         },
-        editItem({ commit }, { item }) {
-            return itemService.edit(item).then(item => {
-                commit({ type: 'editItem', item });
+        editItem({ commit }, { item }) {  
+            return itemService.edit(item)
+            .then(updatedItem => {
+                 commit({ type: 'editItem', updatedItem })
+                return updatedItem;
             })
         },
         saveImage({ commit }, imageToSave) {
@@ -65,9 +74,6 @@ export default {
             .then(newItem=>{
                 context.dispatch({type: 'getUserById', userId: newItem.sellerId})
                 .then(user=>{
-                
-                    console.log('user in add item:######3', user);
-                    
                    context.commit({type: 'updateUserLocally', user})
                 })
                 return newItem._id

@@ -25,16 +25,15 @@ function addRoutes(app) {
         return itemService.add(item)
             .then(item => res.json(item))
     })
-    app.put('/api/item', requireAuth, (req, res) => {
+    app.put('/api/item/edit', requireAuth, (req, res) => {
         const item = req.body;
         itemService.update(item)
-            .then(item => res.json(item))
+            .then(item =>res.json(item[0]))
     })
 
     app.delete('/api/item/:itemId/:sellerId', requireAuth, (req, res) => {
         const itemId = req.params.itemId;
         const sellerId=req.params.sellerId
-        console.log('params', itemId, sellerId);
         
         itemService.remove(itemId)
         .then(()=>{

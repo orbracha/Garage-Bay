@@ -26,11 +26,17 @@ function remove(itemId, sellerId) {
   return axios.delete(`${BASE_URL}/${itemId}/${sellerId}`)
   .then(user=>user.data[0]);
   
-  return updatedUser
+  // return updatedUser
 }
 function edit(item) {
   if (item._id) {
-    return axios.put(`${BASE_URL}`, item).then(res => res.data)
+    return axios.put(`${BASE_URL}/edit`, item).then(res =>
+      {
+        console.log('res.data:', res.data);
+      
+       return res.data
+      }
+      )
   }
   return axios.post(`${BASE_URL}`, item)
 }

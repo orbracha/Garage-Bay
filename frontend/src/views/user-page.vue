@@ -61,6 +61,9 @@ export default {
     };
   },
   methods: {
+    editUserClicked(){
+      this.$router.push(`/user/edit/${this.user._id}`)
+    },
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
     },

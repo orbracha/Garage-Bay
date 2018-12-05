@@ -11,6 +11,7 @@ import searchPage from './views/search-page.vue';
 import userPage from './views/user-page.vue';
 import selectImage from './views/select-image.vue';
 import dibsPage from './views/dibs-page.vue';
+import editUser from './views/edit-user.vue';
 import signupPage from './views/signup-page.vue';
 
 
@@ -75,6 +76,11 @@ export default new Router({
       path: '/user/wishlist/:userId',
       name: 'wishlist',
       component: wishPage,
+    },
+    {
+      path: '/user/edit/:userId',
+      name: 'edit-user',
+      component: editUser,
     },
     {
       path: '/item/details/:id',

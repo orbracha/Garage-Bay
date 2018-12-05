@@ -35,7 +35,7 @@
         <input type="number" v-model="currItem.price" required>
       </label>
       
-      <button>Save</button>
+      <button type="submit">Save</button>
     </form>
     <garage-footer></garage-footer>
   </section>
@@ -64,22 +64,23 @@ export default {
     saveItem: async function() {
       var item = JSON.parse(JSON.stringify(this.currItem));
       if (this.currItem._id) {
-        this.$store.dispatch({ type: "editItem", item });
+        this.$store.dispatch({ type: "editItem", item }).then((item) => {
+          console.log('ret from server',item);
+          
+          this.$router.push(`/item/details/${item._id}`);
+        });
       } else {
         var item = JSON.parse(JSON.stringify(this.currItem));
 
         item.createAt = Date.now();
         item.sellerId = this.$store.getters.getLoggedUser._id;
-        item.location = await this.$store.dispatch({type:'getLocation'});
-        
-        
-        this.$store.dispatch({ type: "addItem", item })
-        .then(itemId=>{
-         this.$router.push(`/item/details/${itemId}`)
-        })
-      }
-    },
+        item.location = await this.$store.dispatch({ type: "getLocation" });
 
+        this.$store.dispatch({ type: "addItem", item }).then(itemId => {
+          this.$router.push(`/item/details/${itemId}`);
+        });
+      }
+    }
   },
   computed: {},
   created() {
