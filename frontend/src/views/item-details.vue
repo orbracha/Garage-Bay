@@ -18,16 +18,20 @@
       <section class="item-content">
         <div class="img-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
         <div class="details-container">
-          <p class="item-desc">{{currItem.desc}}</p>
-          <p>
-            <i class="fas fa-map-marker-alt"/>
-            {{distance}} Km away
-          </p>
-          <p>Condition: {{currItem.condition}}</p>
-          <p>{{currItem.price}}$</p>
-          <div class="action-btn-container">
-            <button @click="sendDibs">Buy</button>
-            <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
+          <div>
+            <div>
+              <p class="item-desc">{{currItem.desc}}</p>
+              <p>
+                <i class="fas fa-map-marker-alt"/>
+                {{distance}} Km away
+              </p>
+              <p>Condition: {{currItem.condition}}</p>
+              <p>{{currItem.price}}$</p>
+            </div>
+            <div class="action-btn-container">
+              <button class="dibs-btn" @click="sendDibs">Call dibs!</button>
+              <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
+            </div>
           </div>
           <google-map :itemCoords="currItem.location"/>
         </div>
@@ -71,22 +75,21 @@ export default {
   },
   methods: {
     sendDibs() {
-      if (this.loggedUser){
-      var item = this.currItem;
-      delete item.user;
-      this.$store.dispatch({
-        type: "sendDibs",
-        userId: this.loggedUser._id,
-        item
-      });
-      var user = JSON.parse(JSON.stringify(this.loggedUser));
-      user.dibsAns.unshift({
-        isAns: false,
-        item
-      });
-      this.$store.dispatch({ type: "updateUser", user });
-      }
-      else this.$router.push('/login');
+      if (this.loggedUser) {
+        var item = this.currItem;
+        delete item.user;
+        this.$store.dispatch({
+          type: "sendDibs",
+          userId: this.loggedUser._id,
+          item
+        });
+        var user = JSON.parse(JSON.stringify(this.loggedUser));
+        user.dibsAns.unshift({
+          isAns: false,
+          item
+        });
+        this.$store.dispatch({ type: "updateUser", user });
+      } else this.$router.push("/login");
     },
     removeItem() {
       var item = this.currItem;

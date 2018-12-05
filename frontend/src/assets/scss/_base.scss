@@ -54,6 +54,9 @@ ul {
 .around{
     justify-content: space-around
 }
+.baseline{
+    align-items: baseline;
+}
 .wrap{
     flex-wrap: wrap
 }
@@ -74,4 +77,6 @@ ul {
       padding-right: 2px;
       font-size: .8rem
   }
+
+
 
