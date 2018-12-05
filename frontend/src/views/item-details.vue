@@ -13,7 +13,9 @@
             <i @click="removeItem" class="far fa-trash-alt"></i>
           </div>
         </div>
-        <img class="details-seller-img" :src="currSeller.img" alt="placeholder image">
+        <router-link :to="'/user/'+ currSeller._id">
+          <img class="details-seller-img" :src="currSeller.img" alt="placeholder image">
+        </router-link>
       </header>
       <section class="item-content">
         <div class="img-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>

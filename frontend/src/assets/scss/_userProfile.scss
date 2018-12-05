@@ -1,4 +1,8 @@
+.user-page-container{
 
+    margin-top: 70px;
+    margin-left: 200px;
+}
 
 
 .user-page-content{
@@ -72,5 +76,15 @@
 
   }
 
+}
+
+
+@media(max-width:950px){
+  .user-page-container{
+
+    // margin-top: 70px;
+    margin-left: unset;
+    margin-bottom: 10px;
+}
 }
 

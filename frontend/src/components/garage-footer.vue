@@ -27,7 +27,12 @@
         <p>Wishlist</p>
       </router-link>
       <router-link class="footer-item-2 flex row" v-if="user" :to="'/user/'+user._id">
-        <i class="fas fa-user"></i>
+        <i class="fas fa-user">
+          <span
+            v-if="user.dibsAns.filter(ans=>ans.isAns).length || user.dibs.length "
+            class="footer-notification"
+          >{{user.dibsAns.filter(ans=>ans.isAns).length + user.dibs.length}}</span>
+        </i>
         <p>My profile</p>
       </router-link>
       <router-link class="footer-item-2 flex row" v-else to="/login">
@@ -41,19 +46,18 @@
 <script>
 export default {
   name: "garage-footer",
-  methods:{
-    toggleMenu(){
-      this.$store.commit({type: 'toggleMenu'})
+  methods: {
+    toggleMenu() {
+      this.$store.commit({ type: "toggleMenu" });
     }
   },
-  computed:{
-    isMenu(){
-      return this.$store.state.isMenu
+  computed: {
+    isMenu() {
+      return this.$store.state.isMenu;
     },
-    user(){
-      return this.$store.getters.getLoggedUser
+    user() {
+      return this.$store.getters.getLoggedUser;
     }
-
   }
 };
 </script>

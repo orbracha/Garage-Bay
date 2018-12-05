@@ -1,10 +1,13 @@
 <template>
   <ul>
+    <h1 v-if="!dibs.length">No dibs</h1>
     <dibs-preview
+      v-else
       v-for="(dib,idx) in dibs"
       :key="idx"
       :dib="dib"
       :idx="idx"
+      :isAnsList="isDibs"
       @removeDib="$emit('removeDib',$event)"
       @sendAns="$emit('sendAns',$event)"
       @cancelDibReq="$emit('cancelDibReq',$event)"
@@ -17,7 +20,8 @@
 import dibsPreview from "./dibs-preview.vue";
 export default {
   props: {
-    dibs: Array
+    dibs: Array,
+    isDibs: Boolean
   },
   components: {
     dibsPreview
