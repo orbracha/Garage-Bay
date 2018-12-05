@@ -6,7 +6,7 @@ const addChatRoutes = require('./routes/chat.route')
 
 const session = require('express-session')
 const app = express()
-// app.use(bodyParser.json());
+
 const cors = require('cors')
 app.use(cors({
     origin: ['http://localhost:8080'],
