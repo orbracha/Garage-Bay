@@ -19,11 +19,14 @@
     </router-link>
 
     <div class="header-icons-container">
-      
       <div v-if="user">
         <a @click="logoutUser" class="logoutBtn">Logout</a>
         <router-link class="header-profile-icon"  :to="'/user/'+user._id">
         <i class="fas fa-user"></i>
+        <span
+          v-if="user.dibsAns.filter(ans=>ans.isAns).length || user.dibs.length "
+          class="notification"
+        >{{user.dibsAns.filter(ans=>ans.isAns).length + user.dibs.length}}</span>
       </router-link>
       </div>
 
