@@ -13,7 +13,8 @@
       @removeDib="removeDib"
       @cancelDibReq="cancelDibReq"
       @doneBuy="doneBuy"
-      :dibs="(($route.params.dibRoute)? dibsAns:dibs)"
+      :dibs="((isDibs)? dibsAns:dibs)"
+      :isDibs="isDibs"
     ></dibs-list>
     <garage-footer/>
   </section>
@@ -24,6 +25,7 @@ import garageHeader from "../components/garage-header.vue";
 import garageFooter from "@/components/garage-footer.vue";
 import dibsList from "@/components/dibs-list.vue";
 export default {
+  props: ["isDibs"],
   computed: {
     dibs() {
       return this.$store.getters.getLoggedUser.dibs;

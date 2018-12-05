@@ -2,15 +2,29 @@
   <section>
     <div v-if="isLoading">Loding...</div>
     <div class="home" v-else>
-      <div class="carousel-container">
-        <div class="carousel-header">Highest rated sellers</div>
-        <garage-carousel v-if="user" :user="user"/>
+      <div class="info-section flex column">
+        <!-- <div class="info-left">
+          <div class="left-info-box">
+            <h4>How
+              <span class="lobster">dibs</span>works?
+            </h4>
+            <p>
+              Find an item you like in the board. You can send instant message to the seller.
+              If you want to buy the product, just
+              <span class="lobster">call dibs</span> and the seller will see your rquest. Once the seller approved your call he will keep it for you for one week.
+            </p>
+          </div>
+        </div>-->
+        <h3 class="home-page-text">Chech Out Our Best Selling Garages:</h3>
+        <div class="carousel-container">
+          <!-- <div class="carousel-header">Highest rated sellers</div> -->
+          <garage-carousel v-if="user" :user="user"/>
+        </div>
       </div>
 
       <section class="home-content">
         <item-list class="item-list" :items="items"/>
       </section>
-
     </div>
   </section>
 </template>

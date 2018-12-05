@@ -1,5 +1,5 @@
 <template>
-  <section class="user-page">
+  <section class="user-page-container">
     <section v-if="isLoadin">Loading...</section>
     <section v-else class="user-page-content">
       <div class="user-profile-preview">
@@ -13,19 +13,41 @@
           </div>
         </div>
       </div>
+      <div v-if="isLoggedUser">
+        <sui-tab active-index="2">
+          <sui-tab-pane icon="user" title="My-Garage">
+            <items-tumbnail :list="user.listedItems"/>
+          </sui-tab-pane>
 
-      <event-feed v-if="user.events.length <= 2" :events="user.events"></event-feed>
-      <items-tumbnail :list="user.listedItems"/>
+          <sui-tab-pane :label="dibs.length+''" title="Dibs">
+            <dibs-page :isDibs="false"/>
+          </sui-tab-pane>
+
+          <sui-tab-pane
+            icon="check"
+            :label="(dibsAns.filter(ans=>ans.isAns).length)+''"
+            title="Dibs Answer"
+          >
+            <dibs-page :isDibs="true"></dibs-page>
+          </sui-tab-pane>
+        </sui-tab>
+      </div>
+      <template v-else>
+            <items-tumbnail :list="user.listedItems"/>
+      </template>
+      <event-feed v-if="user.events.length > 2" :events="user.events"></event-feed>
     </section>
     <garage-footer/>
   </section>
 </template>
 
 <script>
+import userTab from "@/components/user-tab.vue";
 import garageFooter from "@/components/garage-footer.vue";
 import userService from "@/services/user-service.js";
 import itemsTumbnail from "@/components/item-thumbnail.vue";
 import eventFeed from "@/components/event-feed.vue";
+import dibsPage from "@/views/dibs-page.vue";
 
 export default {
   name: "home",
@@ -33,7 +55,9 @@ export default {
     garageFooter,
     itemsTumbnail,
     eventFeed,
-    userService
+    userService,
+    userTab,
+    dibsPage
   },
   data() {
     return {
@@ -47,26 +71,31 @@ export default {
       this.$router.push(`/item/details/${itemId}`);
     },
     setUser() {
-      const loggedUserId = this.$store.getters.getLoggedUser._id;
       const userId = this.$route.params.userId;
-      if (userId === this.loggedUserId) {
-        console.log("displaying logged user profile");
-        isLoggedUser: true;
-      } else {
-        console.log("displaying user profile");
+      const loggedUser = this.$store.getters.getLoggedUser;
+
+      if (loggedUser) {
+        const loggedUserId = this.$store.getters.getLoggedUser._id;
+        if (userId === loggedUserId) this.isLoggedUser = true;
       }
-      var self = this;
+
       this.$store
         .dispatch({ type: "getUserById", userId })
         .then(user => {
-          self.user = user;
+          this.user = user;
           console.log(user);
 
-          self.isLoadin = false;
+          this.isLoadin = false;
         })
         .catch(err => console.log("EROOOOOR"));
-
-      console.log(this.user);
+    }
+  },
+  computed: {
+    dibs() {
+      return this.$store.getters.getLoggedUser.dibs;
+    },
+    dibsAns() {
+      return this.$store.getters.getLoggedUser.dibsAns;
     }
   },
 
@@ -80,8 +109,8 @@ export default {
   },
 
   created() {
-    console.log(this.loggedUserId);
     this.setUser();
+    console.log(this.user);
   }
 };
 </script>

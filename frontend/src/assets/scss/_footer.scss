@@ -9,6 +9,7 @@
   
     .footer-icons-wrapper {
       display: flex;
+      padding: 0 12px;
       justify-content: space-between;
       p {
         display: none;
@@ -37,6 +38,20 @@
         }
       }
     }
+    .footer-notification {
+      font-family: "Avenir", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      position: absolute;
+      height: 15px;
+      width: 15px;
+      top: 0;
+      right: 12px;
+      text-align: center;
+      // padding: 1px 5px;
+      border-radius: 50%;
+      background-color: red;
+      color: white;
+     }
   }
   
   @media (min-width: 600px) {

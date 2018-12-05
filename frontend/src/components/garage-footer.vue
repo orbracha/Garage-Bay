@@ -2,7 +2,7 @@
   <div class="footer" :class="{ open: isMenu }">
     <section class="footer-icons-wrapper">
       <router-link class="footer-item-1" to="/">
-        <div @click="toggleMenu" class="flex row">
+        <div @click="toggleMenu" class="flex row center">
           <i class="fas fa-home"></i>
           <p>Home</p>
         </div>
@@ -36,11 +36,14 @@
           <p>Wishlist</p>
         </div>
       </router-link>
-      <router-link class="footer-item-2" v-if="user" :to="'/user/'+user._id">
-        <div @click="toggleMenu" class="flex row center">
-          <i class="fas fa-user"></i>
-          <p>My profile</p>
-        </div>
+      <router-link class="footer-item-2 flex row" v-if="user" :to="'/user/'+user._id">
+        <i class="fas fa-user">
+          <span
+            v-if="user.dibsAns.filter(ans=>ans.isAns).length || user.dibs.length "
+            class="footer-notification"
+          >{{user.dibsAns.filter(ans=>ans.isAns).length + user.dibs.length}}</span>
+        </i>
+        <p>My profile</p>
       </router-link>
       <router-link class="footer-item-2" v-else to="/login">
         <div @click="toggleMenu" class="flex row center">

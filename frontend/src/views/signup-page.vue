@@ -1,13 +1,13 @@
 <template>
   <section>
-    <header class="home-header">
+    <!-- <header class="home-header">
       <img
         class="home-logo"
         src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png"
         alt
       >
       <h1>Sign-up</h1>
-    </header>
+    </header> -->
     <form class="form-container" @submit.prevent="saveUser">
       <router-link to="/select-image" class="camera-icon">
         <span>{{img? 'Replace':'Add'}} Picture</span>
@@ -108,6 +108,14 @@ export default {
 </script>s
 
 <style lang="scss" scoped>
+.form-container{
+  // width: 300px;
+  // margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+}
 label {
   display: block;
   margin: 5px auto;
@@ -122,6 +130,7 @@ label {
 }
 form {
   margin-top: 80px;
+  // margin: 0 auto;
   img {
     width: 200px;
     margin-top: 20px;
