@@ -1,10 +1,9 @@
 <template>
   <div>
-    <gmap-map :center="center" :zoom="17" class="map"  ref="mapRef">
+    <gmap-map :center="center" :zoom="13" class="map"  ref="mapRef">
       <gmap-marker
         :position="marker.position"
         :clickable="true"
-        :title="marker.title"
         @click="toggleInfoWin"
       >
         <info-window :opened="marker.isInfoOpen" v-if="isLoaded">{{address}}</info-window>
@@ -27,7 +26,6 @@ export default {
       center: { lat: 32.088032, lng: 34.803139 },
       marker: {
         position: { lat: this.itemCoords.lat, lng: this.itemCoords.lng },
-        title: "test title",
         isInfoOpen: false
       },
       address: "No valid address",

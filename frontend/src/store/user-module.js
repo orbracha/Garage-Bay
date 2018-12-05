@@ -35,6 +35,9 @@ export default {
         updateUserLocally(state, { user }) {
             state.loggedUser = user;
             userService.updateUser(user);
+        },
+        logoutUser(state){
+            state.loggedUser=null
         }
 
     },
@@ -78,6 +81,15 @@ export default {
                 commit({ type: 'updateUserLocally', user })
             })
         },
+        logout({commit}){
+          return  userService.logout()
+            .then(()=>{
+                storageService.clear(LOGGEDIN_USER_KEY)
+                commit({type: 'logoutUser'})
+                
+            })
+            
+        }
       
     },
     getters: {

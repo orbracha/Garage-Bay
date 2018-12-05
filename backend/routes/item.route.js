@@ -56,7 +56,7 @@ function addRoutes(app) {
                 res.send(data)
             })
     })
-    app.post('/api/item/add-image', (req, res) => {
+    app.post('/api/item/add-image',requireAuth, (req, res) => {
         const img = req.body;
         itemService.saveImgToCloudinary(img)
             .then(url => res.json(url))
