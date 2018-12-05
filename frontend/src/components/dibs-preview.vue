@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li class="dibs-li">
     <template v-if="!isAnsList">
       <div v-if="fromUser">
         <h1>{{fromUser.nickname}}</h1>
@@ -14,17 +14,19 @@
       </div>
     </template>
     <template v-else>
-      <img :src="dib.item.img">
-      <h1>{{dib.item.title}}</h1>
-      <div v-if="!dib.isAns">
-        <i class="far fa-clock"/>
-        <i class="fas fa-minus-circle" @click="$emit('cancelDibReq',{dib,idx})"/>
+      <div class="dibsAns-container">
+        <img :src="dib.item.img">
+        <h1>{{dib.item.title}}</h1>
+        <span v-if="!dib.isAns">
+          <i class="far fa-clock"/>
+          <i class="fas fa-minus-circle" @click="$emit('cancelDibReq',{dib,idx})"/>
+        </span>
+        <span v-else>
+          <span>The seller is {{(dib.type)? 'Agree':'Deny'}}</span>
+          <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
+          <i @click="$emit('doneBuy',idx)" class="far fa-check-circle"/>
+        </span>
       </div>
-      <span v-else>
-        <span>The seller is {{(dib.type)? 'Agree':'Deny'}}</span>
-        <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
-        <i @click="$emit('doneBuy',idx)" class="far fa-check-circle"/>
-      </span>
     </template>
   </li>
 </template>
@@ -59,34 +61,34 @@ export default {
 
 
 <style lang="scss" scoped>
-li {
-  display: flex;
-  text-align: left;
-  align-items: center;
-  img {
-    height: 60px;
-    width: 60px;
-  }
-  button {
-    height: 25px;
-  }
-  .fa-minus-circle {
-    color: red;
-    cursor: pointer;
-    transition: 0.8s;
-  }
-  .fa-minus-circle:hover {
-    transform: rotate(-90deg);
-  }
-  .fa-check-circle{
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 30px;
-  }
-  .fa-check-circle:hover{
-    background: green;
-  }
-}
+// li {
+//   display: flex;
+//   text-align: left;
+//   align-items: center;
+//   img {
+//     height: 60px;
+//     width: 60px;
+//   }
+//   button {
+//     height: 25px;
+//   }
+//   .fa-minus-circle {
+//     color: red;
+//     cursor: pointer;
+//     transition: 0.8s;
+//   }
+//   .fa-minus-circle:hover {
+//     transform: rotate(-90deg);
+//   }
+//   .fa-check-circle {
+//     cursor: pointer;
+//     border-radius: 50%;
+//     font-size: 30px;
+//   }
+//   .fa-check-circle:hover {
+//     background: green;
+//   }
+// }
 </style>
 
 
