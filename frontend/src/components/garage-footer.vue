@@ -2,7 +2,7 @@
   <div class="footer" :class="{ open: isMenu }">
     <section class="footer-icons-wrapper">
       <router-link class="footer-item-1" to="/">
-        <div @click="toggleMenu" class="flex row">
+        <div @click="toggleMenu" class="flex row center">
           <i class="fas fa-home"></i>
           <p>Home</p>
         </div>

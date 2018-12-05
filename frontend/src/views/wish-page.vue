@@ -63,7 +63,7 @@ export default {
 .wish-spacer {
   // background-color: rgba(194, 125, 125, 0.521);
   text-align: left;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   font-size: 1.3rem;
   color: rgb(255, 255, 255);
   font-weight: 700;
