@@ -5,7 +5,7 @@
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
         <div class="profile-info flec column">
-          <i v-if="isLoggedUser" class="fas fa-pen edit-user"></i>
+          <i v-if="isLoggedUser" class="fas fa-pen edit-user" @click="editUserClicked"></i>
           <h1>{{user.nickname}}'s Garage</h1>
           <div class="rating">
             <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
@@ -67,6 +67,9 @@ export default {
     };
   },
   methods: {
+    editUserClicked(){
+      this.$router.push(`/user/edit/${this.user._id}`)
+    },
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
     },
