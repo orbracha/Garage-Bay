@@ -33,11 +33,11 @@
 
 <script>
 export default {
-  props: ["dib", "idx"],
+  props: ["dib", "idx","isAnsList"],
   data() {
     return {
       fromUser: null,
-      isAnsList: true
+      // isAnsList: true
     };
   },
   methods: {
@@ -51,10 +51,10 @@ export default {
     }
   },
   created() {
-    if (!this.$route.params.dibRoute) {
-      this.isAnsList = false;
-      this.getFromUser();
-    }
+    // if (!this.$route.params.dibRoute) {
+    //   this.isAnsList = false;
+    //   this.getFromUser();
+    // }
   }
 };
 </script>

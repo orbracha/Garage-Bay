@@ -37,6 +37,17 @@
         }
       }
     }
+    .footer-notification {
+      font-family: "Avenir", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      position: absolute;
+      top: -2px;
+      right: 19px;
+      padding: 1px 5px;
+      border-radius: 50%;
+      background-color: red;
+      color: white;
+     }
   }
   
   @media (min-width: 600px) {
