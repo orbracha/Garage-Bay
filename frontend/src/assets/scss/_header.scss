@@ -1,4 +1,8 @@
-.home-header {
+
+    .burger{
+      display: none;
+    }
+    .home-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,12 +18,6 @@
     background-repeat:   no-repeat;
     background-position: center center;
     box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
-
-  
-
-    .burger{
-      display: none;
-    }
 
     input{
         border: 1px solid rgb(206, 206, 206);
@@ -64,11 +62,10 @@
 
       @media (min-width:600px){
         .burger{
-            // padding-right: 15px;
             position: absolute;
+            display: inline-block;
             top: 25px;
             left: 25px;
-            display: inline-block;
         }
         .home-header{
             padding-left: 65px;
