@@ -58,16 +58,12 @@ function getByName(userName) {
 
 function updateUserDibs(userId, dib) {
     const id = new ObjectId(userId)
-    console.log('update user', userId)
-    console.log('update user with dib', dib)
     return mongoService.connectToDb().then(db => {
         return db.collection('user').updateOne({ _id: id }, { $push: { dibs: dib } })
     })
 }
 function updateUserDibsAns(userId, ans) {
     const id = new ObjectId(userId)
-    console.log('update user', id)
-    console.log('update ans', ans.dib.item)
     return mongoService.connectToDb().then(db => {
         return db.collection('user').updateOne(
             {
@@ -140,7 +136,6 @@ function add(user) {
 function update(user) {
     const userId = new ObjectId(user._id)
     delete user._id;
-
     user.wishList = user.wishList.map(id => {
         return new ObjectId(id)
     })
