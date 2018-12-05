@@ -5,9 +5,8 @@
         <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
         <div>
           <h3>{{seller.nickname}}</h3>
-
-          <span v-for="n in seller.rate" :key="n" class="fa fa-star checked"></span>
-          <span v-for="x in 5-seller.rate" :key="x.idx" class="fa fa-star empty-star"></span>
+          <div>{{distance}} Km away </div>
+     
         </div>
       </div>
 
@@ -76,6 +75,10 @@ export default {
       return user.wishList.some(item => {
         return item === this.item._id;
       });
+    },
+    distance(){
+      let itemCoords=this.item.location
+      return this.$store.getters.getDistance(itemCoords)
     }
   },
   created() {
