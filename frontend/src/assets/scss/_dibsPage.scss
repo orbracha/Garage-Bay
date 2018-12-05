@@ -1,0 +1,44 @@
+
+
+.dibs-container{
+    margin-top: 70px;
+    ul{
+        padding: 0;
+    }
+    li {
+        .dibsAns-container{
+            display: flex;
+            text-align: left;
+            align-items: center;
+            padding: 10px;
+            width: 100%;
+            border-bottom: 1px solid #4b4646;
+            h1{
+                display: inline;
+            }
+        }
+  img {
+        height: 60px;
+        width: 60px;
+  }
+  button {
+        height: 25px;
+  }
+  .fa-minus-circle {
+        color: red;
+    cursor: pointer;
+        transition: 0.8s;
+  }
+  .fa-minus-circle:hover {
+        transform: rotate(-90deg);
+  }
+  .fa-check-circle {
+        cursor: pointer;
+        border-radius: 50%;
+        font-size: 30px;
+  }
+  .fa-check-circle:hover {
+         background: green;
+  }
+}    
+}

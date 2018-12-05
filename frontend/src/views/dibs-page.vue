@@ -1,13 +1,13 @@
 <template>
-  <section>
-    <garage-header>
+  <section v-if="loggedUser" class="dibs-container">
+    <!-- <garage-header>
       <div slot="headline">
         <h3>Dibs</h3>
       </div>
       <span slot="optionalIcon">
         <i class="fas fa-shopping-bag"/>
       </span>
-    </garage-header>
+    </garage-header>-->
     <dibs-list
       @sendAns="sendAns"
       @removeDib="removeDib"
@@ -30,6 +30,9 @@ export default {
     },
     dibsAns() {
       return this.$store.getters.getLoggedUser.dibsAns;
+    },
+    loggedUser() {
+      return this.$store.getters.getLoggedUser;
     }
   },
   methods: {

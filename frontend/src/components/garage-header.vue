@@ -23,7 +23,10 @@
           <i class="fas fa-donate"></i>
         </router-link>
         <router-link class="dibs-container" to="/dibs/dibsAns">
-          <span v-if="user.dibsAns.length" class="notification">{{user.dibsAns.length}}</span>
+          <span
+            v-if="user.dibsAns.filter(ans=>ans.isAns).length"
+            class="notification"
+          >{{user.dibsAns.length}}</span>
           <i class="fas fa-shopping-cart"></i>
         </router-link>
       </template>
