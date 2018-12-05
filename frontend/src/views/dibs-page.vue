@@ -1,13 +1,5 @@
 <template>
   <section v-if="loggedUser" class="dibs-container">
-    <!-- <garage-header>
-      <div slot="headline">
-        <h3>Dibs</h3>
-      </div>
-      <span slot="optionalIcon">
-        <i class="fas fa-shopping-bag"/>
-      </span>
-    </garage-header>-->
     <dibs-list
       @sendAns="sendAns"
       @removeDib="removeDib"

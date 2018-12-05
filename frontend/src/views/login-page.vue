@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="login-page page-layout flex column">
-      <img class="home-logo" src="../assets/img/logo1.svg">
+      <!-- <img class="home-logo" src="../assets/img/logo1.svg"> -->
       <form class="flex column" @submit.prevent="checkUser">
         <label class="input-line">
           <div>Username:</div>
@@ -17,15 +17,14 @@
       <p>New Here?</p>
       <router-link to="/signup"> <button class="sign-btn">Sign up!</button></router-link>
       <p>or</p>
+      <router-link to="/">
       <button class="sign-btn">Continue as a guest</button>
-      <!-- <garage-footer/> -->
+      </router-link>
     </div>
   </section>
 </template>
 
 <script>
-// @ is an alias to /src
-// import userList from "@/components/user-list.vue";
 import garageFooter from "@/components/garage-footer.vue";
 
 export default {

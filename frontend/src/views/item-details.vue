@@ -8,7 +8,7 @@
           <span id="item-created">Listed : {{currItem.createAt | relativeTime}}</span>
           <div v-if="isLoggedUser" class="edit-btn-container">
             <router-link :to="`/item/edit/${currItem._id}`">
-              <i class="far fa-edit"/>
+              <i class="far fa-edit edit-item"/>
             </router-link>
             <i @click="removeItem" class="far fa-trash-alt"></i>
           </div>
@@ -18,7 +18,7 @@
         </router-link>
       </header>
       <section class="item-content">
-        <div class="img-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
+        <div class="img-details-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
         <div class="details-container">
           <div>
             <div>
