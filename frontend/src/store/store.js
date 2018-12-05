@@ -4,6 +4,7 @@ import userModule from './user-module.js'
 import itemModule from './item-module.js'
 import msgModule from './msg-module.js'
 import searchModule from './search-module.js'
+import distanceService from '../services/distance-service.js'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -48,5 +49,11 @@ export default new Vuex.Store({
     user(state){
       return state.loggedUser
     },
+    getDistance(state, userCoords, itemCoords){
+      var dis= distanceService.calcDistance(userCoords, location)
+      console.log('distance ret is:', dis);
+      return dis
+      
+    }
   }
 });
