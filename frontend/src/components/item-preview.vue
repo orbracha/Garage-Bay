@@ -1,7 +1,7 @@
 <template>
   <li v-if="item" class="item-preview-container">
     <section class="main-list-item" @click="itemClicked(item._id)">
-      <div class="seller-preview" @click="userClicked(seller._id)">
+      <div class="seller-preview" @click.stop="userClicked(seller._id)">
         <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
         <div>
           <h3>{{seller.nickname}}</h3>
