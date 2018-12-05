@@ -31,7 +31,7 @@
               <p>{{currItem.price}}$</p>
             </div>
             <div class="action-btn-container">
-              <button @click="sendDibs">Buy</button>
+              <button class="dibs-btn" @click="sendDibs">Call dibs!</button>
               <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
             </div>
           </div>

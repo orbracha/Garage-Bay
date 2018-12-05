@@ -42,14 +42,18 @@ export default {
     };
   },
   mounted() {
-    this.video = this.$refs.video;
-    this.stream && this.stream.stop && this.stream.stop();
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-        this.stream = stream;
-        this.video.src = window.URL.createObjectURL(stream);
-        this.video.play().catch(err => console.log(err));
-      });
+    var isUser = this.$store.getters.getLoggedUser;
+    if (!isUser) this.$router.push("/login");
+    else {
+      this.video = this.$refs.video;
+      this.stream && this.stream.stop && this.stream.stop();
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+          this.stream = stream;
+          this.video.src = window.URL.createObjectURL(stream);
+          this.video.play().catch(err => console.log(err));
+        });
+      }
     }
   },
   methods: {
@@ -68,14 +72,9 @@ export default {
       this.saveImage();
     },
     saveImage() {
-  
-      if (this.captures[0]) {
-        var imageToSave = this.captures[0];
-        console.log(imageToSave);
-      } else {
-        var imageToSave = this.imageData;
-        console.log("in else");
-      }
+      if (this.captures[0])  var imageToSave = this.captures[0];
+       else  var imageToSave = this.imageData;
+      
 
       this.$store
         .dispatch({ type: "saveImage", imageToSave })
@@ -109,11 +108,11 @@ export default {
         reader.readAsDataURL(input.files[0]);
       }
     }
-  },
-  beforeDestroy() {
-    const tracks = this.stream.getTracks();
-    tracks.forEach(track => track.stop());
   }
+  // beforeDestroy() {
+  //   const tracks = this.stream.getTracks();
+  //   tracks.forEach(track => track.stop());
+  // }
 };
 </script>
 

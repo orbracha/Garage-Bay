@@ -1,30 +1,58 @@
 <template>
-  <header class="home-header">
-    <div class="burger">
-      <i class="fas fa-times" v-if="isMenu" @click="toggleMenu"></i>
-      <i class="fas fa-bars" v-else @click="toggleMenu"></i>
+  <header class="home-header flex row between baseline">
+    <div class="left-icons flex row">
+      <div class="logo-container flex row center">
+        <div class="burger">
+          <i class="fas fa-times" v-if="isMenu" @click="toggleMenu"></i>
+          <i class="fas fa-bars" v-else @click="toggleMenu"></i>
+        </div>
+
+        <router-link to="/">
+          <div class="logo-text">dibs</div>
+        </router-link>
+      </div>
+      
     </div>
-
-    <router-link to="/">
-      <div class="logo-text">dibs</div>
-    </router-link>
-
     <!-- <input type="text" placeholder=" Search item"> -->
     <router-link to="/search">
       <i class="fas fa-search"/>
     </router-link>
+
     <div class="header-icons-container">
+      <template v-if="user">
+        <router-link class="dibs-container" to="/dibs">
+          <span v-if="user.dibs.length" class="notification">{{user.dibs.length}}</span>
+          <i class="fas fa-donate"></i>
+        </router-link>
+        <router-link class="dibs-container" to="/dibs/dibsAns">
+          <span
+            v-if="user.dibsAns.filter(ans=>ans.isAns).length"
+            class="notification"
+          >{{user.dibsAns.length}}</span>
+          <i class="fas fa-shopping-cart"></i>
+        </router-link>
+      </template>
       <router-link class="header-profile-icon" v-if="user" :to="'/user/'+user._id">
+      <div v-if="user">
+        <a @click="logoutUser" class="logoutBtn">Logout</a>
+        <router-link class="header-profile-icon"  :to="'/user/'+user._id">
         <i class="fas fa-user"></i>
         <span
           v-if="user.dibsAns.filter(ans=>ans.isAns).length || user.dibs.length "
           class="notification"
         >{{user.dibsAns.filter(ans=>ans.isAns).length + user.dibs.length}}</span>
       </router-link>
+      </div>
 
-      <router-link class="header-profile-icon" v-else to="/login">
-        <i class="fas fa-user"></i>
-      </router-link>
+      <div v-else>
+        <router-link class="header-profile-icon"  to="/login">
+          <!-- <i class="fas fa-user"></i> -->Login
+        </router-link> |
+        <router-link class="header-profile-icon"  to="/signup">
+          <!-- <i class="fas fa-user"></i> -->
+          Signup
+        </router-link>
+      </div>
     </div>
   </header>
 </template>
@@ -34,6 +62,13 @@ export default {
   methods: {
     toggleMenu() {
       this.$store.commit({ type: "toggleMenu" });
+    },
+    logoutUser(){
+      console.log('curr user is: ', this.user);
+      this.$store.dispatch({type: 'logout'})
+      .then(()=>{
+        this.$router.push('/')
+      })
     }
   },
   computed: {
@@ -48,4 +83,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.logoutBtn{
+  cursor: pointer;
+}
 </style>
