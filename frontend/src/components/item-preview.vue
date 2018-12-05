@@ -2,7 +2,7 @@
   <li v-if="item" class="item-preview-container">
     <section class="main-list-item" @click="itemClicked(item._id)">
       <div class="seller-preview" @click.stop="userClicked(seller._id)">
-        <img class="seller-thumbnail" v-if="item.img" :src="seller.img">
+        <img class="seller-thumbnail" v-if="seller.img" :src="seller.img">
         <div>
           <h3>{{seller.nickname}}</h3>
           <div v-if="loggedUser">{{distance}} Km away </div>
@@ -13,7 +13,7 @@
       <div class="img-wrapper">
         <i class="fas fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
         <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
-        <img class="main-list-img" :src="item.img">
+        <img v-if="item.img" class="main-list-img" :src="item.img" >
       </div>
 
       <div class="main-item-details">
@@ -42,7 +42,7 @@ export default {
       const itemId = this.item._id;
       var user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
       const wishlistItemIdx = user.wishList.indexOf(itemId);
-      console.log("wish list item index", wishlistItemIdx);
+
       if (wishlistItemIdx === -1) {
         user.wishList.push(itemId);
       } else {
@@ -53,7 +53,6 @@ export default {
     },
 
     userClicked(sellerId) {
-      console.log("seller clicked");
       this.$router.push(`/user/${sellerId}`);
     },
     itemClicked(itemId) {
@@ -83,6 +82,7 @@ export default {
   },
   created() {
     this.loggedUser = this.$store.getters.getLoggedUser;
+
   }
 };
 </script>

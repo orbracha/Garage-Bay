@@ -8,6 +8,8 @@ cloudinary.config({
 });
 
 function query(criteria = {}) {
+    console.log('criteria is:', criteria);
+    
     return mongoService.connectToDb()
         .then(db => {
             return db.collection('item')
@@ -29,6 +31,7 @@ function query(criteria = {}) {
                     }
                 ]).toArray()
                 .then(items => {
+
                     return items
                 })
         })
@@ -76,7 +79,8 @@ function update(item) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const itemCollection = dbConn.collection('item');
-            return itemCollection.updateOne({ "_id": itemId }, { $set: item }).then(() => item)
+            itemCollection.updateOne({ "_id": itemId }, { $set: item })
+            return query({"_id":itemId})
         })
 }
 function getCatagories() {
