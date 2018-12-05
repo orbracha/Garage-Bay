@@ -5,35 +5,29 @@
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
         <div class="profile-info flec column">
-          <i v-if="isLoggedUser" class="fas fa-pen edit-user"></i>
-          <h1>{{user.nickname}}'s Garage</h1>
+          <i v-if="isLoggedUser" class="far fa-edit edit-user"></i>
+          <h1>{{user.nickname}}{{(isLoggedUser)? '':'\'s Garage'}}</h1>
           <div class="rating">
             <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
             <span v-for="x in 5-user.rate" :key="x.idx" class="fa fa-star empty-star"></span>
           </div>
         </div>
       </div>
-      <div v-if="isLoggedUser">
-        <sui-tab active-index="2">
-          <sui-tab-pane icon="user" title="My-Garage">
+      <div class="tab-container" v-if="isLoggedUser">
+        <sui-tab active-index="0">
+          <sui-tab-pane :label="user.listedItems.length+''" title="My Garage">
             <items-tumbnail :list="user.listedItems"/>
           </sui-tab-pane>
-
-          <sui-tab-pane :label="dibs.length+''" title="Dibs">
+          <sui-tab-pane :label="dibs.length+''" title="Dibs Requset">
             <dibs-page :isDibs="false"/>
           </sui-tab-pane>
-
-          <sui-tab-pane
-            icon="check"
-            :label="(dibsAns.filter(ans=>ans.isAns).length)+''"
-            title="Dibs Answer"
-          >
+          <sui-tab-pane :label="(dibsAns.filter(ans=>ans.isAns).length)+''" title="Dibs Answer">
             <dibs-page :isDibs="true"></dibs-page>
           </sui-tab-pane>
         </sui-tab>
       </div>
       <template v-else>
-            <items-tumbnail :list="user.listedItems"/>
+        <items-tumbnail :list="user.listedItems"/>
       </template>
       <event-feed v-if="user.events.length > 2" :events="user.events"></event-feed>
     </section>

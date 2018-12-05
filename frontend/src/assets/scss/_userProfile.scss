@@ -1,12 +1,11 @@
 .user-page-container{
 
-    margin-top: 70px;
+    margin-top: 80px;
     margin-left: 200px;
 }
 
 
 .user-page-content{
-  // margin-right: 240px;
 
   .user-profile-preview {
     position: relative;
@@ -29,13 +28,9 @@
   
     .edit-user {
       position: absolute;
-  
+      left: 17px;
       color: white;
-      font-size: 0.8rem;
-      height: 30px;
-      width: 30px;
-      background-color: rgb(41, 130, 214);
-      border-radius: 20px;
+      cursor: pointer;
     }
     h1 {
       text-align: left;
@@ -51,15 +46,74 @@
 
   }
 
+.tab-container{
+  margin: 20px;
+  .tab-item{
+    border: 3px solid;
+  }
 
+  .ui.tabular.menu .active.item {
+    background: #80D39B;
+    border: unset;
+  }
+  .ui.tabular.menu .item {
+    background: #c5ebd1;
+    border: unset;
+    width: 33.33%;
+  }
+  .ui.tabular.menu {
+    border: unset;
+    display: flex;
+  }
+  .ui.menu .item>.label{
+    background: #dd5959;
+  }
+  i{
+    color: black;
+  }
+  .ui.segment {
+    background: #80D39B;
+    
+  }
+  .ui.attached.segment {
+    border: unset;
+  }
+}
 
 
 @media(max-width:950px){
+  .tab-container{
+    margin: 10px;
+  }
   .user-page-container{
-
     // margin-top: 70px;
     margin-left: unset;
     margin-bottom: 10px;
+    .user-profile-preview {
+      margin: 10px;
+    }
 }
+}
+
+
+@media(max-width:520px){
+  .ui.menu .item>.label,.ui.label:last-child {
+    width: fit-content;
+  }
+}
+@media(max-width:410px){
+  .ui.tabular.menu .item {
+    width: 100px;
+    text-align: center;
+    font-size: 12px;
+    text-align: left;
+  }
+  .ui.menu .item>.label {
+    margin-top: 10px;
+  }
+  .ui.menu .item>i.icon {
+    display: block;
+    margin: 0 auto;
+  }
 }
 

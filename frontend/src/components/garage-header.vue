@@ -13,13 +13,11 @@
       </div>
       
     </div>
-    <!-- <input type="text" placeholder=" Search item"> -->
     <router-link to="/search">
       <i class="fas fa-search"/>
     </router-link>
 
     <div class="header-icons-container">
-      <!-- <router-link class="header-profile-icon" v-if="user" :to="'/user/'+user._id"/> -->
       <div v-if="user">
         <a @click="logoutUser" class="logoutBtn">Logout</a>
         <router-link class="header-profile-icon"  :to="'/user/'+user._id">
@@ -33,10 +31,9 @@
 
       <div v-else>
         <router-link class="header-profile-icon"  to="/login">
-          <!-- <i class="fas fa-user"></i> -->Login
+          Login
         </router-link> |
         <router-link class="header-profile-icon"  to="/signup">
-          <!-- <i class="fas fa-user"></i> -->
           Signup
         </router-link>
       </div>
