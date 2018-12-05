@@ -16,7 +16,11 @@ export default {
   loadFromLocalStorage,
   loadDibs,
   getUserWhishlist,
-  updateUser
+  updateUser,
+  logout
+}
+function logout(){
+  return axios.post(`${BASE_URL}/logout`)
 }
 function updateUser(user){
   storageService.save(LOGGEDIN_USER_KEY,user)

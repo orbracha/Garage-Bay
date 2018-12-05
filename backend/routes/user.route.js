@@ -14,7 +14,11 @@ function addRoutes(app) {
             })
             .catch(err => res.status(401).send(err))
     })
-    
+    app.post('/api/user/logout', (req, res)=>{
+        req.session.destroy()
+        res.end()
+        
+    })
 
 
     app.get('/api/user/logout', (req, res) => {

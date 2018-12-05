@@ -19,6 +19,7 @@
     </router-link>
 
     <div class="header-icons-container">
+<<<<<<< HEAD
       <template v-if="user">
         <router-link class="dibs-container" to="/dibs">
           <span v-if="user.dibs.length" class="notification">{{user.dibs.length}}</span>
@@ -34,12 +35,25 @@
       </template>
 
       <router-link class="header-profile-icon" v-if="user" :to="'/user/'+user._id">
+=======
+      
+      <div v-if="user">
+        <a @click="logoutUser" class="logoutBtn">Logout</a>
+        <router-link class="header-profile-icon"  :to="'/user/'+user._id">
+>>>>>>> dfc1d44a5a06a0bc6412b9f1dc7efb51d52d94f2
         <i class="fas fa-user"></i>
       </router-link>
+      </div>
 
-      <router-link class="header-profile-icon" v-else to="/login">
-        <i class="fas fa-user"></i>
-      </router-link>
+      <div v-else>
+        <router-link class="header-profile-icon"  to="/login">
+          <!-- <i class="fas fa-user"></i> -->Login
+        </router-link> |
+        <router-link class="header-profile-icon"  to="/signup">
+          <!-- <i class="fas fa-user"></i> -->
+          Signup
+        </router-link>
+      </div>
     </div>
   </header>
 </template>
@@ -49,6 +63,13 @@ export default {
   methods: {
     toggleMenu() {
       this.$store.commit({ type: "toggleMenu" });
+    },
+    logoutUser(){
+      console.log('curr user is: ', this.user);
+      this.$store.dispatch({type: 'logout'})
+      .then(()=>{
+        this.$router.push('/')
+      })
     }
   },
   computed: {
@@ -63,4 +84,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.logoutBtn{
+  cursor: pointer;
+}
 </style>
