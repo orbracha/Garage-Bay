@@ -19,10 +19,7 @@ export default {
         },
         toggleWishlist(state, itemId) {
             const id = new ObjectId(itemId)
-
             const wishlistItemIdx = state.loggedUser.wishList.indexOf(id)
-
-
             if (wishlistItemIdx === -1) {
                 state.loggedUser.wishList.push(id)
             } else {
@@ -36,8 +33,8 @@ export default {
             state.loggedUser = user;
             userService.updateUser(user);
         },
-        logoutUser(state){
-            state.loggedUser=null
+        logoutUser(state) {
+            state.loggedUser = null
         }
 
     },
@@ -53,20 +50,29 @@ export default {
                 contex.commit({ type: 'setLoggedUser', user })
             })
         },
-        checkUser({ commit }, { user }) {
+        checkUser(context, { user }) {
             return userService.checkUser(user)
+                .then(retUser => {
+                    return context.dispatch({ type: 'getLocation' })
+                       .then(loc=>{
+                           retUser.location=loc;
+                           return retUser;
+                       })
+                })
                 .then(user => {
-                    commit({ type: 'setLoggedUser', user })
+                    context.commit({ type: 'setLoggedUser', user })
                 })
         },
         getUserById({ commit }, { userId }) {
             return userService.getById(userId)
-                .then(user => { 
-                    return user})
+                .then(user => {
+
+                    return user
+                })
         },
-        getUserWhishlist({commit}, {userId}){
+        getUserWhishlist({ commit }, { userId }) {
             return userService.getUserWhishlist(userId)
-            .then(user => user)
+                .then(user => user)
         },
         addUser({ commit }, { user }) {
             return userService.edit(user)
@@ -81,16 +87,13 @@ export default {
                 commit({ type: 'updateUserLocally', user })
             })
         },
-        logout({commit}){
-          return  userService.logout()
-            .then(()=>{
-                storageService.clear(LOGGEDIN_USER_KEY)
-                commit({type: 'logoutUser'})
-                
-            })
-            
+        logout({ commit }) {
+            return userService.logout()
+                .then(() => {
+                    storageService.clear(LOGGEDIN_USER_KEY)
+                    commit({ type: 'logoutUser' })
+                })
         }
-      
     },
     getters: {
         getLoggedUser(state) {

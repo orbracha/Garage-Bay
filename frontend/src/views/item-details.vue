@@ -102,30 +102,32 @@ export default {
     chatClicked() {
       this.$router.push(`/chat`);
     },
-    getDistance: async function() {
+    getDistance() {
       var itemCoords = this.currItem.location;
-      var userCoords = await this.$store.dispatch({ type: "getLocation" });
-      console.log("USER COORDS", userCoords, "item coords:", itemCoords);
-      this.distance = this.calcDistance(userCoords, itemCoords);
+      var userCoords=this.$store.getters.getLoggedUser
+      
+      console.log('user coords', userCoords);
+    console.log('item coords', itemCoords);
+      // this.distance = this.$store.getDistance(userCoords, itemCoords);
     },
-    calcDistance(userCoords, itemCoords) {
-      var R = 6371;
-      // var dLat = deg2rad(lat2-lat1);
-      var dLat = this.deg2rad(itemCoords.lat - userCoords.lat); // deg2rad below
-      var dLon = this.deg2rad(itemCoords.lng - userCoords.lng);
-      var a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(this.deg2rad(userCoords.lat)) *
-          Math.cos(this.deg2rad(userCoords.lng)) *
-          Math.sin(dLon / 2) *
-          Math.sin(dLon / 2);
-      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      var d = R * c; // Distance in km
-      return d.toFixed(2);
-    },
-    deg2rad(deg) {
-      return deg * (Math.PI / 180);
-    }
+    // calcDistance(userCoords, itemCoords) {
+    //   var R = 6371;
+    //   // var dLat = deg2rad(lat2-lat1);
+    //   var dLat = this.deg2rad(itemCoords.lat - userCoords.lat); // deg2rad below
+    //   var dLon = this.deg2rad(itemCoords.lng - userCoords.lng);
+    //   var a =
+    //     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    //     Math.cos(this.deg2rad(userCoords.lat)) *
+    //       Math.cos(this.deg2rad(userCoords.lng)) *
+    //       Math.sin(dLon / 2) *
+    //       Math.sin(dLon / 2);
+    //   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    //   var d = R * c; // Distance in km
+    //   return d.toFixed(2);
+    // },
+    // deg2rad(deg) {
+    //   return deg * (Math.PI / 180);
+    // }
   },
   computed: {
     relativeTime(time) {
