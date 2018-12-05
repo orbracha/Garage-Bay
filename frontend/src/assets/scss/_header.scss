@@ -1,4 +1,8 @@
-.home-header {
+
+    .burger{
+      display: none;
+    }
+    .home-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,11 +65,10 @@
 
       @media (min-width:600px){
         .burger{
-            // padding-right: 15px;
             position: absolute;
+            display: inline-block;
             top: 25px;
             left: 25px;
-            display: inline-block;
         }
         .home-header{
             padding-left: 65px;

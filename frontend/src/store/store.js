@@ -49,11 +49,12 @@ export default new Vuex.Store({
     user(state){
       return state.loggedUser
     },
-    getDistance(state, userCoords, itemCoords){
-      var dis= distanceService.calcDistance(userCoords, location)
-      console.log('distance ret is:', dis);
-      return dis
-      
+    someMethod: (state) => (id) => {
+      return state.things.find(thing => thing.id === id)
+    },
+    getDistance:(state)=>(itemCoords)=>{
+      let userCoords=state.userModule.loggedUser.location
+      return distanceService.calcDistance(userCoords, itemCoords)
     }
   }
 });

@@ -11,7 +11,7 @@
           <div class="logo-text">dibs</div>
         </router-link>
       </div>
-      
+
     </div>
     <router-link to="/search">
       <i class="fas fa-search"/>
