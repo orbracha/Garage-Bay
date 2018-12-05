@@ -4,11 +4,15 @@ import router from './router';
 import store from './store/store';
 import VueMoment from 'vue-moment'
 import moment from 'moment-timezone'
-import './registerServiceWorker';
-import './assets/scss/main.scss';
 import * as VueGoogleMaps from "vue2-google-maps"
 import VueCarousel from 'vue-carousel';
+import SuiVue from 'semantic-ui-vue';
+import 'semantic-ui-css/semantic.min.css';
+import './registerServiceWorker';
+import './assets/scss/main.scss';
 
+
+Vue.use(SuiVue);
 Vue.use(VueMoment, {
   moment,
 })

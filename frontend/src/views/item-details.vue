@@ -13,7 +13,9 @@
             <i @click="removeItem" class="far fa-trash-alt"></i>
           </div>
         </div>
-        <img class="details-seller-img" :src="currSeller.img" alt="placeholder image">
+        <router-link :to="'/user/'+ currSeller._id">
+          <img class="details-seller-img" :src="currSeller.img" alt="placeholder image">
+        </router-link>
       </header>
       <section class="item-content">
         <div class="img-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
@@ -29,7 +31,7 @@
               <p>{{currItem.price}}$</p>
             </div>
             <div class="action-btn-container">
-              <button @click="sendDibs">Buy</button>
+              <button class="dibs-btn" @click="sendDibs">Call dibs!</button>
               <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
             </div>
           </div>
