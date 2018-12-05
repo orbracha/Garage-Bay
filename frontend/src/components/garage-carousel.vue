@@ -8,7 +8,7 @@
     :paginationEnabled="false"
     :loop="true"
   > -->
-   <carousel class="carousel" :autoplay="true"  :per-page="1" :navigate-to="someLocalProperty" :mouse-drag="false">
+   <carousel class="carousel" :autoplay="true"  :per-page="1" :mouse-drag="false">
     <slide>
       <garage-card :user="user"/>
     </slide>
@@ -44,17 +44,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .carousel {
-  margin-top: 90px;
-
+  // margin-top: 90px;
+  .VueCarousel-pagination{
+        transform: translate(-50px, -50px);
+  }
 }
-@media(min-width:950px){
-    carousel{
-        margin-left: 210px;
-    }
-}
-
 
 </style>
  

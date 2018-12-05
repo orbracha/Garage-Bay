@@ -138,4 +138,12 @@
         transition: 0.3s;
     }
   }
+  .screen{
+
+    &.open{
+      opacity: 0;
+      visibility: hidden;
+    }
   }
+}
+  

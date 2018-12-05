@@ -1,15 +1,17 @@
 <template>
   <header class="home-header flex row between baseline">
     <div class="left-icons flex row">
-      <div class="burger">
-        <i class="fas fa-times" v-if="isMenu" @click="toggleMenu"></i>
-        <i class="fas fa-bars" v-else @click="toggleMenu"></i>
+      <div class="logo-container flex row center">
+        <div class="burger">
+          <i class="fas fa-times" v-if="isMenu" @click="toggleMenu"></i>
+          <i class="fas fa-bars" v-else @click="toggleMenu"></i>
+        </div>
+
+        <router-link to="/">
+          <div class="logo-text">dibs</div>
+        </router-link>
       </div>
-
-      <router-link to="/">
-        <div class="logo-text">dibs</div>
-      </router-link>
-
+      
     </div>
     <!-- <input type="text" placeholder=" Search item"> -->
     <router-link to="/search">

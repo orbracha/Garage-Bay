@@ -3,7 +3,7 @@
     <section class="page-layout">
       <section>
         <div class="wish-spacer">My Wishlist</div>
-        <section v-if="isLoadin">Loading...</section>
+        <section v-if="isLoadin" class="loading">Loading...</section>
         <items-thumbnail v-else :list="wishlist"/>
       </section>
     </section>
@@ -56,7 +56,10 @@ export default {
 
 <style lang="scss" scoped>
 
-
+.loading{
+  color: white;
+  padding-left: 20px;
+}
 .wish-spacer {
   // background-color: rgba(194, 125, 125, 0.521);
   text-align: left;

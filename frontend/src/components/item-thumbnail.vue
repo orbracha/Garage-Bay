@@ -1,9 +1,9 @@
 <template>
   <ul class="items-thumbnail">
     <li v-for="(item,idx) in list" :key="idx" @click="itemClicked(item._id)">
-      <!-- <div class="img-container"> -->
+      <div class="img-container">
         <img class="img-thumb" :src="item.img">
-      <!-- </div> -->
+      </div>
     </li>
   </ul>
 </template>
