@@ -15,7 +15,7 @@
             </p>
           </div>
         </div>-->
-        <h3 class="home-page-text">Chech Out Our Best Selling Garages:</h3>
+        <h3 class="home-page-text">Check Out Our Best Selling Garages:</h3>
         <div class="carousel-container">
           <!-- <div class="carousel-header">Highest rated sellers</div> -->
           <garage-carousel v-if="user" :user="user"/>

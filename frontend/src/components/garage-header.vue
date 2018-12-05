@@ -5,20 +5,19 @@
       <i class="fas fa-bars" v-else @click="toggleMenu"></i>
     </div>
 
-  
-      <div class="logo-container flex row center">
-        <router-link to="/">
-          <div class="logo-text">dibs</div>
-        </router-link>
-      </div>
-    <!-- <input type="text" placeholder=" Search item"> -->
+    <div class="logo-container flex row center">
+      <router-link to="/">
+        <div class="logo-text">dibs</div>
+      </router-link>
+    </div>
+
+    <!-- </div> -->
     <router-link to="/search">
       <i class="fas fa-search"/>
     </router-link>
 
     <div class="header-icons-container">
-      <!-- <router-link class="header-profile-icon" v-if="user" :to="'/user/'+user._id"/> -->
-      <div v-if="user" >
+      <div v-if="user">
         <a @click="logoutUser" class="logoutBtn">Logout</a>
         <router-link class="header-profile-icon" :to="'/user/'+user._id">
           <i class="fas fa-user"></i>
@@ -34,9 +33,7 @@
           <!-- <i class="fas fa-user"></i> -->
           Login
         </router-link>&ensp;|
-        <router-link class="header-profile-icon" to="/signup">
-          Signup
-        </router-link>
+        <router-link class="header-profile-icon" to="/signup">Signup</router-link>
       </div>
     </div>
   </header>
