@@ -10,12 +10,20 @@
   </router-link>
 </template>
 
+<script>
+export default {
+  props: ["item"]
+};
+</script>
+
 <style lang="scss" scoped>
 a{
   text-decoration: none;
-  color: black;
+  color: rgb(53, 53, 53);
 }
 li {
+  color: rgb(53, 53, 53);
+  
   text-align: left;
   display: flex;
   margin-bottom: 5px;
@@ -33,9 +41,5 @@ li {
 </style>
 
 
-<script>
-export default {
-  props: ["item"]
-};
-</script>
+
 

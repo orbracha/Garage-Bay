@@ -2,10 +2,16 @@
     .burger{
       display: none;
     }
-    .logoutBtn{
-      color: $mid;
+    .header-icons-container{
     display: none;
+    .logoutBtn{
+        color:$mid;   
+          }
     }
+    // .logoutBtn{
+    //   color: $mid;
+    // display: none;
+    // }
     .home-header {
     padding: 0 20px;
     z-index: 2;
@@ -24,7 +30,7 @@
         border: 1px solid rgb(206, 206, 206);
       }
     .logo-text{
-      // color:$mid;
+      // color:#80D39B;
       color:$v1;
       font-size: 50px;
       font-family: $lobster;
@@ -66,9 +72,13 @@
       }
 
       @media (min-width:600px){
-        .logoutBtn{
+        .header-icons-container{
         display: inline-block;       
+      
           }
+        // .logoutBtn{
+        // display: inline-block;       
+        //   }
         .burger{
             position: absolute;
             display: inline-block;
@@ -90,7 +100,7 @@
         }
         .home-header{
             padding: 0 20px;
-            padding-left: 20px;
+            // padding-left: 20px;
 
         } 
 

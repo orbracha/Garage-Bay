@@ -1,11 +1,11 @@
 <template>
   <section>
-    <garage-header>
+    <!-- <garage-header>
       <div slot="headline">
         <h3>Chat Page</h3>
       </div>
       <span slot="optionalIcon">&#128172;</span>
-    </garage-header>
+    </garage-header> -->
     <generic-list :data="userMsgs"></generic-list>
     <garage-footer/>
   </section>

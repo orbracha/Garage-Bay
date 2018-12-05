@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="generic-list">
     <generic-preview v-for="(item,idx) in data" :item="item" :key="idx"></generic-preview>
   </ul>
 </template>
@@ -16,5 +16,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.generic-list{
+  padding: 20px;
+}
 </style>
+

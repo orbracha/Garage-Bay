@@ -1,13 +1,11 @@
 <template>
   <section>
-    <section class="page-layout">
       <section>
         <div class="wish-spacer">My Wishlist</div>
         <section v-if="isLoadin" class="loading">Loading...</section>
         <items-thumbnail v-else :list="wishlist"/>
       </section>
     </section>
-  </section>
 </template>
 
 <script>
@@ -29,11 +27,11 @@ export default {
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
     },
-    getUserWhishlist() {
+    getUserWishlist() {
       const userId = this.$store.getters.getLoggedUser._id;
       var self = this;
       this.$store
-        .dispatch({ type: "getUserWhishlist", userId })
+        .dispatch({ type: "getUserWishlist", userId })
         .then(user => {
           self.wishlist = user.wishlistItems;
           console.log(user);
@@ -46,7 +44,7 @@ export default {
   watch: {
     "$route.params.userId": {
       handler() {
-        this.getUserWhishlist();
+        this.getUserWishlist();
       },
       immediate: true
     }
@@ -67,7 +65,7 @@ export default {
   font-size: 1.3rem;
   color: rgb(255, 255, 255);
   font-weight: 700;
-  margin-top: 40px;
+  margin-top: 70px;
   border-radius: 10px;
 }
 </style>
