@@ -25,6 +25,7 @@
         <router-link class="header-profile-icon"  :to="'/user/'+user._id">
         <i class="fas fa-user"></i>
       </router-link>
+      
       </div>
 
       <div v-else>

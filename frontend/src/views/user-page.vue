@@ -4,7 +4,7 @@
     <section v-else class="user-page-content">
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
-        <div class="profile-info flec column">
+        <div class="profile-info flex column">
           <i v-if="isLoggedUser" class="fas fa-pen edit-user"></i>
           <h1>{{user.nickname}}'s Garage</h1>
           <div class="rating">
