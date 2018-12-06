@@ -25,7 +25,7 @@ import garageHeader from "../components/garage-header.vue";
 export default {
   data() {
     return {
-      newMsg: { from: "", txt: "" },
+      newMsg: { from: "", txt: "", createAt: "" },
       loggedUser: null
     };
   },
