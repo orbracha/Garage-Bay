@@ -82,8 +82,6 @@ export default {
                 this.$router.push('/user/edit/userId')
           }
           else if(this.$route.params.def==='item'){
-            console.log('res is ', res);
-            
             this.$router.push(`/item/edit`)
           }
           else {
@@ -100,19 +98,19 @@ export default {
       this.stopStream();
       var input = event.target;
       if (input.files && input.files[0]) {
-        // create a new FileReader to read this image and convert to base64 format
         var reader = new FileReader();
-        // Define a callback function to run, when FileReader finishes its job
         reader.onload = e => {
-          // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
-          // Read image as base64 and set to imageData
           this.imageData = e.target.result;
           this.saveImage();
         };
-        // Start the reader job - read file as a data url (base64 format)
         reader.readAsDataURL(input.files[0]);
       }
     }
+  },
+  beforeDestroy(){
+     const tracks = this.stream.getTracks();
+    if(tracks)
+    this.stopStream()
   }
 
 };
