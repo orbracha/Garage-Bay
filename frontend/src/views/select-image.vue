@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div>
+  <div class="add-item-container flex column">
+    <div class="video-container">
       <video
         v-if="showStream"
         ref="video"
@@ -12,8 +12,10 @@
       ></video>
     </div>
 
-    <div>
-      <button id="snap" v-on:click="capture">Snap Photo</button>
+    <div class="icon">
+      <!-- <button id="snap" v-on:click="capture"> -->
+        <i class="fas fa-camera" id="snap" v-on:click="capture"></i>
+      <!-- </button> -->
     </div>
 
     <div class="file-upload-form">
@@ -72,21 +74,18 @@ export default {
       this.saveImage();
     },
     saveImage() {
-      if (this.captures[0])  var imageToSave = this.captures[0];
-       else  var imageToSave = this.imageData;
+      if (this.captures[0]) var imageToSave = this.captures[0];
+      else var imageToSave = this.imageData;
       this.$store
         .dispatch({ type: "saveImage", imageToSave })
         .then(res => {
-     
-           if(this.$route.params.def === 'edit-user'){
-                this.$router.push('/user/edit/userId')
-          }
-          else if(this.$route.params.def==='item'){
-            console.log('res is ', res);
-            
-            this.$router.push(`/item/edit`)
-          }
-          else {
+          if (this.$route.params.def === "edit-user") {
+            this.$router.push("/user/edit/userId");
+          } else if (this.$route.params.def === "item") {
+            console.log("res is ", res);
+
+            this.$router.push(`/item/edit`);
+          } else {
             this.$router.push("/signup");
             console.log("PARAMS", this.$route.params.def);
           }
@@ -114,15 +113,34 @@ export default {
       }
     }
   }
-
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+.add-item-container{
+  text-align: center;
+  i{
+    padding: 8px;
+    background-color:white;
+    border-radius: 90px;
+  }
+}
 img.preview {
   /* width: 200px; */
   background-color: white;
   border: 1px solid #ddd;
   padding: 5px;
 }
+.video-container {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 500px;
+  // max-height: 400px;
+
+
+}
+  #video {
+    width: 100%
+  }
 </style>

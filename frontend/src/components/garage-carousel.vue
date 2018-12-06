@@ -68,14 +68,6 @@ export default {
   min-height: 100px;
 }
 
-
-.label {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 </style>
  
 
