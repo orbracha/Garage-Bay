@@ -5,7 +5,7 @@
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
         <div class="profile-info flex column">
-          <i v-if="isLoggedUser" class="far fa-edit edit-user"></i>
+          <i v-if="isLoggedUser" class="far fa-edit edit-user" @click="editUserClicked"></i>
           <h1>{{user.nickname}}{{(isLoggedUser)? '':'\'s Garage'}}</h1>
           <div class="rating">
             <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
@@ -21,8 +21,8 @@
           <sui-tab-pane :label="dibs.length+''" title="Dibs Requset">
             <dibs-page :isDibs="false"/>
           </sui-tab-pane>
-          <sui-tab-pane :label="(dibsAns.filter(ans=>ans.isAns).length)+''" title="Dibs Reply">
-            <dibs-page :isDibs="true"></dibs-page>
+          <sui-tab-pane :label="(dibsAns.filter(ans=>ans.isAns).length)+''" title="Dibs Answer">
+            <dibs-page @removeItem="removeItem" :isDibs="true"></dibs-page>
           </sui-tab-pane>
         </sui-tab>
       </div>
@@ -67,10 +67,13 @@ export default {
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
     },
+    removeItem(){
+      debugger
+      this.getUser();
+    },
     setUser() {
       const userId = this.$route.params.userId;
       const loggedUser = this.$store.getters.getLoggedUser;
-
       if (loggedUser) {
         const loggedUserId = this.$store.getters.getLoggedUser._id;
         if (userId === loggedUserId) this.isLoggedUser = true;
@@ -99,6 +102,7 @@ export default {
   watch: {
     "$route.params.userId": {
       handler() {
+        this.isLoggedUser = false;
         this.setUser();
       },
       immediate: true

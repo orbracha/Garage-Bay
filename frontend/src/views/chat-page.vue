@@ -12,10 +12,7 @@
 </template>
 
 <script>
-import msgService from "../services/msg-service.js";
-import garageHeader from "../components/garage-header.vue";
-import genericList from "../components/generic-list.vue";
-import garageFooter from "@/components/garage-footer.vue";
+import chatList from "../components/chat-list.vue";
 export default {
   data() {
     return {
@@ -57,9 +54,7 @@ export default {
       });
   },
   components: {
-    garageHeader,
-    genericList,
-    garageFooter
+    chatList
   }
 };
 </script>

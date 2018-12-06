@@ -13,8 +13,15 @@ export default {
     state: {
         loggedUser: null,
         bestSellers:null,
+        editUser:null
     },
     mutations: {
+        setEditUser(state, {editUser}){
+            state.editUser=editUser;
+        },
+        resetEditedUser(state){
+            state.editUser=null;
+        },
         setLoggedUser(state, { user }) {
             state.loggedUser = user;
         },
@@ -98,6 +105,7 @@ export default {
         updateUser({ commit }, { user }) {
             return userService.edit(user).then(user => {
                 commit({ type: 'updateUserLocally', user })
+                return user
             })
         },
         logout({ commit }) {
@@ -115,7 +123,10 @@ export default {
        bestSellers(state){
         return state.bestSellers;
 
-       }
+       },
 
+        getEditUser(state) {
+            return state.editUser;
+        }
     },
 };
