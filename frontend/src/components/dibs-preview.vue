@@ -33,7 +33,7 @@
           <sui-card-content>
             <sui-image :src="dib.item.img" class="right floated"/>
             <sui-card-header>
-              <template v-if="!dib.isAns">The seller isnt answer yet!</template>
+              <template v-if="!dib.isAns">The seller hasn't answered yet!</template>
               <template v-else>
                 The seller {{(dib.type)? 'Agree':'Deny'}} ,
                 Talk to him/her:

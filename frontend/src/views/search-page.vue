@@ -13,7 +13,7 @@
         <i class="fas fa-search"/>
       </span>-->
     </garage-header>
-    <section v-if="isLoadingCat">Loading</section>
+    <section v-if="isLoadingCat" class="loading">Loading</section>
 
     <section v-else>
       <!-- <div class="filter-container">
@@ -27,7 +27,7 @@
         >{{catagory}}</div>
       </div>
 
-      <div v-if="isLoadingItems">Loading Items</div>
+      <div v-if="isLoadingItems" class="loading"></div>
       <items-tumbnail v-else :list="itemsToDisplay"/>
 
       <div class="items-container">
@@ -108,9 +108,9 @@ export default {
   flex-wrap: wrap;
   div {
     // border: 1px solid black;
-    background-color: #333;
+    background-color: rgb(119, 119, 119);
     box-shadow: 8px 8px 28px -6px rgba(0, 0, 0, 0.75);
-    color: white;
+    color: rgb(223, 223, 223);
     padding: 10px;
     margin: 5px;
     width: fit-content;
@@ -124,7 +124,7 @@ export default {
   justify-content: center;
   div {
     background-color: #f5f5f0;
-    border: 1px solid black;
+    // border: 1px solid black;
     color: black;
     padding: 10px;
     margin: 5px;

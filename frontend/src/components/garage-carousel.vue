@@ -15,7 +15,7 @@
     class="carousel"
     :loop="true"
     :per-page="1"
-    :perPageCustom="[[480, 1], [768, 2]]"
+   
     :navigationEnabled="false"
     :mouse-drag="false"
   >

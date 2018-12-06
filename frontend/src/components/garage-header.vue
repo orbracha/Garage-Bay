@@ -17,8 +17,11 @@
     </router-link>
 
     <div class="header-icons-container">
-      <div v-if="user">
-        <a @click="logoutUser" class="logoutBtn">Logout</a>
+      <div v-if="user" class="flex row center">
+        <section class="user-icon-text">
+          <div>Hello {{user.nickname}}</div>
+          <a @click="logoutUser" class="logoutBtn">Logout</a>
+        </section>
         <router-link class="header-profile-icon" :to="'/user/'+user._id">
           <i class="fas fa-user"></i>
           <span

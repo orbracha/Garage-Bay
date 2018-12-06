@@ -29,9 +29,15 @@
     input{
         border: 1px solid rgb(206, 206, 206);
       }
+      .user-icon-text{
+        text-align: left;
+        a{
+          margin: 0;
+        }
+      }
     .logo-text{
       // color:#80D39B;
-      color:$v1;
+      color:$s1;
       font-size: 50px;
       font-family: $lobster;
         &:hover{

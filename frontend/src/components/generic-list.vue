@@ -18,6 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 .generic-list{
+  
   padding: 20px;
 }
 </style>

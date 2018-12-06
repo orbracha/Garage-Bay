@@ -3,13 +3,14 @@
     <div v-if="isLoading">Loding...</div>
     <div class="home" v-else>
       <div class="info-section flex column">
-        <h1 class="home-page-text">Most Popular Garages:</h1>
+        <h1 class="home-page-text">Most Popular Garage Sales:</h1>
         <!-- <div class="carousel-container"> -->
           <garage-carousel v-if="bestSellers" :bestSellers="bestSellers"/>
         <!-- </div> -->
       </div>
 
       <section class="home-content">
+        <h1 class="home-page-text">Recently Add Items:</h1>
         <item-list class="item-list" :items="items"/>
       </section>
     </div>

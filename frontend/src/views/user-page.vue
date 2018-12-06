@@ -21,7 +21,7 @@
           <sui-tab-pane :label="dibs.length+''" title="Dibs Requset">
             <dibs-page :isDibs="false"/>
           </sui-tab-pane>
-          <sui-tab-pane :label="(dibsAns.filter(ans=>ans.isAns).length)+''" title="Dibs Answer">
+          <sui-tab-pane :label="(dibsAns.filter(ans=>ans.isAns).length)+''" title="Dibs Reply">
             <dibs-page :isDibs="true"></dibs-page>
           </sui-tab-pane>
         </sui-tab>
