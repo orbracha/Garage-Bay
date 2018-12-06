@@ -14,6 +14,11 @@ export default {
         newUrl:''
     },
     mutations: {
+        resetNewUrl(state){
+            console.log('state:', state);
+            
+            state.newUrl='';
+        },
         setItems(state, { items }) {
             state.items = items;
         },

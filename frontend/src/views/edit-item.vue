@@ -65,7 +65,7 @@ export default {
       if (this.currItem._id) {
         this.$store.dispatch({ type: "editItem", item }).then(item => {
           console.log("ret from server", item);
-
+          
           this.$router.push(`/item/details/${item._id}`);
         });
       } else {
@@ -76,6 +76,7 @@ export default {
         item.location = await this.$store.dispatch({ type: "getLocation" });
 
         this.$store.dispatch({ type: "addItem", item }).then(itemId => {
+          this.$store.commit({type:'resetNewUrl'})
           this.$router.push(`/item/details/${itemId}`);
         });
       }
