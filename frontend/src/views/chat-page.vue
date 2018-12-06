@@ -1,21 +1,14 @@
 <template>
-  <section>
-    <garage-header>
-      <div slot="headline">
+  <section class="chat-page-container">
+    <header class="chat-page-header">
         <h3>Chat Page</h3>
-      </div>
-      <span slot="optionalIcon">&#128172;</span>
-    </garage-header>
-    <generic-list :data="userMsgs"></generic-list>
-    <garage-footer/>
+    </header>
+    <chat-list :data="userMsgs"/>
   </section>
 </template>
 
 <script>
-import msgService from "../services/msg-service.js";
-import garageHeader from "../components/garage-header.vue";
-import genericList from "../components/generic-list.vue";
-import garageFooter from "@/components/garage-footer.vue";
+import chatList from "../components/chat-list.vue";
 export default {
   data() {
     return {
@@ -57,9 +50,7 @@ export default {
       });
   },
   components: {
-    garageHeader,
-    genericList,
-    garageFooter
+    chatList
   }
 };
 </script>
