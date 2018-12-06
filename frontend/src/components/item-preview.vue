@@ -17,8 +17,8 @@
       </div>
 
       <div class="main-item-details">
-        <div class="main-list-header">{{item.desc}}</div>
-        <div class="item-desc">{{item.desc}} {{item.desc}} {{item.desc}}</div>
+        <div class="main-list-header">{{item.title}}</div>
+        <div class="item-desc-prev">{{item.desc}}</div>
         <div>${{item.price}}</div>
       </div>
     </section>

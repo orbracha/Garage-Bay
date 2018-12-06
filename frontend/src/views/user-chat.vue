@@ -1,11 +1,11 @@
 <template>
   <section class="chat-container">
-    <garage-header>
+    <!-- <garage-header>
       <div slot="headline">
         <h3>User Chat</h3>
       </div>
       <span slot="optionalIcon">&#128172;</span>
-    </garage-header>
+    </garage-header> -->
     <div class="chat-msgs">
       <ul>
         <li v-for="(msg,idx) in msgs" :key="idx">{{msg.txt}}</li>

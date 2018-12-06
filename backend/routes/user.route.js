@@ -43,6 +43,13 @@ function addRoutes(app) {
             .then(user => res.json(user))
 
     })
+
+    app.get('/api/user', (req, res) => {
+        userService.getUsers()
+            .then(users => res.json(users))
+
+    })
+
     app.post('/api/user/sign/user', (req, res) => {
         const userName = req.body.userName;
         userService.getByName(userName)

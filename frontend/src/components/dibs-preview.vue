@@ -37,7 +37,7 @@
               <sui-image :src="dib.item.img" class="right floated"/>
             </router-link>
             <sui-card-header>
-              <template v-if="!dib.isAns">The seller isnt answer yet!</template>
+              <template v-if="!dib.isAns">The seller hasn't answered yet!</template>
               <template v-else>
                 <template v-if="dib.type">
                   The seller Agrees,

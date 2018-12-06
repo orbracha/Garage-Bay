@@ -12,6 +12,7 @@ export default {
     strict: true,
     state: {
         loggedUser: null,
+        bestSellers:null,
         editUser:null
     },
     mutations: {
@@ -23,6 +24,9 @@ export default {
         },
         setLoggedUser(state, { user }) {
             state.loggedUser = user;
+        },
+        setBestSellers(state, {users}){
+            state.bestSellers = users
         },
         toggleWishlist(state, itemId) {
             const id = new ObjectId(itemId)
@@ -77,13 +81,22 @@ export default {
                     return user
                 })
         },
-        getUserWhishlist({ commit }, { userId }) {
-            return userService.getUserWhishlist(userId)
+        getUserWishlist({ commit }, { userId }) {
+            return userService.getUserWishlist(userId)
                 .then(user => user)
         },
         addUser({ commit }, { user }) {
             return userService.edit(user)
                 .then(user => user)
+        },
+        getBestSellers({ commit },) {
+            return userService.getUsers()
+                .then(users => {
+                    console.log('users in store', users);
+                    
+                    commit({type: 'setBestSellers', users})
+                    return users
+                })
         },
         getUserByName({ commit }, { userName }) {
             return userService.getByName(userName)
@@ -107,6 +120,11 @@ export default {
         getLoggedUser(state) {
             return state.loggedUser;
         },
+       bestSellers(state){
+        return state.bestSellers;
+
+       },
+
         getEditUser(state) {
             return state.editUser;
         }

@@ -2,7 +2,7 @@
   <div class="item-container">
     <div v-if="!isLoaded">Loading...</div>
     <template v-else>
-      <header class="details-header flex">
+      <header class="details-header flex row">
         <div class="header-content">
           <h3>{{currItem.title}}</h3>
           <span id="item-created">Listed : {{currItem.createAt | relativeTime}}</span>
@@ -68,12 +68,11 @@ export default {
     this.$store.dispatch({ type: "getItemById", itemId }).then(item => {
       this.currItem = item;
       var userId = this.currItem.sellerId;
-      this.$store.dispatch({ type: "getUserById", userId })
-      .then(user => {
+      this.$store.dispatch({ type: "getUserById", userId }).then(user => {
         this.currSeller = user;
         this.isLoaded = true;
-        let itemCoords=this.currItem.location
-       this.distance= this.$store.getters.getDistance(itemCoords);
+        let itemCoords = this.currItem.location;
+        this.distance = this.$store.getters.getDistance(itemCoords);
       });
     });
   },

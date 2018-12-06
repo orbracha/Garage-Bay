@@ -15,9 +15,10 @@ export default {
   checkUser,
   loadFromLocalStorage,
   loadDibs,
-  getUserWhishlist,
+  getUserWishlist,
   updateUser,
-  logout
+  logout,
+  getUsers
 }
 function logout(){
   return axios.post(`${BASE_URL}/logout`)
@@ -49,7 +50,11 @@ function getByName(userName) {
   return axios.post(`${BASE_URL}/sign/user`, {userName}).then(res => res.data)
 }
 
-function getUserWhishlist(userId){
+function getUsers() {
+  return axios.get(`${BASE_URL}`).then(res => res.data)
+}
+
+function getUserWishlist(userId){
   return axios.get(`${BASE_URL}/wishlist/${userId}`).then(res =>res.data[0])
 }
 

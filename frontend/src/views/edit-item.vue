@@ -1,12 +1,11 @@
 <template>
   <section>
-    <garage-header>
-      <div slot="headline">
+    <!-- <garage-header>
+     <div slot="headline">
         <h3>{{(currItem._id)? 'Edit':'Add'}}</h3>
       </div>
       <span slot="optionalIcon">&#x1f4f7;</span>
-    </garage-header>
-
+    </garage-header>-->
     <form @submit.prevent="saveItem">
       <img :src="currItem.img">
       <label>
@@ -64,9 +63,9 @@ export default {
     saveItem: async function() {
       var item = JSON.parse(JSON.stringify(this.currItem));
       if (this.currItem._id) {
-        this.$store.dispatch({ type: "editItem", item }).then((item) => {
-          console.log('ret from server',item);
-          
+        this.$store.dispatch({ type: "editItem", item }).then(item => {
+          console.log("ret from server", item);
+
           this.$router.push(`/item/details/${item._id}`);
         });
       } else {
