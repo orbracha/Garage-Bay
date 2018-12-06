@@ -1,8 +1,7 @@
 <template>
   <section>
-      <section class="thumbnail-container">
-        <!-- <div class="wish-spacer">My Wishlist</div> -->
-         <h1 class="home-page-text">My Wishlist</h1>
+      <section >
+        <h1 class="home-page-text">My Wishlist</h1>
         <section v-if="isLoadin" class="loading">Loading...</section>
         <items-thumbnail v-else :list="wishlist"/>
       </section>

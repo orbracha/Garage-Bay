@@ -1,6 +1,5 @@
 <template>
-  <ul 
-  >
+  <ul class="items-thumbnail">
     <li v-for="(item,idx) in list" :key="idx" @click="itemClicked(item._id)">
       <div class="img-container">
         <img class="img-thumb" :src="item.img">
@@ -28,11 +27,11 @@ export default {
   grid-gap: 18px;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   .img-container {
-      height: 100px;
-      .img-thumb {
-        // width: 100%;
-        object-fit: cover;
-      }
+    height: 100px;
+    .img-thumb {
+      // width: 100%;
+      object-fit: cover;
+    }
   }
 }
 </style>
