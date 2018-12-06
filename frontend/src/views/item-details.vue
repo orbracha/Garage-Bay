@@ -1,7 +1,7 @@
 <template>
-  <div class="item-container">
+  <div class="item-container flex column">
     <div v-if="!isLoaded">Loading...</div>
-    <template v-else>
+    <template v-else class="item-container flex column">
       <header class="details-header flex row">
         <div class="header-content">
           <h3>{{currItem.title}}</h3>
@@ -17,7 +17,8 @@
           <img class="details-seller-img" :src="currSeller.img" alt="placeholder image">
         </router-link>
       </header>
-      <section class="item-content">
+
+      <section class="item-content flex column">
         <div class="img-details-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
         <div class="details-container">
           <div>
@@ -39,21 +40,17 @@
         </div>
       </section>
     </template>
-    <garage-footer></garage-footer>
   </div>
 </template>
 
 <script>
-import garageHeader from "../components/garage-header.vue";
-import garageFooter from "../components/garage-footer.vue";
 import GoogleMap from "@/components/GoogleMap";
 
 export default {
   name: "item-details",
   components: {
     GoogleMap,
-    garageHeader,
-    garageFooter
+
   },
   data() {
     return {

@@ -40,13 +40,13 @@
               <template v-if="!dib.isAns">The seller hasn't answered yet!</template>
               <template v-else>
                 <template v-if="dib.type">
-                  The seller Agrees,
-                  Talk to him/her:
+                  The seller accepted your dibs call! <br>
+                  Talk to them:
                   <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
                 </template>
                 <template v-else>
-                  Sorry, the seller Denied the offer,
-                  Try to talk to him:
+                  Sorry, the seller rejected your offer,<br>
+                  Send a message:
                   <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
                 </template>
               </template>
