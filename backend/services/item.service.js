@@ -53,7 +53,7 @@ function remove(itemId) {
             return itemCollection.remove({ _id: itemId })
             .then(()=>{
                 const userCollection = dbConn.collection('user');
-                return userCollection.update({},{$pull:{itemList: itemId, wishList:itemId}},{ multi: true } )
+                return userCollection.update({},{$pull:{itemList: itemId, wishList:itemId,listedItems:itemId}},{ multi: true } )
                 
             })
         })
