@@ -5,10 +5,6 @@
 
       <img :src="newImage?newImage:editedUser.img" alt="no image to display" >
         </label>
-      <!-- <div class="file-upload-form">
-        Upload an image file:
-        <input type="file" @change="previewImage" accept="image/*">
-      </div> -->
       <label>
         Nickname:
         <input type="text" v-model="editedUser.nickname">
@@ -63,6 +59,10 @@ export default {
         let user=this.editedUser
         this.$store.dispatch({type:'updateUser',user })
         .then((user)=>{
+          
+          this.$store.commit({type:'resetEditedUser'})
+          this.$store.commit({type:'resetNewUrl'})
+          
            this.$router.push(`/user/${user._id}`);
           
         })

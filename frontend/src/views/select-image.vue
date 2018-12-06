@@ -77,10 +77,14 @@ export default {
       this.$store
         .dispatch({ type: "saveImage", imageToSave })
         .then(res => {
-          if (this.$route.params.def === "item")
-            this.$router.push("/select-image/edit");
-          else if(this.$route.params.def === "edit-user"){
+     
+           if(this.$route.params.def === 'edit-user'){
                 this.$router.push('/user/edit/userId')
+          }
+          else if(this.$route.params.def==='item'){
+            console.log('res is ', res);
+            
+            this.$router.push(`/item/edit`)
           }
           else {
             this.$router.push("/signup");
@@ -110,10 +114,7 @@ export default {
       }
     }
   }
-  // beforeDestroy() {
-  //   const tracks = this.stream.getTracks();
-  //   tracks.forEach(track => track.stop());
-  // }
+
 };
 </script>
 
