@@ -1,16 +1,15 @@
 <template>
   <div class="editContainer">
     <form @submit.prevent="saveUser" v-if="user">
-        <label for="image" @click="editImage">
-
-      <img :src="newImage?newImage:editedUser.img" alt="no image to display" >
-        </label>
+      <label for="image" @click="editImage">
+        <img :src="newImage?newImage:editedUser.img" alt="no image to display">
+      </label>
       <label>
-        Nickname:
+        <div>Nickname:</div>
         <input type="text" v-model="editedUser.nickname">
       </label>
       <label>
-        Password:
+        <div>Password:</div>
         <input type="password" v-model="editedUser.password">
       </label>
       
@@ -24,17 +23,16 @@ export default {
   name: "edit-user",
   data() {
     return {
-      editedUser: {},
-      
-    }
+      editedUser: {}
+    };
   },
   computed: {
     user() {
-      if(this.$store.getters.editUser){
+      if (this.$store.getters.editUser) {
         var editedUser = JSON.parse(
           JSON.stringify(this.$store.getters.getLoggedUser)
-        )}
-      else if (this.$store.getters.getLoggedUser) {
+        );
+      } else if (this.$store.getters.getLoggedUser) {
         var editedUser = JSON.parse(
           JSON.stringify(this.$store.getters.getLoggedUser)
         );
@@ -43,34 +41,28 @@ export default {
       }
       return false;
     },
-    newImage(){
-      return this.$store.getters.getImageUrl
+    newImage() {
+      return this.$store.getters.getImageUrl;
     }
   },
-  methods:{
-      editImage(){
-          console.log('clicked');
-          var editUser=this.editedUser
-          this.$store.commit({type: 'setEditUser', editUser})
-          this.$router.push(`/select-image/edit-user`);
-      },
-      saveUser(){
-        this.editedUser.img=this.newImage;
-        let user=this.editedUser
-        this.$store.dispatch({type:'updateUser',user })
-        .then((user)=>{
-          
-          this.$store.commit({type:'resetEditedUser'})
-          this.$store.commit({type:'resetNewUrl'})
-          
-           this.$router.push(`/user/${user._id}`);
-          
-        })
-        
-      }
+  methods: {
+    editImage() {
+      console.log("clicked");
+      var editUser = this.editedUser;
+      this.$store.commit({ type: "setEditUser", editUser });
+      this.$router.push(`/select-image/edit-user`);
+    },
+    saveUser() {
+      this.editedUser.img = this.newImage;
+      let user = this.editedUser;
+      this.$store.dispatch({ type: "updateUser", user }).then(user => {
+        this.$store.commit({ type: "resetEditedUser" });
+        this.$store.commit({ type: "resetNewUrl" });
 
-  },
-
+        this.$router.push(`/user/${user._id}`);
+      });
+    }
+  }
 };
 </script>
 
