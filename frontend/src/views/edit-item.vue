@@ -1,12 +1,6 @@
 <template>
-  <section >
-    <!-- <garage-header>
-     <div slot="headline">
-        <h3>{{(currItem._id)? 'Edit':'Add'}}</h3>
-      </div>
-      <span slot="optionalIcon">&#x1f4f7;</span>
-    </garage-header>-->
-    <form @submit.prevent="saveItem">
+  <section class="edit-item-container">
+    <form class="edit-form" @submit.prevent="saveItem">
       <div>
         <img :src="currItem.img">
       </div>

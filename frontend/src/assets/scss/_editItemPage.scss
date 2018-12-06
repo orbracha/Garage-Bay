@@ -1,13 +1,14 @@
+.edit-item-container{
 
-form {
-    
+    .edit-form {
+        
     margin-top: 90px;
     width: 100%;
     display: flex;
     justify-content: space-around;
     img {
-      width: 100%;
-    text-align: center;
+        width: 100%;
+        text-align: center;
     }
     div{
         margin: 0 20px;
@@ -16,6 +17,7 @@ form {
         
     }
     button{
+        margin: 4px ;
         margin-top:5px;
         font-size: 1.5em;
         font-family: inherit;
@@ -33,8 +35,21 @@ form {
         font-size: 1.1em;
         margin: 4px ;
         span {
-          display: block;
-          margin-bottom: 5px ;
+            display: block;
+            margin-bottom: 5px ;
         }
-      }
+    }
   }
+
+}
+
+
+
+@media(max-width:700px){
+    .edit-item-container{
+        margin-bottom: 50px;
+        .edit-form{
+            flex-direction: column;
+        }
+    }
+}
