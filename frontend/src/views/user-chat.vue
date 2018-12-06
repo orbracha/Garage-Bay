@@ -1,15 +1,17 @@
 <template>
   <section class="chat-container">
-    <!-- <garage-header>
-      <div slot="headline">
-        <h3>User Chat</h3>
-      </div>
-      <span slot="optionalIcon">&#128172;</span>
-    </garage-header> -->
     <div class="chat-msgs">
-      <ul>
-        <li v-for="(msg,idx) in msgs" :key="idx">{{msg.txt}}</li>
-      </ul>
+      <div
+        class="message"
+        v-for="(msg,idx) in msgs"
+        :key="idx"
+        :class="{'loggedin-side': msg.from._id===loggedUser._id,'userChat-side': msg.from._id!==loggedUser._id}"
+      >
+        <img :src="msg.from.img" alt srcset>
+        
+        {{msg.txt}}
+        <p class="msg-time">{{msg.createAt | relativeTime}}</p>
+      </div>
     </div>
     <div class="chat-text">
       <form @submit.prevent="sendMsg">
@@ -21,11 +23,10 @@
 </template>
 
 <script>
-import garageHeader from "../components/garage-header.vue";
 export default {
   data() {
     return {
-      newMsg: { from: "", txt: "" },
+      newMsg: { from: "", txt: "", createAt: "" },
       loggedUser: null
     };
   },
@@ -42,6 +43,7 @@ export default {
         nickname: this.loggedUser.nickname,
         img: this.loggedUser.img
       };
+      this.newMsg.createAt = Date.now();
       var msg = JSON.parse(JSON.stringify(this.newMsg));
       this.$store
         .dispatch({ type: "sendMsg", msg, user: this.loggedUser })
@@ -61,42 +63,16 @@ export default {
       userId: this.loggedUser._id,
       userDest
     });
+
+    // this.$store.dispatch({
+    //   type: "loadMsgs",
+    //   userId: this.loggedUser._id,
+    //   userDest
+    // });
   },
-  components: {
-    garageHeader
-  }
+  components: {}
 };
 </script>
 
 <style lang="scss" scoped>
-ul {
-  margin: 0;
-  li {
-    list-style-type: none;
-  }
-}
-.chat-container {
-  height: 100%;
-}
-.chat-msgs {
-  height: 85%;
-  background: lightgray;
-}
-.chat-text {
-  display: flex;
-  height: 5%;
-  margin-bottom: 2px;
-  form {
-    width: 100%;
-    height: 100%;
-  }
-  input {
-    width: 80%;
-    height: 100%;
-  }
-  button {
-    height: 100%;
-    width: 20%;
-  }
-}
 </style>

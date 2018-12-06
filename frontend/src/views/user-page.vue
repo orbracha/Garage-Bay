@@ -68,7 +68,6 @@ export default {
       this.$router.push(`/item/details/${itemId}`);
     },
     removeItem(){
-      debugger
       this.getUser();
     },
     setUser() {
