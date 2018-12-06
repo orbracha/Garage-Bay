@@ -6,7 +6,7 @@
       </div>
       <span slot="optionalIcon">&#128172;</span>
     </garage-header> -->
-    <generic-list :data="userMsgs"></generic-list>
+    <chat-list :data="userMsgs"></chat-list>
     <garage-footer/>
   </section>
 </template>

@@ -47,10 +47,14 @@ export default {
           .dispatch({ type: "removeItem", item: dib.item })
           .then(() => {
             this.$emit("removeItem");
-            this.removeDib(idx).then(() => {
-              this.$store.dispatch({ type: "sendAns", ans });
-            });
           });
+        this.removeDib(idx).then(() => {
+          this.$store.dispatch({ type: "sendAns", ans });
+        });
+      } else {
+        this.removeDib(idx).then(() => {
+          this.$store.dispatch({ type: "sendAns", ans });
+        });
       }
     },
     cancelDibReq({ dib, idx }) {
