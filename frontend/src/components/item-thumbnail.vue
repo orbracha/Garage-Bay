@@ -1,5 +1,6 @@
 <template>
-  <ul class="items-thumbnail">
+  <ul 
+  >
     <li v-for="(item,idx) in list" :key="idx" @click="itemClicked(item._id)">
       <div class="img-container">
         <img class="img-thumb" :src="item.img">
