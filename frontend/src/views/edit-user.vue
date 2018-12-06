@@ -3,7 +3,7 @@
     <form @submit.prevent="saveUser" v-if="user">
         <label for="image" @click="editImage">
 
-      <img :src="newImage?newImage:editedUser.img" alt="no image to display" >
+      <img class="preview" :src="newImage?newImage:editedUser.img" alt="no image to display" >
         </label>
       <label>
         Nickname:
@@ -89,9 +89,9 @@ form {
   }
 }
 img.preview {
-  /* width: 200px; */
-  background-color: white;
-  border: 1px solid #ddd;
+  width: 200px; 
+  // background-color: white;
+  // border: 1px solid #ddd;
   padding: 5px;
 }
 </style>
