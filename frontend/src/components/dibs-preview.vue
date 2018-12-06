@@ -4,8 +4,10 @@
       <div class="dib-container">
         <sui-card v-if="fromUser">
           <sui-card-content>
-            <sui-image :src="fromUser.img" class="right floated"/>
-            <sui-card-header>{{fromUser.nickname}}</sui-card-header>
+            <router-link :to="'/user/'+fromUser._id">
+              <sui-image :src="fromUser.img" class="right floated"/>
+              <sui-card-header>{{fromUser.nickname}}</sui-card-header>
+            </router-link>
             <!-- <sui-card-meta>Friends of Veronika</sui-card-meta> -->
             <sui-card-description>
               Interested about the {{dib.item.title}} that you offer:
@@ -18,7 +20,7 @@
                 <sui-button basic positive @click="$emit('sendAns',{dib,idx,type:true})">
                   <i class="far fa-thumbs-up ans-icon"></i>
                 </sui-button>
-                <sui-button basic negative @click="$emit('sendAns',{dib,idx,type:true})">
+                <sui-button basic negative @click="$emit('sendAns',{dib,idx,type:false})">
                   <i class="far fa-thumbs-down ans-icon"></i>
                 </sui-button>
               </sui-button-group>
@@ -31,13 +33,22 @@
       <div class="dibAns-container">
         <sui-card>
           <sui-card-content>
-            <sui-image :src="dib.item.img" class="right floated"/>
+            <router-link :to="'/item/details/'+dib.item._id">
+              <sui-image :src="dib.item.img" class="right floated"/>
+            </router-link>
             <sui-card-header>
               <template v-if="!dib.isAns">The seller isnt answer yet!</template>
               <template v-else>
-                The seller {{(dib.type)? 'Agree':'Deny'}} ,
-                Talk to him/her:
-                <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
+                <template v-if="dib.type">
+                  The seller Agrees,
+                  Talk to him/her:
+                  <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
+                </template>
+                <template v-else>
+                  Sorry, the seller Denied the offer,
+                  Try to talk to him:
+                  <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
+                </template>
               </template>
             </sui-card-header>
           </sui-card-content>
@@ -86,37 +97,3 @@ export default {
   }
 };
 </script>
-
-
-<style lang="scss" scoped>
-// li {
-//   display: flex;
-//   text-align: left;
-//   align-items: center;
-//   img {
-//     height: 60px;
-//     width: 60px;
-//   }
-//   button {
-//     height: 25px;
-//   }
-//   .fa-minus-circle {
-//     color: red;
-//     cursor: pointer;
-//     transition: 0.8s;
-//   }
-//   .fa-minus-circle:hover {
-//     transform: rotate(-90deg);
-//   }
-//   .fa-check-circle {
-//     cursor: pointer;
-//     border-radius: 50%;
-//     font-size: 30px;
-//   }
-//   .fa-check-circle:hover {
-//     background: green;
-//   }
-// }
-</style>
-
-

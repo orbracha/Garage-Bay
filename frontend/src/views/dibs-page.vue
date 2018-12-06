@@ -42,9 +42,16 @@ export default {
         idx,
         type
       };
-      this.removeDib(idx).then(() => {
-        this.$store.dispatch({ type: "sendAns", ans });
-      });
+      if (type) {
+        this.$store
+          .dispatch({ type: "removeItem", item: dib.item })
+          .then(() => {
+            this.$emit("removeItem");
+            this.removeDib(idx).then(() => {
+              this.$store.dispatch({ type: "sendAns", ans });
+            });
+          });
+      }
     },
     cancelDibReq({ dib, idx }) {
       if (confirm("Are you sure?")) {
