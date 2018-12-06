@@ -48,6 +48,34 @@ function getById(userId) {
                 ]).toArray()
         })
 }
+
+function getUsers(criteria = {}) {
+    return mongoService.connectToDb()
+        .then(db => {
+
+            return db.collection('user')
+                .aggregate([
+                    {
+                        $match: criteria
+                    },
+                    {
+                        $lookup:
+                        {
+                            from: 'item',
+                            localField: 'itemList',
+                            foreignField: '_id',
+                            as: 'listedItems'
+                        }
+                    }
+                ])
+                .toArray()
+            // .then(users => {
+            //     return users
+            // })
+        })
+}
+
+
 function getByName(userName) {
     return mongoService.connectToDb()
         .then(db => {
@@ -148,7 +176,7 @@ function update(user) {
             const userCollection = dbConn.collection('user');
             return userCollection.updateOne({ "_id": userId }, { $set: user }).then(() => {
                 user._id = userId;
-                
+
                 return user
             })
         })
@@ -169,6 +197,7 @@ module.exports = {
     updateUserDibsAns,
     getUserWishlist,
     getByName,
+    getUsers
 
 }
 

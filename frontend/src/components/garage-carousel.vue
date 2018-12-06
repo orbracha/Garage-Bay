@@ -15,25 +15,14 @@
     class="carousel"
     :loop="true"
     :per-page="1"
-    :perPageCustom="[[480, 1], [768, 2]]"
+   
     :navigationEnabled="false"
     :mouse-drag="false"
   >
-    <slide>
+    <slide v-for="user in bestSellers" :key="user._id">
       <garage-card :user="user"/>
     </slide>
-    <slide>
-      <garage-card :user="user"/>
-    </slide>
-    <slide>
-      <garage-card :user="user"/>
-    </slide>
-    <slide>
-      <garage-card :user="user"/>
-    </slide>
-    <slide>
-      <garage-card :user="user"/>
-    </slide>
+  
   </carousel>
   <!-- </div> -->
 </template>
@@ -46,7 +35,7 @@ import { Carousel, Slide } from "vue-carousel";
 import garageCard from "@/components/garage-card.vue";
 
 export default {
-  props: ["user"],
+  props: ["bestSellers"],
   components: {
     Carousel,
     Slide,
@@ -66,12 +55,27 @@ export default {
 }
 .VueCarousel-dot {
   padding: 6px !important;
+  color: white;
   margin: 0;
 }
 .VueCarousel-pagination {
   text-align: left !important;
 }
-// }
+
+.VueCarousel-slide {
+  position: relative;
+  background: #42b983;
+  min-height: 100px;
+}
+
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 </style>
  
 

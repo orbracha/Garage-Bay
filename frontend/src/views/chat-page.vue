@@ -1,9 +1,13 @@
 <template>
-  <section class="chat-page-container">
-    <header class="chat-page-header">
+  <section>
+    <!-- <garage-header>
+      <div slot="headline">
         <h3>Chat Page</h3>
-    </header>
-    <chat-list :data="userMsgs"/>
+      </div>
+      <span slot="optionalIcon">&#128172;</span>
+    </garage-header> -->
+    <generic-list :data="userMsgs"></generic-list>
+    <garage-footer/>
   </section>
 </template>
 

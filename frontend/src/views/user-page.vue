@@ -19,7 +19,7 @@
             <items-tumbnail :list="user.listedItems"/>
           </sui-tab-pane>
           <sui-tab-pane :label="dibs.length+''" title="Dibs Requset">
-            <dibs-page :isDibs="false"/>
+            <dibs-page  @removeItem="removeItem" :isDibs="false"/>
           </sui-tab-pane>
           <sui-tab-pane :label="(dibsAns.filter(ans=>ans.isAns).length)+''" title="Dibs Answer">
             <dibs-page @removeItem="removeItem" :isDibs="true"></dibs-page>
