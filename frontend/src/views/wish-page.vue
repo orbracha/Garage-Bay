@@ -1,8 +1,7 @@
 <template>
   <section>
-      <section>
-        <!-- <div class="wish-spacer">My Wishlist</div> -->
-         <h1 class="home-page-text">My Wishlist</h1>
+      <section >
+        <h1 class="home-page-text">My Wishlist</h1>
         <section v-if="isLoadin" class="loading">Loading...</section>
         <items-thumbnail v-else :list="wishlist"/>
       </section>
@@ -60,7 +59,6 @@ export default {
   padding-left: 20px;
 }
 .wish-spacer {
-  // background-color: rgba(194, 125, 125, 0.521);
   text-align: left;
   padding: 20px 20px 0 20px;
   font-size: 1.3rem;
