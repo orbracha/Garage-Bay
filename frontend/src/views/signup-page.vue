@@ -1,41 +1,35 @@
 <template>
   <section>
-    <!-- <header class="home-header">
-      <img
-        class="home-logo"
-        src="https://res.cloudinary.com/duxpc5ggn/image/upload/v1543466484/logo1.png"
-        alt
-      >
-      <h1>Sign-up</h1>
-    </header> -->
     <form class="form-container" @submit.prevent="saveUser">
-      <router-link to="/select-image" class="camera-icon">
-        <span>{{img? 'Replace':'Add'}} Picture</span>
-        <i class="fas fa-camera"/>
-      </router-link>
       <img
         :src="img? img:'https://res.cloudinary.com/duxpc5ggn/image/upload/v1543435981/u1.jpg'"
         alt
         srcset
       >
+      <router-link to="/select-image" class="camera-icon flex column center">
+        <i class="fas fa-camera"/>
+        <div>{{img? 'Edit':'Add'}} Photo</div>
+      </router-link>
       <!-- <img :src="currItem.img"> -->
-      <label>
-        <span>Nickanme:</span>
-        <input type="text" @input="checkNickname" v-model="newUser.nickname" required>
-        <span id="error-input" v-if="errorNickname.isErr">{{errorNickname.txt}}</span>
-        <span id="good-input" v-else-if="newUser.nickname">Your nickname is good!</span>
-      </label>
-      <label>
-        <span>Password:</span>
-        <input type="password" v-model="newUser.password" required>
-      </label>
-      <label>
-        <span>Repeat Password:</span>
-        <input type="password" @input="checkPassword" v-model="repeatPass" required>
-      </label>
-      <span id="error-input" v-if="errorPass.isErr && newUser.password">{{errorPass.txt}}</span>
-      <span id="good-input" v-else-if="repeatPass">Your Password is great!</span>
-      <button :disabled="!isValid">Save</button>
+      <div class="text-container">
+        <label>
+          <span>Nickanme:</span>
+          <input type="text" @input="checkNickname" v-model="newUser.nickname" required>
+          <span id="error-input" v-if="errorNickname.isErr">{{errorNickname.txt}}</span>
+          <span id="good-input" v-else-if="newUser.nickname">Your nickname is good!</span>
+        </label>
+        <label>
+          <span>Password:</span>
+          <input type="password" v-model="newUser.password" required>
+        </label>
+        <label>
+          <span>Repeat Password:</span>
+          <input type="password" @input="checkPassword" v-model="repeatPass" required>
+        </label>
+        <span id="error-input" v-if="errorPass.isErr && newUser.password">{{errorPass.txt}}</span>
+        <span id="good-input" v-else-if="repeatPass">Your Password is great!</span>
+        <button :disabled="!isValid">Save</button>
+      </div>
     </form>
   </section>
 </template>
@@ -105,10 +99,13 @@ export default {
   created() {},
   components: {}
 };
-</script>s
+</script>
 
 <style lang="scss" scoped>
-.form-container{
+span {
+  margin: 2px 0;
+}
+.form-container {
   // width: 300px;
   // margin: 0 auto;
   display: flex;
@@ -124,13 +121,26 @@ label {
     margin: 5px auto;
   }
 }
-.camera-icon{
+.camera-icon {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.596);
+  border-radius: 99px;
+  position: relative;
+  top: -150px;
   color: white;
   text-decoration: none;
+  i {
+    color: white;
+    padding: 0;
+  }
 }
 form {
   margin-top: 80px;
   // margin: 0 auto;
+  .text-container{
+    transform: translateY(-100px)
+
+  }
   img {
     width: 200px;
     margin-top: 20px;

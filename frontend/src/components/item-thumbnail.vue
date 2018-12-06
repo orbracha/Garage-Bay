@@ -27,11 +27,11 @@ export default {
   grid-gap: 18px;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   .img-container {
-      height: 100px;
-      .img-thumb {
-        // width: 100%;
-        object-fit: cover;
-      }
+    height: 100px;
+    .img-thumb {
+      // width: 100%;
+      object-fit: cover;
+    }
   }
 }
 </style>
