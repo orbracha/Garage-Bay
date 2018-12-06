@@ -1,40 +1,39 @@
 <template>
-  <section>
-    <!-- <garage-header>
-     <div slot="headline">
-        <h3>{{(currItem._id)? 'Edit':'Add'}}</h3>
+  <section class="edit-item-container">
+    <form class="edit-form" @submit.prevent="saveItem">
+      <div>
+        <img :src="currItem.img">
       </div>
-      <span slot="optionalIcon">&#x1f4f7;</span>
-    </garage-header>-->
-    <form @submit.prevent="saveItem">
-      <img :src="currItem.img">
-      <label>
-        <span>Title:</span>
-        <input type="text" v-model="currItem.title" required>
-      </label>
-      <label>
-        <span>Category:</span>
-        <select v-if="catagories.length>0" v-model="currItem.category">
-          <option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</option>
-        </select>
-      </label>
-      <label>
-        <span>Condition:</span>
-        <select v-model="currItem.condition">
-          <option value="likeNew">Like new</option>
-          <option value="used">Used</option>
-        </select>
-      </label>
-      <label>
-        <span>Description:</span>
-        <textarea cols="30" rows="10" v-model="currItem.desc" required></textarea>
-      </label>
-      <label>
-        <span>Price:</span>
-        <input type="number" v-model="currItem.price" required>
-      </label>
+      <div >
+            <label>
+            <span>Title:</span>
+            <input type="text" v-model="currItem.title" required>
+          </label>
+          <label>
+            <span>Category:</span>
+            <select v-if="catagories.length>0" v-model="currItem.category">
+              <option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</option>
+            </select>
+          </label>
+          <label>
+            <span>Condition:</span>
+            <select v-model="currItem.condition">
+              <option value="likeNew">Like new</option>
+              <option value="used">Used</option>
+            </select>
+          </label>
+          <label>
+            <span>Description:</span>
+            <textarea cols="30" rows="10" v-model="currItem.desc" required></textarea>
+          </label>
+          <label>
+            <span>Price:</span>
+            <input type="number" v-model="currItem.price" required>
+          </label>
       
       <button type="submit">Save</button>
+      </div>
+
     </form>
     <garage-footer></garage-footer>
   </section>
@@ -76,7 +75,7 @@ export default {
         item.location = await this.$store.dispatch({ type: "getLocation" });
 
         this.$store.dispatch({ type: "addItem", item }).then(itemId => {
-          this.$store.commit({type:'resetNewUrl'})
+          this.$store.commit({type:'resetNewUrl'})  
           this.$router.push(`/item/details/${itemId}`);
         });
       }
@@ -113,20 +112,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-label {
-  display: block;
-  margin: 5px auto;
-  span {
-    display: block;
-    margin: 5px auto;
-  }
-}
-form {
-  margin-bottom: 70px;
-  img {
-    width: 200px;
-    margin-top: 20px;
-  }
-}
+// label {
+//   display: block;
+//   margin: 5px auto;
+//   span {
+//     display: block;
+//     margin: 5px auto;
+//   }
+// }
+// form {
+//   margin-bottom: 70px;
+//   img {
+//     width: 200px;
+//     margin-top: 20px;
+//   }
+// }
 </style>
 
