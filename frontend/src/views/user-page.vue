@@ -7,10 +7,11 @@
         <div class="profile-info flex column">
           <i v-if="isLoggedUser" class="far fa-edit edit-user" @click="editUserClicked"></i>
           <h1>{{user.nickname}}{{(isLoggedUser)? '':'\'s Garage'}}</h1>
-          <div class="rating">
+            <a @click="logoutUser" class="logoutBtn">Logout</a>
+          <!-- <div class="rating">
             <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
             <span v-for="x in 5-user.rate" :key="x.idx" class="fa fa-star empty-star"></span>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="tab-container" v-if="isLoggedUser">
@@ -61,6 +62,12 @@ export default {
     };
   },
   methods: {
+      logoutUser() {
+      console.log("curr user is: ", this.user);
+      this.$store.dispatch({ type: "logout" }).then(() => {
+        this.$router.push("/");
+      });
+    },
     editUserClicked(){
       this.$router.push(`/user/edit/${this.user._id}`)
     },

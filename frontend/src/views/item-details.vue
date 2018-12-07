@@ -34,8 +34,8 @@
             <div class="action-btn-container"  >
               <button v-if="!isLoggedUser" class="dibs-btn" @click="sendDibs">Call dibs!</button>
               <button v-else class="dibs-btn" @click="$router.push('/login')">Call dibs!</button>
-              <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
-               <router-link v-if="!isLoggedUser" :to="'/chat/user/'+ currSeller._id">&#128172;</router-link>
+              <i v-if="loggedUser && !isLoggedUser" class="far fa-heart empty-heart"></i>
+               <router-link v-if="!isLoggedUser" :to="'/chat/user/'+ currSeller._id"><i class="far fa-comment-alt"></i></router-link>
             </div>
           </div>
           <google-map :itemCoords="currItem.location"/>
@@ -124,4 +124,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.fa-comment-alt{
+  padding-left: 8px;
+}
+</style>
+
 

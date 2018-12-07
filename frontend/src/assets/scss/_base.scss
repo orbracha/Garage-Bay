@@ -4,7 +4,7 @@ html{
 }
 
 .router-view{
-    margin-top: 70px;
+    margin-top: 80px;
 
 }
 @media (min-width:950px){
@@ -28,7 +28,7 @@ body{
 *{
     box-sizing: border-box;
    
-}
+
 a{
     text-decoration: none;
 }
@@ -60,6 +60,9 @@ ul {
 .row{
     flex-direction: row
 }
+.row-reverse{
+    flex-direction: row-reverse
+}
 .between{
     justify-content: space-between
 }
@@ -82,17 +85,23 @@ ul {
 .floated{
     float: unset;
 }
+// .fa-comment-alt{
+//   color: rgba(255, 255, 255, 0.466);
 
+//     -webkit-text-stroke-width: 2px;
+//     -webkit-text-stroke-color: rgba(0, 0, 0, 0.459);
+//     font-size: 1.6rem;
+//     transition: .3s ease;
+//     animation: none;
+// }
 .fa-star{
-    color: grey;
+    color: rgb(155, 155, 155);
     padding-right: 2px;
     font-size: .8rem
 }
-                    .checked {
-                        color: rgb(241, 188, 41);
-                        // -webkit-text-stroke-width: 1px;
-                        // -webkit-text-stroke-color: orange;
-                      } 
+.checked {
+    color: rgb(241, 188, 41);
+    } 
 
   p{
       margin-bottom: 5px;

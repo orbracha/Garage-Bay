@@ -1,13 +1,6 @@
 <template>
   <section>
-    <!-- <garage-header>
-      <div slot="headline">
-        <h3>Chat Page</h3>
-      </div>
-      <span slot="optionalIcon">&#128172;</span>
-    </garage-header> -->
     <chat-list :data="userMsgs"></chat-list>
-    <garage-footer/>
   </section>
 </template>
 
