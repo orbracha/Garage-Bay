@@ -7,7 +7,7 @@
           <p>Home</p>
         </div>
       </router-link>
-      <router-link class="footer-item footer-item-4" to="/chat">
+      <router-link class="footer-item footer-item-4" :to="(user)? '/chat':'/login'">
         <div @click="toggleMenu" class="flex row center">
           <i class="far fa-comment-alt"></i>
           <p>Chat</p>

@@ -68,7 +68,7 @@ export default {
       this.$router.push(`/item/details/${itemId}`);
     },
     removeItem(){
-      this.getUser();
+      this.setUser();
     },
     setUser() {
       const userId = this.$route.params.userId;

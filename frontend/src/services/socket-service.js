@@ -3,7 +3,7 @@ import eventBus, { GET_MSG, GET_DIBS, GET_ANS, GET_CANCLE } from '../services/ev
 import ioClient from 'socket.io-client'
 
 const BASE_URL = (process.env.NODE_ENV !== 'development')
-    ? process.env.NODE_ENV
+    ? ''
     : 'http://localhost:3000';
 
 var socket;
