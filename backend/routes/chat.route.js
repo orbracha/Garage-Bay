@@ -3,11 +3,17 @@ msgService = require('../services/msg.service')
 roomService = require('../services/room.service')
 userService = require('../services/user.service')
 function addRoute(app, server) {
+    var loggedInUsers = {};
     var currRoom;
     var io = require('socket.io').listen(server);
     io.on('connection', function (socket) {
-        console.log('a user connected');
+        socket.on('inline', userId => {
+            console.log(userId, 'is online')
+            loggedInUsers = { [socket.id]: userId };
+            userService.userAvailableStatus(userId, true)
+        })
         socket.on('roomRequested', (userId, userDest) => {
+
             return roomService.findRoom(userId, userDest).then(room => {
                 if (room) {
                     currRoom = room;
@@ -23,28 +29,27 @@ function addRoute(app, server) {
             });
 
         });
+        socket.on('disconnect', () => {
+            console.log(loggedInUsers[socket.id], 'is offline')
+            userService.userAvailableStatus(loggedInUsers[socket.id], false)
+        })
         socket.on('dibs', (userId, item) => {
             userService.updateUserDibs(item.sellerId, { item: item, from: userId }).then(() => {
                 io.emit('got-dibs', userId, item);
             })
         })
         socket.on('cancelDibReq', dib => {
-            console.log('outer dib', dib)
             userService.removeUserDib(dib).then(() => {
                 io.emit('got-cancle-dib', dib);
             })
         })
         socket.on('sendAns', (ans) => {
-            // var dib = {
-            //     item: ans.dib.item,
-            //     type: ans.type,
-            //     isAns: true
-            // }
             userService.updateUserDibsAns(ans.dib.from, ans).then(() => {
                 io.emit('got-ans', ans);
             })
         })
         socket.on('chat-newMsg', (msg, room) => {
+            userService.userOfflineMsgs(room.userId, room.userDest, msg)
             roomService.addMsgToRoom(msg, room).then(() => {
                 io.to(room._id).emit('newMsg', msg)
             })
@@ -53,7 +58,6 @@ function addRoute(app, server) {
 
     app.get('/api/msg', (req, res) => {
         var { userId, userDest } = req.query
-        console.log('userId, userDest', userId, userDest)
         if (!userDest) {
             return roomService.query(userId)
                 .then(rooms => res.json(rooms))

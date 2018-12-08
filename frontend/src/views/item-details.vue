@@ -17,9 +17,10 @@
           <img class="details-seller-img" :src="currSeller.img" alt="placeholder image">
         </router-link>
       </header>
-
       <section class="item-content flex column">
-        <div class="img-details-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
+        <div class="img-details-container" :style="{backgroundImage:`url(${currItem.img})`}">
+          <img v-if="currItem.callDibs.length" src="../assets/img/logo1.svg" alt srcset>
+        </div>
         <div class="details-container">
           <div>
             <div>
@@ -31,11 +32,15 @@
               <p>Condition: {{currItem.condition}}</p>
               <p>{{currItem.price}}$</p>
             </div>
-            <div class="action-btn-container"  >
-              <button v-if="!isLoggedUser" class="dibs-btn" @click="sendDibs">Call dibs!</button>
-              <button v-else class="dibs-btn" @click="$router.push('/login')">Call dibs!</button>
+            <div class="action-btn-container">
+              <button
+                v-if="loggedUser && !isLoggedUser"
+                class="dibs-btn"
+                @click="sendDibs"
+              >Call dibs!</button>
+              <button v-if="!loggedUser" class="dibs-btn" @click="$router.push('/login')">Call dibs!</button>
               <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
-               <router-link v-if="loggedUser" :to="'/chat/user/'+ currSeller._id">&#128172;</router-link>
+              <router-link v-if="loggedUser" :to="'/chat/user/'+ currSeller._id">&#128172;</router-link>
             </div>
           </div>
           <google-map :itemCoords="currItem.location"/>
@@ -51,8 +56,7 @@ import GoogleMap from "@/components/GoogleMap";
 export default {
   name: "item-details",
   components: {
-    GoogleMap,
-
+    GoogleMap
   },
   data() {
     return {
@@ -78,19 +82,23 @@ export default {
   methods: {
     sendDibs() {
       if (this.loggedUser) {
-        var item = this.currItem;
-        delete item.user;
-        this.$store.dispatch({
-          type: "sendDibs",
-          userId: this.loggedUser._id,
-          item
+        let item = JSON.parse(JSON.stringify(this.currItem));
+        item.callDibs.push(this.loggedUser._id);
+        this.currItem.callDibs.push(this.loggedUser._id);
+        this.$store.dispatch({ type: "editItem", item }).then(item => {
+          delete item.user;
+          this.$store.dispatch({
+            type: "sendDibs",
+            userId: this.loggedUser._id,
+            item
+          });
+          var user = JSON.parse(JSON.stringify(this.loggedUser));
+          user.dibsAns.unshift({
+            isAns: false,
+            item
+          });
+          this.$store.dispatch({ type: "updateUser", user });
         });
-        var user = JSON.parse(JSON.stringify(this.loggedUser));
-        user.dibsAns.unshift({
-          isAns: false,
-          item
-        });
-        this.$store.dispatch({ type: "updateUser", user });
       } else this.$router.push("/login");
     },
     removeItem() {
