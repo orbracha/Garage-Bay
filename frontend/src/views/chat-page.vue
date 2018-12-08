@@ -1,7 +1,6 @@
 <template>
-  <section>
+  <section class="chat-page-container">
     <chat-list :data="userMsgs"></chat-list>
-    <garage-footer/>
   </section>
 </template>
 
@@ -33,19 +32,24 @@ export default {
               txt: room.historyMsgs[room.historyMsgs.length - 1].txt,
               title: user.nickname,
               img: user.img,
-              link: `/chat/user/${userDest}`
+              link: `/chat/user/${userDest}`,
+              isAvailable: user.isAvailable
             });
           });
       });
     }
   },
   created() {
-    this.loggedUser = this.$store.getters.getLoggedUser;
-    this.$store
-      .dispatch({ type: "loadRooms", userId: this.loggedUser._id })
-      .then(() => {
-        this.getUserMsgs();
-      });
+    let user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
+    user.historyChat = [];
+    this.$store.dispatch({ type: "updateUser", user }).then(() => {
+      this.loggedUser = this.$store.getters.getLoggedUser;
+      this.$store
+        .dispatch({ type: "loadRooms", userId: this.loggedUser._id })
+        .then(() => {
+          this.getUserMsgs();
+        });
+    });
   },
   components: {
     chatList

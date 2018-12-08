@@ -1,11 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const session = require('express-session')
+const app = express()
+
 const addItemRoutes = require('./routes/item.route')
 const addUserRoutes = require('./routes/user.route')
 const addChatRoutes = require('./routes/chat.route')
-
-const session = require('express-session')
-const app = express()
 
 const cors = require('cors')
 app.use(cors({
@@ -31,6 +31,9 @@ app.use(session({
 
 
 app.use(express.static('public'));
+
+
+
 
 const port = process.env.PORT || 3000;
 var server = app.listen(port, () => {
