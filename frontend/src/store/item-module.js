@@ -11,43 +11,44 @@ export default {
     strict: true,
     state: {
         items: [],
-        newUrl:''
+        newUrl: ''
     },
     mutations: {
-        resetNewUrl(state){         
-            state.newUrl='';
+        resetNewUrl(state) {
+            state.newUrl = '';
         },
         setItems(state, { items }) {
             state.items = items;
         },
-        editItem(state, { updatedItem }) {     
+        editItem(state, { updatedItem }) {
             var items = state.items;
-            var itemIdx = items.findIndex(currItem =>{
+            var itemIdx = items.findIndex(currItem => {
                 return currItem._id === updatedItem._id
-            } );
-            if (itemIdx!==-1){
+            });
+            if (itemIdx !== -1) {
                 return items.splice(itemIdx, 1, updatedItem);
-            } 
+            }
             items.unshift(updatedItem);
         },
-        setNewUrl(state, {url}){
-            state.newUrl=url
+        setNewUrl(state, { url }) {
+            state.newUrl = url
         }
     },
     actions: {
-        removeItem(context, {item}){
 
-          itemService.remove(item._id, item.sellerId)
-           
-            .then(user=>{
-                context.commit({type: 'updateUserLocally', user})
-            })
-           
+        removeItem(context, { item }) {
+
+            itemService.remove(item._id, item.sellerId)
+
+                .then(user => {
+                    context.commit({ type: 'updateUserLocally', user })
+                })
+
         },
 
         loadItems({ commit }) {
-            itemService.query().then(items => {   
-                commit({ type: 'setItems', items })                
+            itemService.query().then(items => {
+                commit({ type: 'setItems', items })
                 return items;
             })
         },
@@ -56,31 +57,31 @@ export default {
                 return item;
             })
         },
-        editItem({ commit }, { item }) {  
+        editItem({ commit }, { item }) {
             return itemService.edit(item)
-            .then(updatedItem => {
-                 commit({ type: 'editItem', updatedItem })
-                return updatedItem;
-            })
+                .then(updatedItem => {
+                    commit({ type: 'editItem', updatedItem })
+                    return updatedItem;
+                })
         },
         saveImage({ commit }, imageToSave) {
-           return itemService.saveImage(imageToSave)
-            .then(url=>{
-                commit({type: 'setNewUrl',url })
-            })
-          
-        },
-        addItem(context, {item}){
-            return itemService.addItem(item)
-            .then(newItem=>{
-                context.dispatch({type: 'getUserById', userId: newItem.sellerId})
-                .then(user=>{
-                   context.commit({type: 'updateUserLocally', user})
+            return itemService.saveImage(imageToSave)
+                .then(url => {
+                    commit({ type: 'setNewUrl', url })
                 })
-                return newItem._id
-            })
+
         },
-      
+        addItem(context, { item }) {
+            return itemService.addItem(item)
+                .then(newItem => {
+                    context.dispatch({ type: 'getUserById', userId: newItem.sellerId })
+                        .then(user => {
+                            context.commit({ type: 'updateUserLocally', user })
+                        })
+                    return newItem._id
+                })
+        },
+
     },
     getters: {
         itemsToDisplay: state => {
@@ -90,7 +91,7 @@ export default {
         getItems(state) {
             return state.items;
         },
-        getImageUrl(state){
+        getImageUrl(state) {
             return state.newUrl
         }
     }

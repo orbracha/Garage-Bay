@@ -37,20 +37,10 @@ export default {
 
   methods: {
     toggleWishlist() {
+      const id = this.item._id
       if (!this.loggedUser) return this.$router.push(`/login`);
-      const itemId = this.item._id;
-      var user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
-      const wishlistItemIdx = user.wishList.indexOf(itemId);
-
-      if (wishlistItemIdx === -1) {
-        user.wishList.push(itemId);
-      } else {
-        user.wishList.splice(wishlistItemIdx, 1);
-      }
-
-      this.$store.dispatch({ type: "updateUser", user });
+      this.$store.dispatch({ type: 'toggleWishlist', id });
     },
-
     userClicked(sellerId) {
       this.$router.push(`/user/${sellerId}`);
     },
@@ -76,9 +66,10 @@ export default {
       return this.item.user;
     },
     wishlist() {
+      const id = this.item._id
       if (!this.loggedUser) return;
-      return this.loggedUser.wishList.some(item => {
-        return item === this.item._id;
+      return this.loggedUser.wishList.some(itemId => { 
+        return itemId === id;
       });
     },
     distance() {

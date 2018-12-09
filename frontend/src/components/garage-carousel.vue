@@ -22,7 +22,6 @@
       <garage-card :user="user"/>
     </slide>
   </carousel>
-  <!-- </div> -->
 </template>
 
 
@@ -38,9 +37,6 @@ export default {
     Carousel,
     Slide,
     garageCard
-  },
-  created() {
-    console.log(this.bestSellers);
   }
 };
 </script>
