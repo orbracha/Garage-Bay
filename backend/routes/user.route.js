@@ -26,7 +26,7 @@ function addRoutes(app) {
 
                 return res.json(userAndToken);
             })
-            
+            .catch(err=> console.log(err))
             .catch(err => res.status(401).send(err))
     })
 
