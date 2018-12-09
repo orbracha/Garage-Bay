@@ -28,8 +28,7 @@ export default {
         setBestSellers(state, {users}){
             state.bestSellers = users
         },
-        toggleWishlist(state, itemId) {
-            const id = new ObjectId(itemId)
+        toggleWishlist(state, id) {
             const wishlistItemIdx = state.loggedUser.wishList.indexOf(id)
             if (wishlistItemIdx === -1) {
                 state.loggedUser.wishList.push(id)
@@ -66,8 +65,10 @@ export default {
         //     this.$store.dispatch({ type: "updateUser", user });
         // },  
 
-        toggleWishlist(contex, { itemId }) {
-            contex.commit('toggleWishlist', itemId)
+        toggleWishlist(contex, {id}) {
+   
+            
+            contex.commit('toggleWishlist', id)
             return userService.edit(contex.state.loggedUser).then(user => {
             })
         },

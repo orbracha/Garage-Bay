@@ -3,7 +3,8 @@
     <div v-if="isLoading">Loding...</div>
     <div class="home" v-else>
       <div class="info-section flex column">
-        <h1 class="home-page-text">Search , Pick , Call Dibs!</h1>
+      <h1 class="home-page-text">Search , Pick <span>&</span> Call Dibs! </h1>
+
         <garage-carousel v-if="bestSellers" :bestSellers="bestSellers"/>
       </div>
 
@@ -59,6 +60,11 @@ export default {
 </script>
 
 <style lang="scss">
+h1{
+  span{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+}
 .VueCarousel-navigation-next {
   margin-right: 10px;
   color: rgba(255, 255, 255, 0.815) !important;
