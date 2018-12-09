@@ -52,6 +52,7 @@ export default {
           this.$store.dispatch({ type: "sendAns", ans });
         });
       } else {
+        
         this.removeDib(idx).then(() => {
           this.$store.dispatch({ type: "sendAns", ans });
         });

@@ -8,17 +8,11 @@
         </div>
         <i class="fas fa-search"/>
       </div>
-
-      <!-- <span slot="optionalIcon">
-        <i class="fas fa-search"/>
-      </span>-->
     </garage-header>
     <section v-if="isLoadingCat" class="loading">Loading</section>
 
     <section v-else>
-      <!-- <div class="filter-container">
-        <input type="text" v-model="filter.byTxt">
-      </div>-->
+
       <div class="catagories-container">
         <div
           v-for="catagory in catagories"
@@ -32,11 +26,6 @@
       <items-tumbnail v-else :list="itemsToDisplay" class="search-res"/>
 
       <div class="items-container">
-        <!-- <div v-else v-for="item in itemsToDisplay" :key="item._id">
-          <img :src="item.img" alt>
-          <br>
-          {{item.title}}
-        </div>-->
       </div>
     </section>
     <garage-footer/>

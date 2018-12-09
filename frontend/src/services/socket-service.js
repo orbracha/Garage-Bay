@@ -1,5 +1,5 @@
 'use strict'
-import eventBus, { GET_MSG, GET_DIBS, GET_ANS, GET_CANCLE } from '../services/eventBus-service.js'
+import eventBus, { GET_MSG,DIBS} from '../services/eventBus-service.js'
 import ioClient from 'socket.io-client'
 
 const BASE_URL = (process.env.NODE_ENV !== 'development')
@@ -20,7 +20,7 @@ function connectSocket(userId, userDest) {
         if (userId === item.sellerId) {
             if (userId !== fromUserId) {
                 console.log('got dibs from', fromUserId)
-                eventBus.$emit(GET_DIBS, item, fromUserId)
+                eventBus.$emit(DIBS)
             }
 
         }
@@ -29,13 +29,13 @@ function connectSocket(userId, userDest) {
     socket.on('got-ans', function (ans) {
         if (userId === ans.dib.from) {
             console.log('got ans about', ans.dib.item.title, ans)
-            eventBus.$emit(GET_ANS, ans)
+            eventBus.$emit(DIBS)
         }
     });
     socket.on('got-cancle-dib', function (dib) {
         if (userId === dib.item.sellerId) {
             console.log('got cancle about', dib.item.title, 'from', dib.from)
-            eventBus.$emit(GET_CANCLE, dib)
+            eventBus.$emit(DIBS)
         }
     });
     socket.on('usersConnected', room => {
