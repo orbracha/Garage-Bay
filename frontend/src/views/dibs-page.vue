@@ -52,7 +52,10 @@ export default {
           this.$store.dispatch({ type: "sendAns", ans });
         });
       } else {
-        
+        let item = JSON.parse(JSON.stringify(dib.item));
+        let userIdx = item.callDibs.indexOf(dib.from);       
+        item.callDibs.splice(userIdx, 1);
+        this.$store.dispatch({ type: "editItem", item }); 
         this.removeDib(idx).then(() => {
           this.$store.dispatch({ type: "sendAns", ans });
         });
