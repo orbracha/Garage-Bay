@@ -6,7 +6,8 @@
     height: 45px;
     background-color: $light;
     color: $dark;
-  
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+
     .footer-icons-wrapper {
       display: flex;
       padding: 0 12px;
@@ -15,7 +16,7 @@
         display: none;
       }
       i {
-        font-size: 1.3rem;
+        // font-size: 1.3rem;
         padding: 10px;
         
       }
@@ -47,10 +48,11 @@
     .footer-notification {
       font-family: "Avenir", Helvetica, Arial, sans-serif;
       font-size: 12px;
+      font-weight: 200;
       position: absolute;
       height: 15px;
       width: 15px;
-      top: 0;
+      top: 5px;;
       right: 12px;
       text-align: center;
       // padding: 1px 5px;
@@ -75,14 +77,21 @@
 
     .footer {
       padding-top: 70px;
-      left: -5px;
+      left: 0;
       top: 0;
-      width: 0px;
+      width: 4px;
       height: 100vh;
       margin-right: 10px;
       background-color: rgba(241, 9, 9, 0);
       box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.6);
       transition: 0.3s;
+      &:hover{
+        width: 205px;
+        background-color:white;
+        .footer-icons-wrapper {
+          left: 0;
+        }
+      }
       &.open {
         width: 205px;
         background-color:white;
@@ -158,7 +167,7 @@
     width: 200px;
     height: 100vh;
     margin-right: 10px;
-    background-color: white;
+    background-color: $xlight;
     .footer-icons-wrapper {
         padding: 10px;
         padding-left: 20px;

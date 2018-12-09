@@ -30,7 +30,7 @@
                 {{distance}} Km away
               </p>
               <p>Condition: {{currItem.condition}}</p>
-              <p>{{currItem.price}}$</p>
+              <p>Price: {{currItem.price}}$</p>
             </div>
             <div class="action-btn-container">
               <button
@@ -132,4 +132,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.fa-comment-alt{
+  padding-left: 8px;
+}
+</style>
+
 

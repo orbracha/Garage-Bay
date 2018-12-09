@@ -15,14 +15,12 @@
     class="carousel"
     :loop="true"
     :per-page="1"
-   
     :navigationEnabled="false"
     :mouse-drag="false"
   >
     <slide v-for="user in bestSellers" :key="user._id">
       <garage-card :user="user"/>
     </slide>
-  
   </carousel>
   <!-- </div> -->
 </template>
@@ -40,6 +38,9 @@ export default {
     Carousel,
     Slide,
     garageCard
+  },
+  created() {
+    console.log(this.bestSellers);
   }
 };
 </script>
@@ -64,10 +65,9 @@ export default {
 
 .VueCarousel-slide {
   position: relative;
-  background: #42b983;
+  // background: #42b983;
   min-height: 100px;
 }
-
 </style>
  
 
