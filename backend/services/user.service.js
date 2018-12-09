@@ -83,6 +83,43 @@ function getByName(userName) {
         })
 }
 
+function userAvailableStatus(userId, status) {
+    userId = new ObjectId(userId)
+    return mongoService.connectToDb().then(db => {
+        db.collection('user').updateOne({ _id: userId }, { $set: { isAvailable: status } })
+    })
+
+
+}
+
+function userOfflineMsgs(userId1, userId2, msg) {
+    userId1 = new ObjectId(userId1)
+    userId2 = new ObjectId(userId2)
+    return mongoService.connectToDb().then(db => {
+        db.collection('user').findOne({
+            $and: [{ _id: userId1 },
+            { isAvailable: { $eq: false } }]
+        }
+        ).then(user => {
+            if (user) {
+                db.collection('user').updateOne(
+                    { _id: userId1 }, { $push: { historyChat: msg } }
+                )
+            }
+        })
+        db.collection('user').findOne({
+            $and: [{ _id: userId2 },
+            { isAvailable: { $eq: false } }]
+        }
+        ).then(user => {
+            if (user) {
+                db.collection('user').updateOne(
+                    { _id: userId2 }, { $push: { historyChat: msg } }
+                )
+            }
+        })
+    })
+}
 
 function updateUserDibs(userId, dib) {
     const id = new ObjectId(userId)
@@ -197,7 +234,9 @@ module.exports = {
     updateUserDibsAns,
     getUserWishlist,
     getByName,
-    getUsers
+    getUsers,
+    userAvailableStatus,
+    userOfflineMsgs
 
 }
 

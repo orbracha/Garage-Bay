@@ -59,6 +59,9 @@ export default {
     },
     cancelDibReq({ dib, idx }) {
       if (confirm("Are you sure?")) {
+        let item = JSON.parse(JSON.stringify(dib.item));
+        item.callDibs.pop();
+        this.$store.dispatch({ type: "editItem", item });
         dib.from = this.$store.getters.getLoggedUser._id;
         var user = JSON.parse(
           JSON.stringify(this.$store.getters.getLoggedUser)

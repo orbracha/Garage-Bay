@@ -37,6 +37,7 @@ export default {
             type: "connectSocket",
             userId: this.$store.getters.getLoggedUser._id
           });
+
           eventBus.$on(GET_DIBS, (item, fromUser) => {
             this.$store.dispatch({ type: "loadDibs" });
           });

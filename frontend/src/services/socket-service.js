@@ -3,14 +3,14 @@ import eventBus, { GET_MSG, GET_DIBS, GET_ANS, GET_CANCLE } from '../services/ev
 import ioClient from 'socket.io-client'
 
 const BASE_URL = (process.env.NODE_ENV !== 'development')
-    ? process.env.NODE_ENV
+    ? ''
     : 'http://localhost:3000';
 
 var socket;
 var gRoom;
 function connectSocket(userId, userDest) {
-
     socket = ioClient(BASE_URL);
+    socket.emit('inline', userId);
     if (userDest && userId) socket.emit('roomRequested', userId, userDest)
     socket.on('newMsg', function (msg) {
         if (msg.from._id !== userId) eventBus.$emit(GET_MSG, msg)
@@ -25,9 +25,10 @@ function connectSocket(userId, userDest) {
 
         }
     });
+
     socket.on('got-ans', function (ans) {
         if (userId === ans.dib.from) {
-            console.log('got ans about', ans.dib.item.title,ans)
+            console.log('got ans about', ans.dib.item.title, ans)
             eventBus.$emit(GET_ANS, ans)
         }
     });
