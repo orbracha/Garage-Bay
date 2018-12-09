@@ -9,9 +9,9 @@
       </router-link>
       <router-link class="footer-item footer-item-4" :to="(user)? '/chat':'/login'">
         <div @click="toggleMenu" class="flex row center">
-          <span v-if="user && user.historyChat.length" class="chat-notification">{{user.historyChat.length}}</span>
           <i class="far fa-comment-alt"></i>
           <p>Chat</p>
+          <span v-if="user && user.historyChat.length" class="chat-notification">{{user.historyChat.length}}</span>
         </div>
       </router-link>
       <router-link class="footer-item footer-item-5" to="/select-image/item">
