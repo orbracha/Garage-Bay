@@ -1,22 +1,33 @@
 
 const userService = require('../services/user.service')
-
-
+const jwt=require('jsonwebtoken')
 
 
 
 function addRoutes(app) {
     app.post('/api/user', (req, res) => {
-        return userService.checkUser(req.body.user)
+       var userCred=req.body.user;       
+       if(typeof userCred!=='object'){
+        var userCred = jwt.verify(userCred, 'mysecretkey')
+    }
+
+        return userService.checkUser(userCred)
             .then(user => {
                 req.session.loggedinUser = user;
-                return res.json(user);
+                const userInfo={
+                    nickname:user.nickname,
+                    password: user.password
+                }
+                var token=jwt.sign({userInfo},'mysecretkey')
+                const userAndToken={
+                    user,
+                    token
+                }
+
+                return res.json(userAndToken);
             })
+            
             .catch(err => res.status(401).send(err))
-    })
-    app.post('/api/user/logout', (req, res)=>{
-        req.session.destroy()
-        res.end()  
     })
 
 
@@ -25,16 +36,7 @@ function addRoutes(app) {
         req.session.destroy();
         res.end();
     });
-    // app.get('/api/user/dibs/:userId', (req, res) => {
-    //     const userId = req.params.userId;
-    //     console.log('userid', userId)
-    //     return userService.getById(userId)
-    //         .then(user => {
-    //             console.log('user with dibs to send', user);
 
-    //             return res.json(user)
-    //         })
-    // });
 
     app.get('/api/user/:userId', (req, res) => {
         const userId = req.params.userId;
@@ -67,7 +69,6 @@ function addRoutes(app) {
                 res.json(user)
             })
     })
-
 
     app.post('/api/user/sign', (req, res) => {
         const user = req.body;

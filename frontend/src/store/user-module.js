@@ -119,11 +119,15 @@ export default {
             return state.loggedUser;
         },
        bestSellers(state){
-        return state.bestSellers;
+           if(state.bestSellers)
+        return state.bestSellers.filter(seller =>{
+            return 'header' in seller
+        })
 
        },
 
         getEditUser(state) {
+
             return state.editUser;
         }
     },

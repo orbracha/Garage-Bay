@@ -24,11 +24,12 @@
           v-for="catagory in catagories"
           :key="catagory"
           @click="catagoryClicked(catagory)"
-        >{{catagory}}</div>
+          v-if="catagory.length>1"
+        >{{catagory}} </div>
       </div>
 
       <div v-if="isLoadingItems" class="loading"></div>
-      <items-tumbnail v-else :list="itemsToDisplay"/>
+      <items-tumbnail v-else :list="itemsToDisplay" class="search-res"/>
 
       <div class="items-container">
         <!-- <div v-else v-for="item in itemsToDisplay" :key="item._id">
@@ -117,6 +118,9 @@ export default {
     border-radius: 5px;
     cursor: pointer;
   }
+}
+.search-res{
+  padding: 20px;
 }
 .items-container {
   display: flex;

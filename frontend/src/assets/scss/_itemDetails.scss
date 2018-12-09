@@ -1,9 +1,13 @@
 .item-container{
   margin: 80px 10px;
-margin-bottom: 20px;
+  margin-bottom: 10px;
+  i{
+    padding: 0;
+  }
 .details-header{
   align-items: center;
   justify-content: space-between;
+  align-items: flex-start;
   font-size: 20px;
   height: 7rem;
   margin-bottom: 10px;
@@ -11,29 +15,31 @@ margin-bottom: 20px;
   padding: 10px;
     .header-content{
       text-align: left;
-
+      // padding: 10px;
+      h3{
+        margin: 0;
+      }
+      i{
+        padding: 0;
+      }
       .edit-btn-container{
-        a{
-           font-size: 14px;   
-           color: black;
+        i{
+          padding: 0;
+          color: $dark;
+          margin-right: 6px;
+          font-size: 1.3rem;
+          &:hover{
+            cursor: pointer;
+            color: $mid;
           }
-          .fa-trash-alt{
-            margin-left: 5px;
-            font-size: 14px;   
-            color: black;
-          } 
-          .edit-item{
-           font-size: 14px;   
-           color: black;
-
-          }
+        }
       }
 
       #item-created{
         font-size: 14px;
         margin-bottom: 3px;
         font-weight: 100;
-        color: gray;
+        color: $mid;
       }
     }
     .details-seller-img{
@@ -106,7 +112,6 @@ margin-bottom: 20px;
 }
 
 .img-details-container{
-  // height: 300px;
   width: 100%;
   background-color: white;
   background-position: top;
@@ -116,9 +121,8 @@ margin-bottom: 20px;
 
 @media(max-width:600px){
 .img-details-container{
-
-  height: 300px;
-
+  width: 100%;
+  margin-bottom: 10px;
 }
 }
 
