@@ -33,12 +33,10 @@
         text-decoration: none; /* no underline */
         transition: 0.3s;
         &:focus{
-          color: $s1;
-    
+          color: $s1;   
         }
         &:hover {
           cursor: pointer;
-    
           color: $s1;
         }
     
@@ -68,7 +66,6 @@
     }
     &:hover {
       cursor: pointer;
-
       color: $s1;
     }
   }
@@ -159,25 +156,26 @@
   }
 
   @media (min-width: 950px) {
-      .footer{
-    position: fixed;
-    padding-top: 70px;
-    left: 0;
-    top: 0;
-    width: 200px;
-    height: 100vh;
-    margin-right: 10px;
-    background-color: $xlight;
-    .footer-icons-wrapper {
-        padding: 10px;
-        padding-left: 20px;
-        position: relative;
-        flex-direction: column;
-        justify-content: start;
-        align-items: flex-start;
-        left: 0;
-        transition: 0.3s;
-    }
+    .footer{
+      position: fixed;
+      padding-top: 70px;
+      left: 0;
+      top: 0;
+      width: 205px;
+      height: 100vh;
+      margin-right: 10px;
+      background-color: $xlight;
+  
+      .footer-icons-wrapper {
+          padding: 10px;
+          padding-left: 20px;
+          position: relative;
+          flex-direction: column;
+          justify-content: start;
+          align-items: flex-start;
+          left: 0;
+          transition: 0.3s;
+      }
   }
   .screen{
 

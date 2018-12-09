@@ -4,10 +4,10 @@
     margin-left: 0px;
     color:$s1;
     font-family: $lobster;
-    // color: white;
+    color: #add22d;
     font-size: 2rem;
     font-weight:900;
-    text-shadow: 0px 1px 10px #17171580, 0px 0px 12px #0c0c0c8a;
+    text-shadow: 0px 0px 10px #0c0c0c8a;
   }
 
   
@@ -74,12 +74,16 @@
           
         }
             .home-page-text{
-              font-size: 4.5rem;
+              font-size: 3.5rem;
             }
       }
 
-  //     @media (min-width:770px){
-     
+
+      @media (min-width:770px){
+        .home-page-text{
+          font-size: 4.5rem;
+        }
+      }
      
   // .info-section{
   //   padding: 20px;

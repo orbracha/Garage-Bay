@@ -5,15 +5,22 @@
         <img class="seller-thumbnail" v-if="seller.img" :src="seller.img">
         <div>
           <h3>{{seller.nickname}}</h3>
-          <div v-if="loggedUser">{{distance}} Km away </div>
-     
+          <div v-if="loggedUser">{{distance}} Km away</div>
         </div>
       </div>
 
       <div class="img-wrapper">
-        <i class="fas fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
-        <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
-        <img v-if="item.img" class="main-list-img" :src="item.img" >
+        <section v-if="!isUserItem">
+          <i class="fas fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
+          <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
+        </section>
+        <section v-if="isDibs">
+          <img
+            class="dibs-stamp"
+            src="../assets/img/dibs_stamp.svg"
+          >
+        </section>
+        <img v-if="item.img" class="main-list-img" :src="item.img">
       </div>
 
       <div class="main-item-details">
@@ -57,13 +64,19 @@ export default {
     },
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
-    },
-
-
+    }
   },
   computed: {
     userWishlist() {
       if (this.loggedUser) return this.loggedUser.wishList;
+    },
+    isUserItem() {
+       if (this.loggedUser) return this.loggedUser.itemList.some(id => id === this.item._id);
+       return false;
+    },
+    isDibs(){
+      console.log( this.item.callDibs); 
+      return this.item.callDibs.length>0   
     },
     seller() {
       return this.item.user;
@@ -75,14 +88,13 @@ export default {
         return item === this.item._id;
       });
     },
-    distance(){
-      let itemCoords=this.item.location
-      return this.$store.getters.getDistance(itemCoords)
+    distance() {
+      let itemCoords = this.item.location;
+      return this.$store.getters.getDistance(itemCoords);
     }
   },
   created() {
     this.loggedUser = this.$store.getters.getLoggedUser;
-
   }
 };
 </script>

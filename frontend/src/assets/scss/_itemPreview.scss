@@ -64,6 +64,13 @@
     height: 25px;
 
   }
+  .dibs-stamp{
+    position: absolute;
+    height: 80px;
+    top: -15px;
+    left: 2px;
+  
+  }
 }
 
 .empty-heart{
@@ -97,6 +104,8 @@
       transform: scale(1)
   }
 }
+
+
 
 .full-heart{
   color: rgb(247, 53, 53);
