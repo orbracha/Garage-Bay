@@ -52,7 +52,8 @@ export default {
         desc: "",
         price: 0,
         img: "",
-        condition: ""
+        condition: "",
+        callDibs:[]
       },
       isLoadingCat: false,
       catagories: []
