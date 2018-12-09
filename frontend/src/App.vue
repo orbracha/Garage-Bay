@@ -64,7 +64,7 @@ export default {
   padding-top: 80px;
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: rgb(46, 46, 46);
     &.router-link-exact-active {
       color: #42b983;
     }

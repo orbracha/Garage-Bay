@@ -19,7 +19,7 @@
       </header>
       <section class="item-content flex column">
         <div class="img-details-container" :style="{backgroundImage:`url(${currItem.img})`}">
-          <img v-if="currItem.callDibs.length" src="../assets/img/logo1.svg" alt srcset>
+          <img v-if="currItem.callDibs.length" src="../assets/img/dibs.svg" alt srcset>
         </div>
         <div class="details-container">
           <div>
