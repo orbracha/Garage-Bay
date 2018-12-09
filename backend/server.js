@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+
 const app = express()
 
 const addItemRoutes = require('./routes/item.route')
@@ -28,6 +29,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }))
+
 
 
 app.use(express.static('public'));

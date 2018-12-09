@@ -46,7 +46,6 @@ export default {
 
   computed: {
     items() {
-      // console.log(this.$store.getters.itemsToDisplay);
       return this.$store.getters.itemsToDisplay;
     },
     user() {
