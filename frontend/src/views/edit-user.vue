@@ -1,7 +1,7 @@
 <template>
   <div class="editContainer">
     <form @submit.prevent="saveUser" v-if="user">
-      <label for="image" @click="editImage">
+      <label for="image" @click="editImage" class="user-img-wrapper">
         <img :src="newImage?newImage:editedUser.img" alt="no image to display">
       </label>
       <label>
@@ -70,6 +70,11 @@ export default {
 .editContainer {
   color: white;
   margin-top: 150px;
+  img{
+    max-width: 400px;
+    margin: 0 auto;
+
+  }
 }
 form {
   display: flex;

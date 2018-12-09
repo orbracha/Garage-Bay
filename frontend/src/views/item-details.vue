@@ -19,7 +19,8 @@
       </header>
 
       <section class="item-content flex column">
-        <div class="img-details-container" :style="{backgroundImage:`url(${currItem.img})`}"></div>
+        <img class="img-details-container" :src="currItem.img" alt="">
+        <!-- <div class="img-details-container" :style="{backgroundImage:`url(${currItem.img})`}"></div> -->
         <div class="details-container">
           <div>
             <div>
@@ -29,12 +30,12 @@
                 {{distance}} Km away
               </p>
               <p>Condition: {{currItem.condition}}</p>
-              <p>{{currItem.price}}$</p>
+              <p>Price: {{currItem.price}}$</p>
             </div>
             <div class="action-btn-container"  >
-              <button v-if="!isLoggedUser" class="dibs-btn" @click="sendDibs">Call dibs!</button>
+              <button v-if="loggedUser && !isLoggedUser" class="dibs-btn" @click="sendDibs">Call dibs!</button>
               <button v-else class="dibs-btn" @click="$router.push('/login')">Call dibs!</button>
-              <i v-if="loggedUser && !isLoggedUser" class="far fa-heart empty-heart"></i>
+              <i v-if="loggedUser && !isLoggedUser" class="far fa-heart"></i>
                <router-link v-if="!isLoggedUser" :to="'/chat/user/'+ currSeller._id"><i class="far fa-comment-alt"></i></router-link>
             </div>
           </div>

@@ -2,7 +2,7 @@
     margin-top: 80px;
     .chat-page-header{
         height: 5rem;
-        background: #80d39bc4;
+        // background: #80d39bc4;
         margin: 0 20px;
         margin-bottom:10px;
         padding: 20px;
@@ -19,10 +19,11 @@
     margin-bottom: 40px;
     position: relative;
     .chat-msgs{
-        border-radius: 10px;
+        // border-radius: 10px;
         border-bottom-right-radius: unset;
         border-bottom-left-radius: unset;
-        background: lightgray;
+        background: $semi;
+        height: 100%;
         overflow: auto;
         padding: .5em;
         font-size: 1.5em;
@@ -37,27 +38,36 @@
             border-radius: 10px;
         }
         .loggedin-side{
+            // display: inline-block;
+            // width:fit-content;
             margin-bottom: 10px;
+            padding-left: 15px;
             background: #407FFF;
             color: white;
+
             direction: rtl;
-            margin-left: 50%;
+            margin-left: 20%;
+            right:0;
             .msg-time{
                 direction: ltr;
-                font-size: 1rem;
+                font-size: 0.8rem;
                 opacity: .5;
             }
 
         }
         .userChat-side{
+            // display: inline-block;
+            padding-right: 15px;
+            // width:fit-content;
+
             margin-bottom: 10px;
             direction: ltr;
             background: #F1F0F0;
-            color: black;
-            margin-right: 50%;
+            color: $dark;
+            margin-right: 20%;
             .msg-time{
                 direction: rtl;
-                font-size: 1rem;
+                font-size: 0.8rem;
                 opacity: .5;
             }
         }
@@ -79,14 +89,23 @@
           height: 45px;
         }
         input {
-            font-size: 1rem;
-          padding: 20px;
-          width: 80%;
-          height: 100%;
+          font-size: 1rem;
+          border: 1px solid $light;
+          width: 100%;
+          height: 40px;
+          margin: 0;
         }
         button {
-          height:100%;
-          width: 20%;
+            position: absolute;
+            right: 0;
+                border: 1px solid $light;
+                background-color: $xlight;
+                i{
+                  padding: 0;
+                }            
+              
+          height:40px;
+          width: 80px;
         }
       }
 }

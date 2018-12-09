@@ -54,6 +54,7 @@ export default {
 
 <style lang="scss" scoped>
 .wishlist-container{
+  padding: 20px;
   max-width: 1000px;
   margin: 0 auto;;
 

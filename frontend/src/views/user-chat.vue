@@ -16,7 +16,7 @@
     <div class="chat-text">
       <form @submit.prevent="sendMsg">
         <input type="text" v-model="newMsg.txt" required>
-        <button>Send</button>
+        <button class="send"><i class="far fa-paper-plane"></i></button>
       </form>
     </div>
   </section>
@@ -75,4 +75,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.send{
+  border: none;
+  background-color: white;
+  height: 0.7rem;;
+  i{
+    padding: 0;
+  }
+  
+}
 </style>

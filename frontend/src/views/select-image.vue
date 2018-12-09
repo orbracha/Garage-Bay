@@ -19,7 +19,7 @@
     </div>
 
     <div class="file-upload-form">
-      Upload an image file:
+      Or <br> <br>
       <input type="file" @change="previewImage" accept="image/*">
     </div>
 
@@ -120,14 +120,20 @@ export default {
 
 .add-item-container{
   text-align: center;
+  .icon{
+  margin-bottom: 20px;
+
+  }
   i{
     padding: 8px;
     background-color:white;
     border-radius: 90px;
+
   }
 }
 img.preview {
   /* width: 200px; */
+  // top:120px;
   background-color: white;
   border: 1px solid #ddd;
   padding: 5px;
@@ -135,12 +141,14 @@ img.preview {
 .video-container {
   width: 90%;
   margin: 0 auto;
-  max-width: 500px;
-  // max-height: 400px;
+  max-width: 400px;
+  height: 400px;
 
-
+input{
+  text-align: center;
+}
 }
   #video {
-    width: 100%
+    width: 100%;
   }
 </style>
