@@ -19,7 +19,13 @@
       </header>
       <section class="item-content flex column">
         <div class="img-details-container" :style="{backgroundImage:`url(${currItem.img})`}">
-          <img  class="dibs-stamp" v-if="currItem.callDibs.length" src="../assets/img/dibs_stamp.svg" alt srcset>
+          <img
+            class="dibs-stamp"
+            v-if="currItem.callDibs.length"
+            src="../assets/img/dibs_stamp.svg"
+            alt
+            srcset
+          >
         </div>
         <div class="details-container">
           <div>
@@ -34,7 +40,7 @@
             </div>
             <div class="action-btn-container">
               <button
-                v-if="loggedUser && !isLoggedUser"
+                v-if="loggedUser && !isLoggedUser && !(currItem.callDibs.includes(loggedUser._id))"
                 class="dibs-btn"
                 @click="sendDibs"
               >Call dibs!</button>
