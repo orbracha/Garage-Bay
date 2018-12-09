@@ -46,15 +46,12 @@ export default {
 
   computed: {
     items() {
-      // console.log(this.$store.getters.itemsToDisplay);
       return this.$store.getters.itemsToDisplay;
     },
     user() {
       return this.$store.getters.getLoggedUser;
     },
     bestSellers() {
-      console.log('in computsed',this.$store.getters.bestSellers);
-      
       return this.$store.getters.bestSellers;
     },
     countOfDibsAns() {

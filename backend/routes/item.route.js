@@ -40,7 +40,6 @@ function addRoutes(app) {
             userService.getById(sellerId)
             .then(user=>res.json(user))
         })
-       
     })
 
     app.get('/api/search', (req, res) => {

@@ -16,8 +16,7 @@ function addRoutes(app) {
     })
     app.post('/api/user/logout', (req, res)=>{
         req.session.destroy()
-        res.end()
-        
+        res.end()  
     })
 
 
@@ -72,7 +71,8 @@ function addRoutes(app) {
 
     app.post('/api/user/sign', (req, res) => {
         const user = req.body;
-
+        console.log('user to log in is:', user);
+        
         userService.add(user)
             .then(user => res.json(user))
     })
