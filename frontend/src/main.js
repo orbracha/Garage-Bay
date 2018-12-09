@@ -30,7 +30,7 @@ Vue.use(VueGoogleMaps, {
 
 Vue.config.productionTip = false;
 Vue.filter('relativeTime', timestamp => {
-  return moment(timestamp).fromNow();
+  return moment(timestamp).format('L');
 })
 new Vue({
   router,

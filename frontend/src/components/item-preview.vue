@@ -26,7 +26,7 @@
       <div class="main-item-details">
         <div class="main-list-header">{{item.title}}</div>
         <div class="item-desc-prev">{{item.desc}}</div>
-        <div>${{item.price}}</div>
+        <div>{{(item.price)? item.price+'$':'FREE'}}</div>
       </div>
     </section>
   </li>

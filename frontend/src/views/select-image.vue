@@ -14,16 +14,23 @@
 
     <div class="icon">
       <!-- <button id="snap" v-on:click="capture"> -->
-        <i class="fas fa-camera" id="snap" v-on:click="capture"></i>
+      <i class="fas fa-camera" id="snap" v-on:click="capture"></i>
       <!-- </button> -->
     </div>
 
-    <div class="file-upload-form">
-      Or <br> <br>
+    <div class="file-upload-form">Or
+      <br>
+      <br>
       <input type="file" @change="previewImage" accept="image/*">
     </div>
 
-    <canvas ref="canvas" id="canvas" width="640" height="480" v-if="showStream"></canvas>
+    <canvas
+      ref="canvas"
+      id="canvas"
+      width="640"
+      height="480"
+      v-if="showStream"
+    ></canvas>
     <div class="image-preview" v-else>
       <img class="preview" :src="imageData">
     </div>
@@ -79,13 +86,11 @@ export default {
       this.$store
         .dispatch({ type: "saveImage", imageToSave })
         .then(res => {
-           if(this.$route.params.def === 'edit-user'){
-                this.$router.push('/user/edit/userId')
-          }
-          else if(this.$route.params.def==='item'){
-            this.$router.push(`/item/edit`)
-          }
-          else {
+          if (this.$route.params.def === "edit-user") {
+            this.$router.push("/user/edit/userId");
+          } else if (this.$route.params.def === "item") {
+            this.$router.push(`/item/edit`);
+          } else {
             this.$router.push("/signup");
             console.log("PARAMS", this.$route.params.def);
           }
@@ -108,27 +113,26 @@ export default {
       }
     }
   },
-  beforeDestroy(){
-     const tracks = this.stream.getTracks();
-    if(tracks)
-    this.stopStream()
+  beforeDestroy() {
+    const tracks = this.stream.getTracks();
+    if (tracks) this.stopStream();
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
-.add-item-container{
+.add-item-container {
   text-align: center;
-  .icon{
-  margin-bottom: 20px;
-
+  .icon {
+    margin-bottom: 20px;
+    #canvas {
+      display: none;
+    }
   }
-  i{
+  i {
     padding: 8px;
-    background-color:white;
+    background-color: white;
     border-radius: 90px;
-
   }
 }
 img.preview {
@@ -144,11 +148,11 @@ img.preview {
   max-width: 400px;
   height: 400px;
 
-input{
-  text-align: center;
-}
-}
-  #video {
-    width: 100%;
+  input {
+    text-align: center;
   }
+}
+#video {
+  width: 100%;
+}
 </style>
