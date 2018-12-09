@@ -15,10 +15,7 @@
           <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
         </section>
         <section v-if="isDibs">
-          <img
-            class="dibs-stamp"
-            src="../assets/img/dibs_stamp.svg"
-          >
+          <img class="dibs-stamp" src="../assets/img/dibs_stamp.svg">
         </section>
         <img v-if="item.img" class="main-list-img" :src="item.img">
       </div>
@@ -46,18 +43,22 @@ export default {
   methods: {
     toggleWishlist() {
       if (!this.loggedUser) return this.$router.push(`/login`);
-      const itemId = this.item._id;
-      var user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
-      const wishlistItemIdx = user.wishList.indexOf(itemId);
-
-      if (wishlistItemIdx === -1) {
-        user.wishList.push(itemId);
-      } else {
-        user.wishList.splice(wishlistItemIdx, 1);
-      }
-
-      this.$store.dispatch({ type: "updateUser", user });
+      this.$store.dispatch({ type: " toggleWishlist" }, this.item._id);
     },
+    // toggleWishlist() {
+    //   if (!this.loggedUser) return this.$router.push(`/login`);
+    //   const itemId = this.item._id;
+    //   var user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
+    //   const wishlistItemIdx = user.wishList.indexOf(itemId);
+
+    //   if (wishlistItemIdx === -1) {
+    //     user.wishList.push(itemId);
+    //   } else {
+    //     user.wishList.splice(wishlistItemIdx, 1);
+    //   }
+
+    //   this.$store.dispatch({ type: "updateUser", user });
+    // },
 
     userClicked(sellerId) {
       this.$router.push(`/user/${sellerId}`);
@@ -71,12 +72,14 @@ export default {
       if (this.loggedUser) return this.loggedUser.wishList;
     },
     isUserItem() {
-       if (this.loggedUser) return this.loggedUser.itemList.some(id => id === this.item._id);
-       return false;
+      if (this.loggedUser)
+        return this.loggedUser.itemList.some(id => id === this.item._id);
+      return false;
     },
-    isDibs(){
-      console.log( this.item.callDibs); 
-      return this.item.callDibs.length>0   
+    isDibs() {
+
+      if(this.item.callDibs)
+      return this.item.callDibs.length > 0;
     },
     seller() {
       return this.item.user;

@@ -50,6 +50,22 @@ export default {
 
     },
     actions: {
+
+        // toggleWishlist({state}, {id}) {
+           
+        //     const itemId = this.item._id;
+        //     var user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
+        //     const wishlistItemIdx = user.wishList.indexOf(itemId);
+
+        //     if (wishlistItemIdx === -1) {
+        //         user.wishList.push(itemId);
+        //     } else {
+        //         user.wishList.splice(wishlistItemIdx, 1);
+        //     }
+
+        //     this.$store.dispatch({ type: "updateUser", user });
+        // },  
+
         toggleWishlist(contex, { itemId }) {
             contex.commit('toggleWishlist', itemId)
             return userService.edit(contex.state.loggedUser).then(user => {

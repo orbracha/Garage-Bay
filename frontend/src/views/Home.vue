@@ -3,14 +3,11 @@
     <div v-if="isLoading">Loding...</div>
     <div class="home" v-else>
       <div class="info-section flex column">
-      <h1 class="home-page-text">Search , Pick , Call Dibs! </h1>
-        <!-- <div class="carousel-container"> -->
+        <h1 class="home-page-text">Search , Pick , Call Dibs!</h1>
         <garage-carousel v-if="bestSellers" :bestSellers="bestSellers"/>
-        <!-- </div> -->
       </div>
 
       <section class="home-content">
-      <!-- <h1 class="home-page-text">Recently Added Items:</h1> -->
         <item-list class="item-list" :items="items"/>
       </section>
     </div>
@@ -46,15 +43,12 @@ export default {
 
   computed: {
     items() {
-      // console.log(this.$store.getters.itemsToDisplay);
       return this.$store.getters.itemsToDisplay;
     },
     user() {
       return this.$store.getters.getLoggedUser;
     },
     bestSellers() {
-      console.log("in computsed", this.$store.getters.bestSellers);
-
       return this.$store.getters.bestSellers;
     },
     countOfDibsAns() {
