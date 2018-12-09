@@ -27,11 +27,13 @@ function updateUser(user){
   storageService.save(LOGGEDIN_USER_KEY,user)
 }
 function checkUser(user) {
+  console.log('user in front service', user);
+  
   return axios.post(`${BASE_URL}`, { user }).then(res => {
-    // console.log('user in  user servive',user);
+    console.log('res.data in  user service',res.data);
 
-    storageService.save(LOGGEDIN_USER_KEY, res.data)
-    return res.data
+    storageService.save(LOGGEDIN_USER_KEY, res.data.token)
+    return res.data.user
   });
 }
 

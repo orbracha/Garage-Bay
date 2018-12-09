@@ -4,6 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 function checkUser(user) {
+    if(user.userInfo) user=user.userInfo
     return mongoService.connectToDb()
         .then(dbConn => {
             const db = dbConn.collection('user');
@@ -12,7 +13,9 @@ function checkUser(user) {
 
             )
                 .then(user => {
-                    if (!user) throw err;
+                    console.log('user found:', user);
+                    
+                    if (!user) throw user;
                     return user
                 });
         })
