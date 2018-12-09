@@ -36,7 +36,7 @@ export default {
                 state.loggedUser.wishList.splice(wishlistItemIdx, 1)
             }
             return userService.edit(state.loggedUser).then(user => {
-                console.log(user);
+                
             })
         },
         updateUserLocally(state, { user }) {
@@ -109,8 +109,6 @@ export default {
         getBestSellers({ commit },) {
             return userService.getUsers()
                 .then(users => {
-                    console.log('users in store', users);
-                    
                     commit({type: 'setBestSellers', users})
                     return users
                 })

@@ -5,32 +5,22 @@
         v-if="showStream"
         ref="video"
         id="video"
-        width="640"
-        height="480"
+        width="300"
+        height="300"
         autoplay
         muted="muted"
       ></video>
     </div>
-
-    <div class="icon">
-      <!-- <button id="snap" v-on:click="capture"> -->
-      <i class="fas fa-camera" id="snap" v-on:click="capture"></i>
-      <!-- </button> -->
+    <div class="icon" @click="capture">
+      <i class="fas fa-camera"></i>
     </div>
-
     <div class="file-upload-form">Or
       <br>
       <br>
       <input type="file" @change="previewImage" accept="image/*">
     </div>
 
-    <canvas
-      ref="canvas"
-      id="canvas"
-      width="640"
-      height="480"
-      v-if="showStream"
-    ></canvas>
+    <canvas ref="canvas" id="canvas" width="640" height="480" v-if="showStream"></canvas>
     <div class="image-preview" v-else>
       <img class="preview" :src="imageData">
     </div>
@@ -72,6 +62,7 @@ export default {
       this.showStream = false;
     },
     capture() {
+
       this.canvas = this.$refs.canvas;
       var context = this.canvas
         .getContext("2d")
@@ -126,7 +117,7 @@ export default {
   .icon {
     margin-bottom: 20px;
     #canvas {
-      display: none;
+      // display: none;
     }
   }
   i {
@@ -134,6 +125,9 @@ export default {
     background-color: white;
     border-radius: 90px;
   }
+  #capture {
+  cursor: pointer;
+}
 }
 img.preview {
   /* width: 200px; */
@@ -155,4 +149,5 @@ img.preview {
 #video {
   width: 100%;
 }
+
 </style>
