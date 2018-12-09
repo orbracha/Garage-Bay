@@ -54,6 +54,7 @@ function addRoute(app, server) {
                 io.to(room._id).emit('newMsg', msg)
             })
         })
+
     });
 
     app.get('/api/msg', (req, res) => {

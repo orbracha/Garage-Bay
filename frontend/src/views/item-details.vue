@@ -19,7 +19,13 @@
       </header>
       <section class="item-content flex column">
         <div class="img-details-container" :style="{backgroundImage:`url(${currItem.img})`}">
-          <img v-if="currItem.callDibs.length" src="../assets/img/logo1.svg" alt srcset>
+          <img
+            class="dibs-stamp"
+            v-if="currItem.callDibs.length"
+            src="../assets/img/dibs_stamp.svg"
+            alt
+            srcset
+          >
         </div>
         <div class="details-container">
           <div>
@@ -30,17 +36,19 @@
                 {{distance}} Km away
               </p>
               <p>Condition: {{currItem.condition}}</p>
-              <p>Price: {{currItem.price}}$</p>
+              <p>Price: {{(currItem.price)? currItem.price+'$':'FREE'}}</p>
             </div>
             <div class="action-btn-container">
               <button
-                v-if="loggedUser && !isLoggedUser"
+                v-if="loggedUser && !isLoggedUser && !(currItem.callDibs.includes(loggedUser._id))"
                 class="dibs-btn"
                 @click="sendDibs"
               >Call dibs!</button>
               <button v-if="!loggedUser" class="dibs-btn" @click="$router.push('/login')">Call dibs!</button>
               <i v-if="loggedUser && !isLoggedUser" class="fas fa-heart empty-heart"></i>
-              <router-link v-if="loggedUser" :to="'/chat/user/'+ currSeller._id">&#128172;</router-link>
+              <router-link v-if="loggedUser && !isLoggedUser" :to="'/chat/user/'+ currSeller._id">
+                <i class="far fa-comment-alt"></i>
+              </router-link>
             </div>
           </div>
           <google-map :itemCoords="currItem.location"/>
@@ -134,8 +142,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fa-comment-alt{
+.fa-comment-alt {
   padding-left: 8px;
+  font-size: 1.6rem;
 }
 </style>
 

@@ -1,25 +1,29 @@
 <template>
-  <li v-if="item" class="item-preview-container">
+  <li v-if="item && !isUserItem " class="item-preview-container">
     <section class="main-list-item" @click="itemClicked(item._id)">
       <div class="seller-preview" @click.stop="userClicked(seller._id)">
         <img class="seller-thumbnail" v-if="seller.img" :src="seller.img">
         <div>
           <h3>{{seller.nickname}}</h3>
-          <div v-if="loggedUser">{{distance}} Km away </div>
-     
+          <div v-if="loggedUser">{{distance}} Km away</div>
         </div>
       </div>
 
       <div class="img-wrapper">
-        <i class="fas fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
-        <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
-        <img v-if="item.img" class="main-list-img" :src="item.img" >
+        <section>
+          <i class="fas fa-heart empty-heart" v-if="!wishlist" @click.stop="toggleWishlist"></i>
+          <i class="fas fa-heart full-heart" v-else @click.stop="toggleWishlist"></i>
+        </section>
+        <section v-if="isDibs">
+          <img class="dibs-stamp" src="../assets/img/dibs_stamp.svg">
+        </section>
+        <img v-if="item.img" class="main-list-img" :src="item.img">
       </div>
 
       <div class="main-item-details">
         <div class="main-list-header">{{item.title}}</div>
         <div class="item-desc-prev">{{item.desc}}</div>
-        <div>${{item.price}}</div>
+        <div>{{(item.price)? item.price+'$':'FREE'}}</div>
       </div>
     </section>
   </li>
@@ -31,11 +35,6 @@ export default {
     item: Object
   },
 
-  data() {
-    return {
-      loggedUser: null
-    };
-  },
   methods: {
     toggleWishlist() {
       if (!this.loggedUser) return this.$router.push(`/login`);
@@ -57,32 +56,38 @@ export default {
     },
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
-    },
-
-
+    }
   },
   computed: {
     userWishlist() {
       if (this.loggedUser) return this.loggedUser.wishList;
     },
+    isUserItem() {
+      if (this.loggedUser)
+        return this.loggedUser.itemList.some(id => id === this.item._id);
+      return false;
+    },
+    isDibs() {
+      if (this.item.callDibs) {
+        return this.item.callDibs.length > 0;
+      }
+    },
     seller() {
       return this.item.user;
     },
     wishlist() {
-      const user = this.$store.getters.getLoggedUser;
-      if (!user) return;
-      return user.wishList.some(item => {
+      if (!this.loggedUser) return;
+      return this.loggedUser.wishList.some(item => {
         return item === this.item._id;
       });
     },
-    distance(){
-      let itemCoords=this.item.location
-      return this.$store.getters.getDistance(itemCoords)
+    distance() {
+      let itemCoords = this.item.location;
+      return this.$store.getters.getDistance(itemCoords);
+    },
+    loggedUser() {
+      return this.$store.getters.getLoggedUser;
     }
-  },
-  created() {
-    this.loggedUser = this.$store.getters.getLoggedUser;
-
   }
 };
 </script>

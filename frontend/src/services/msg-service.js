@@ -18,9 +18,14 @@ function add(msg, user) {
     return Promise.resolve();
 }
 
+function disconnent() {
+    return axios.post(`${BASE_URL}/disconnent`)
+}
+
 
 export default {
     queryMsgs,
     queryRooms,
-    add
+    add,
+    disconnent
 }

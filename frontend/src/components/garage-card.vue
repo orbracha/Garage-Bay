@@ -14,7 +14,7 @@
           <span v-for="x in 5-user.rate" :key="x.idx" class="fa fa-star empty-star"></span>
         </div>
       </div>
-      <div>Selling: {{user.itemList.length}} items</div>
+      <div>Selling: {{user.listedItems.length}} items</div>
     </div>
   </div>
 </template>
