@@ -14,11 +14,7 @@ export default {
         newUrl:''
     },
     mutations: {
-<<<<<<< HEAD
-        resetNewUrl(state){
-=======
         resetNewUrl(state){         
->>>>>>> 56cd0a3b5567f21cf661fd2eee2831c644f054fe
             state.newUrl='';
         },
         setItems(state, { items }) {
