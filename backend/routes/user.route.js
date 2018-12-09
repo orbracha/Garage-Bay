@@ -31,7 +31,7 @@ function addRoutes(app) {
     })
 
 
-    app.get('/api/user/logout', (req, res) => {
+    app.post('/api/user/logout', (req, res) => {
         console.log('About to destroy Server Session for', req.session.loggedinUser);
         req.session.destroy();
         res.end();
