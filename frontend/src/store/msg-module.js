@@ -57,11 +57,14 @@ export default {
         sendDibs({ commit }, { userId, item }) {
             socketService.sendDibs(userId, item);
         },
-        sendAns({commit},{ans}){
+        sendAns({ commit }, { ans }) {
             socketService.sendAns(ans);
         },
-        cancelDibReq({},{dib}){
+        cancelDibReq({ }, { dib }) {
             socketService.cancelDibReq(dib)
+        },
+        disconnent() {
+            return msgService.disconnent()
         }
 
     },
