@@ -14,9 +14,7 @@ export default {
         newUrl:''
     },
     mutations: {
-        resetNewUrl(state){
-            console.log('state:', state);
-            
+        resetNewUrl(state){         
             state.newUrl='';
         },
         setItems(state, { items }) {
@@ -49,9 +47,7 @@ export default {
 
         loadItems({ commit }) {
             itemService.query().then(items => {   
-                commit({ type: 'setItems', items })
-                console.log('items:', items);
-                
+                commit({ type: 'setItems', items })                
                 return items;
             })
         },

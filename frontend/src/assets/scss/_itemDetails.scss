@@ -92,7 +92,6 @@
         color: $s1;
         background: none;
         border: none;
-        // border-radius: 3px;
         padding: 6px 0;
         padding-right: 10px;
         &:hover{
@@ -109,6 +108,10 @@
 
     }
   
+}
+.dibs-stamp{
+  height: 120px;
+  transform: rotate(-15deg)
 }
 
 .img-details-container{
