@@ -60,12 +60,12 @@ self.__precacheManifest = [
     "url": "/fonts/fa-solid-900.bcb927a7.woff"
   },
   {
-    "revision": "b69de69a4ff8ca0abe96ec0b0c180c5b",
-    "url": "/fonts/fa-brands-400.b69de69a.ttf"
-  },
-  {
     "revision": "ec0716ae8aa1ba781a1a6bcbce833f6c",
     "url": "/fonts/fa-brands-400.ec0716ae.eot"
+  },
+  {
+    "revision": "b69de69a4ff8ca0abe96ec0b0c180c5b",
+    "url": "/fonts/fa-brands-400.b69de69a.ttf"
   },
   {
     "revision": "0c41971339b9fc5b1cefb0abad1e2e69",
@@ -100,12 +100,12 @@ self.__precacheManifest = [
     "url": "/fonts/outline-icons.cd6c777f.woff2"
   },
   {
-    "revision": "701ae6abd4719e9c2ada3535a497b341",
-    "url": "/fonts/outline-icons.701ae6ab.eot"
-  },
-  {
     "revision": "ad97afd3337e8cda302d10ff5a4026b8",
     "url": "/fonts/outline-icons.ad97afd3.ttf"
+  },
+  {
+    "revision": "701ae6abd4719e9c2ada3535a497b341",
+    "url": "/fonts/outline-icons.701ae6ab.eot"
   },
   {
     "revision": "0ab54153eeeca0ce03978cc463b257f7",
@@ -136,12 +136,12 @@ self.__precacheManifest = [
     "url": "/fonts/brand-icons.13db00b7.eot"
   },
   {
-    "revision": "c5ebe0b32dc1b5cc449a76c4204d13bb",
-    "url": "/fonts/brand-icons.c5ebe0b3.ttf"
-  },
-  {
     "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
     "url": "/fonts/icons.b87b9ba5.ttf"
+  },
+  {
+    "revision": "c5ebe0b32dc1b5cc449a76c4204d13bb",
+    "url": "/fonts/brand-icons.c5ebe0b3.ttf"
   },
   {
     "revision": "962a1bf31c081691065fe333d9fa8105",
