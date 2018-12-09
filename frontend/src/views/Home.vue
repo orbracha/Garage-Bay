@@ -3,7 +3,7 @@
     <div v-if="isLoading">Loding...</div>
     <div class="home" v-else>
       <div class="info-section flex column">
-      <!-- <h1 class="home-page-text">Popular Garage Sales:</h1> -->
+      <h1 class="home-page-text">Search , Pick , Call Dibs! </h1>
         <!-- <div class="carousel-container"> -->
         <garage-carousel v-if="bestSellers" :bestSellers="bestSellers"/>
         <!-- </div> -->
