@@ -1,9 +1,7 @@
 import Vue from 'vue';
 
 export const GET_MSG = 'get-msg';
-export const GET_DIBS = 'get-dibs';
-export const GET_ANS = 'get-ans';
-export const GET_CANCLE = 'get-cancle';
+export const DIBS = 'dibs';
 
 var bus = new Vue();
 
