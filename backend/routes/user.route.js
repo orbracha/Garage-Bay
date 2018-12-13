@@ -26,12 +26,12 @@ function addRoutes(app) {
 
                 return res.json(userAndToken);
             })
-            .catch(err=> console.log(err))
+            // .catch(err=> console.log(err))
             .catch(err => res.status(401).send(err))
     })
 
 
-    app.get('/api/user/logout', (req, res) => {
+    app.post('/api/user/logout', (req, res) => {
         console.log('About to destroy Server Session for', req.session.loggedinUser);
         req.session.destroy();
         res.end();
@@ -72,8 +72,6 @@ function addRoutes(app) {
 
     app.post('/api/user/sign', (req, res) => {
         const user = req.body;
-        console.log('user to log in is:', user);
-        
         userService.add(user)
             .then(user => res.json(user))
     })
