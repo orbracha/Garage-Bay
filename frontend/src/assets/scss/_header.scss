@@ -2,17 +2,14 @@
     .burger{
       display: none;
     }
-    .logoutBtn{
-      color:$mid;   
-        }
+    // .logoutBtn{
+    //   color:$mid;   
+    //     }
     .header-icons-container{
     display: none;
    
     }
-    // .logoutBtn{
-    //   color: $mid;
-    // display: none;
-    // }
+
     .home-header {
     padding: 0 20px;
     z-index: 2;
@@ -83,9 +80,6 @@
         display: inline-block;       
       
           }
-        // .logoutBtn{
-        // display: inline-block;       
-        //   }
         .burger{
             position: absolute;
             display: inline-block;
