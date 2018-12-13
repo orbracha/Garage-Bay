@@ -5,9 +5,15 @@
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
         <div class="profile-info flex column">
-          <i v-if="isLoggedUser" class="far fa-edit edit-user" @click="editUserClicked"></i>
           <h1>{{user.nickname}}{{(isLoggedUser)? '':'\'s Garage'}}</h1>
-          <div class="rating">
+          <section v-if="isLoggedUser">
+            <div class="edit-user flex row">
+              <i class="far fa-edit" @click="editUserClicked"></i>
+              <h3>Edit Profile</h3>
+            </div>
+            <a @click="logoutUser" class="logoutBtn">Logout</a>
+          </section>
+          <div class="rating" v-else>
             <span v-for="n in user.rate" :key="n" class="fa fa-star checked"></span>
             <span v-for="x in 5-user.rate" :key="x.idx" class="fa fa-star empty-star"></span>
           </div>
@@ -19,7 +25,7 @@
             <items-tumbnail :list="user.listedItems"/>
           </sui-tab-pane>
           <sui-tab-pane :label="dibs.length+''" title="Dibs Requset">
-            <dibs-page  @removeItem="removeItem" :isDibs="false"/>
+            <dibs-page @removeItem="removeItem" :isDibs="false"/>
           </sui-tab-pane>
           <sui-tab-pane :label="(dibsAns.filter(ans=>ans.isAns).length)+''" title="Dibs Answer">
             <dibs-page @removeItem="removeItem" :isDibs="true"></dibs-page>
@@ -31,8 +37,8 @@
       </template>
       <event-feed v-if="user.events.length > 2" :events="user.events"></event-feed>
     </section>
-    <garage-footer/>
   </section>
+    <!-- <garage-footer/> -->
 </template>
 
 <script>
@@ -61,8 +67,14 @@ export default {
     };
   },
   methods: {
-    editUserClicked(){
-      this.$router.push(`/user/edit/${this.user._id}`)
+    logoutUser() {
+      console.log("curr user is: ", this.user);
+      this.$store.dispatch({ type: "logout" }).then(() => {
+        this.$router.push("/");
+      });
+    },
+    editUserClicked() {
+      this.$router.push(`/user/edit/${this.user._id}`);
     },
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);

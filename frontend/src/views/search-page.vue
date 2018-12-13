@@ -8,34 +8,24 @@
         </div>
         <i class="fas fa-search"/>
       </div>
-
-      <!-- <span slot="optionalIcon">
-        <i class="fas fa-search"/>
-      </span>-->
     </garage-header>
     <section v-if="isLoadingCat" class="loading">Loading</section>
 
     <section v-else>
-      <!-- <div class="filter-container">
-        <input type="text" v-model="filter.byTxt">
-      </div>-->
+
       <div class="catagories-container">
         <div
           v-for="catagory in catagories"
           :key="catagory"
           @click="catagoryClicked(catagory)"
-        >{{catagory}}</div>
+          v-if="catagory.length>1"
+        >{{catagory}} </div>
       </div>
 
       <div v-if="isLoadingItems" class="loading"></div>
-      <items-tumbnail v-else :list="itemsToDisplay"/>
+      <items-tumbnail v-else :list="itemsToDisplay" class="search-res"/>
 
       <div class="items-container">
-        <!-- <div v-else v-for="item in itemsToDisplay" :key="item._id">
-          <img :src="item.img" alt>
-          <br>
-          {{item.title}}
-        </div>-->
       </div>
     </section>
     <garage-footer/>
@@ -117,6 +107,9 @@ export default {
     border-radius: 5px;
     cursor: pointer;
   }
+}
+.search-res{
+  padding: 20px;
 }
 .items-container {
   display: flex;

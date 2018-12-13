@@ -12,9 +12,7 @@ import storageService, {
 } from "./services/storage-service.js";
 import eventBus, {
   GET_MSG,
-  GET_DIBS,
-  GET_ANS,
-  GET_CANCLE
+  DIBS
 } from "./services/eventBus-service.js";
 import garageFooter from "@/components/garage-footer.vue";
 import garageHeader from "@/components/garage-header.vue";
@@ -37,14 +35,7 @@ export default {
             type: "connectSocket",
             userId: this.$store.getters.getLoggedUser._id
           });
-
-          eventBus.$on(GET_DIBS, (item, fromUser) => {
-            this.$store.dispatch({ type: "loadDibs" });
-          });
-          eventBus.$on(GET_ANS, ans => {
-            this.$store.dispatch({ type: "loadDibs" });
-          });
-          eventBus.$on(GET_CANCLE, dib => {
+          eventBus.$on(DIBS, () => {
             this.$store.dispatch({ type: "loadDibs" });
           });
         });
@@ -64,7 +55,7 @@ export default {
   padding-top: 80px;
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: rgb(46, 46, 46);
     &.router-link-exact-active {
       color: #42b983;
     }

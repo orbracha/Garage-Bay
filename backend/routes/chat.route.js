@@ -8,7 +8,7 @@ function addRoute(app, server) {
     var io = require('socket.io').listen(server);
     io.on('connection', function (socket) {
         socket.on('inline', userId => {
-            console.log(userId, 'is online')
+            // console.log(userId, 'is online')
             loggedInUsers = { [socket.id]: userId };
             userService.userAvailableStatus(userId, true)
         })
@@ -30,7 +30,7 @@ function addRoute(app, server) {
 
         });
         socket.on('disconnect', () => {
-            console.log(loggedInUsers[socket.id], 'is offline')
+            // console.log(loggedInUsers[socket.id], 'is offline')
             userService.userAvailableStatus(loggedInUsers[socket.id], false)
         })
         socket.on('dibs', (userId, item) => {
@@ -54,6 +54,7 @@ function addRoute(app, server) {
                 io.to(room._id).emit('newMsg', msg)
             })
         })
+
     });
 
     app.get('/api/msg', (req, res) => {

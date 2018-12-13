@@ -52,6 +52,10 @@ export default {
           this.$store.dispatch({ type: "sendAns", ans });
         });
       } else {
+        let item = JSON.parse(JSON.stringify(dib.item));
+        let userIdx = item.callDibs.indexOf(dib.from);       
+        item.callDibs.splice(userIdx, 1);
+        this.$store.dispatch({ type: "editItem", item }); 
         this.removeDib(idx).then(() => {
           this.$store.dispatch({ type: "sendAns", ans });
         });
@@ -60,7 +64,8 @@ export default {
     cancelDibReq({ dib, idx }) {
       if (confirm("Are you sure?")) {
         let item = JSON.parse(JSON.stringify(dib.item));
-        item.callDibs.pop();
+        let userIdx = item.callDibs.indexOf(this.loggedUser._id);
+        item.callDibs.splice(userIdx, 1);
         this.$store.dispatch({ type: "editItem", item });
         dib.from = this.$store.getters.getLoggedUser._id;
         var user = JSON.parse(

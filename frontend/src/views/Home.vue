@@ -3,14 +3,12 @@
     <div v-if="isLoading">Loding...</div>
     <div class="home" v-else>
       <div class="info-section flex column">
-        <h1 class="home-page-text">Most Popular Garage Sales:</h1>
-        <!-- <div class="carousel-container"> -->
-          <garage-carousel v-if="bestSellers" :bestSellers="bestSellers"/>
-        <!-- </div> -->
+      <h1 class="home-page-text">Search , Pick <span>&</span> Call Dibs! </h1>
+
+        <garage-carousel v-if="bestSellers" :bestSellers="bestSellers"/>
       </div>
 
       <section class="home-content">
-        <h1 class="home-page-text">Recently Add Items:</h1>
         <item-list class="item-list" :items="items"/>
       </section>
     </div>
@@ -32,7 +30,7 @@ export default {
   },
   data() {
     return {
-      isLoading: true,
+      isLoading: true
     };
   },
   created() {
@@ -62,6 +60,11 @@ export default {
 </script>
 
 <style lang="scss">
+h1{
+  span{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+}
 .VueCarousel-navigation-next {
   margin-right: 10px;
   color: rgba(255, 255, 255, 0.815) !important;

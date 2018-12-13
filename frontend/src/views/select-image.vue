@@ -5,21 +5,18 @@
         v-if="showStream"
         ref="video"
         id="video"
-        width="640"
-        height="480"
+        width="300"
+        height="300"
         autoplay
         muted="muted"
       ></video>
     </div>
-
-    <div class="icon">
-      <!-- <button id="snap" v-on:click="capture"> -->
-        <i class="fas fa-camera" id="snap" v-on:click="capture"></i>
-      <!-- </button> -->
+    <div class="icon" @click="capture">
+      <i class="fas fa-camera"></i>
     </div>
-
-    <div class="file-upload-form">
-      Upload an image file:
+    <div class="file-upload-form">Or
+      <br>
+      <br>
       <input type="file" @change="previewImage" accept="image/*">
     </div>
 
@@ -65,6 +62,7 @@ export default {
       this.showStream = false;
     },
     capture() {
+
       this.canvas = this.$refs.canvas;
       var context = this.canvas
         .getContext("2d")
@@ -79,13 +77,11 @@ export default {
       this.$store
         .dispatch({ type: "saveImage", imageToSave })
         .then(res => {
-           if(this.$route.params.def === 'edit-user'){
-                this.$router.push('/user/edit/userId')
-          }
-          else if(this.$route.params.def==='item'){
-            this.$router.push(`/item/edit`)
-          }
-          else {
+          if (this.$route.params.def === "edit-user") {
+            this.$router.push("/user/edit/userId");
+          } else if (this.$route.params.def === "item") {
+            this.$router.push(`/item/edit`);
+          } else {
             this.$router.push("/signup");
             console.log("PARAMS", this.$route.params.def);
           }
@@ -108,26 +104,34 @@ export default {
       }
     }
   },
-  beforeDestroy(){
-     const tracks = this.stream.getTracks();
-    if(tracks)
-    this.stopStream()
+  beforeDestroy() {
+    const tracks = this.stream.getTracks();
+    if (tracks) this.stopStream();
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
-.add-item-container{
+.add-item-container {
   text-align: center;
-  i{
+  .icon {
+    margin-bottom: 20px;
+    #canvas {
+      // display: none;
+    }
+  }
+  i {
     padding: 8px;
-    background-color:white;
+    background-color: white;
     border-radius: 90px;
   }
+  #capture {
+  cursor: pointer;
+}
 }
 img.preview {
   /* width: 200px; */
+  // top:120px;
   background-color: white;
   border: 1px solid #ddd;
   padding: 5px;
@@ -135,12 +139,15 @@ img.preview {
 .video-container {
   width: 90%;
   margin: 0 auto;
-  max-width: 500px;
-  // max-height: 400px;
+  max-width: 400px;
+  height: 400px;
 
-
-}
-  #video {
-    width: 100%
+  input {
+    text-align: center;
   }
+}
+#video {
+  width: 100%;
+}
+
 </style>
