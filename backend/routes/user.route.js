@@ -26,7 +26,7 @@ function addRoutes(app) {
 
                 return res.json(userAndToken);
             })
-            .catch(err=> console.log(err))
+            // .catch(err=> console.log(err))
             .catch(err => res.status(401).send(err))
     })
 
@@ -72,8 +72,6 @@ function addRoutes(app) {
 
     app.post('/api/user/sign', (req, res) => {
         const user = req.body;
-        console.log('user to log in is:', user);
-        
         userService.add(user)
             .then(user => res.json(user))
     })
