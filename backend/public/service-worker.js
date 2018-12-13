@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.928727a1a386f640ae5f847e9c7a95a3.js"
+  "/precache-manifest.e75fe1655e777719ce1db87e3b4aad23.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "garage-sle"});
