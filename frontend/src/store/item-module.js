@@ -15,7 +15,7 @@ export default {
     },
     mutations: {
         resetNewUrl(state) {
-            state.newUrl = '';
+            state.newUrl = '';           
         },
         setItems(state, { items }) {
             state.items = items;

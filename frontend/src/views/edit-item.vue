@@ -11,7 +11,7 @@
           </label>
           <label>
             <span>Category:</span>
-            <select v-if="catagories.length>0" v-model="currItem.category">
+            <select v-if="catagories.length>0" v-model="currItem.category" required>
               <option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</option>
             </select>
           </label>
@@ -74,7 +74,8 @@ export default {
         item.createAt = Date.now();
         item.sellerId = this.$store.getters.getLoggedUser._id;
         item.location = await this.$store.dispatch({ type: "getLocation" });
-
+        item.callDibs=[]
+        
         this.$store.dispatch({ type: "addItem", item }).then(itemId => {
           this.$store.commit({type:'resetNewUrl'})  
           this.$router.push(`/item/details/${itemId}`);
