@@ -4,12 +4,12 @@ self.__precacheManifest = [
     "url": "/js/about.0bf3fb79.js"
   },
   {
-    "revision": "1909ce6df8c11788d6c9",
-    "url": "/css/app.04b56cc6.css"
+    "revision": "c51c5d19687d04ac3e5a",
+    "url": "/css/app.ec298d72.css"
   },
   {
-    "revision": "1909ce6df8c11788d6c9",
-    "url": "/js/app.f5f29746.js"
+    "revision": "c51c5d19687d04ac3e5a",
+    "url": "/js/app.1ae70b6a.js"
   },
   {
     "revision": "ae3025c1243d21669d2a",
@@ -60,12 +60,12 @@ self.__precacheManifest = [
     "url": "/fonts/fa-solid-900.bcb927a7.woff"
   },
   {
-    "revision": "b69de69a4ff8ca0abe96ec0b0c180c5b",
-    "url": "/fonts/fa-brands-400.b69de69a.ttf"
-  },
-  {
     "revision": "ec0716ae8aa1ba781a1a6bcbce833f6c",
     "url": "/fonts/fa-brands-400.ec0716ae.eot"
+  },
+  {
+    "revision": "b69de69a4ff8ca0abe96ec0b0c180c5b",
+    "url": "/fonts/fa-brands-400.b69de69a.ttf"
   },
   {
     "revision": "0c41971339b9fc5b1cefb0abad1e2e69",
@@ -100,12 +100,12 @@ self.__precacheManifest = [
     "url": "/fonts/outline-icons.cd6c777f.woff2"
   },
   {
-    "revision": "ad97afd3337e8cda302d10ff5a4026b8",
-    "url": "/fonts/outline-icons.ad97afd3.ttf"
-  },
-  {
     "revision": "701ae6abd4719e9c2ada3535a497b341",
     "url": "/fonts/outline-icons.701ae6ab.eot"
+  },
+  {
+    "revision": "ad97afd3337e8cda302d10ff5a4026b8",
+    "url": "/fonts/outline-icons.ad97afd3.ttf"
   },
   {
     "revision": "0ab54153eeeca0ce03978cc463b257f7",
@@ -128,12 +128,12 @@ self.__precacheManifest = [
     "url": "/fonts/brand-icons.a046592b.woff"
   },
   {
-    "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
-    "url": "/fonts/icons.8e3c7f55.eot"
-  },
-  {
     "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
     "url": "/fonts/icons.b87b9ba5.ttf"
+  },
+  {
+    "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
+    "url": "/fonts/icons.8e3c7f55.eot"
   },
   {
     "revision": "c5ebe0b32dc1b5cc449a76c4204d13bb",
@@ -152,7 +152,7 @@ self.__precacheManifest = [
     "url": "/img/brand-icons.a1a749e8.svg"
   },
   {
-    "revision": "0e8dbf337690dee9487e8c4467afb7ec",
+    "revision": "ee981b75f3c88ecda5328a22fc593744",
     "url": "/index.html"
   },
   {
@@ -160,12 +160,16 @@ self.__precacheManifest = [
     "url": "/dibs_fav.png"
   },
   {
-    "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
-    "url": "/robots.txt"
+    "revision": "565d01743c147e1f3db11228e02e6147",
+    "url": "/img/guitar.jpg"
   },
   {
     "revision": "2745d35750efcba6f8e0e62bbf8f2a10",
     "url": "/img/user.jpg"
+  },
+  {
+    "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
+    "url": "/robots.txt"
   },
   {
     "revision": "8fb4f273d78f3301e2c512163b9c389b",

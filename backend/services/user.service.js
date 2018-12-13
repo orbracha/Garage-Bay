@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 function checkUser(user) {
-    if(user.userInfo) user=user.userInfo
+    if (user.userInfo) user = user.userInfo
     return mongoService.connectToDb()
         .then(dbConn => {
             const db = dbConn.collection('user');
@@ -14,7 +14,7 @@ function checkUser(user) {
             )
                 .then(user => {
                     console.log('user found:', user);
-                    
+
                     if (!user) throw user;
                     return user
                 });
@@ -87,9 +87,12 @@ function getByName(userName) {
 }
 
 function userAvailableStatus(userId, status) {
-    userId = new ObjectId(userId)
+    const id = new ObjectId(userId)
+    console.log(id, status)
     return mongoService.connectToDb().then(db => {
-        db.collection('user').updateOne({ _id: userId }, { $set: { isAvailable: status } })
+        return db.collection('user').updateOne({ _id: id }, { $set: { isAvailable: status } }).then(()=>{
+            return getById(userId)
+        })
     })
 
 

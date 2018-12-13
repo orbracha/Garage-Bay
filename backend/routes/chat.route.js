@@ -8,9 +8,9 @@ function addRoute(app, server) {
     var io = require('socket.io').listen(server);
     io.on('connection', function (socket) {
         socket.on('inline', userId => {
-            console.log(userId, 'is online')
+            // console.log(userId, 'is online')
             loggedInUsers = { [socket.id]: userId };
-            userService.userAvailableStatus(userId, true)
+            // userService.userAvailableStatus(userId, true)
         })
         socket.on('roomRequested', (userId, userDest) => {
 
@@ -30,8 +30,8 @@ function addRoute(app, server) {
 
         });
         socket.on('disconnect', () => {
-            console.log(loggedInUsers[socket.id], 'is offline')
-            userService.userAvailableStatus(loggedInUsers[socket.id], false)
+            // console.log(loggedInUsers[socket.id], 'is offline')
+            // userService.userAvailableStatus(loggedInUsers[socket.id], false)
         })
         socket.on('dibs', (userId, item) => {
             userService.updateUserDibs(item.sellerId, { item: item, from: userId }).then(() => {
@@ -74,6 +74,20 @@ function addRoute(app, server) {
         const user = req.body;
         msgService.updateUserChat(user)
             .then(msg => res.json(msg))
+    })
+    app.post('/api/msg/chat/connect', (req, res) => {
+        const { user } = req.body;
+        return userService.userAvailableStatus(user._id, true).then(user => {
+            console.log(user[0].isAvailable, 'is to chat online')
+            return res.json(user)
+        })
+    })
+    app.post('/api/msg/chat/disconnect', (req, res) => {
+        const { user } = req.body;
+        return userService.userAvailableStatus(user._id, false).then(user => {
+            console.log(user[0]._id, 'is to chat offline')
+            return res.json(user)
+        })
     })
 }
 

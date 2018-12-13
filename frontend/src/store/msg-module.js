@@ -63,8 +63,13 @@ export default {
         cancelDibReq({ }, { dib }) {
             socketService.cancelDibReq(dib)
         },
-        disconnent() {
-            return msgService.disconnent()
+        disconnentChat(context, { user }) {
+            return msgService.disconnentChat(user)
+        },
+        connentChat(context, { user }) {
+            return msgService.connentChat(user).then(user => {
+                context.commit({ type: 'setLoggedUser', user })
+            })
         }
 
     },
