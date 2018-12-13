@@ -18,8 +18,11 @@ function add(msg, user) {
     return Promise.resolve();
 }
 
-function disconnent() {
-    return axios.post(`${BASE_URL}/disconnent`)
+function disconnentChat(user) {
+    return axios.post(`${BASE_URL}/chat/disconnect`, { user }).then(res => res.data[0])
+}
+function connentChat(user) {
+    return axios.post(`${BASE_URL}/chat/connect`, { user }).then(res => res.data[0])
 }
 
 
@@ -27,5 +30,6 @@ export default {
     queryMsgs,
     queryRooms,
     add,
-    disconnent
+    disconnentChat,
+    connentChat
 }
