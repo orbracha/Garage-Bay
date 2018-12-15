@@ -50,8 +50,7 @@ export default {
     },
     logoutUser() {
       console.log("curr user is: ", this.user);
-      this.$store
-        .dispatch({ type: "disconnentChat", user: this.user })
+      this.$store.dispatch({ type: "disconnentChat", user: this.user });
       this.$store.dispatch({ type: "logout" }).then(() => {
         this.$router.push("/");
       });

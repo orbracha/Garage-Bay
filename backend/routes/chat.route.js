@@ -4,34 +4,41 @@ roomService = require('../services/room.service')
 userService = require('../services/user.service')
 function addRoute(app, server) {
     var loggedInUsers = {};
+    var logginRooms = {};
     var currRoom;
     var io = require('socket.io').listen(server);
     io.on('connection', function (socket) {
         socket.on('inline', userId => {
-            // console.log(userId, 'is online')
             loggedInUsers = { [socket.id]: userId };
-            // userService.userAvailableStatus(userId, true)
         })
         socket.on('roomRequested', (userId, userDest) => {
-
             return roomService.findRoom(userId, userDest).then(room => {
                 if (room) {
                     currRoom = room;
                     socket.join(room._id);
+                    if (logginRooms[room._id]) logginRooms[room._id].push(userId)
+                    else logginRooms[room._id] = [userId];
                     io.to(currRoom._id).emit('usersConnected', currRoom);
                 }
                 else roomService.addRoom(userId, userDest).then(res => {
                     currRoom = res.ops[0];
                     socket.join(currRoom._id);
+                    if (logginRooms[room._id]) logginRooms[room._id].push(userId)
+                    else logginRooms[room._id] = [userId];
                     io.to(currRoom._id).emit('usersConnected', currRoom);
                 })
 
             });
 
         });
+        socket.on('disconnect-room', (userId, room) => {
+            var idx = logginRooms[room._id].indexOf(userId)
+            logginRooms[room._id].splice(idx, 1)
+            console.log('all rooms', logginRooms)
+        })
         socket.on('disconnect', () => {
             // console.log(loggedInUsers[socket.id], 'is offline')
-            // userService.userAvailableStatus(loggedInUsers[socket.id], false)
+            userService.userAvailableStatus(loggedInUsers[socket.id], false)
         })
         socket.on('dibs', (userId, item) => {
             userService.updateUserDibs(item.sellerId, { item: item, from: userId }).then(() => {
@@ -48,10 +55,19 @@ function addRoute(app, server) {
                 io.emit('got-ans', ans);
             })
         })
-        socket.on('chat-newMsg', (msg, room) => {
-            userService.userOfflineMsgs(room.userId, room.userDest, msg)
+        socket.on('chat-newMsg', (msg, room, loggedIn) => {
             roomService.addMsgToRoom(msg, room).then(() => {
-                io.to(room._id).emit('newMsg', msg)
+                const userDestId = ((room.userId === msg.from._id) ?
+                    room.userDest : room.userId)
+                if (logginRooms[room._id].indexOf(userDestId) !== -1) {
+                    io.to(room._id).emit('newMsg', msg)
+                }
+                else {
+                    console.log('out')
+                    userService.userOfflineMsgs(userDestId, msg).then(() => {
+                        socket.broadcast.emit('newMsg', msg)
+                    })
+                }
             })
         })
 

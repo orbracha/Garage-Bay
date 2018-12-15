@@ -1,6 +1,6 @@
 <template>
   <router-link :to="item.link">
-    <li>
+    <li :class="{'newMsg':item.isNewMsg}">
       <span class="available" :class="{'offline':!item.isAvailable,'inline':item.isAvailable}"></span>
       <img v-if="item.img" :src="item.img">
       <div>
@@ -27,17 +27,20 @@ li {
   border-top-left-radius: 200px;
   border-bottom-left-radius: 200px;
   color: rgb(53, 53, 53);
-  background-color: rgba(255, 255, 255, 0); 
-  background-image: linear-gradient(to right, rgb(236, 236, 236) , rgba(255, 255, 255, 0)); 
+  background-color: rgba(255, 255, 255, 0);
+  background-image: linear-gradient(
+    to right,
+    rgb(236, 236, 236),
+    rgba(255, 255, 255, 0)
+  );
   position: relative;
   text-align: left;
   display: flex;
   margin-bottom: 5px;
-  .chat-head{
+  .chat-head {
     font-weight: 700;
-    color:rgb(46, 46, 46);
+    color: rgb(46, 46, 46);
     font-size: 1.6rem;
-
   }
   img {
     height: 50px;
@@ -47,22 +50,31 @@ li {
   }
   h1,
   p {
-    color:rgb(46, 46, 46);
+    color: rgb(46, 46, 46);
     margin: 0;
   }
 }
-.available{
+.available {
   height: 10px;
   width: 10px;
   border-radius: 50px;
   position: absolute;
-  top:0;
+  top: 0;
 }
 .available.offline {
-  background: #E38968;
+  background: #e38968;
 }
 .available.inline {
-  background: #86BB71;
+  background: #86bb71;
+}
+.newMsg {
+  font-weight: bold;
+  background: #7fa00e7d;
+  background-image: linear-gradient(
+    to right,
+    #7fa00e7d,
+    rgba(255, 255, 255, 0)
+  );
 }
 </style>
 

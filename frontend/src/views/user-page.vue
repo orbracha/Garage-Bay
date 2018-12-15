@@ -122,7 +122,6 @@ export default {
 
   created() {
     this.setUser();
-    console.log(this.user);
   }
 };
 </script>

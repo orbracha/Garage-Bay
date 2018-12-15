@@ -90,7 +90,7 @@ function userAvailableStatus(userId, status) {
     const id = new ObjectId(userId)
     console.log(id, status)
     return mongoService.connectToDb().then(db => {
-        return db.collection('user').updateOne({ _id: id }, { $set: { isAvailable: status } }).then(()=>{
+        return db.collection('user').updateOne({ _id: id }, { $set: { isAvailable: status } }).then(() => {
             return getById(userId)
         })
     })
@@ -98,31 +98,20 @@ function userAvailableStatus(userId, status) {
 
 }
 
-function userOfflineMsgs(userId1, userId2, msg) {
-    userId1 = new ObjectId(userId1)
-    userId2 = new ObjectId(userId2)
+function userOfflineMsgs(userId, msg) {
+    const id = new ObjectId(userId)
     return mongoService.connectToDb().then(db => {
-        db.collection('user').findOne({
-            $and: [{ _id: userId1 },
+        return db.collection('user').findOne({
+            $and: [{ _id: id },
             { isAvailable: { $eq: false } }]
         }
         ).then(user => {
             if (user) {
                 db.collection('user').updateOne(
-                    { _id: userId1 }, { $push: { historyChat: msg } }
+                    { _id: id }, { $push: { historyChat: msg } }
                 )
             }
-        })
-        db.collection('user').findOne({
-            $and: [{ _id: userId2 },
-            { isAvailable: { $eq: false } }]
-        }
-        ).then(user => {
-            if (user) {
-                db.collection('user').updateOne(
-                    { _id: userId2 }, { $push: { historyChat: msg } }
-                )
-            }
+            return user
         })
     })
 }

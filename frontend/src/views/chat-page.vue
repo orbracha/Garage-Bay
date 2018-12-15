@@ -1,6 +1,6 @@
 <template>
   <section class="chat-page-container">
-    <img v-if="isLoading" class="loading-chat" src="../assets/img/loader.gif" alt="" srcset="">
+    <img v-if="isLoading" class="loading-chat" src="../assets/img/loader.gif" alt srcset>
     <chat-list v-else :data="userMsgs"></chat-list>
   </section>
 </template>
@@ -11,7 +11,8 @@ export default {
   data() {
     return {
       userMsgs: [],
-      isLoading: true
+      isLoading: true,
+      newMsg: null
     };
   },
   computed: {
@@ -37,11 +38,19 @@ export default {
               title: user.nickname,
               img: user.img,
               link: `/chat/user/${userDest}`,
-              isAvailable: user.isAvailable
+              isAvailable: user.isAvailable,
+              isNewMsg: this.checkNewMsg(user._id)
             });
             this.isLoading = false;
           });
       });
+    },
+    checkNewMsg(id) {
+      var isNewMsg = this.newMsg.find(msg => {
+        return msg.from._id === id;
+      });
+      if(isNewMsg) return true
+      return false;
     }
   },
   created() {
@@ -54,6 +63,7 @@ export default {
         let user = JSON.parse(
           JSON.stringify(this.$store.getters.getLoggedUser)
         );
+        this.newMsg = user.historyChat;
         user.historyChat = [];
         this.$store.dispatch({ type: "updateUser", user }).then(() => {
           this.$store
@@ -73,7 +83,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.loading-chat{
+.loading-chat {
   display: block;
   margin: 0 auto;
   height: 200px;

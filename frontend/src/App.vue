@@ -10,10 +10,7 @@
 import storageService, {
   LOGGEDIN_USER_KEY
 } from "./services/storage-service.js";
-import eventBus, {
-  GET_MSG,
-  DIBS
-} from "./services/eventBus-service.js";
+import eventBus, { GET_MSG, DIBS } from "./services/eventBus-service.js";
 import garageFooter from "@/components/garage-footer.vue";
 import garageHeader from "@/components/garage-header.vue";
 import menuScreen from "@/components/screen.vue";
@@ -26,6 +23,7 @@ export default {
   },
   methods: {},
   created() {
+    window.scrollTo(0,0);
     const credentials = storageService.load(LOGGEDIN_USER_KEY);
     if (credentials) {
       this.$store
@@ -36,6 +34,11 @@ export default {
             userId: this.$store.getters.getLoggedUser._id
           });
           eventBus.$on(DIBS, () => {
+            this.$store.dispatch({ type: "loadDibs" });
+          });
+          eventBus.$on(GET_MSG, msg => {
+            this.$store.commit({ type: "addMsg", msg });
+            console.log("loading user");
             this.$store.dispatch({ type: "loadDibs" });
           });
         });
