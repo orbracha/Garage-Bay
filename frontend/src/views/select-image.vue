@@ -54,6 +54,10 @@ export default {
           this.video.play().catch(err => console.log(err));
         });
       }
+      else{
+        console.log('no media devices');
+        
+      }
     }
   },
   methods: {

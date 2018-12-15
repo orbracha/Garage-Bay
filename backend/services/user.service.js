@@ -13,7 +13,7 @@ function checkUser(user) {
 
             )
                 .then(user => {
-                    console.log('user found:', user);
+                    // console.log('user found:', user);
 
                     if (!user) throw user;
                     return user
@@ -88,7 +88,7 @@ function getByName(userName) {
 
 function userAvailableStatus(userId, status) {
     const id = new ObjectId(userId)
-    console.log(id, status)
+    // console.log(id, status)
     return mongoService.connectToDb().then(db => {
         return db.collection('user').updateOne({ _id: id }, { $set: { isAvailable: status } }).then(()=>{
             return getById(userId)
@@ -159,7 +159,7 @@ function removeUserDib(dib) {
                     }
                 }
             }, { multi: true })
-                .then(result => console.log({ nModified: result.result.nModified }))
+                // .then(result => console.log({ nModified: result.result.nModified }))
         })
 }
 

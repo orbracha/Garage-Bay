@@ -78,14 +78,14 @@ function addRoute(app, server) {
     app.post('/api/msg/chat/connect', (req, res) => {
         const { user } = req.body;
         return userService.userAvailableStatus(user._id, true).then(user => {
-            console.log(user[0].isAvailable, 'is to chat online')
+            // console.log(user[0].isAvailable, 'is to chat online')
             return res.json(user)
         })
     })
     app.post('/api/msg/chat/disconnect', (req, res) => {
         const { user } = req.body;
         return userService.userAvailableStatus(user._id, false).then(user => {
-            console.log(user[0]._id, 'is to chat offline')
+            // console.log(user[0]._id, 'is to chat offline')
             return res.json(user)
         })
     })

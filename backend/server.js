@@ -1,6 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+var history = require('connect-history-api-fallback');
+
 
 const app = express()
 
@@ -32,8 +34,8 @@ app.use(session({
 
 
 
+app.use(history());
 app.use(express.static('public'));
-
 
 
 
