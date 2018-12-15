@@ -1,6 +1,7 @@
 <template>
   <section class="chat-page-container">
-    <chat-list :data="userMsgs"></chat-list>
+    <img v-if="isLoading" class="loading-chat" src="../assets/img/loader.gif" alt srcset>
+    <chat-list v-else :data="userMsgs"></chat-list>
   </section>
 </template>
 
@@ -9,13 +10,17 @@ import chatList from "../components/chat-list.vue";
 export default {
   data() {
     return {
-      loggedUser: null,
-      userMsgs: []
+      userMsgs: [],
+      isLoading: true,
+      newMsg: null
     };
   },
   computed: {
     rooms() {
       return this.$store.getters.getRooms;
+    },
+    loggedUser() {
+      return this.$store.getters.getLoggedUser;
     }
   },
   methods: {
@@ -33,29 +38,57 @@ export default {
               title: user.nickname,
               img: user.img,
               link: `/chat/user/${userDest}`,
-              isAvailable: user.isAvailable
+              isAvailable: user.isAvailable,
+              isNewMsg: this.checkNewMsg(user._id)
             });
+            this.isLoading = false;
           });
       });
+    },
+    checkNewMsg(id) {
+      var isNewMsg = this.newMsg.find(msg => {
+        return msg.from._id === id;
+      });
+      if(isNewMsg) return true
+      return false;
     }
   },
   created() {
-    let user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
-    user.historyChat = [];
-    this.$store.dispatch({ type: "updateUser", user }).then(() => {
-      this.loggedUser = this.$store.getters.getLoggedUser;
-      this.$store
-        .dispatch({ type: "loadRooms", userId: this.loggedUser._id })
-        .then(() => {
-          this.getUserMsgs();
+    window.scrollTo(0,0);
+    this.$store
+      .dispatch({
+        type: "connentChat",
+        user: this.$store.getters.getLoggedUser
+      })
+      .then(() => {
+        let user = JSON.parse(
+          JSON.stringify(this.$store.getters.getLoggedUser)
+        );
+        this.newMsg = user.historyChat;
+        user.historyChat = [];
+        this.$store.dispatch({ type: "updateUser", user }).then(() => {
+          this.$store
+            .dispatch({ type: "loadRooms", userId: user._id })
+            .then(() => {
+              this.getUserMsgs();
+            });
         });
-    });
+      });
   },
   components: {
     chatList
+  },
+  destroyed() {
+    this.$store.dispatch({ type: "disconnentChat", user: this.loggedUser });
   }
 };
 </script>
-
-<style>
+<style lang="scss" scoped>
+.loading-chat {
+  display: block;
+  margin: 0 auto;
+  height: 200px;
+  width: 200px;
+}
 </style>
+

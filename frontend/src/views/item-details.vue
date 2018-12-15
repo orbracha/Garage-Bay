@@ -119,9 +119,29 @@ export default {
       } else this.$router.push("/login");
     },
     removeItem() {
-      var item = this.currItem;
-      this.$store.dispatch({ type: "removeItem", item }).then(() => {
-        this.$router.push("/");
+      this.$swal({
+        title: "Are you sure?",
+        text: "You can't revert your action",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes Delete it!",
+        cancelButtonText: "No, Keep it!",
+        showCloseButton: true,
+        showLoaderOnConfirm: true
+      }).then(result => {
+        if (result.value) {
+          this.$swal(
+            "Deleted",
+            "You successfully deleted this item",
+            "success"
+          );
+          var item = this.currItem;
+          this.$store.dispatch({ type: "removeItem", item }).then(() => {
+            this.$router.push("/");
+          });
+        } else {
+          this.$swal("Cancelled", "Your item is still intact", "info");
+        }
       });
     },
     chatClicked() {

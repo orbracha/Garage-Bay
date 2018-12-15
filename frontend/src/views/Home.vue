@@ -3,7 +3,9 @@
     <div v-if="isLoading">Loding...</div>
     <div class="home" v-else>
       <div class="info-section flex column">
-      <h1 class="home-page-text">Search , Pick <span>&</span> Call Dibs! </h1>
+        <h1 class="home-page-text">Search , Pick
+          <span>&</span> Call Dibs!
+        </h1>
 
         <garage-carousel v-if="bestSellers" :bestSellers="bestSellers"/>
       </div>
@@ -34,6 +36,7 @@ export default {
     };
   },
   created() {
+    window.scrollTo(0, 0);
     this.$store.dispatch({ type: "loadItems" }).then(res => {
       this.isLoading = false;
     });
@@ -60,9 +63,10 @@ export default {
 </script>
 
 <style lang="scss">
-h1{
-  span{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+h1 {
+  span {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
   }
 }
 .VueCarousel-navigation-next {

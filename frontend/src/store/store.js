@@ -23,7 +23,6 @@ export default new Vuex.Store({
   mutations: {
     toggleMenu(state) {
       state.isMenu = !state.isMenu;
-      console.log('state isMenu', state.isMenu);
       
     }
 

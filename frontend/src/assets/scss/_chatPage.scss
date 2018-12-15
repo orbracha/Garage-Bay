@@ -21,12 +21,13 @@
     height: 100%;
     margin-bottom: 40px;
     position: relative;
+    // max-height: 400px;
+    height: 100%;
+    overflow: auto;
     .chat-msgs{
         border-bottom-right-radius: unset;
         border-bottom-left-radius: unset;
         background: $semi;
-        height: 100%;
-        overflow: auto;
         padding: .5em;
         font-size: 1.5em;
         img{
@@ -47,7 +48,7 @@
             margin-left: 20%;
             right:0;
             .msg-time{
-                direction: rtl;
+                direction: ltr;
                 padding: 0 10px;
                 font-size: 0.8rem;
                 opacity: .5;

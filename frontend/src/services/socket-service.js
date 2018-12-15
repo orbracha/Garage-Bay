@@ -1,5 +1,5 @@
 'use strict'
-import eventBus, { GET_MSG,DIBS} from '../services/eventBus-service.js'
+import eventBus, { GET_MSG, DIBS } from '../services/eventBus-service.js'
 import ioClient from 'socket.io-client'
 
 const BASE_URL = (process.env.NODE_ENV !== 'development')
@@ -13,7 +13,8 @@ function connectSocket(userId, userDest) {
     socket.emit('inline', userId);
     if (userDest && userId) socket.emit('roomRequested', userId, userDest)
     socket.on('newMsg', function (msg) {
-        if (msg.from._id !== userId) eventBus.$emit(GET_MSG, msg)
+        console.log('new msg')
+        eventBus.$emit(GET_MSG, msg)
     });
     socket.on('got-dibs', function (fromUserId, item) {
         console.log('got dibs from', fromUserId, 'curr user', userId)
@@ -49,9 +50,8 @@ function sendDibs(userId, item) {
     socket.emit('dibs', userId, item)
 
 }
-function sendMsg(msg) {
-    socket.emit('chat-newMsg', msg, gRoom)
-    return gRoom
+function sendMsg(msg, loggedInId) {
+    socket.emit('chat-newMsg', msg, gRoom, loggedInId)
 }
 function sendAns(ans) {
     socket.emit('sendAns', ans)
@@ -59,10 +59,15 @@ function sendAns(ans) {
 function cancelDibReq(dib) {
     socket.emit('cancelDibReq', dib)
 }
+
+function disconnectRoom(userId) {
+    socket.emit('disconnect-room', userId, gRoom)
+}
 export default {
     connectSocket,
     sendMsg,
     sendDibs,
     sendAns,
-    cancelDibReq
+    cancelDibReq,
+    disconnectRoom
 }
