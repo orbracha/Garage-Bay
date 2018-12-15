@@ -83,8 +83,18 @@ export default {
                 .then(retUser => {
                     return context.dispatch({ type: 'getLocation' })
                        .then(loc=>{
+                        //    console.log('location we got', loc);
+                        //    console.log('yes geo, returning', retUser);
                            retUser.location=loc;
                            return retUser;
+                       })
+                       .catch(()=>{
+                        let loc={lng: 34.803139, lat: 32.088032}
+                        // resolve(loc);
+                        
+                        retUser.location=loc;
+                        // console.log('no geo, returning', retUser);
+                        return retUser;
                        })
                 })
                 .then(user => {

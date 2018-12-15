@@ -38,6 +38,7 @@ export default new Vuex.Store({
           }, reject);
         } else {
           reject("no geolocation in navigator");
+        
         }
       })
     },

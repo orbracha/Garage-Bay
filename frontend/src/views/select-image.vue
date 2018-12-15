@@ -40,6 +40,7 @@ export default {
       imageData: ""
     };
   },
+
   mounted() {
     var isUser = this.$store.getters.getLoggedUser;
     if (!isUser) this.$router.push("/login");
@@ -136,8 +137,6 @@ export default {
   }
 }
 img.preview {
-  /* width: 200px; */
-  // top:120px;
   background-color: white;
   border: 1px solid #ddd;
   padding: 5px;
