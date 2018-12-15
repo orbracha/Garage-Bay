@@ -32,8 +32,10 @@ function addRoute(app, server) {
 
         });
         socket.on('disconnect-room', (userId, room) => {
-            var idx = logginRooms[room._id].indexOf(userId)
-            logginRooms[room._id].splice(idx, 1)
+            var idx = (logginRooms[room._id]).indexOf(userId)
+            var currRoom = logginRooms[room._id]
+            currRoom.splice(idx, 1)
+            logginRooms[room._id] = currRoom;
             console.log('all rooms', logginRooms)
         })
         socket.on('disconnect', () => {

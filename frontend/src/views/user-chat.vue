@@ -80,16 +80,16 @@ export default {
       type: "disconnectRoom",
       userId: this.loggedUser._id
     });
-    this.$store.commit({ type: "setMsgs", msgs: null });
+    // this.$store.commit({ type: "setMsgs", msgs: null });
   },
-  watch: {
-    msgs() {
-      window.scrollTo(0, document.body.scrollHeight );
-      // console.log(document.body.scrollHeight);
-
-    }
-  },
-  components: {}
+  // watch: {
+  //   msgs: {
+  //     handler() {
+  //       window.scrollTo(0, document.body.scrollHeight);
+  //     },
+  //     immediate: true
+  //   }
+  // }
 };
 </script>
 
