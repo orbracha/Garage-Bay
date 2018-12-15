@@ -1,5 +1,4 @@
 'use strict'
-import eventBus, { GET_MSG } from '../services/eventBus-service.js'
 import Vue from 'vue';
 import Vuex from 'vuex';
 import msgService from '../services/msg-service.js'
