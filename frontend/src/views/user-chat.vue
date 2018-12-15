@@ -50,7 +50,6 @@ export default {
         .dispatch({ type: "sendMsg", msg, userId: this.loggedUser._id })
         .then(() => {
           this.newMsg = { from: "", txt: "" };
-          // this.$refs.chat.focus();
         });
     }
   },
@@ -62,18 +61,19 @@ export default {
       userId: this.loggedUser._id,
       userDest
     });
-    this.$store.dispatch({
-      type: "loadMsgs",
-      userId: this.loggedUser._id,
-      userDest
-    });
+    this.$store
+      .dispatch({
+        type: "loadMsgs",
+        userId: this.loggedUser._id,
+        userDest
+      })
+      .then(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
   },
   mounted() {
-    // this.$refs.chat.focus();
-    console.log(this.$refs.chatMsgs);
-    // this.$refs.chatContainer.scrollTop = this.$refs.chat.scrollHeight;
-    this.$refs.chatMsgs.scrollTop = this.$refs.chatMsgs.scrollHeight;
     this.$refs.chat.focus();
+    window.scrollTo(0, document.body.scrollHeight);
   },
   destroyed() {
     this.$store.dispatch({
@@ -84,7 +84,9 @@ export default {
   },
   watch: {
     msgs() {
-      // this.$refs.chatMsgs.scrollTop = this.$refs.chatMsgs.scrollHeight;
+      window.scrollTo(0, document.body.scrollHeight );
+      // console.log(document.body.scrollHeight);
+
     }
   },
   components: {}

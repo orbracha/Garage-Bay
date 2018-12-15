@@ -54,6 +54,7 @@ export default {
     }
   },
   created() {
+    window.scrollTo(0,0);
     this.$store
       .dispatch({
         type: "connentChat",

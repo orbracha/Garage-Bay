@@ -23,7 +23,7 @@ export default {
   },
   methods: {},
   created() {
-    window.scrollTo(0,0);
+    // window.scrollTo(0,0);
     const credentials = storageService.load(LOGGEDIN_USER_KEY);
     if (credentials) {
       this.$store
