@@ -30,7 +30,7 @@ export default {
     },
     actions: {
         loadMsgs({ commit }, { userId, userDest }) {
-            msgService.queryMsgs(userId, userDest).then(msgs => {
+           return msgService.queryMsgs(userId, userDest).then(msgs => {
                 commit({ type: 'setMsgs', msgs })
             })
         },
