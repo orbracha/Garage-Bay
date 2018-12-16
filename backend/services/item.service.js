@@ -8,7 +8,7 @@ cloudinary.config({
 });
 
 function query(criteria = {}) {
-    console.log('criteria is:', criteria);
+    
     
     return mongoService.connectToDb()
         .then(db => {
