@@ -111,6 +111,7 @@ export default {
 i {
   color: rgb(46, 46, 46);
   padding: 0;
+  // padding-top: 6px;
 }
 </style>
 
