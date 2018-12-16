@@ -1,8 +1,11 @@
 .chat-page-container{
-    margin-top: 80px;
+    max-width: 600px;
+    border-radius: 4px;
+
+    margin: 0 auto;
+ 
     .chat-page-header{
         height: 5rem;
-        // background: #80d39bc4;
         margin: 0 20px;
         margin-bottom:10px;
         padding: 20px;
@@ -22,7 +25,6 @@
     height: 100%;
     overflow: auto;
     .chat-msgs{
-        // border-radius: 10px;
         border-bottom-right-radius: unset;
         border-bottom-left-radius: unset;
         background: $semi;
@@ -39,14 +41,10 @@
             border-radius: 10px;
         }
         .loggedin-side{
-            // display: inline-block;
-            // width:fit-content;
             margin-bottom: 10px;
             padding-left: 15px;
             background: #407FFF;
             color: white;
-
-            direction: rtl;
             margin-left: 20%;
             right:0;
             .msg-time{
@@ -58,10 +56,7 @@
 
         }
         .userChat-side{
-            // display: inline-block;
             padding-right: 15px;
-            // width:fit-content;
-
             margin-bottom: 10px;
             direction: ltr;
             background: #F1F0F0;
@@ -80,10 +75,6 @@
         margin-bottom: 2px;
         
     }
-
-    //   .chat-container {
-    //     height: 100%;
-    //   }
       .chat-text {
         
         form {

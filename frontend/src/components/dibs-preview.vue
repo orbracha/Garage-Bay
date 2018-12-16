@@ -33,23 +33,24 @@
       <div class="dibAns-container">
         <sui-card>
           <sui-card-content>
-            <router-link :to="'/item/details/'+dib.item._id">
-              <sui-image :src="dib.item.img" class="right floated"/>
-            </router-link>
             <sui-card-header>
-              <template v-if="!dib.isAns">The seller hasn't answered yet!</template>
-              <template v-else>
-                <template v-if="dib.type">
-                  The seller accepted your dibs call! <br>
-                  Talk to them:
-                  <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
-                </template>
+              <section class="flex row between">
+                <template v-if="!dib.isAns">Pending</template>
                 <template v-else>
-                  Sorry, the seller rejected your offer,<br>
-                  Send a message:
-                  <router-link :to="'/chat/user/'+ dib.item.sellerId">&#128172;</router-link>
+                  <template v-if="dib.type">Accepted!</template>
+                  <template v-else>Declined</template>
                 </template>
-              </template>
+                <router-link :to="'/item/details/'+dib.item._id">
+                  <sui-image :src="dib.item.img"/>
+                </router-link>
+              </section>
+              <!-- <div > -->
+              <router-link :to="'/chat/user/'+ dib.item.sellerId" class="call-seller">
+                <i class="far fa-comment-alt"></i>
+                <span>&ensp;</span>
+                Call Seller
+              </router-link>
+              <!-- </div> -->
             </sui-card-header>
           </sui-card-content>
           <sui-card-content extra>
@@ -97,3 +98,19 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.card {
+  color: rgb(46, 46, 46);
+  height: 165px;
+  .call-seller {
+    padding: 0;
+    color: rgb(46, 46, 46);
+  }
+}
+i {
+  color: rgb(46, 46, 46);
+  padding: 0;
+}
+</style>
+

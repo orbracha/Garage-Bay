@@ -11,6 +11,9 @@ import SuiVue from 'semantic-ui-vue';
 import 'semantic-ui-css/semantic.min.css';
 import './registerServiceWorker';
 import './assets/scss/main.scss';
+import Element from 'element-ui'
+ 
+Vue.use(Element)
 
 
 Vue.use(VueSweetalert2);

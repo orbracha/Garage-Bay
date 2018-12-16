@@ -27,17 +27,27 @@ li {
   border-top-left-radius: 200px;
   border-bottom-left-radius: 200px;
   color: rgb(53, 53, 53);
-  background-color: rgba(255, 255, 255, 0);
-  background-image: linear-gradient(
-    to right,
-    rgb(236, 236, 236),
-    rgba(255, 255, 255, 0)
-  );
+  background-color: rgba(255, 255, 255, 0); 
+  background-image: linear-gradient(to right, rgb(255, 255, 255) , rgba(255, 255, 255, 0)); 
   position: relative;
   text-align: left;
   display: flex;
-  margin-bottom: 5px;
-  .chat-head {
+  margin-bottom: 8px;
+  &:hover{
+  background-image: linear-gradient(to right, rgb(216, 216, 216) , rgba(255, 255, 255, 0)); 
+  }
+  .chat-head{
+  // background-color: rgba(255, 255, 255, 0);
+  // background-image: linear-gradient(
+  //   to right,
+  //   rgb(236, 236, 236),
+  //   rgba(255, 255, 255, 0)
+  // );
+  // position: relative;
+  // text-align: left;
+  // display: flex;
+  // margin-bottom: 5px;
+  // .chat-head {
     font-weight: 700;
     color: rgb(46, 46, 46);
     font-size: 1.6rem;

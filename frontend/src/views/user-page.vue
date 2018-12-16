@@ -7,8 +7,8 @@
         <div class="profile-info flex column">
           <h1>{{user.nickname}}{{(isLoggedUser)? '':'\'s Garage'}}</h1>
           <section v-if="isLoggedUser">
-            <div class="edit-user flex row">
-              <i class="far fa-edit" @click="editUserClicked"></i>
+            <div class="edit-user flex row" @click="editUserClicked">
+              <i class="far fa-edit" ></i>
               <h3>Edit Profile</h3>
             </div>
             <a @click="logoutUser" class="logoutBtn">Logout</a>
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     logoutUser() {
-      console.log("curr user is: ", this.user);
+      // console.log("curr user is: ", this.user);
       this.$store.dispatch({ type: "logout" }).then(() => {
         this.$router.push("/");
       });
@@ -94,8 +94,6 @@ export default {
         .dispatch({ type: "getUserById", userId })
         .then(user => {
           this.user = user;
-          console.log(user);
-
           this.isLoadin = false;
         })
         .catch(err => console.log("EROOOOOR"));
@@ -126,4 +124,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>

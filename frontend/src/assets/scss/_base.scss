@@ -4,12 +4,12 @@ html{
 }
 
 .router-view{
-    margin-top: 80px;
+    padding-top: 80px;
 
 }
 @media (min-width:950px){
     .router-view{
-    margin-left: 200px;
+    margin-left: 205px;
     }
 }
 
@@ -33,7 +33,7 @@ a{
 }
 
 ul {
-    padding: 0 20px;
+    padding: 0 ;
     margin: 0;
     list-style-type: none;
   }
@@ -84,15 +84,19 @@ ul {
 .floated{
     float: unset;
 }
-// .fa-comment-alt{
-//   color: rgba(255, 255, 255, 0.466);
 
-//     -webkit-text-stroke-width: 2px;
-//     -webkit-text-stroke-color: rgba(0, 0, 0, 0.459);
-//     font-size: 1.6rem;
-//     transition: .3s ease;
-//     animation: none;
-// }
+
+
+// ************layout*****************
+
+.logoutBtn{
+      color:$mid;   
+
+    &:hover{
+      cursor: pointer;
+      color: $dark;
+    }
+}
 .fa-star{
     color: rgb(155, 155, 155);
     padding-right: 2px;

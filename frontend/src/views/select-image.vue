@@ -63,7 +63,6 @@ export default {
       this.showStream = false;
     },
     capture() {
-
       this.canvas = this.$refs.canvas;
       var context = this.canvas
         .getContext("2d")
@@ -114,10 +113,19 @@ export default {
 
 <style lang="scss" scoped>
 .add-item-container {
+  max-width: 430px;
+  margin: 0 auto;
+  background-color:  rgba(255, 255, 255, 0.445);
+  border-radius: 4px;
+  padding: 15px;
   text-align: center;
+  margin-top: 90px;
+   #canvas {
+      visibility: hidden;
+    }
   .icon {
-    margin-bottom: 20px;
-    
+    margin: 20px 0;
+   
   }
   i {
     padding: 8px;
@@ -125,8 +133,8 @@ export default {
     border-radius: 90px;
   }
   #capture {
-  cursor: pointer;
-}
+    cursor: pointer;
+  }
 }
 img.preview {
   background-color: white;
@@ -134,10 +142,10 @@ img.preview {
   padding: 5px;
 }
 .video-container {
-  width: 90%;
   margin: 0 auto;
   max-width: 400px;
-  height: 400px;
+  height: 300px;
+  // background-color: aqua;
 
   input {
     text-align: center;
@@ -146,5 +154,4 @@ img.preview {
 #video {
   width: 100%;
 }
-
 </style>

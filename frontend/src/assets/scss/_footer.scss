@@ -74,21 +74,21 @@
 
     .footer {
       padding-top: 70px;
-      left: 0;
+      left: -4px;
       top: 0;
-      width: 4px;
+      width: 2px;
       height: 100vh;
       margin-right: 10px;
       background-color: rgba(241, 9, 9, 0);
       box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.6);
       transition: 0.3s;
-      &:hover{
-        width: 205px;
-        background-color:white;
-        .footer-icons-wrapper {
-          left: 0;
-        }
-      }
+      // &:hover{
+      //   width: 205px;
+      //   background-color:white;
+      //   .footer-icons-wrapper {
+      //     left: 0;
+      //   }
+      // }
       &.open {
         width: 205px;
         background-color:white;
