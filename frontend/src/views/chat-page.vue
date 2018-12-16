@@ -1,7 +1,7 @@
 <template>
   <section class="chat-page-container">
     <img v-if="isLoading" class="loading-chat" src="../assets/img/loader.gif" alt srcset>
-    <chat-list v-else :data="userMsgs"></chat-list>
+    <chat-list v-else :data="userRooms"></chat-list>
   </section>
 </template>
 
@@ -10,7 +10,7 @@ import chatList from "../components/chat-list.vue";
 export default {
   data() {
     return {
-      userMsgs: [],
+      userRooms: [],
       isLoading: true,
       newMsg: null
     };
@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    getUserMsgs() {
+    getUserRooms() {
       console.log(this.rooms);
       var self = this;
       return this.rooms.map(room => {
@@ -33,7 +33,7 @@ export default {
         this.$store
           .dispatch({ type: "getUserById", userId: userDest })
           .then(user => {
-            self.userMsgs.push({
+            self.userRooms.push({
               txt: room.historyMsgs[room.historyMsgs.length - 1].txt,
               title: user.nickname,
               img: user.img,
@@ -60,7 +60,7 @@ export default {
     user.historyChat = [];
     this.$store.dispatch({ type: "updateUser", user }).then(() => {
       this.$store.dispatch({ type: "loadRooms", userId: user._id }).then(() => {
-        this.getUserMsgs();
+        this.getUserRooms();
       });
     });
   },
