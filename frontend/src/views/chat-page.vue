@@ -12,7 +12,7 @@ export default {
     return {
       userRooms: [],
       isLoading: true,
-      newMsg: null
+      newMsgs: []
     };
   },
   computed: {
@@ -42,21 +42,37 @@ export default {
               isNewMsg: this.checkNewMsg(user._id)
             });
             this.isLoading = false;
+            this.orderRooms();
           });
       });
     },
     checkNewMsg(id) {
-      var isNewMsg = this.newMsg.find(msg => {
+      var isNewMsg = this.newMsgs.find(msg => {
         return msg.from._id === id;
       });
       if (isNewMsg) return true;
       return false;
+    },
+    orderRooms() {
+      if (this.newMsgs.length) {
+        for (let i = 0; i < this.userRooms.length; i++) {
+          for (let j = 0; j < this.newMsgs.length; j++) {
+            if (this.userRooms[i].title === this.newMsgs[j].nickname) {
+              console.log('in')
+              var currRoom = room;
+              this.userRooms.splice(idx, 1);
+              this.userRooms.unshift(currRoom);
+              break;
+            }
+          }
+        }
+      }
     }
   },
   created() {
     window.scrollTo(0, 0);
     let user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
-    this.newMsg = user.historyChat;
+    this.newMsgs = user.historyChat;
     user.historyChat = [];
     this.$store.dispatch({ type: "updateUser", user }).then(() => {
       this.$store.dispatch({ type: "loadRooms", userId: user._id }).then(() => {
@@ -66,7 +82,7 @@ export default {
   },
   components: {
     chatList
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
