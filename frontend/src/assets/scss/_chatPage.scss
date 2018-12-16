@@ -46,6 +46,7 @@
             background: #407FFF;
             color: white;
             margin-left: 20%;
+            direction: rtl;
             right:0;
             .msg-time{
                 direction: ltr;
@@ -80,6 +81,7 @@
         form {
           width: 100%;
           height: 45px;
+          display: flex;
         }
         input {
           font-size: 1rem;
@@ -89,10 +91,8 @@
           margin: 0;
         }
         button {
-            position: absolute;
-            right: 0;
-                border: 1px solid $light;
-                background-color: $xlight;
+            border: 1px solid $light;
+            background-color: $xlight;
                 i{
                   padding: 0;
                 }            
