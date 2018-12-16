@@ -24,7 +24,7 @@
           </label>
           <label>
             <span>Description:</span>
-            <textarea cols="30" rows="10" v-model="currItem.desc" required></textarea>
+            <textarea cols="30" rows="8" v-model="currItem.desc" required></textarea>
           </label>
           <label>
             <span>Price:</span>
