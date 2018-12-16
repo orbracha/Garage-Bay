@@ -88,6 +88,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-layout{
+  max-width: 1000px;
+  margin: 0 auto;
+}
 .loading {
   text-align: center;
   margin-top: 10px;
