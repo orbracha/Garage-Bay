@@ -54,6 +54,10 @@ export default {
           this.video.play().catch(err => console.log(err));
         });
       }
+      else{
+        console.log('no media devices');
+        
+      }
     }
   },
   methods: {
@@ -113,15 +117,15 @@ export default {
 
 <style lang="scss" scoped>
 .add-item-container {
-  max-width: 430px;
+  min-height:100vh;
   margin: 0 auto;
   background-color:  rgba(255, 255, 255, 0.445);
   border-radius: 4px;
   padding: 15px;
   text-align: center;
-  margin-top: 90px;
+  margin-top: 70px;
    #canvas {
-      visibility: hidden;
+      display: none;
     }
   .icon {
     margin: 20px 0;
