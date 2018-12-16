@@ -16,8 +16,6 @@ export default {
   created() {
     var i = 0;
     this.feed = setInterval(() => {
-      console.log(this.events);
-
       this.news = this.events[i];
       i++;
       if (i >= this.events.length) i = 0;

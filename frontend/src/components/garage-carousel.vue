@@ -1,16 +1,4 @@
 <template>
-  <!-- <carousel
-    class="carousel"
-    :perPage="1"
-  
-    :mouse-drag="true"
-    :navigationEnabled="true"
-    :paginationEnabled="false"
-    :autoplay="true" 
-    ease-in-out
-  
-  >-->
-  <!-- <div class="carousel-wrapper"> -->
   <carousel
     class="carousel"
     :loop="true"

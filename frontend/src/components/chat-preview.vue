@@ -37,17 +37,6 @@ li {
   background-image: linear-gradient(to right, rgb(216, 216, 216) , rgba(255, 255, 255, 0)); 
   }
   .chat-head{
-  // background-color: rgba(255, 255, 255, 0);
-  // background-image: linear-gradient(
-  //   to right,
-  //   rgb(236, 236, 236),
-  //   rgba(255, 255, 255, 0)
-  // );
-  // position: relative;
-  // text-align: left;
-  // display: flex;
-  // margin-bottom: 5px;
-  // .chat-head {
     font-weight: 700;
     color: rgb(46, 46, 46);
     font-size: 1.6rem;

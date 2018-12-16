@@ -3,7 +3,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import itemService from '../services/item-service.js'
-import { debug } from 'util';
 
 Vue.use(Vuex);
 

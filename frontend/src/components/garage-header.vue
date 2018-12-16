@@ -5,17 +5,16 @@
         <i class="fas fa-times" v-if="isMenu" @click="toggleMenu"></i>
         <i class="fas fa-bars" v-else @click="toggleMenu"></i>
       </div>
-
       <router-link to="/">
         <div class="logo-text">dibs</div>
       </router-link>
+      <div class="search-container">
+        <router-link to="/search">
+          <input placeholder="Search your item" @input="search" v-model="filterTxt" type="text">
+        </router-link>
+        <i class="fas fa-search"></i>
+      </div>
     </div>
-
-    <!-- </div> -->
-    <router-link to="/search">
-      <i class="fas fa-search"/>
-    </router-link>
-
     <div class="header-icons-container">
       <div v-if="user" class="flex row center">
         <section class="user-icon-text">
@@ -30,12 +29,8 @@
           >{{user.dibsAns.filter(ans=>ans.isAns).length + user.dibs.length}}</span>
         </router-link>
       </div>
-
       <div v-else>
-        <router-link class="header-profile-icon" to="/login">
-          <!-- <i class="fas fa-user"></i> -->
-          Login
-        </router-link>&ensp;|
+        <router-link class="header-profile-icon" to="/login">Login</router-link>&ensp;|
         <router-link class="header-profile-icon" to="/signup">Signup</router-link>
       </div>
     </div>
@@ -44,16 +39,23 @@
 
 <script>
 export default {
+  data() {
+    return {
+      filterTxt: ""
+    };
+  },
   methods: {
     toggleMenu() {
       this.$store.commit({ type: "toggleMenu" });
     },
     logoutUser() {
-      console.log("curr user is: ", this.user);
       this.$store.dispatch({ type: "disconnentChat", user: this.user });
       this.$store.dispatch({ type: "logout" }).then(() => {
         this.$router.push("/");
       });
+    },
+    search() {
+      this.$store.commit({ type: "setFilterTxt", txt: this.filterTxt });
     }
   },
   computed: {
@@ -70,5 +72,27 @@ export default {
 <style lang="scss" scoped>
 .logoutBtn {
   cursor: pointer;
+}
+.logo-text {
+  margin-right: 10px;
+}
+.search-container {
+  // border: 1px solid;
+  height: 30px;
+  position: relative;
+  margin-top: 4px;
+  input {
+    height: 100%;
+    font-size: 15px;
+    padding: 8px 7px 7px 28px;
+    border-color: #ddd;
+    border-radius: 3px;
+  }
+  .fa-search {
+    position: absolute;
+    font-size: 16px;
+    top: 6px;
+    left: 8px;
+  }
 }
 </style>

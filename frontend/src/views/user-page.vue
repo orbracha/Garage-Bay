@@ -8,7 +8,7 @@
           <h1>{{user.nickname}}{{(isLoggedUser)? '':'\'s Garage'}}</h1>
           <section v-if="isLoggedUser">
             <div class="edit-user flex row" @click="editUserClicked">
-              <i class="far fa-edit" ></i>
+              <i class="far fa-edit"></i>
               <h3>Edit Profile</h3>
             </div>
             <a @click="logoutUser" class="logoutBtn">Logout</a>
@@ -38,7 +38,7 @@
       <event-feed v-if="user.events.length > 2" :events="user.events"></event-feed>
     </section>
   </section>
-    <!-- <garage-footer/> -->
+  <!-- <garage-footer/> -->
 </template>
 
 <script>
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     logoutUser() {
-      // console.log("curr user is: ", this.user);
+      this.$store.dispatch({ type: "disconnentChat", user: this.user });
       this.$store.dispatch({ type: "logout" }).then(() => {
         this.$router.push("/");
       });
@@ -79,7 +79,7 @@ export default {
     itemClicked(itemId) {
       this.$router.push(`/item/details/${itemId}`);
     },
-    removeItem(){
+    removeItem() {
       this.setUser();
     },
     setUser() {
