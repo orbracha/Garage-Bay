@@ -18,10 +18,11 @@
             <sui-container text-align="center">
               <sui-button-group>
                 <sui-button basic positive @click="$emit('sendAns',{dib,idx,type:true})">
-                  <i class="far fa-thumbs-up ans-icon"></i>
+                  <!-- <span>Its a dill</span> -->
+                  <i class="fas fa-check"></i>
                 </sui-button>
                 <sui-button basic negative @click="$emit('sendAns',{dib,idx,type:false})">
-                  <i class="far fa-thumbs-down ans-icon"></i>
+                  <i class="fas fa-times"></i>
                 </sui-button>
               </sui-button-group>
             </sui-container>

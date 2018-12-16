@@ -42,23 +42,21 @@ export default {
   },
 
   mounted() {
-    var isUser = this.$store.getters.getLoggedUser;
-    if (!isUser) this.$router.push("/login");
-    else {
-      this.video = this.$refs.video;
-      this.stream && this.stream.stop && this.stream.stop();
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-          this.stream = stream;
-          this.video.src = window.URL.createObjectURL(stream);
-          this.video.play().catch(err => console.log(err));
-        });
-      }
-      else{
-        console.log('no media devices');
-        
-      }
+    // var isUser = this.$store.getters.getLoggedUser;
+    // if (!isUser) this.$router.push("/login");
+    // else {
+    this.video = this.$refs.video;
+    this.stream && this.stream.stop && this.stream.stop();
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+        this.stream = stream;
+        this.video.src = window.URL.createObjectURL(stream);
+        this.video.play().catch(err => console.log(err));
+      });
+    } else {
+      console.log("no media devices");
     }
+    // }
   },
   methods: {
     stopStream() {
@@ -76,14 +74,15 @@ export default {
       this.saveImage();
     },
     saveImage() {
+      var user = this.$store.getters.getLoggedUser;
       if (this.captures[0]) var imageToSave = this.captures[0];
       else var imageToSave = this.imageData;
       this.$store
         .dispatch({ type: "saveImage", imageToSave })
         .then(res => {
-          if (this.$route.params.def === "edit-user") {
+          if (this.$route.params.def === "edit-user" && user) {
             this.$router.push("/user/edit/userId");
-          } else if (this.$route.params.def === "item") {
+          } else if (this.$route.params.def === "item" && user) {
             this.$router.push(`/item/edit`);
           } else {
             this.$router.push("/signup");
@@ -117,19 +116,18 @@ export default {
 
 <style lang="scss" scoped>
 .add-item-container {
-  min-height:100vh;
+  min-height: 100vh;
   margin: 0 auto;
-  background-color:  rgba(255, 255, 255, 0.445);
+  background-color: rgba(255, 255, 255, 0.445);
   border-radius: 4px;
   padding: 15px;
   text-align: center;
   margin-top: 70px;
-   #canvas {
-      display: none;
-    }
+  #canvas {
+    display: none;
+  }
   .icon {
     margin: 20px 0;
-   
   }
   i {
     padding: 8px;
