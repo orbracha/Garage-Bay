@@ -9,6 +9,7 @@ function addRoute(app, server) {
     var io = require('socket.io').listen(server);
     io.on('connection', function (socket) {
         socket.on('inline', userId => {
+            userService.userAvailableStatus(userId, true)
             loggedInUsers = { [socket.id]: userId };
         })
         socket.on('roomRequested', (userId, userDest) => {

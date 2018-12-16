@@ -49,38 +49,24 @@ export default {
       var isNewMsg = this.newMsg.find(msg => {
         return msg.from._id === id;
       });
-      if(isNewMsg) return true
+      if (isNewMsg) return true;
       return false;
     }
   },
   created() {
-    window.scrollTo(0,0);
-    this.$store
-      .dispatch({
-        type: "connentChat",
-        user: this.$store.getters.getLoggedUser
-      })
-      .then(() => {
-        let user = JSON.parse(
-          JSON.stringify(this.$store.getters.getLoggedUser)
-        );
-        this.newMsg = user.historyChat;
-        user.historyChat = [];
-        this.$store.dispatch({ type: "updateUser", user }).then(() => {
-          this.$store
-            .dispatch({ type: "loadRooms", userId: user._id })
-            .then(() => {
-              this.getUserMsgs();
-            });
-        });
+    window.scrollTo(0, 0);
+    let user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
+    this.newMsg = user.historyChat;
+    user.historyChat = [];
+    this.$store.dispatch({ type: "updateUser", user }).then(() => {
+      this.$store.dispatch({ type: "loadRooms", userId: user._id }).then(() => {
+        this.getUserMsgs();
       });
+    });
   },
   components: {
     chatList
   },
-  destroyed() {
-    this.$store.dispatch({ type: "disconnentChat", user: this.loggedUser });
-  }
 };
 </script>
 <style lang="scss" scoped>

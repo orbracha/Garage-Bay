@@ -19,7 +19,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import itemList from "@/components/item-list.vue";
 import garageCarousel from "@/components/garage-carousel.vue";
 import menuScreen from "@/components/screen.vue";

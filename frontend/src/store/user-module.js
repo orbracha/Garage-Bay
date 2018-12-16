@@ -49,30 +49,12 @@ export default {
 
     },
     actions: {
-
-        // toggleWishlist({state}, {id}) {
-           
-        //     const itemId = this.item._id;
-        //     var user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
-        //     const wishlistItemIdx = user.wishList.indexOf(itemId);
-
-        //     if (wishlistItemIdx === -1) {
-        //         user.wishList.push(itemId);
-        //     } else {
-        //         user.wishList.splice(wishlistItemIdx, 1);
-        //     }
-
-        //     this.$store.dispatch({ type: "updateUser", user });
-        // },  
-
         toggleWishlist(contex, {id}) {
-   
-            
             contex.commit('toggleWishlist', id)
             return userService.edit(contex.state.loggedUser).then(user => {
             })
         },
-        loadDibs(contex) {
+        loadChange(contex) {
             userService.getById(contex.state.loggedUser._id).then(user => {
                 storageService.save(LOGGEDIN_USER_KEY, user)
                 contex.commit({ type: 'setLoggedUser', user })
@@ -83,17 +65,12 @@ export default {
                 .then(retUser => {
                     return context.dispatch({ type: 'getLocation' })
                        .then(loc=>{
-                        //    console.log('location we got', loc);
-                        //    console.log('yes geo, returning', retUser);
                            retUser.location=loc;
                            return retUser;
                        })
                        .catch(()=>{
                         let loc={lng: 34.803139, lat: 32.088032}
-                        // resolve(loc);
-                        
                         retUser.location=loc;
-                        // console.log('no geo, returning', retUser);
                         return retUser;
                        })
                 })
@@ -154,7 +131,6 @@ export default {
        },
 
         getEditUser(state) {
-
             return state.editUser;
         }
     },

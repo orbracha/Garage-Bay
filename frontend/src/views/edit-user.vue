@@ -87,8 +87,6 @@ form {
 }
 img.preview {
   width: 200px; 
-  // background-color: white;
-  // border: 1px solid #ddd;
   padding: 5px;
 }
 </style>

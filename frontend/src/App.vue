@@ -23,7 +23,6 @@ export default {
   },
   methods: {},
   created() {
-    // window.scrollTo(0,0);
     const credentials = storageService.load(LOGGEDIN_USER_KEY);
     if (credentials) {
       this.$store
@@ -34,12 +33,11 @@ export default {
             userId: this.$store.getters.getLoggedUser._id
           });
           eventBus.$on(DIBS, () => {
-            this.$store.dispatch({ type: "loadDibs" });
+            this.$store.dispatch({ type: "loadChange" });
           });
           eventBus.$on(GET_MSG, msg => {
             this.$store.commit({ type: "addMsg", msg });
-            console.log("loading user");
-            this.$store.dispatch({ type: "loadDibs" });
+            this.$store.dispatch({ type: "loadChange" });
           });
         });
     }

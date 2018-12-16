@@ -17,9 +17,6 @@ export default {
   components: {
     itemPreview,
     itemService
-  },
-  created() {
-    // console.log('inside  item list', this.items);
   }
 };
 </script>
