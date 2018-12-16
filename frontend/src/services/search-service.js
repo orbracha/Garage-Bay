@@ -12,13 +12,14 @@ export default {
 function getCatagories() {
   return axios.get(`${BASE_URL}/search`).then(res => res.data);
 }
-function query({filter}){
-  if(!filter.byTxt&& !filter.byType)
-  return Promise.resolve([])
-  let queryStr=`?`;
-  queryStr += filter.byTxt? `&text=${filter.byTxt}` : '';
-  queryStr += filter.byType? `&type=${filter.byType}` : '';
+function query({ filter }) {
+  if (!filter.byTxt && !filter.byType)
+    return axios.get(`${BASE_URL}/item`)
+      .then(res => res.data)
+  let queryStr = `?`;
+  queryStr += filter.byTxt ? `&text=${filter.byTxt}` : '';
+  queryStr += filter.byType ? `&type=${filter.byType}` : '';
 
   return axios.get(`${BASE_URL}/filter/${queryStr}`)
-    .then(res =>res.data)
+    .then(res => res.data)
 }

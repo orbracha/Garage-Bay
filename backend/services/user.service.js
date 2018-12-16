@@ -101,18 +101,10 @@ function userAvailableStatus(userId, status) {
 function userOfflineMsgs(userId, msg) {
     const id = new ObjectId(userId)
     return mongoService.connectToDb().then(db => {
-        return db.collection('user').findOne({
-            $and: [{ _id: id },
-            { isAvailable: { $eq: false } }]
-        }
-        ).then(user => {
-            if (user) {
-                db.collection('user').updateOne(
-                    { _id: id }, { $push: { historyChat: msg } }
-                )
-            }
-            return user
-        })
+        return db.collection('user').updateOne(
+            { _id: id }, { $push: { historyChat: msg } }
+        )
+
     })
 }
 
@@ -148,7 +140,7 @@ function removeUserDib(dib) {
                     }
                 }
             }, { multi: true })
-                // .then(result => console.log({ nModified: result.result.nModified }))
+            // .then(result => console.log({ nModified: result.result.nModified }))
         })
 }
 

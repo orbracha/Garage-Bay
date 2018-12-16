@@ -37,12 +37,29 @@
         }
         &:hover {
           cursor: pointer;
-          color: $s1;
+          color: $mid;
+          // color: $s1;
         }
     
       }
     }
- 
+.chat-footer{
+  position: relative;
+  .chat-notification{
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 200;
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    top: 3px;;
+    right: 1px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+  }
+}
     .footer-notification {
       font-family: "Avenir", Helvetica, Arial, sans-serif;
       font-size: 12px;
@@ -130,6 +147,23 @@
           order: 5;
         }
       }
+      .chat-footer{
+        position: relative;
+        .chat-notification{
+          font-family: "Avenir", Helvetica, Arial, sans-serif;
+          font-size: 12px;
+          font-weight: 200;
+          position: absolute;
+          height: 15px;
+          width: 15px;
+          top: -1px;;
+          right: 30px;
+          text-align: center;
+          border-radius: 50%;
+          background-color: red;
+          color: white;
+        }
+      }
     }
 
     .screen {
@@ -193,7 +227,6 @@
               }
               &:hover{
                 box-shadow: inset 0px -4px 0px 0px rgba(33,33,33,1);
-                // color: $greenB;
               }
             
 

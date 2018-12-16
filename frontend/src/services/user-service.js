@@ -20,18 +20,14 @@ export default {
   logout,
   getUsers
 }
-function logout(){
+function logout() {
   return axios.post(`${BASE_URL}/logout`)
 }
-function updateUser(user){
-  storageService.save(LOGGEDIN_USER_KEY,user)
+function updateUser(user) {
+  storageService.save(LOGGEDIN_USER_KEY, user)
 }
 function checkUser(user) {
-  console.log('user in front service', user);
-  
   return axios.post(`${BASE_URL}`, { user }).then(res => {
-    console.log('res.data in  user service',res.data);
-
     storageService.save(LOGGEDIN_USER_KEY, res.data.token)
     return res.data.user
   });
@@ -41,7 +37,7 @@ function loadFromLocalStorage() {
   const userFromLS = storageService.load(LOGGEDIN_USER_KEY);
   return userFromLS ? userFromLS : null;
 }
-function loadDibs(userId){
+function loadDibs(userId) {
   return axios.get(`${BASE_URL}/dibs/${userId}`).then(res => res.data)
 }
 function getById(userId) {
@@ -49,15 +45,15 @@ function getById(userId) {
 }
 
 function getByName(userName) {
-  return axios.post(`${BASE_URL}/sign/user`, {userName}).then(res => res.data)
+  return axios.post(`${BASE_URL}/sign/user`, { userName }).then(res => res.data)
 }
 
 function getUsers() {
   return axios.get(`${BASE_URL}`).then(res => res.data)
 }
 
-function getUserWishlist(userId){
-  return axios.get(`${BASE_URL}/wishlist/${userId}`).then(res =>res.data[0])
+function getUserWishlist(userId) {
+  return axios.get(`${BASE_URL}/wishlist/${userId}`).then(res => res.data[0])
 }
 
 function remove(userId) {
@@ -68,6 +64,5 @@ function edit(user) {
     storageService.save(LOGGEDIN_USER_KEY, user)
     return axios.put(`${BASE_URL}`, user).then(res => res.data)
   }
-  console.log('user to update', user)
   return axios.post(`${BASE_URL}/sign`, user)
 }

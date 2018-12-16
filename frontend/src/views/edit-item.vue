@@ -33,9 +33,8 @@
       
       <button type="submit">Save</button>
       </div>
-
     </form>
-    <garage-footer></garage-footer>
+    <!-- <garage-footer></garage-footer> -->
   </section>
 </template>
 
@@ -43,7 +42,6 @@
 import garageHeader from "../components/garage-header.vue";
 import garageFooter from "../components/garage-footer.vue";
 export default {
-  // props: ["img"],
   data() {
     return {
       currItem: {
@@ -53,7 +51,7 @@ export default {
         price: 0,
         img: "",
         condition: "",
-        callDibs:[]
+        callDibs: []
       },
       isLoadingCat: false,
       catagories: []
@@ -64,20 +62,16 @@ export default {
       var item = JSON.parse(JSON.stringify(this.currItem));
       if (this.currItem._id) {
         this.$store.dispatch({ type: "editItem", item }).then(item => {
-          console.log("ret from server", item);
-          
           this.$router.push(`/item/details/${item._id}`);
         });
       } else {
         var item = JSON.parse(JSON.stringify(this.currItem));
-
         item.createAt = Date.now();
         item.sellerId = this.$store.getters.getLoggedUser._id;
         item.location = await this.$store.dispatch({ type: "getLocation" });
-        item.callDibs=[]
-        
+        item.callDibs = [];
         this.$store.dispatch({ type: "addItem", item }).then(itemId => {
-          this.$store.commit({type:'resetNewUrl'})  
+          this.$store.commit({ type: "resetNewUrl" });
           this.$router.push(`/item/details/${itemId}`);
         });
       }
@@ -112,22 +106,4 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-// label {
-//   display: block;
-//   margin: 5px auto;
-//   span {
-//     display: block;
-//     margin: 5px auto;
-//   }
-// }
-// form {
-//   margin-bottom: 70px;
-//   img {
-//     width: 200px;
-//     margin-top: 20px;
-//   }
-// }
-</style>
 

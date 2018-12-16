@@ -65,6 +65,15 @@
 
 
   }
+  .ui.card, .ui.cards>.card{
+    height: fit-content;
+    .ui.buttons .button:last-child{
+      // .fa-check , .fa-times{
+
+      //   width: 70px;
+      // }
+    }
+  }
 
 .tab-container{
   margin: 20px;

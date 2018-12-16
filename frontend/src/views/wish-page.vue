@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import itemsThumbnail from "@/components/item-thumbnail.vue";
 
 export default {
@@ -34,8 +33,6 @@ export default {
         .dispatch({ type: "getUserWishlist", userId })
         .then(user => {
           self.wishlist = user.wishlistItems;
-          console.log(user);
-
           self.isLoadin = false;
         })
         .catch(err => console.log("ERROOOR"));

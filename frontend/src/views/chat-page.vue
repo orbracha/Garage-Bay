@@ -1,7 +1,7 @@
 <template>
   <section class="chat-page-container">
     <img v-if="isLoading" class="loading-chat" src="../assets/img/loader.gif" alt srcset>
-    <chat-list v-else :data="userMsgs"></chat-list>
+    <chat-list v-else :data="userRooms"></chat-list>
   </section>
 </template>
 
@@ -10,9 +10,9 @@ import chatList from "../components/chat-list.vue";
 export default {
   data() {
     return {
-      userMsgs: [],
+      userRooms: [],
       isLoading: true,
-      newMsg: null
+      newMsgs: []
     };
   },
   computed: {
@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    getUserMsgs() {
+    getUserRooms() {
       console.log(this.rooms);
       var self = this;
       return this.rooms.map(room => {
@@ -33,7 +33,7 @@ export default {
         this.$store
           .dispatch({ type: "getUserById", userId: userDest })
           .then(user => {
-            self.userMsgs.push({
+            self.userRooms.push({
               txt: room.historyMsgs[room.historyMsgs.length - 1].txt,
               title: user.nickname,
               img: user.img,
@@ -42,44 +42,46 @@ export default {
               isNewMsg: this.checkNewMsg(user._id)
             });
             this.isLoading = false;
+            this.orderRooms();
           });
       });
     },
     checkNewMsg(id) {
-      var isNewMsg = this.newMsg.find(msg => {
+      var isNewMsg = this.newMsgs.find(msg => {
         return msg.from._id === id;
       });
-      if(isNewMsg) return true
+      if (isNewMsg) return true;
       return false;
+    },
+    orderRooms() {
+      if (this.newMsgs.length) {
+        for (let i = 0; i < this.userRooms.length; i++) {
+          for (let j = 0; j < this.newMsgs.length; j++) {
+            if (this.userRooms[i].title === this.newMsgs[j].nickname) {
+              console.log('in')
+              var currRoom = room;
+              this.userRooms.splice(idx, 1);
+              this.userRooms.unshift(currRoom);
+              break;
+            }
+          }
+        }
+      }
     }
   },
   created() {
-    window.scrollTo(0,0);
-    this.$store
-      .dispatch({
-        type: "connentChat",
-        user: this.$store.getters.getLoggedUser
-      })
-      .then(() => {
-        let user = JSON.parse(
-          JSON.stringify(this.$store.getters.getLoggedUser)
-        );
-        this.newMsg = user.historyChat;
-        user.historyChat = [];
-        this.$store.dispatch({ type: "updateUser", user }).then(() => {
-          this.$store
-            .dispatch({ type: "loadRooms", userId: user._id })
-            .then(() => {
-              this.getUserMsgs();
-            });
-        });
+    window.scrollTo(0, 0);
+    let user = JSON.parse(JSON.stringify(this.$store.getters.getLoggedUser));
+    this.newMsgs = user.historyChat;
+    user.historyChat = [];
+    this.$store.dispatch({ type: "updateUser", user }).then(() => {
+      this.$store.dispatch({ type: "loadRooms", userId: user._id }).then(() => {
+        this.getUserRooms();
       });
+    });
   },
   components: {
     chatList
-  },
-  destroyed() {
-    this.$store.dispatch({ type: "disconnentChat", user: this.loggedUser });
   }
 };
 </script>

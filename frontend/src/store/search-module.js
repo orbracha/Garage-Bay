@@ -1,5 +1,4 @@
 'use strict'
-
 import Vue from 'vue';
 import Vuex from 'vuex';
 import searchService from '../services/search-service.js'
@@ -10,14 +9,18 @@ export default {
     strict: true,
     state: {
         catagories: [],
-        itemsToDisplay: []
+        itemsToDisplay: [],
+        txt: ''
     },
     mutations: {
         setCatagories(state, { catagories }) {
             state.catagories = catagories;
         },
-        setItemsToDisplay(state, {itemsToDisplay}) {
-            state.itemsToDisplay=itemsToDisplay
+        setItemsToDisplay(state, { itemsToDisplay }) {
+            state.itemsToDisplay = itemsToDisplay
+        },
+        setFilterTxt(state, { txt }) {
+            state.txt = txt;
         }
     },
     actions: {
@@ -42,8 +45,11 @@ export default {
         getAllCatagories(state) {
             return state.catagories;
         },
-        getItemsToDisplay(state){
+        getItemsToDisplay(state) {
             return state.itemsToDisplay;
+        },
+        getFilterTxt(state) {
+            return state.txt;
         }
 
     }

@@ -8,7 +8,6 @@
               <sui-image :src="fromUser.img" class="right floated"/>
               <sui-card-header>{{fromUser.nickname}}</sui-card-header>
             </router-link>
-            <!-- <sui-card-meta>Friends of Veronika</sui-card-meta> -->
             <sui-card-description>
               Interested about the {{dib.item.title}} that you offer:
               <img :src="dib.item.img">
@@ -18,10 +17,10 @@
             <sui-container text-align="center">
               <sui-button-group>
                 <sui-button basic positive @click="$emit('sendAns',{dib,idx,type:true})">
-                  <i class="far fa-thumbs-up ans-icon"></i>
+                  <i class="fas fa-check"></i>
                 </sui-button>
                 <sui-button basic negative @click="$emit('sendAns',{dib,idx,type:false})">
-                  <i class="far fa-thumbs-down ans-icon"></i>
+                  <i class="fas fa-times"></i>
                 </sui-button>
               </sui-button-group>
             </sui-container>
@@ -44,13 +43,11 @@
                   <sui-image :src="dib.item.img"/>
                 </router-link>
               </section>
-              <!-- <div > -->
               <router-link :to="'/chat/user/'+ dib.item.sellerId" class="call-seller">
                 <i class="far fa-comment-alt"></i>
                 <span>&ensp;</span>
                 Call Seller
               </router-link>
-              <!-- </div> -->
             </sui-card-header>
           </sui-card-content>
           <sui-card-content extra>
@@ -78,7 +75,6 @@ export default {
   data() {
     return {
       fromUser: null
-      // isAnsList: true
     };
   },
   methods: {

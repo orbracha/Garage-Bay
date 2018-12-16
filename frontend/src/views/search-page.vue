@@ -1,40 +1,29 @@
 <template>
   <div class="page-layout">
-    <garage-header>
-      <div slot="headline flex row">
-        <h3>Search</h3>
-        <div class="filter-container">
-          <input type="text" v-model="filter.byTxt">
-        </div>
-        <i class="fas fa-search"/>
-      </div>
-    </garage-header>
-    <section v-if="isLoadingCat" class="loading">Loading</section>
-
+    <!-- Dont delete! -->
+    {{filterTxt}}
+    <!-- Dont delete! -->
+    <section v-if="isLoadingCat" class="loading">
+      <img src="../assets/img/loader.gif" alt>
+    </section>
     <section v-else>
-
       <div class="catagories-container">
         <div
           v-for="catagory in catagories"
           :key="catagory"
           @click="catagoryClicked(catagory)"
           v-if="catagory.length>1"
-        >{{catagory}} </div>
+        >{{catagory}}</div>
       </div>
-
-      <div v-if="isLoadingItems" class="loading"></div>
+      <div v-if="isLoadingItems" class="loading">
+        <img src="../assets/img/loader.gif" alt>
+      </div>
       <items-tumbnail v-else :list="itemsToDisplay" class="search-res"/>
-
-      <div class="items-container">
-      </div>
     </section>
-    <garage-footer/>
   </div>
 </template>
 
 <script>
-import garageHeader from "../components/garage-header.vue";
-import garageFooter from "@/components/garage-footer.vue";
 import itemsTumbnail from "@/components/item-thumbnail.vue";
 
 export default {
@@ -54,12 +43,15 @@ export default {
   created() {
     this.isLoadingCat = true;
     this.$store.dispatch({ type: "getAllCatagories" }).then(catagories => {
+      catagories = JSON.parse(JSON.stringify(catagories));
       this.catagories = catagories;
+      this.catagories.unshift("All");
       this.isLoadingCat = false;
     });
   },
   methods: {
     catagoryClicked(catagory) {
+      if (catagory === "All") catagory = "";
       this.filter.byType = catagory;
     },
     filterItems() {
@@ -73,7 +65,13 @@ export default {
         });
     }
   },
-
+  computed: {
+    filterTxt() {
+      this.isLoadingItems = true;
+      var txt = this.$store.getters.getFilterTxt;
+      this.filter.byTxt = txt;
+    }
+  },
   watch: {
     filter: {
       handler() {
@@ -84,46 +82,44 @@ export default {
     }
   },
   components: {
-    garageHeader,
-    garageFooter,
     itemsTumbnail
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.loading {
+  text-align: center;
+  margin-top: 10px;
+  img{
+    height: 100px;
+    width: 100px;
+  }
+
+}
 .catagories-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   div {
-    // border: 1px solid black;
-    background-color: rgb(119, 119, 119);
-    box-shadow: 8px 8px 28px -6px rgba(0, 0, 0, 0.75);
-    color: rgb(223, 223, 223);
+    text-align: center;
+    background-color: #dbdbdb;
+    box-shadow: 8px 8px 28px -6px rgba(0, 0, 0, 0.5);
+    color: rgb(46, 46, 46);
     padding: 10px;
     margin: 5px;
-    width: fit-content;
+    width: 77px;
+    height: 40px;
+    // width: fit-content;
     border-radius: 5px;
-    cursor: pointer;
+    &:hover{
+      background-color: rgb(243, 243, 243);
+      cursor: pointer;
+    }
   }
 }
-.search-res{
+.search-res {
   padding: 20px;
-}
-.items-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  div {
-    background-color: #f5f5f0;
-    // border: 1px solid black;
-    color: black;
-    padding: 10px;
-    margin: 5px;
-    width: fit-content;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+  margin-bottom: 40px;
 }
 </style>
