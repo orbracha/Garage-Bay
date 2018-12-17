@@ -1,5 +1,6 @@
 .item-container{
-  // margin: 80px 10px;
+  margin: 0 auto;
+  max-width: 900px;
   padding: 20px;
   padding-top: 100px;
   margin-bottom: 10px;
@@ -155,7 +156,6 @@
 }
 
 @media(min-width:950px){
-  .item-container{
-    margin-left: 210px;
-  }
+  margin: 0 auto;
+  max-width: 900px;
 }

@@ -88,6 +88,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-layout{
+  max-width: 1000px;
+  margin: 0 auto;
+}
 .loading {
   text-align: center;
   margin-top: 10px;
@@ -102,14 +106,20 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
   div {
-    background-color: #7fa00e;
-    box-shadow: 8px 8px 28px -6px rgba(0, 0, 0, 0.75);
-    color: white;
+    text-align: center;
+    background-color: #dbdbdb;
+    box-shadow: 8px 8px 28px -6px rgba(0, 0, 0, 0.5);
+    color: rgb(46, 46, 46);
     padding: 10px;
     margin: 5px;
-    width: fit-content;
+    width: 77px;
+    height: 40px;
+    // width: fit-content;
     border-radius: 5px;
-    cursor: pointer;
+    &:hover{
+      background-color: rgb(243, 243, 243);
+      cursor: pointer;
+    }
   }
 }
 .search-res {

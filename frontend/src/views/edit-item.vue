@@ -4,37 +4,37 @@
       <div>
         <img :src="currItem.img">
       </div>
-      <div>
-        <label>
-          <span>Title:</span>
-          <input type="text" v-model="currItem.title" required>
-        </label>
-        <label>
-          <span>Category:</span>
-          <select v-if="catagories.length>0" v-model="currItem.category" required>
-            <option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</option>
-          </select>
-        </label>
-        <label>
-          <span>Condition:</span>
-          <select v-model="currItem.condition">
-            <option value="likeNew">Like new</option>
-            <option value="used">Used</option>
-          </select>
-        </label>
-        <label>
-          <span>Description:</span>
-          <textarea cols="30" rows="10" v-model="currItem.desc" required></textarea>
-        </label>
-        <label>
-          <span>Price:</span>
-          <input type="number" v-model="currItem.price" required>
-        </label>
-        
-        <button type="submit">Save</button>
+      <div >
+            <label>
+            <span>Title:</span>
+            <input type="text" v-model="currItem.title" required>
+          </label>
+          <label>
+            <span>Category:</span>
+            <select v-if="catagories.length>0" v-model="currItem.category" required>
+              <option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</option>
+            </select>
+          </label>
+          <label>
+            <span>Condition:</span>
+            <select v-model="currItem.condition">
+              <option value="likeNew">Like new</option>
+              <option value="used">Used</option>
+            </select>
+          </label>
+          <label>
+            <span>Description:</span>
+            <textarea cols="30" rows="8" v-model="currItem.desc" required></textarea>
+          </label>
+          <label>
+            <span>Price:</span>
+            <input type="number" v-model="currItem.price" required>
+          </label>
+      
+      <button type="submit">Save</button>
       </div>
     </form>
-    <garage-footer></garage-footer>
+    <!-- <garage-footer></garage-footer> -->
   </section>
 </template>
 

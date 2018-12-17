@@ -53,7 +53,7 @@ export default {
 .wishlist-container{
   padding: 20px;
   max-width: 1000px;
-  margin: 0 auto;;
+  margin: 0 auto;
 
 }
 
@@ -61,6 +61,17 @@ export default {
   color: white;
   padding-left: 20px;
 }
+// .wish-page-text{
+//       text-align: center;
+//     margin-left: 0px;
+//     color:$s1;
+//     font-family: $lobster;
+//     color: #add22d;
+//     font-size: 2.5rem;
+//     // font-weight:00;
+//     text-shadow: 0px 0px 10px #0c0c0c8a;
+
+// }
 .wish-spacer {
   text-align: left;
   padding: 20px 20px 0 20px;

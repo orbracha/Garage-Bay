@@ -9,13 +9,20 @@
       label-width="120px"
       class="demo-ruleForm form-container"
     >
+      <img
+        :src="img? img:'https://res.cloudinary.com/duxpc5ggn/image/upload/v1543435981/u1.jpg'"
+        alt
+        srcset
+      >
       <router-link to="/select-image" class="camera-icon flex column center">
         <i class="fas fa-camera"/>
         <div>{{img? 'Edit':'Add'}} Photo</div>
       </router-link>
 
       <el-form-item label="Nickname" prop="nickname">
-        <el-input v-model="user.nickname"></el-input>
+        <el-input v-model="user.nickname" @input="checkNickname"></el-input>
+        <span id="error-input" v-if="errorNickname.isErr">{{errorNickname.txt}}</span>
+        <span id="good-input" v-else-if="user.nickname">Your nickname is good!</span>
       </el-form-item>
       <el-form-item label="Password" prop="password">
         <el-input type="password" v-model="user.password" autocomplete="off"></el-input>
@@ -120,11 +127,11 @@ export default {
       },
       errorNickname: {
         isErr: false,
-        txt: "Your nickname is used"
+        txt: "This nickname is taken"
       },
       errorPass: {
         isErr: false,
-        txt: "There problem with your password"
+        txt: "There is problem with your password"
       }
     };
   },
@@ -194,8 +201,11 @@ label {
   }
 }
 .camera-icon {
+  margin: 0 auto;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.596);
+  height: 90px;
+  width: 90px;
   border-radius: 99px;
   position: relative;
   top: -150px;
@@ -214,7 +224,7 @@ form {
   }
   img {
     width: 200px;
-    margin-top: 20px;
+    margin-left: 55px;
     border-radius: 50%;
   }
 }

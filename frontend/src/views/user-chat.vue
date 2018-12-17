@@ -94,6 +94,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.chat-text{
+
+}
 .send {
   border: none;
   background-color: white;

@@ -8,15 +8,15 @@
       <router-link to="/">
         <div class="logo-text">dibs</div>
       </router-link>
-      <div class="search-container">
-        <router-link to="/search">
-          <input placeholder="Search your item" @input="search" v-model="filterTxt" type="text">
-        </router-link>
-        <i class="fas fa-search"></i>
-      </div>
     </div>
     <div class="header-icons-container">
       <div v-if="user" class="flex row center">
+        <div class="search-container">
+          <router-link to="/search">
+            <input placeholder="Search items" @input="search" v-model="filterTxt" type="text">
+          </router-link>
+          <i class="fas fa-search"></i>
+        </div>
         <section class="user-icon-text">
           <div>Hello {{user.nickname}}</div>
           <a @click="logoutUser" class="logoutBtn">Logout</a>
@@ -77,22 +77,27 @@ export default {
   margin-right: 10px;
 }
 .search-container {
-  // border: 1px solid;
+  margin-right: 15px;
   height: 30px;
   position: relative;
   margin-top: 4px;
   input {
     height: 100%;
-    font-size: 15px;
+    // font-size: 15px;
     padding: 8px 7px 7px 28px;
-    border-color: #ddd;
-    border-radius: 3px;
+    border: none;
+    // border-radius: 3px;
+    &:focus{
+      border: none;
+      outline: none;
+    }
   }
   .fa-search {
     position: absolute;
     font-size: 16px;
     top: 6px;
-    left: 8px;
+    left: 14px;
+    color: rgb(189, 189, 189);
   }
 }
 </style>
