@@ -5,6 +5,7 @@ html{
 
 .router-view{
     padding-top: 80px;
+    margin: 0 auto;
 
 }
 // @media (min-width:950px){
@@ -32,6 +33,13 @@ a{
     text-decoration: none;
 }
 
+.loading {
+    display: block;
+    margin: 0 auto;
+    height: 120px;
+    width: 120px;
+  }
+
 ul {
     padding: 0 ;
     margin: 0;
@@ -42,10 +50,10 @@ ul {
       margin-bottom: 8px;
   }
 
-  .loading{
-    margin-left: 20px;
-    color: rgba(121, 121, 121, 0.336);
-  }
+//   .loading{
+//     margin-left: 20px;
+//     color: rgba(121, 121, 121, 0.336);
+//   }
 
 
 

@@ -1,68 +1,47 @@
 <template>
   <section class="edit-item-container">
     <div class="edit-form">
-      <div>
-        <img :src="currItem.img">
-      </div>
-
       <el-form ref="form" :model="form" label-width="120px">
-        <el-form-item label="Title">
-          <el-input placeholder="Item's Name" v-model="currItem.title" required></el-input>
+        <el-form-item>
+          <el-input placeholder="Title" v-model="currItem.title" required></el-input>
         </el-form-item>
 
-        <el-form-item label="Category">
-          <el-select v-model="currItem.category" placeholder="Home">
+        <el-form-item>
+          <el-select v-model="currItem.category" placeholder="Category">
             <el-option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Condition">
-          <el-select v-model="currItem.condition" placeholder="Used">
+        <el-form-item>
+          <el-select v-model="currItem.condition" placeholder="Condition">
             <el-option value="likeNew">Like new</el-option>
             <el-option value="used">Used</el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Description">
-          <el-input type="textarea" :rows="4" placeholder="Detailed of the item" v-model="currItem.desc"></el-input>
+        <el-form-item>
+          <el-input type="textarea" :rows="4" placeholder="Description" v-model="currItem.desc"></el-input>
         </el-form-item>
 
-        <el-form-item label="Price">
-          <!-- <p>Price</p> -->
-          <el-input class="price-input" placeholder="Price" v-model="currItem.price" required></el-input>
+        <el-form-item>
+          <p>Price</p>
+          <el-input type="number" class="price-input" placeholder="Price" v-model="currItem.price" required></el-input>
         </el-form-item>
+
         <el-form-item>
           <el-button type="primary" @click="saveItem">Create</el-button>
-          <el-button>Cancel</el-button>
+          <el-button @click="$router.go(-1)">Cancel</el-button>
         </el-form-item>
       </el-form>
 
-      <!-- <form class="form-text-container" @submit.prevent="saveItem">
-        <el-input placeholder="Title" v-model="currItem.title" required></el-input>
-
-        <el-select v-model="currItem.category" placeholder="Category">
-          <el-option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</el-option>
-        </el-select>
-
-        <el-select v-model="currItem.condition" placeholder="Condition">
-          <el-option value="likeNew">Like new</el-option>
-          <el-option value="used">Used</el-option>
-        </el-select>
-
-        <el-input type="textarea" :rows="4" placeholder="Description" v-model="currItem.desc"></el-input>
-
-        <p>Price</p>
-        <el-input class="price-input" placeholder="Price" v-model="currItem.price" required></el-input>
-        <el-button type="submit">Save</el-button>
-      </form> -->
-
+      <div>
+        <img :src="currItem.img">
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-import garageHeader from "../components/garage-header.vue";
-import garageFooter from "../components/garage-footer.vue";
 export default {
   data() {
     return {
@@ -70,7 +49,7 @@ export default {
         title: "",
         category: "",
         desc: "",
-        price: 0,
+        price: "",
         img: "",
         condition: "",
         callDibs: []
@@ -123,10 +102,6 @@ export default {
       this.catagories = catagories;
       this.isLoadingCat = false;
     });
-  },
-  components: {
-    garageHeader,
-    garageFooter
   }
 };
 </script>

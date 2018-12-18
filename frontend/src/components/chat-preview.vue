@@ -61,19 +61,19 @@ li {
   top: 0;
 }
 .available.offline {
-  background: #e38968;
+  background: #ec4e42;
 }
 .available.inline {
-  background: #86bb71;
+  background: #79c75a;
 }
 .newMsg {
   font-weight: bold;
-  background: #7fa00e7d;
-  background-image: linear-gradient(
-    to right,
-    #7fa00e7d,
-    rgba(255, 255, 255, 0)
-  );
+  // background: #7fa00e7d;
+  // background-image: linear-gradient(
+  //   to right,
+  //   #7fa00e7d,
+  //   rgba(255, 255, 255, 0)
+  // );
 }
 </style>
 

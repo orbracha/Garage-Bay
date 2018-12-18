@@ -1,6 +1,8 @@
 <template>
   <section>
-    <div v-if="isLoading">Loding...</div>
+    <img v-if="isLoading" class="loading" src="../assets/img/loader.gif" alt srcset>
+
+    <!-- <div v-if="isLoading">Loding...</div> -->
     <div class="home" v-else>
       <div class="info-section flex column">
         <h1 class="home-page-text">Garage Sale Online</h1>

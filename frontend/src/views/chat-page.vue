@@ -1,6 +1,6 @@
 <template>
   <section class="chat-page-container">
-    <img v-if="isLoading" class="loading-chat" src="../assets/img/loader.gif" alt srcset>
+    <img v-if="isLoading" class="loading" src="../assets/img/loader.gif" alt srcset>
     <chat-list v-else :data="userRooms"></chat-list>
   </section>
 </template>
@@ -86,11 +86,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.loading-chat {
+.loading {
   display: block;
   margin: 0 auto;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
 }
 </style>
 
