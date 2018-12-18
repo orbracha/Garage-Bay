@@ -226,8 +226,12 @@
                 display: none;
               }
               &:hover{
-                box-shadow: inset 0px -4px 0px 0px rgba(33,33,33,1);
+                box-shadow: inset 0px -4px 0px 0px rgb(109, 109, 109);
               }
+              &:focus{
+                box-shadow: inset 0px -4px 0px 0px rgb(109, 109, 109);
+              }
+
             
 
       }

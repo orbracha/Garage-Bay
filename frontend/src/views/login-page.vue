@@ -52,13 +52,9 @@
 </template>
 
 <script>
-// import garageFooter from "@/components/garage-footer.vue";
 
 export default {
-  name: "login",
-  // components: {
-  //   garageFooter
-  // },
+  name: "login", 
 
   data() {
     var validatePass = (rule, value, callback) => {
