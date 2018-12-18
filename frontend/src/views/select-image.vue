@@ -32,71 +32,74 @@ export default {
       imageData: "",
       showStream: false,
       isPc: false,
-      isLoading:false
+      isLoading: false
     };
   },
   mounted() {
-    var isUser = this.$store.getters.getLoggedUser
-    if (!isUser) this.$router.push("/login")
-
+    var isUser = this.$store.getters.getLoggedUser;
+    // if (!isUser) this.$router.push("/login")
     if (
       screen.width > 500 &&
       navigator.mediaDevices &&
       navigator.mediaDevices.getUserMedia
     )
-      this.isPc = true
+      this.isPc = true;
   },
   methods: {
     startStream() {
-      this.showStream = true
+      this.showStream = true;
       navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-        this.$refs.video.srcObject = stream
+        this.$refs.video.srcObject = stream;
       });
     },
     capture() {
-      this.canvas = this.$refs.canvas
+      this.canvas = this.$refs.canvas;
       var context = this.canvas
         .getContext("2d")
-        .drawImage(this.$refs.video, 0, 0, 640, 480)
-      this.imageData = this.canvas.toDataURL("image/png")
-      this.showStream = false
-      this.stopStream()
-      this.saveImage()
+        .drawImage(this.$refs.video, 0, 0, 640, 480);
+      this.imageData = this.canvas.toDataURL("image/png");
+      this.showStream = false;
+      this.stopStream();
+      this.saveImage();
     },
     onSelectedFile(event) {
-      var reader = new FileReader()
+      var reader = new FileReader();
       reader.onload = e => {
-        this.imageData = e.target.result
-        this.saveImage()
+        this.imageData = e.target.result;
+        this.saveImage();
       };
-      reader.readAsDataURL(event.target.files[0])
+      reader.readAsDataURL(event.target.files[0]);
     },
     stopStream() {
       this.$refs.video.srcObject
         .getVideoTracks()
-        .forEach(track => track.stop())
+        .forEach(track => track.stop());
     },
     saveImage() {
-      this.isLoading=true
-      var user = this.$store.getters.getLoggedUser
+      this.isLoading = true;
+      var user = this.$store.getters.getLoggedUser;
       this.$store
         .dispatch({ type: "saveImage", imageToSave: this.imageData })
         .then(res => {
           if (this.$route.params.def === "edit-user" && user) {
-            this.$router.push("/user/edit/userId")
+            this.$router.push("/user/edit/userId");
           } else if (this.$route.params.def === "item" && user) {
-            this.$router.push(`/item/edit`)
+            this.$router.push(`/item/edit`);
           } else {
-            this.$router.push("/signup")
+            this.$router.push("/signup");
           }
-          this.isLoading=false;
+          this.isLoading = false;
         })
         .catch(err => {
-          console.log("ERROR:", err)
-        })
+          console.log("ERROR:", err);
+        });
     }
-  }
-}
+  },
+  beforeRouteUpdate() {
+    var isUser = this.$store.getters.getLoggedUser;
+    if (!isUser) next('/login')
+  },
+};
 </script>
 
 <style lang="scss" scoped>

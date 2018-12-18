@@ -14,6 +14,8 @@ import dibsPage from './views/dibs-page.vue';
 import editUser from './views/edit-user.vue';
 import signupPage from './views/signup-page.vue';
 
+import Store from './store/store'
+
 
 Vue.use(Router);
 
@@ -45,8 +47,13 @@ export default new Router({
       path: '/select-image/:def?',
       name: 'select-image',
       component: selectImage,
+      beforeEnter(to, from, next) {
+        const loggedInUser = Store.getters.getLoggedUser;
+        if (from.name !== 'signup' && !loggedInUser) return next('/login');
+        next();
+      }
     },
- 
+
     {
       path: '/search',
       name: 'search',
