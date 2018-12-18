@@ -58,8 +58,7 @@ function addRoute(app, server) {
                 io.emit('got-ans', ans);
             })
         })
-        socket.on('chat-newMsg', (msg, room, loggedIn) => {
-            console.log('room',room)
+        socket.on('chat-newMsg', (msg, room) => {
             roomService.addMsgToRoom(msg, room).then(() => {
                 const userDestId = ((room.userId === msg.from._id) ?
                     room.userDest : room.userId)
@@ -69,7 +68,7 @@ function addRoute(app, server) {
                 else {
                     console.log('out')
                     userService.userOfflineMsgs(userDestId, msg).then(() => {
-                        socket.broadcast.emit('newMsg', msg)
+                        io.emit('newMsg', msg)
                     })
                 }
             })
@@ -98,14 +97,12 @@ function addRoute(app, server) {
     app.post('/api/msg/chat/connect', (req, res) => {
         const { user } = req.body;
         return userService.userAvailableStatus(user._id, true).then(user => {
-            // console.log(user[0].isAvailable, 'is to chat online')
             return res.json(user)
         })
     })
     app.post('/api/msg/chat/disconnect', (req, res) => {
         const { user } = req.body;
         return userService.userAvailableStatus(user._id, false).then(user => {
-            // console.log(user[0]._id, 'is to chat offline')
             return res.json(user)
         })
     })

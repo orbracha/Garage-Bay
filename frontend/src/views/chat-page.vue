@@ -1,7 +1,10 @@
 <template>
   <section class="chat-page-container">
     <img v-if="isLoading" class="loading-chat" src="../assets/img/loader.gif" alt srcset>
-    <chat-list v-else :data="userRooms"></chat-list>
+    <template v-else>
+      <h1 v-if="!rooms.length">No didnt talk with anyone yet..</h1>
+      <chat-list v-else :data="userRooms"></chat-list>
+    </template>
   </section>
 </template>
 
@@ -30,11 +33,14 @@ export default {
       return this.rooms.map(room => {
         if (room.userId === this.loggedUser._id) var userDest = room.userDest;
         else var userDest = room.userId;
+        console.log(userDest);
         this.$store
           .dispatch({ type: "getUserById", userId: userDest })
           .then(user => {
             self.userRooms.push({
-              txt: room.historyMsgs[room.historyMsgs.length - 1].txt,
+              txt: room.historyMsgs.length
+                ? room.historyMsgs[room.historyMsgs.length - 1].txt
+                : "",
               title: user.nickname,
               img: user.img,
               link: `/chat/user/${userDest}`,
@@ -58,7 +64,7 @@ export default {
         for (let i = 0; i < this.userRooms.length; i++) {
           for (let j = 0; j < this.newMsgs.length; j++) {
             if (this.userRooms[i].title === this.newMsgs[j].nickname) {
-              console.log('in')
+              console.log("in");
               var currRoom = room;
               this.userRooms.splice(idx, 1);
               this.userRooms.unshift(currRoom);
@@ -76,7 +82,8 @@ export default {
     user.historyChat = [];
     this.$store.dispatch({ type: "updateUser", user }).then(() => {
       this.$store.dispatch({ type: "loadRooms", userId: user._id }).then(() => {
-        this.getUserRooms();
+        if (this.rooms.length) this.getUserRooms();
+        else this.isLoading = false;
       });
     });
   },

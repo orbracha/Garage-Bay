@@ -36,7 +36,6 @@ function connectSocket(userId) {
     });
     socket.on('usersConnected', room => {
         gRoom = room;
-        console.log('room is Ready', room)
     });
     return Promise.resolve(gRoom)
 }
