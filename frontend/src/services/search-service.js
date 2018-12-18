@@ -10,11 +10,11 @@ export default {
 }
 
 function getCatagories() {
-  return axios.get(`${BASE_URL}/search`).then(res => res.data);
+  return axios.post(`${BASE_URL}/search`).then(res => res.data);
 }
 function query({ filter }) {
   if (!filter.byTxt && !filter.byType)
-    return axios.get(`${BASE_URL}/item`)
+    return axios.get(`${BASE_URL}`)
       .then(res => res.data)
   let queryStr = `?`;
   queryStr += filter.byTxt ? `&text=${filter.byTxt}` : '';

@@ -99,8 +99,14 @@ function filterItems(queryObj) {
     return query(criteria)
 }
 function saveImgToCloudinary({ imageToSave }) {
+    console.log('saving to cloudinary', imageToSave);
+    
     return cloudinary.v2.uploader.upload(imageToSave)
-        .then(data => data.secure_url)
+        .then(data =>{
+            console.log('back from cloudinary', data);
+            
+         return   data.secure_url
+        } )
 }
 
 

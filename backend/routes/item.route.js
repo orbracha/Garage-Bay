@@ -42,13 +42,15 @@ function addRoutes(app) {
         })
     })
 
-    app.get('/api/search', (req, res) => {
+    app.post('/api/item/search', (req, res) => {
         return itemService.getCatagories()
             .then(catagories => {
                 res.json(catagories)
             })
     })
-    app.get('/api/filter/', (req, res) => {
+    app.get('/api/item/filter/', (req, res) => {
+        console.log('query', req.query);
+        
         return itemService.filterItems(req.query)
             .then(data => {
                 res.send(data)
