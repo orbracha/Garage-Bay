@@ -57,7 +57,7 @@ export default {
     this.loggedUser = this.$store.getters.getLoggedUser;
     var userDest = this.$route.params.sellerId;
     this.$store.commit({
-      type: "connectSocket",
+      type: "roomRequested",
       userId: this.loggedUser._id,
       userDest
     });
@@ -94,9 +94,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.chat-text{
-
-}
 .send {
   border: none;
   background-color: white;

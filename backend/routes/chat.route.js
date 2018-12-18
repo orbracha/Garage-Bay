@@ -59,6 +59,7 @@ function addRoute(app, server) {
             })
         })
         socket.on('chat-newMsg', (msg, room, loggedIn) => {
+            console.log('room',room)
             roomService.addMsgToRoom(msg, room).then(() => {
                 const userDestId = ((room.userId === msg.from._id) ?
                     room.userDest : room.userId)

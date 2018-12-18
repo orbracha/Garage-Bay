@@ -8,10 +8,9 @@ const BASE_URL = (process.env.NODE_ENV !== 'development')
 
 var socket;
 var gRoom;
-function connectSocket(userId, userDest) {
+function connectSocket(userId) {
     socket = ioClient(BASE_URL);
     socket.emit('inline', userId);
-    if (userDest && userId) socket.emit('roomRequested', userId, userDest)
     socket.on('newMsg', function (msg) {
         console.log('new msg')
         eventBus.$emit(GET_MSG, msg)
@@ -37,6 +36,7 @@ function connectSocket(userId, userDest) {
     });
     socket.on('usersConnected', room => {
         gRoom = room;
+        console.log('room is Ready', room)
     });
     return Promise.resolve(gRoom)
 }
@@ -58,11 +58,16 @@ function cancelDibReq(dib) {
 function disconnectRoom(userId) {
     socket.emit('disconnect-room', userId, gRoom)
 }
+
+function roomRequested(userId, userDest) {
+    socket.emit('roomRequested', userId, userDest)
+}
 export default {
     connectSocket,
     sendMsg,
     sendDibs,
     sendAns,
     cancelDibReq,
-    disconnectRoom
+    disconnectRoom,
+    roomRequested
 }
