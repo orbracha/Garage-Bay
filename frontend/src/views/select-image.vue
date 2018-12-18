@@ -1,28 +1,23 @@
 <template>
   <div class="add-item-container flex column">
-    <div class="video-container">
-      <video
-        v-if="showStream"
-        ref="video"
-        id="video"
-        width="300"
-        height="300"
-        autoplay
-        muted="muted"
-      ></video>
+    <img v-if="isLoading" src="../assets/img/loader.gif" alt srcset>
+    <div class="file-upload-form">
+      <input type="file" accept="image/*" @change="onSelectedFile">
     </div>
-    <div class="icon" @click="capture">
-      <i class="fas fa-camera"></i>
-    </div>
-    <div class="file-upload-form">Or
+    <div class="video-container" v-if="isPc">
+      <br>Or
       <br>
-      <br>
-      <input type="file" @change="previewImage" accept="image/*">
-    </div>
-
-    <canvas ref="canvas" id="canvas" width="640" height="480" v-if="showStream"></canvas>
-    <div class="image-preview" v-else>
-      <img class="preview" :src="imageData">
+      <div class="icon" @click="startStream">
+        <i class="fas fa-play-circle"></i>
+        Take a photo
+      </div>
+      <div v-if="showStream">
+        <video ref="video" id="video" width="300" height="300" autoplay muted="muted"></video>
+        <div class="icon" @click="capture">
+          <i class="fas fa-camera"></i>
+        </div>
+      </div>
+      <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
     </div>
   </div>
 </template>
@@ -34,84 +29,74 @@ export default {
     return {
       video: {},
       canvas: {},
-      captures: [],
-      stream: null,
-      showStream: true,
-      imageData: ""
+      imageData: "",
+      showStream: false,
+      isPc: false,
+      isLoading:false
     };
   },
-
   mounted() {
-    // var isUser = this.$store.getters.getLoggedUser;
-    // if (!isUser) this.$router.push("/login");
-    // else {
-    this.video = this.$refs.video;
-    this.stream && this.stream.stop && this.stream.stop();
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-        this.stream = stream;
-        this.video.src = window.URL.createObjectURL(stream);
-        this.video.play().catch(err => console.log(err));
-      });
-    } else {
-      console.log("no media devices");
-    }
-    // }
+    var isUser = this.$store.getters.getLoggedUser
+    if (!isUser) this.$router.push("/login")
+
+    if (
+      screen.width > 500 &&
+      navigator.mediaDevices &&
+      navigator.mediaDevices.getUserMedia
+    )
+      this.isPc = true
   },
   methods: {
-    stopStream() {
-      const tracks = this.stream.getTracks();
-      tracks.forEach(track => track.stop());
-      this.showStream = false;
+    startStream() {
+      this.showStream = true
+      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+        this.$refs.video.srcObject = stream
+      });
     },
     capture() {
-      this.canvas = this.$refs.canvas;
+      this.canvas = this.$refs.canvas
       var context = this.canvas
         .getContext("2d")
-        .drawImage(this.video, 0, 0, 640, 480);
-      this.captures.push(canvas.toDataURL("image/png"));
-      this.stopStream();
-      this.saveImage();
+        .drawImage(this.$refs.video, 0, 0, 640, 480)
+      this.imageData = this.canvas.toDataURL("image/png")
+      this.showStream = false
+      this.stopStream()
+      this.saveImage()
+    },
+    onSelectedFile(event) {
+      var reader = new FileReader()
+      reader.onload = e => {
+        this.imageData = e.target.result
+        this.saveImage()
+      };
+      reader.readAsDataURL(event.target.files[0])
+    },
+    stopStream() {
+      this.$refs.video.srcObject
+        .getVideoTracks()
+        .forEach(track => track.stop())
     },
     saveImage() {
-      var user = this.$store.getters.getLoggedUser;
-      if (this.captures[0]) var imageToSave = this.captures[0];
-      else var imageToSave = this.imageData;
+      this.isLoading=true
+      var user = this.$store.getters.getLoggedUser
       this.$store
-        .dispatch({ type: "saveImage", imageToSave })
+        .dispatch({ type: "saveImage", imageToSave: this.imageData })
         .then(res => {
           if (this.$route.params.def === "edit-user" && user) {
-            this.$router.push("/user/edit/userId");
+            this.$router.push("/user/edit/userId")
           } else if (this.$route.params.def === "item" && user) {
-            this.$router.push(`/item/edit`);
+            this.$router.push(`/item/edit`)
           } else {
-            this.$router.push("/signup");
-            console.log("PARAMS", this.$route.params.def);
+            this.$router.push("/signup")
           }
+          this.isLoading=false;
         })
         .catch(err => {
-          console.log("ERROR:", err);
-        });
-    },
-
-    previewImage(event) {
-      this.stopStream();
-      var input = event.target;
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = e => {
-          this.imageData = e.target.result;
-          this.saveImage();
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
+          console.log("ERROR:", err)
+        })
     }
-  },
-  beforeDestroy() {
-    const tracks = this.stream.getTracks();
-    if (tracks) this.stopStream();
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

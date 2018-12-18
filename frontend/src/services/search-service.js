@@ -3,18 +3,18 @@ import axios from 'axios';
 
 const BASE_URL = (process.env.NODE_ENV !== 'development')
   ? '/api/item'
-  : 'http://localhost:3000/api';
+  : 'http://localhost:3000/api/item';
 export default {
   getCatagories,
   query
 }
 
 function getCatagories() {
-  return axios.get(`${BASE_URL}/search`).then(res => res.data);
+  return axios.post(`${BASE_URL}/search`).then(res => res.data);
 }
 function query({ filter }) {
   if (!filter.byTxt && !filter.byType)
-    return axios.get(`${BASE_URL}/item`)
+    return axios.get(`${BASE_URL}`)
       .then(res => res.data)
   let queryStr = `?`;
   queryStr += filter.byTxt ? `&text=${filter.byTxt}` : '';
