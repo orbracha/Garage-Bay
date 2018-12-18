@@ -16,7 +16,6 @@
         display: none;
       }
       i {
-        // font-size: 1.3rem;
         padding: 10px;
         
       }
@@ -33,7 +32,7 @@
         text-decoration: none; /* no underline */
         transition: 0.3s;
         &:focus{
-          color: $s1;   
+          color: $mid;   
         }
         &:hover {
           cursor: pointer;

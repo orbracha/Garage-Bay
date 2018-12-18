@@ -28,13 +28,13 @@ li {
   border-bottom-left-radius: 200px;
   color: rgb(53, 53, 53);
   background-color: rgba(255, 255, 255, 0); 
-  background-image: linear-gradient(to right, rgb(255, 255, 255) , rgba(255, 255, 255, 0)); 
+  background-image: linear-gradient(to right, rgb(238, 238, 238) , rgba(255, 255, 255, 0)); 
   position: relative;
   text-align: left;
   display: flex;
   margin-bottom: 8px;
   &:hover{
-  background-image: linear-gradient(to right, rgb(216, 216, 216) , rgba(255, 255, 255, 0)); 
+  background-image: linear-gradient(to right, rgb(255, 255, 255) , rgba(255, 255, 255, 0)); 
   }
   .chat-head{
     font-weight: 700;

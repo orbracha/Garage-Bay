@@ -2,65 +2,84 @@
 
     .edit-form {
     color: $dark;    
-    max-width: 90%;
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     background-color: $semi;
     padding: 20px;
-    border-radius: 3px;
-    input{
-        border: none;
-        height: 30px;
+    border-radius: 4px;
+    label{
+        width: 1px;
     }
-    .textarea{
-        border: none;
-        outline: none;
 
-    }
-    option{
-        border: none;
-        outline: none;
-        height: 30px;
+    // .el-form-item{
+    //     margin-bottom: 15px;
+    // }
 
+    // .form-text-container{
+    //     max-width: 450px;
 
-    }
-    img {
-        width: 100%;
-        text-align: center;
-    }
-    div{
-        margin: 0 20px;
-        display: flex;
-        flex-direction: column;
+    //     el-input.price-input{
+    //         width: 120px;
+    //     }
+    //     .el-input__inner{
+    //         margin-right: 30px;
+    //     }
         
-    }
-    button{
-        margin: 4px ;
-        margin-top:5px;
-        font-size: 1.5em;
-        font-family: inherit;
-        border: 0;
-        padding: 0;
-        background-color: #b3d22a;
-        padding: 3px;
-        width: 3.5em;
-        border-radius: 3px;
-        
-    }
-    label {
-        font-weight: bold;
-        color: $dark;
-        font-size: 1.1em;
-        margin: 4px ;
-        span {
-            display: block;
-            margin-bottom: 5px ;
+    //     .el-textarea__inner{
+    //         margin-bottom: 15px;
+    //     }
+
+    //     el-input.button{
+    //         font-size: 1.5em;
+    //         font-family: inherit;
+    //         border: 0;
+    //         padding: 0;
+    //         background-color: #5a5a5a;
+    //         color: white;
+    //         padding: 3px;
+    //         width: 3.5em;
+    //         border-radius: 3px;
+    //     }
+
+    //     i{
+    //         padding-top: 3px;
+    //     }
+
+    //     input{
+    //         margin-bottom: 15px;
+    //     }
+
+    //     el-input.textarea{
+    //         margin-bottom: 15px;
+
         }
-    }
-  }
+    
 
+
+    img {
+  
+        max-width: 400px;
+        text-align: center;
+        padding-right: 20px;
+        padding-bottom: 20px;
+    }
 }
+ 
+    // label {
+    //     font-weight: bold;
+    //     color: $dark;
+    //     font-size: 1.1em;
+    //     margin: 4px ;
+    //     span {
+    //         display: block;
+    //         margin-bottom: 5px ;
+    //     }
+    // }
+  
+
+
 
 
 
