@@ -9,14 +9,14 @@
         <div class="logo-text">dibs</div>
       </router-link>
     </div>
-    <div class="header-icons-container">
-      <div v-if="user" class="flex row center">
-        <div class="search-container">
-          <router-link to="/search">
-            <input placeholder="Search items" @input="search" v-model="filterTxt" type="text">
-          </router-link>
-          <i class="fas fa-search"></i>
-        </div>
+    <div class="header-icons-container flex row">
+      <div class="search-container">
+        <router-link to="/search">
+          <input placeholder="Search items" @input="search" v-model="filterTxt" type="text">
+        </router-link>
+        <i class="fas fa-search"></i>
+      </div>
+      <div v-if="user" class=" header-icons flex row center">
         <section class="user-icon-text">
           <div>Hello {{user.nickname}}</div>
           <a @click="logoutUser" class="logoutBtn">Logout</a>
@@ -87,7 +87,7 @@ export default {
     padding: 8px 7px 7px 28px;
     border: none;
     // border-radius: 3px;
-    &:focus{
+    &:focus {
       border: none;
       outline: none;
     }
