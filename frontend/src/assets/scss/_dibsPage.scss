@@ -1,6 +1,12 @@
 
 
 .dibs-container{
+
+      .ui.right.floated.image, .ui.right.floated.images{
+            margin: 0;
+            margin-right: 8px;
+            margin-bottom: 8px;
+      }
     ul{
         padding: 0;
     }
@@ -9,9 +15,16 @@
       margin: 10px;
       width: 217px;
   img {
-        height: 60px;
-        width: 60px;
+        height: 30px;
+        width: 30px;
         border-radius: 50px;
+
+  }
+  .img-item-dibs{
+      height: 80px;
+      width: 80px;
+      object-fit: cover;
+      border-radius: unset;
   }
 
   .fa-minus-circle {
