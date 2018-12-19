@@ -1,6 +1,6 @@
 <template>
   <section class="user-page-container">
-    <section v-if="isLoadin">Loading...</section>
+    <img v-if="isLoadin" class="loading" src="../assets/img/loader.gif" alt srcset>
     <section v-else class="user-page-content">
       <div class="user-profile-preview">
         <img class="user-profile-thumbnail" :src="user.img">
@@ -22,7 +22,7 @@
       <div class="tab-container" v-if="isLoggedUser">
         <sui-tab active-index="0">
           <sui-tab-pane :label="user.listedItems.length+''" title="My Garage">
-            <items-tumbnail :list="user.listedItems"/>
+            <items-thumbnail :list="user.listedItems"/>
           </sui-tab-pane>
           <sui-tab-pane :label="dibs.length+''" title="Dibs Requset">
             <dibs-page @removeItem="removeItem" :isDibs="false"/>
@@ -33,19 +33,18 @@
         </sui-tab>
       </div>
       <template v-else>
-        <items-tumbnail :list="user.listedItems"/>
+        <items-thumbnail :list="user.listedItems"/>
       </template>
       <event-feed v-if="user.events.length > 2" :events="user.events"></event-feed>
     </section>
   </section>
-  <!-- <garage-footer/> -->
 </template>
 
 <script>
 import userTab from "@/components/user-tab.vue";
 import garageFooter from "@/components/garage-footer.vue";
 import userService from "@/services/user-service.js";
-import itemsTumbnail from "@/components/item-thumbnail.vue";
+import itemsThumbnail from "@/components/item-thumbnail.vue";
 import eventFeed from "@/components/event-feed.vue";
 import dibsPage from "@/views/dibs-page.vue";
 
@@ -53,7 +52,7 @@ export default {
   name: "home",
   components: {
     garageFooter,
-    itemsTumbnail,
+    itemsThumbnail,
     eventFeed,
     userService,
     userTab,
