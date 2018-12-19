@@ -107,6 +107,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#canvas{
+  display: none;
+}
 .add-item-container {
   // min-height: 100vh;
   height: 450px;

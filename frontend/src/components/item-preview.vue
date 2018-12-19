@@ -23,7 +23,7 @@
       <div class="main-item-details">
         <div class="main-list-header">{{item.title}}</div>
         <div class="item-desc-prev">{{item.desc}}</div>
-        <div>{{(item.price)? item.price+'$':'FREE'}}</div>
+        <div>{{(item.price)? '$' +item.price:'FREE'}}</div>
       </div>
     </section>
   </li>
@@ -37,9 +37,9 @@ export default {
 
   methods: {
     toggleWishlist() {
-      const id = this.item._id
+      const id = this.item._id;
       if (!this.loggedUser) return this.$router.push(`/login`);
-      this.$store.dispatch({ type: 'toggleWishlist', id });
+      this.$store.dispatch({ type: "toggleWishlist", id });
     },
     userClicked(sellerId) {
       this.$router.push(`/user/${sellerId}`);
@@ -66,9 +66,9 @@ export default {
       return this.item.user;
     },
     wishlist() {
-      const id = this.item._id
+      const id = this.item._id;
       if (!this.loggedUser) return;
-      return this.loggedUser.wishList.some(itemId => { 
+      return this.loggedUser.wishList.some(itemId => {
         return itemId === id;
       });
     },

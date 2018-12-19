@@ -2,7 +2,7 @@
   <div class="item-container flex column">
     <!-- <div v-if="!isLoaded">
       <img src="../assets/img/loader.gif" alt>
-    </div> -->
+    </div>-->
     <img v-if="!isLoaded" class="loading" src="../assets/img/loader.gif" alt srcset>
 
     <template v-else class="item-container flex column">
@@ -40,7 +40,7 @@
                 {{distance}} Km away
               </p>
               <p>Condition: {{currItem.condition}}</p>
-              <p>Price: {{(currItem.price)? currItem.price+'$':'FREE'}}</p>
+              <p class="price-bold">Price: {{(currItem.price)? '$'+currItem.price:'FREE'}}</p>
             </div>
             <div class="action-btn-container flex row">
               <section v-if="loggedUser && !isLoggedUser" class="heart">
@@ -50,12 +50,12 @@
               <router-link v-if="loggedUser && !isLoggedUser" :to="'/chat/user/'+ currSeller._id">
                 <i class="far fa-comment-alt"></i>
               </router-link>
-            <button
-              v-if="loggedUser && !isLoggedUser && !(currItem.callDibs.includes(loggedUser._id))"
-              class="dibs-btn"
-              @click="sendDibs"
-            >Dib It!</button>
-            <button v-if="!loggedUser" class="dibs-btn" @click="$router.push('/login')">Call dibs!</button>
+              <button
+                v-if="loggedUser && !isLoggedUser && !(currItem.callDibs.includes(loggedUser._id))"
+                class="dibs-btn"
+                @click="sendDibs"
+              >Dib It!</button>
+              <button v-if="!loggedUser" class="dibs-btn" @click="$router.push('/login')">Call dibs!</button>
             </div>
           </div>
           <google-map :itemCoords="currItem.location"/>
@@ -184,6 +184,9 @@ export default {
 .fa-comment-alt {
   padding-left: 8px;
   font-size: 1.6rem;
+}
+.price-bold {
+  font-weight: 700;
 }
 </style>
 
