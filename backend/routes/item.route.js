@@ -48,7 +48,7 @@ function addRoutes(app) {
                 res.json(catagories)
             })
     })
-    app.get('/api/item/filter/', (req, res) => {
+    app.post('/api/item/filter', (req, res) => {
         console.log('query', req.query);
         
         return itemService.filterItems(req.query)

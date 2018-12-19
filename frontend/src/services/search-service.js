@@ -20,6 +20,6 @@ function query({ filter }) {
   queryStr += filter.byTxt ? `&text=${filter.byTxt}` : '';
   queryStr += filter.byType ? `&type=${filter.byType}` : '';
 
-  return axios.get(`${BASE_URL}/filter/${queryStr}`)
+  return axios.post(`${BASE_URL}/filter${queryStr}`)
     .then(res => res.data)
 }
