@@ -39,7 +39,6 @@ export default {
   },
   mounted() {
     var isUser = this.$store.getters.getLoggedUser;
-    // if (!isUser) this.$router.push("/login")
     if (
       screen.width > 500 &&
       navigator.mediaDevices &&
