@@ -19,7 +19,7 @@
           <i class="fas fa-camera"></i>
         </div>
       </div>
-      <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+      <canvas ref="canvas" id="canvas" width="400" height="300"></canvas>
     </div>
   </div>
 </template>
@@ -111,7 +111,6 @@ export default {
   display: none;
 }
 .add-item-container {
-  // min-height: 100vh;
   height: 450px;
   max-width: 430px;
   margin: 0 auto;
@@ -168,9 +167,6 @@ label{
       cursor: pointer;
     }
      }
-
-
-
 input[type="file"] {
     display: none;
 }
