@@ -15,13 +15,13 @@
         >{{catagory}}</div>
       </div>
       <img v-if="isLoadingItems" class="loading" src="../assets/img/loader.gif" alt srcset>
-      <items-tumbnail v-else :list="itemsToDisplay" class="search-res"/>
+      <items-thumbnail v-else :list="itemsToDisplay" class="search-res"/>
     </section>
   </div>
 </template>
 
 <script>
-import itemsTumbnail from "@/components/item-thumbnail.vue";
+import itemsThumbnail from "@/components/item-thumbnail.vue";
 
 export default {
   name: "search-page",
@@ -79,7 +79,7 @@ export default {
     }
   },
   components: {
-    itemsTumbnail
+    itemsThumbnail
   }
 };
 </script>

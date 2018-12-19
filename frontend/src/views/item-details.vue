@@ -110,6 +110,7 @@ export default {
           this.$store.dispatch({
             type: "sendDibs",
             userId: this.loggedUser._id,
+            rate:this.loggedUser.rate,
             item
           });
           var user = JSON.parse(JSON.stringify(this.loggedUser));

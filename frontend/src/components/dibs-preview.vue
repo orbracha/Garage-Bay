@@ -4,13 +4,14 @@
       <div class="dib-container">
         <sui-card v-if="fromUser">
           <sui-card-content>
-            <router-link :to="'/user/'+fromUser._id">
+            <router-link :to="'/user/'+fromUser._id" class="flex row">
               <sui-image :src="fromUser.img" class="right floated"/>
               <sui-card-header>{{fromUser.nickname}}</sui-card-header>
+        
             </router-link>
             <sui-card-description>
-              Interested about the {{dib.item.title}} that you offer:
-              <img :src="dib.item.img">
+              Interested in: {{dib.item.title}}
+              <img class="img-item-dibs" :src="dib.item.img">
             </sui-card-description>
           </sui-card-content>
           <sui-card-content extra>
