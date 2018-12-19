@@ -1,19 +1,21 @@
 <template>
   <div class="add-item-container flex column">
-    <img v-if="isLoading" src="../assets/img/loader.gif" alt srcset>
-    <div class="file-upload-form">
-      <input type="file" accept="image/*" @change="onSelectedFile">
-    </div>
+    <img v-if="isLoading" class="loading" src="../assets/img/loader.gif" alt srcset>
+    <label id="#bb">
+      Upload a File
+      <input type="file" id="File" size="60" accept="image/*" @change="onSelectedFile">
+    </label>
     <div class="video-container" v-if="isPc">
-      <br>Or
+      <br v-if="!showStream">
+      <span v-if="!showStream">Or</span>
       <br>
-      <div class="icon" @click="startStream">
+      <div class="icon add-photo" v-if="!showStream" @click="startStream">
         <i class="fas fa-play-circle"></i>
         Take a photo
       </div>
       <div v-if="showStream">
         <video ref="video" id="video" width="300" height="300" autoplay muted="muted"></video>
-        <div class="icon" @click="capture">
+        <div class="icon take-photo" @click="capture">
           <i class="fas fa-camera"></i>
         </div>
       </div>
@@ -95,6 +97,9 @@ export default {
         });
     }
   },
+  beforeDestroy(){
+    this.stopStream()
+  },
   beforeRouteUpdate() {
     var isUser = this.$store.getters.getLoggedUser;
     if (!isUser) next('/login')
@@ -104,15 +109,22 @@ export default {
 
 <style lang="scss" scoped>
 .add-item-container {
-  min-height: 100vh;
+  // min-height: 100vh;
+  height: 450px;
+  max-width: 430px;
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.445);
   border-radius: 4px;
   padding: 15px;
   text-align: center;
-  margin-top: 70px;
-  #canvas {
-    display: none;
+  margin-top: 80px;
+  .input {
+    background: rgb(223, 223, 223);
+    color: rgb(46, 46, 46);
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
   }
   .icon {
     margin: 20px 0;
@@ -135,13 +147,30 @@ img.preview {
   margin: 0 auto;
   max-width: 400px;
   height: 300px;
-  // background-color: aqua;
 
-  input {
-    text-align: center;
-  }
+
 }
 #video {
   width: 100%;
 }
+
+label{
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: none;
+    background: #7fa00e;
+    color: white;
+    display: table;
+    &:hover{
+      cursor: pointer;
+    }
+     }
+
+
+
+input[type="file"] {
+    display: none;
+}
+
 </style>

@@ -93,13 +93,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.send {
-  border: none;
-  background-color: white;
-  height: 0.7rem;
-  i {
-    padding: 0;
-  }
-}
-</style>

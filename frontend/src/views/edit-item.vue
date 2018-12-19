@@ -1,46 +1,47 @@
 <template>
   <section class="edit-item-container">
-    <form class="edit-form" @submit.prevent="saveItem">
+    <div class="edit-form">
+      <el-form ref="form" :model="form" label-width="120px">
+        <el-form-item>
+          <el-input placeholder="Title" v-model="currItem.title" required></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <el-select v-model="currItem.category" placeholder="Category">
+            <el-option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item>
+          <el-select v-model="currItem.condition" placeholder="Condition">
+            <el-option value="likeNew">Like new</el-option>
+            <el-option value="used">Used</el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item>
+          <el-input type="textarea" :rows="4" placeholder="Description" v-model="currItem.desc"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <p>Price</p>
+          <el-input type="number" class="price-input" placeholder="Price" v-model="currItem.price" required></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="saveItem">Create</el-button>
+          <el-button @click="$router.go(-1)">Cancel</el-button>
+        </el-form-item>
+      </el-form>
+
       <div>
         <img :src="currItem.img">
       </div>
-      <div >
-            <label>
-            <span>Title:</span>
-            <input type="text" v-model="currItem.title" required>
-          </label>
-          <label>
-            <span>Category:</span>
-            <select v-if="catagories.length>0" v-model="currItem.category" required>
-              <option v-for="catagory in catagories" :key="catagory" :value="catagory">{{catagory}}</option>
-            </select>
-          </label>
-          <label>
-            <span>Condition:</span>
-            <select v-model="currItem.condition">
-              <option value="likeNew">Like new</option>
-              <option value="used">Used</option>
-            </select>
-          </label>
-          <label>
-            <span>Description:</span>
-            <textarea cols="30" rows="8" v-model="currItem.desc" required></textarea>
-          </label>
-          <label>
-            <span>Price:</span>
-            <input type="number" v-model="currItem.price" required>
-          </label>
-      
-      <button type="submit">Save</button>
-      </div>
-    </form>
-    <!-- <garage-footer></garage-footer> -->
+    </div>
   </section>
 </template>
 
 <script>
-import garageHeader from "../components/garage-header.vue";
-import garageFooter from "../components/garage-footer.vue";
 export default {
   data() {
     return {
@@ -48,7 +49,7 @@ export default {
         title: "",
         category: "",
         desc: "",
-        price: 0,
+        price: "",
         img: "",
         condition: "",
         callDibs: []
@@ -59,6 +60,8 @@ export default {
   },
   methods: {
     saveItem: async function() {
+      console.log("submiting form");
+
       var item = JSON.parse(JSON.stringify(this.currItem));
       if (this.currItem._id) {
         this.$store.dispatch({ type: "editItem", item }).then(item => {
@@ -99,11 +102,14 @@ export default {
       this.catagories = catagories;
       this.isLoadingCat = false;
     });
-  },
-  components: {
-    garageHeader,
-    garageFooter
   }
 };
 </script>
+
+<style lang="scss" scoped>
+input {
+  margin-bottom: 15px;
+}
+</style>
+
 

@@ -26,6 +26,7 @@
         padding: 0;
       }
       .edit-btn-container{
+     
         i{
           padding: 0;
           color: $dark;
@@ -53,6 +54,7 @@
     }
   }
 }
+
 
 
 .details-container{
@@ -84,6 +86,7 @@
     height: 300px;
   }
   .action-btn-container{
+    margin-bottom: 10px;
     align-items: center;
     text-align: left;
       .fa-heart{
@@ -95,19 +98,19 @@
   }
 .dibs-btn{
   font-size: 1.5rem;
+  outline: none;
+  border: none;
   font-family: $lobster;
   display: block;
-  margin: 5px auto;
+  margin-left: 12px;
   text-align: center;
-  padding: 10px;
+  padding: 5px;
   background: #7fa00e;
   color: white;
-  font-size: 25px;
-  border-radius: 7px;
-  transition: .4s;
+  border-radius: 6px;
+  transition: .3s;
     &:hover{
-      color: #7fa00e;
-      background: white;
+      background: #99ac5e;
     }
     &:focus{
       color: $s2;

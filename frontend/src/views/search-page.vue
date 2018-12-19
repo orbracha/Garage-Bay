@@ -3,9 +3,8 @@
     <!-- Dont delete! -->
     {{filterTxt}}
     <!-- Dont delete! -->
-    <section v-if="isLoadingCat" class="loading">
-      <img src="../assets/img/loader.gif" alt>
-    </section>
+    <img v-if="isLoadingCat" class="loading" src="../assets/img/loader.gif" alt srcset>
+
     <section v-else>
       <div class="catagories-container">
         <div
@@ -15,9 +14,7 @@
           v-if="catagory.length>1"
         >{{catagory}}</div>
       </div>
-      <div v-if="isLoadingItems" class="loading">
-        <img src="../assets/img/loader.gif" alt>
-      </div>
+      <img v-if="isLoadingItems" class="loading" src="../assets/img/loader.gif" alt srcset>
       <items-tumbnail v-else :list="itemsToDisplay" class="search-res"/>
     </section>
   </div>
@@ -88,18 +85,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page-layout{
+.page-layout {
   max-width: 1000px;
   margin: 0 auto;
 }
 .loading {
   text-align: center;
   margin-top: 10px;
-  img{
+  img {
     height: 100px;
     width: 100px;
   }
-
 }
 .catagories-container {
   display: flex;
@@ -116,7 +112,7 @@ export default {
     height: 40px;
     // width: fit-content;
     border-radius: 5px;
-    &:hover{
+    &:hover {
       background-color: rgb(243, 243, 243);
       cursor: pointer;
     }

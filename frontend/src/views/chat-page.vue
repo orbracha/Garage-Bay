@@ -2,7 +2,7 @@
   <section class="chat-page-container">
     <img v-if="isLoading" class="loading-chat" src="../assets/img/loader.gif" alt srcset>
     <template v-else>
-      <h1 v-if="!rooms.length">Didnt talk with anyone yet..</h1>
+      <h1 v-if="!rooms.length">You don't have chats yet..</h1>
       <chat-list v-else :data="userRooms"></chat-list>
     </template>
   </section>
@@ -93,11 +93,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.loading-chat {
+.loading {
   display: block;
   margin: 0 auto;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
 }
 </style>
 

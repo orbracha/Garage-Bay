@@ -36,37 +36,6 @@
         <el-button @click="resetForm('user')">Reset</el-button>
       </el-form-item>
     </el-form>
-
-    <!-- <form class="form-container" @submit.prevent="saveUser">
-      <img
-        :src="img? img:'https://res.cloudinary.com/duxpc5ggn/image/upload/v1543435981/u1.jpg'"
-        alt
-        srcset
-      >
-      <router-link to="/select-image" class="camera-icon flex column center">
-        <i class="fas fa-camera"/>
-        <div>{{img? 'Edit':'Add'}} Photo</div>
-      </router-link>
-      <div class="text-container">
-        <label>
-          <span>Nickanme:</span>
-          <input type="text" @input="checkNickname" v-model="user.nickname" required>
-          <span id="error-input" v-if="errorNickname.isErr">{{errorNickname.txt}}</span>
-          <span id="good-input" v-else-if="user.nickname">Your nickname is good!</span>
-        </label>
-        <label>
-          <span>Password:</span>
-          <input type="password" v-model="user.password" required>
-        </label>
-        <label>
-          <span>Repeat Password:</span>
-          <input type="password" @input="checkPassword" v-model="repeatPass" required>
-        </label>
-        <span id="error-input" v-if="errorPass.isErr && user.password">{{errorPass.txt}}</span>
-        <span id="good-input" v-else-if="repeatPass">Your Password is great!</span>
-        <button :disabled="!isValid">Save</button>
-      </div>
-    </form>-->
   </section>
 </template>
 
@@ -118,7 +87,7 @@ export default {
             trigger: "blur"
           },
           {
-            min: 3,
+            min: 2,
             max: 8,
             message: "Length should be 3 to 8",
             trigger: "blur"

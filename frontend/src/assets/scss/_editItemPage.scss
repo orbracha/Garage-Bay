@@ -2,67 +2,48 @@
 
     .edit-form {
     color: $dark;    
-    max-width: 90%;
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     background-color: $semi;
     padding: 20px;
-    border-radius: 3px;
-    input{
-        border: none;
-        height: 30px;
+    border-radius: 4px;
+    label{
+        width: 1px;
     }
-    .textarea{
-        border: none;
-        outline: none;
-
-    }
-    option{
-        border: none;
-        outline: none;
-        height: 30px;
-
-
-    }
-    img {
-        width: 100%;
-        text-align: center;
-    }
-    div{
-        margin: 0 20px;
-        display: flex;
-        flex-direction: column;
-        
-    }
-    button{
-        margin: 4px ;
-        margin-top:5px;
-        font-size: 1.5em;
-        font-family: inherit;
-        border: 0;
-        padding: 0;
-        background-color: #b3d22a;
-        padding: 3px;
-        width: 3.5em;
-        border-radius: 3px;
-        
-    }
-    label {
-        font-weight: bold;
-        color: $dark;
-        font-size: 1.1em;
-        margin: 4px ;
-        span {
-            display: block;
-            margin-bottom: 5px ;
+     margin-bottom: 15px;
         }
-    }
-  }
+    
+    img {
 
+        max-width: 400px;
+        text-align: center;
+        padding-left: 20px;
+        padding-bottom: 20px;
+    }
 }
 
+.el-button--primary {
+    color: #fff;
+    background-color: #7fa00e;
+    border-color: #7fa00e;
+    &:hover{
+        background-color: #a3ce17;
+        border-color: #a3ce17;
 
+    }
+    // &:active{
+    //     background-color: #afbe7d;
+    //     border-color: #afbe7d;
+
+    // }
+}
+.el-button--primary:active {
+    background: #a3ce17;
+    border-color: #a3ce17;
+    color: #fff;
+}
 
 @media(max-width:700px){
     .edit-item-container{
