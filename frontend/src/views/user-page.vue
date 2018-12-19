@@ -33,19 +33,18 @@
         </sui-tab>
       </div>
       <template v-else>
-        <items-tumbnail :list="user.listedItems"/>
+        <items-thumbnail :list="user.listedItems"/>
       </template>
       <event-feed v-if="user.events.length > 2" :events="user.events"></event-feed>
     </section>
   </section>
-  <!-- <garage-footer/> -->
 </template>
 
 <script>
 import userTab from "@/components/user-tab.vue";
 import garageFooter from "@/components/garage-footer.vue";
 import userService from "@/services/user-service.js";
-import itemsTumbnail from "@/components/item-thumbnail.vue";
+import itemsThumbnail from "@/components/item-thumbnail.vue";
 import eventFeed from "@/components/event-feed.vue";
 import dibsPage from "@/views/dibs-page.vue";
 
@@ -53,7 +52,7 @@ export default {
   name: "home",
   components: {
     garageFooter,
-    itemsTumbnail,
+    itemsThumbnail,
     eventFeed,
     userService,
     userTab,
