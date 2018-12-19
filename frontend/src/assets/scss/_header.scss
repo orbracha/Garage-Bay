@@ -2,12 +2,11 @@
     .burger{
       display: none;
     }
-    // .logoutBtn{
-    //   color:$mid;   
-    //     }
+
     .header-icons-container{
-    display: none;
-   
+      .header-icons{
+        display: none;
+      }
     }
 
     .home-header {
@@ -76,10 +75,19 @@
       }
 
       @media (min-width:600px){
+
         .header-icons-container{
-        display: inline-block;       
-      
+          .header-icons{
+            display: flex; 
+            // flex-direction: row;
+            // align-items: center;
+
           }
+        }
+        // .header-icons-container{
+        // display: inline-block;       
+      
+        //   }
         .burger{
             position: absolute;
             display: inline-block;
