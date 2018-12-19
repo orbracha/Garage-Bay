@@ -25,11 +25,14 @@ export default {
         connectSocket(state, { userId, userDest }) {
             socketService.connectSocket(userId, userDest)
         },
+        roomRequested(context, { userId, userDest }) {
+            socketService.roomRequested(userId, userDest)
+        }
 
     },
     actions: {
         loadMsgs({ commit }, { userId, userDest }) {
-           return msgService.queryMsgs(userId, userDest).then(msgs => {
+            return msgService.queryMsgs(userId, userDest).then(msgs => {
                 commit({ type: 'setMsgs', msgs })
             })
         },
@@ -59,9 +62,10 @@ export default {
                 context.commit({ type: 'setLoggedUser', user })
             })
         },
-        disconnectRoom(context, { userId}) {
+        disconnectRoom(context, { userId }) {
             socketService.disconnectRoom(userId)
-        }
+        },
+
 
     },
     getters: {

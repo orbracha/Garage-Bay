@@ -49,25 +49,14 @@ export default {
         callback();
       }
     };
-    // var validatePass2 = (rule, value, callback) => {
-    //   if (value === "") {
-    //     callback(new Error("Please input the password again"));
-    //   } else if (value !== this.user.pass) {
-    //     callback(new Error("Two inputs don't match!"));
-    //   } else {
-    //     callback();
-    //   }
-    // };
     return {
       user: {
         password: "",
-        // checkPass: "",
         nickname: ""
       },
 
       rules2: {
         password: [{ validator: validatePass, trigger: "blur" }],
-        // checkPass: [{ validator: validatePass2, trigger: "blur" }],
         nickname: [
           {
             required: true,
@@ -82,24 +71,10 @@ export default {
           }
         ]
       },
-      // user: {
-      //   nickname: null,
-      //   password: null
-      // },
       isUnknowen: false
     };
   },
   methods: {
-    // submitForm(formName) {
-    //   this.$refs[formName].validate(valid => {
-    //     if (valid) {
-    //       alert("submit!");
-    //     } else {
-    //       console.log("error submit!!");
-    //       return false;
-    //     }
-    //   });
-    // },
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
