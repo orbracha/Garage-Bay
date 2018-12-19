@@ -82,14 +82,16 @@ export default {
     });
     // this.$store.commit({ type: "setMsgs", msgs: null });
   },
-  // watch: {
-  //   msgs: {
-  //     handler() {
-  //       window.scrollTo(0, document.body.scrollHeight);
-  //     },
-  //     immediate: true
-  //   }
-  // }
+  watch: {
+    msgs: {
+      handler() {
+        this.$nextTick(() => {
+          window.scrollTo(0, document.body.scrollHeight);
+        });
+      },
+      immediate: true
+    }
+  }
 };
 </script>
 
