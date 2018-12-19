@@ -93,11 +93,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.loading {
+.loading-chat {
   display: block;
-  margin: 0 auto;
-  height: 150px;
-  width: 150px;
+  margin: 20px auto;
+  height: 50px;
+  width: 50px;
 }
 </style>
 
