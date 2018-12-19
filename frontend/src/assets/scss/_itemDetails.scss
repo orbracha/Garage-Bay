@@ -135,7 +135,7 @@
 .img-details-container{
   min-height: 300px;
   background-color: white;
-
+  background-size: contain;
 }
 }
 
@@ -143,6 +143,8 @@
   .img-details-container{
   width: 100%;
   margin-bottom: 10px;
+  background-size: contain;
+
 }
 }
 

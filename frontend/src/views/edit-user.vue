@@ -53,7 +53,7 @@ export default {
       this.$router.push(`/select-image/edit-user`);
     },
     saveUser() {
-      this.editedUser.img = this.newImage;
+      if (this.newImage.length) this.editedUser.img = this.newImage;
       let user = this.editedUser;
       this.$store.dispatch({ type: "updateUser", user }).then(user => {
         this.$store.commit({ type: "resetEditedUser" });
@@ -70,10 +70,9 @@ export default {
 .editContainer {
   color: white;
   margin-top: 150px;
-  img{
+  img {
     max-width: 400px;
     margin: 0 auto;
-
   }
 }
 form {
@@ -86,7 +85,7 @@ form {
   }
 }
 img.preview {
-  width: 200px; 
+  width: 200px;
   padding: 5px;
 }
 </style>
